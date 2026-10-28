@@ -1,0 +1,21 @@
+# Q4. Everything about one order: who, when, where, and each line.
+PREFIX rdf:    <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs:   <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl:    <http://www.w3.org/2002/07/owl#>
+PREFIX xsd:    <http://www.w3.org/2001/XMLSchema#>
+PREFIX retail: <https://example.org/retail/ontology#>
+PREFIX ex:     <https://example.org/retail/data/>
+
+SELECT ?customerName ?orderDate ?status ?city ?productName ?qty ?unitPrice ((?qty * ?unitPrice) AS ?lineTotal)
+WHERE {
+  BIND(ex:O1 AS ?order)
+  ?order retail:placedBy/retail:name ?customerName ;   # sequence path
+         retail:orderDate ?orderDate ;
+         retail:status ?status ;
+         retail:shipsTo/retail:city ?city ;
+         retail:hasLine ?line .
+  ?line retail:forProduct/retail:name ?productName ;
+        retail:quantity ?qty ;
+        retail:unitPrice ?unitPrice .
+}
+ORDER BY ?productName

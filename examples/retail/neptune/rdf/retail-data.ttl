@@ -1,0 +1,133 @@
+#############################################################################
+#  Retail Ordering - instance data (ABox) in Turtle
+#  -----------------------------------------------------------------------
+#  SOURCE OF TRUTH for all RDF formats in this folder. The other files
+#  (.nt, .nq, .trig, .rdf, .jsonld) are generated from this one by
+#  ../scripts/build_rdf_formats.py - edit this file, then re-run the script.
+#
+#  Notice what is NOT stated here but can be inferred from the ontology:
+#    * Alice and Carol are only typed PremiumCustomer -> they are also Customer
+#    * orders say placedBy  -> customers placedOrder (owl:inverseOf)
+#    * Laptops subCategoryOf Computers subCategoryOf Electronics (transitive)
+#    * customer purchased product (owl:propertyChainAxiom)
+#############################################################################
+
+@prefix rdf:    <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:   <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:    <http://www.w3.org/2001/XMLSchema#> .
+@prefix retail: <https://example.org/retail/ontology#> .
+@prefix ex:     <https://example.org/retail/data/> .
+
+#---------------------------------------------------------------------------
+# Catalog: category taxonomy
+#---------------------------------------------------------------------------
+ex:CAT-ELECTRONICS a retail:Category ; retail:name "Electronics" .
+ex:CAT-COMPUTERS   a retail:Category ; retail:name "Computers" ; retail:subCategoryOf ex:CAT-ELECTRONICS .
+ex:CAT-LAPTOPS     a retail:Category ; retail:name "Laptops"   ; retail:subCategoryOf ex:CAT-COMPUTERS .
+ex:CAT-AUDIO       a retail:Category ; retail:name "Audio"     ; retail:subCategoryOf ex:CAT-ELECTRONICS .
+ex:CAT-BOOKS       a retail:Category ; retail:name "Books" .
+ex:CAT-KITCHEN     a retail:Category ; retail:name "Kitchen" .
+
+#---------------------------------------------------------------------------
+# Catalog: sellers
+#---------------------------------------------------------------------------
+ex:S1 a retail:Seller ; retail:name "TechHub Inc" .
+ex:S2 a retail:Seller ; retail:name "PageTurner Books" .
+ex:S3 a retail:Seller ; retail:name "HomeGoods Co" .
+
+#---------------------------------------------------------------------------
+# Catalog: products
+#---------------------------------------------------------------------------
+ex:P1 a retail:Product ;
+    retail:name "Laptop Pro 14" ; retail:sku "LAP-PRO-14" ;
+    retail:price "1299.00"^^xsd:decimal ;
+    retail:inCategory ex:CAT-LAPTOPS ; retail:soldBy ex:S1 .
+
+ex:P2 a retail:Product ;
+    retail:name "Wireless Earbuds X" ; retail:sku "EAR-X" ;
+    retail:price "149.99"^^xsd:decimal ;
+    retail:inCategory ex:CAT-AUDIO ; retail:soldBy ex:S1 .
+
+ex:P3 a retail:Product ;
+    retail:name "USB-C Charger 65W" ; retail:sku "CHG-65W" ;
+    retail:price "29.99"^^xsd:decimal ;
+    retail:inCategory ex:CAT-ELECTRONICS ; retail:soldBy ex:S1 .
+
+ex:P4 a retail:Product ;
+    retail:name "Knowledge Graphs 101" ; retail:sku "BK-KG101" ;
+    retail:price "49.99"^^xsd:decimal ;
+    retail:inCategory ex:CAT-BOOKS ; retail:soldBy ex:S2 .
+
+ex:P5 a retail:Product ;
+    retail:name "Chef Knife 8in" ; retail:sku "KNF-8" ;
+    retail:price "79.50"^^xsd:decimal ;
+    retail:inCategory ex:CAT-KITCHEN ; retail:soldBy ex:S3 .
+
+ex:P6 a retail:Product ;
+    retail:name "Mechanical Keyboard" ; retail:sku "KBD-MECH" ;
+    retail:price "89.00"^^xsd:decimal ;
+    retail:inCategory ex:CAT-COMPUTERS ; retail:soldBy ex:S1 .
+
+#---------------------------------------------------------------------------
+# Customers and addresses
+#---------------------------------------------------------------------------
+ex:C1 a retail:PremiumCustomer ;
+    retail:name "Alice Johnson" ; retail:email "alice@example.com" ;
+    retail:memberSince "2024-03-15"^^xsd:date ;
+    retail:hasAddress ex:A1 .
+
+ex:C2 a retail:Customer ;
+    retail:name "Bob Smith" ; retail:email "bob@example.com" ;
+    retail:hasAddress ex:A2 .
+
+ex:C3 a retail:PremiumCustomer ;
+    retail:name "Carol Diaz" ; retail:email "carol@example.com" ;
+    retail:memberSince "2025-11-01"^^xsd:date ;
+    retail:hasAddress ex:A3 .
+
+ex:A1 a retail:Address ; retail:city "Seattle"  ; retail:state "WA" ; retail:postalCode "98101" ; retail:country "US" .
+ex:A2 a retail:Address ; retail:city "Austin"   ; retail:state "TX" ; retail:postalCode "78701" ; retail:country "US" .
+ex:A3 a retail:Address ; retail:city "New York" ; retail:state "NY" ; retail:postalCode "10001" ; retail:country "US" .
+
+#---------------------------------------------------------------------------
+# Orders and order lines
+#---------------------------------------------------------------------------
+ex:O1 a retail:Order ;
+    retail:placedBy ex:C1 ; retail:orderDate "2026-09-01"^^xsd:date ;
+    retail:status "DELIVERED" ; retail:paymentMethod "CARD" ;
+    retail:shipsTo ex:A1 ;
+    retail:hasLine ex:O1-L1 , ex:O1-L2 .
+ex:O1-L1 a retail:OrderLine ; retail:forProduct ex:P1 ; retail:quantity "1"^^xsd:positiveInteger ; retail:unitPrice "1299.00"^^xsd:decimal .
+ex:O1-L2 a retail:OrderLine ; retail:forProduct ex:P3 ; retail:quantity "2"^^xsd:positiveInteger ; retail:unitPrice "29.99"^^xsd:decimal .
+
+ex:O2 a retail:Order ;
+    retail:placedBy ex:C2 ; retail:orderDate "2026-09-05"^^xsd:date ;
+    retail:status "SHIPPED" ; retail:paymentMethod "PAYPAL" ;
+    retail:shipsTo ex:A2 ;
+    retail:hasLine ex:O2-L1 , ex:O2-L2 .
+ex:O2-L1 a retail:OrderLine ; retail:forProduct ex:P4 ; retail:quantity "1"^^xsd:positiveInteger ; retail:unitPrice "49.99"^^xsd:decimal .
+ex:O2-L2 a retail:OrderLine ; retail:forProduct ex:P2 ; retail:quantity "1"^^xsd:positiveInteger ; retail:unitPrice "149.99"^^xsd:decimal .
+
+ex:O3 a retail:Order ;
+    retail:placedBy ex:C1 ; retail:orderDate "2026-09-20"^^xsd:date ;
+    retail:status "DELIVERED" ; retail:paymentMethod "CARD" ;
+    retail:shipsTo ex:A1 ;
+    retail:hasLine ex:O3-L1 .
+# Bought on sale: unit price paid (139.99) differs from list price (149.99)
+ex:O3-L1 a retail:OrderLine ; retail:forProduct ex:P2 ; retail:quantity "1"^^xsd:positiveInteger ; retail:unitPrice "139.99"^^xsd:decimal .
+
+ex:O4 a retail:Order ;
+    retail:placedBy ex:C3 ; retail:orderDate "2026-10-02"^^xsd:date ;
+    retail:status "PLACED" ; retail:paymentMethod "GIFT_CARD" ;
+    retail:shipsTo ex:A3 ;
+    retail:hasLine ex:O4-L1 , ex:O4-L2 .
+ex:O4-L1 a retail:OrderLine ; retail:forProduct ex:P5 ; retail:quantity "1"^^xsd:positiveInteger ; retail:unitPrice "79.50"^^xsd:decimal .
+ex:O4-L2 a retail:OrderLine ; retail:forProduct ex:P4 ; retail:quantity "2"^^xsd:positiveInteger ; retail:unitPrice "49.99"^^xsd:decimal .
+
+#---------------------------------------------------------------------------
+# Reviews
+#---------------------------------------------------------------------------
+ex:R1 a retail:Review ; retail:writtenBy ex:C1 ; retail:reviewOf ex:P1 ; retail:rating 5 ; retail:reviewText "Fast and light." .
+ex:R2 a retail:Review ; retail:writtenBy ex:C2 ; retail:reviewOf ex:P4 ; retail:rating 4 ; retail:reviewText "Great intro to graphs." .
+ex:R3 a retail:Review ; retail:writtenBy ex:C1 ; retail:reviewOf ex:P2 ; retail:rating 3 ; retail:reviewText "Good sound, weak battery." .
+ex:R4 a retail:Review ; retail:writtenBy ex:C3 ; retail:reviewOf ex:P4 ; retail:rating 5 ; retail:reviewText "Clear and practical." .

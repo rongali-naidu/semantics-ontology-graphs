@@ -1,0 +1,18 @@
+# Q8. "Inference at query time". Alice and Carol are typed only as
+# retail:PremiumCustomer. Asking for ?c a retail:Customer returns only Bob
+# unless a reasoner ran - the path  rdf:type/rdfs:subClassOf*  fixes that.
+# Needs the ONTOLOGY loaded alongside the data (it contains subClassOf).
+PREFIX rdf:    <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs:   <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl:    <http://www.w3.org/2002/07/owl#>
+PREFIX xsd:    <http://www.w3.org/2001/XMLSchema#>
+PREFIX retail: <https://example.org/retail/ontology#>
+PREFIX ex:     <https://example.org/retail/data/>
+
+SELECT DISTINCT ?name ?type
+WHERE {
+  ?c rdf:type ?type ;
+     retail:name ?name .
+  ?type rdfs:subClassOf* retail:Customer .
+}
+ORDER BY ?name

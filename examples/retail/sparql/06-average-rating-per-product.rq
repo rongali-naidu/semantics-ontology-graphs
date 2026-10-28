@@ -1,0 +1,16 @@
+# Q6. Average rating and review count per product (products without reviews
+# still appear thanks to OPTIONAL).
+PREFIX rdf:    <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs:   <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl:    <http://www.w3.org/2002/07/owl#>
+PREFIX xsd:    <http://www.w3.org/2001/XMLSchema#>
+PREFIX retail: <https://example.org/retail/ontology#>
+PREFIX ex:     <https://example.org/retail/data/>
+
+SELECT ?productName (COUNT(?review) AS ?reviews) (AVG(?rating) AS ?avgRating)
+WHERE {
+  ?product a retail:Product ; retail:name ?productName .
+  OPTIONAL { ?review retail:reviewOf ?product ; retail:rating ?rating . }
+}
+GROUP BY ?productName
+ORDER BY DESC(?avgRating) ?productName

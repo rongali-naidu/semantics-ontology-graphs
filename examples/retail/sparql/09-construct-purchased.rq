@@ -1,0 +1,12 @@
+# Q9. CONSTRUCT returns a new graph instead of a table. Here we materialise
+# the OWL property chain  placedOrder o hasLine o forProduct => purchased
+# (we walk placedBy backwards with ^ because the data only states placedBy).
+PREFIX rdf:    <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs:   <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl:    <http://www.w3.org/2002/07/owl#>
+PREFIX xsd:    <http://www.w3.org/2001/XMLSchema#>
+PREFIX retail: <https://example.org/retail/ontology#>
+PREFIX ex:     <https://example.org/retail/data/>
+
+CONSTRUCT { ?customer retail:purchased ?product . }
+WHERE     { ?customer ^retail:placedBy/retail:hasLine/retail:forProduct ?product . }

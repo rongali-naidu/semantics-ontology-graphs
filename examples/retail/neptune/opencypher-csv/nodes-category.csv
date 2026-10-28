@@ -1,0 +1,7 @@
+:ID,:LABEL,name:String
+CAT-AUDIO,Category,Audio
+CAT-BOOKS,Category,Books
+CAT-COMPUTERS,Category,Computers
+CAT-ELECTRONICS,Category,Electronics
+CAT-KITCHEN,Category,Kitchen
+CAT-LAPTOPS,Category,Laptops

@@ -1,0 +1,214 @@
+@prefix ex: <https://example.org/retail/data/> .
+@prefix g: <https://example.org/retail/graph/> .
+@prefix retail: <https://example.org/retail/ontology#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+g:catalog {
+    ex:P1 a retail:Product ;
+        retail:inCategory ex:CAT-LAPTOPS ;
+        retail:name "Laptop Pro 14" ;
+        retail:price 1299.00 ;
+        retail:sku "LAP-PRO-14" ;
+        retail:soldBy ex:S1 .
+
+    ex:P2 a retail:Product ;
+        retail:inCategory ex:CAT-AUDIO ;
+        retail:name "Wireless Earbuds X" ;
+        retail:price 149.99 ;
+        retail:sku "EAR-X" ;
+        retail:soldBy ex:S1 .
+
+    ex:P3 a retail:Product ;
+        retail:inCategory ex:CAT-ELECTRONICS ;
+        retail:name "USB-C Charger 65W" ;
+        retail:price 29.99 ;
+        retail:sku "CHG-65W" ;
+        retail:soldBy ex:S1 .
+
+    ex:P4 a retail:Product ;
+        retail:inCategory ex:CAT-BOOKS ;
+        retail:name "Knowledge Graphs 101" ;
+        retail:price 49.99 ;
+        retail:sku "BK-KG101" ;
+        retail:soldBy ex:S2 .
+
+    ex:P5 a retail:Product ;
+        retail:inCategory ex:CAT-KITCHEN ;
+        retail:name "Chef Knife 8in" ;
+        retail:price 79.50 ;
+        retail:sku "KNF-8" ;
+        retail:soldBy ex:S3 .
+
+    ex:P6 a retail:Product ;
+        retail:inCategory ex:CAT-COMPUTERS ;
+        retail:name "Mechanical Keyboard" ;
+        retail:price 89.00 ;
+        retail:sku "KBD-MECH" ;
+        retail:soldBy ex:S1 .
+
+    ex:CAT-AUDIO a retail:Category ;
+        retail:name "Audio" ;
+        retail:subCategoryOf ex:CAT-ELECTRONICS .
+
+    ex:CAT-BOOKS a retail:Category ;
+        retail:name "Books" .
+
+    ex:CAT-KITCHEN a retail:Category ;
+        retail:name "Kitchen" .
+
+    ex:CAT-LAPTOPS a retail:Category ;
+        retail:name "Laptops" ;
+        retail:subCategoryOf ex:CAT-COMPUTERS .
+
+    ex:S2 a retail:Seller ;
+        retail:name "PageTurner Books" .
+
+    ex:S3 a retail:Seller ;
+        retail:name "HomeGoods Co" .
+
+    ex:CAT-COMPUTERS a retail:Category ;
+        retail:name "Computers" ;
+        retail:subCategoryOf ex:CAT-ELECTRONICS .
+
+    ex:CAT-ELECTRONICS a retail:Category ;
+        retail:name "Electronics" .
+
+    ex:S1 a retail:Seller ;
+        retail:name "TechHub Inc" .
+}
+
+g:customers {
+    ex:C1 a retail:PremiumCustomer ;
+        retail:email "alice@example.com" ;
+        retail:hasAddress ex:A1 ;
+        retail:memberSince "2024-03-15"^^xsd:date ;
+        retail:name "Alice Johnson" .
+
+    ex:C2 a retail:Customer ;
+        retail:email "bob@example.com" ;
+        retail:hasAddress ex:A2 ;
+        retail:name "Bob Smith" .
+
+    ex:C3 a retail:PremiumCustomer ;
+        retail:email "carol@example.com" ;
+        retail:hasAddress ex:A3 ;
+        retail:memberSince "2025-11-01"^^xsd:date ;
+        retail:name "Carol Diaz" .
+
+    ex:A1 a retail:Address ;
+        retail:city "Seattle" ;
+        retail:country "US" ;
+        retail:postalCode "98101" ;
+        retail:state "WA" .
+
+    ex:A2 a retail:Address ;
+        retail:city "Austin" ;
+        retail:country "US" ;
+        retail:postalCode "78701" ;
+        retail:state "TX" .
+
+    ex:A3 a retail:Address ;
+        retail:city "New York" ;
+        retail:country "US" ;
+        retail:postalCode "10001" ;
+        retail:state "NY" .
+}
+
+g:orders {
+    ex:O1 a retail:Order ;
+        retail:hasLine ex:O1-L1,
+            ex:O1-L2 ;
+        retail:orderDate "2026-09-01"^^xsd:date ;
+        retail:paymentMethod "CARD" ;
+        retail:placedBy ex:C1 ;
+        retail:shipsTo ex:A1 ;
+        retail:status "DELIVERED" .
+
+    ex:O2 a retail:Order ;
+        retail:hasLine ex:O2-L1,
+            ex:O2-L2 ;
+        retail:orderDate "2026-09-05"^^xsd:date ;
+        retail:paymentMethod "PAYPAL" ;
+        retail:placedBy ex:C2 ;
+        retail:shipsTo ex:A2 ;
+        retail:status "SHIPPED" .
+
+    ex:O3 a retail:Order ;
+        retail:hasLine ex:O3-L1 ;
+        retail:orderDate "2026-09-20"^^xsd:date ;
+        retail:paymentMethod "CARD" ;
+        retail:placedBy ex:C1 ;
+        retail:shipsTo ex:A1 ;
+        retail:status "DELIVERED" .
+
+    ex:O4 a retail:Order ;
+        retail:hasLine ex:O4-L1,
+            ex:O4-L2 ;
+        retail:orderDate "2026-10-02"^^xsd:date ;
+        retail:paymentMethod "GIFT_CARD" ;
+        retail:placedBy ex:C3 ;
+        retail:shipsTo ex:A3 ;
+        retail:status "PLACED" .
+
+    ex:O1-L1 a retail:OrderLine ;
+        retail:forProduct ex:P1 ;
+        retail:quantity "1"^^xsd:positiveInteger ;
+        retail:unitPrice 1299.00 .
+
+    ex:O1-L2 a retail:OrderLine ;
+        retail:forProduct ex:P3 ;
+        retail:quantity "2"^^xsd:positiveInteger ;
+        retail:unitPrice 29.99 .
+
+    ex:O2-L1 a retail:OrderLine ;
+        retail:forProduct ex:P4 ;
+        retail:quantity "1"^^xsd:positiveInteger ;
+        retail:unitPrice 49.99 .
+
+    ex:O2-L2 a retail:OrderLine ;
+        retail:forProduct ex:P2 ;
+        retail:quantity "1"^^xsd:positiveInteger ;
+        retail:unitPrice 149.99 .
+
+    ex:O3-L1 a retail:OrderLine ;
+        retail:forProduct ex:P2 ;
+        retail:quantity "1"^^xsd:positiveInteger ;
+        retail:unitPrice 139.99 .
+
+    ex:O4-L1 a retail:OrderLine ;
+        retail:forProduct ex:P5 ;
+        retail:quantity "1"^^xsd:positiveInteger ;
+        retail:unitPrice 79.50 .
+
+    ex:O4-L2 a retail:OrderLine ;
+        retail:forProduct ex:P4 ;
+        retail:quantity "2"^^xsd:positiveInteger ;
+        retail:unitPrice 49.99 .
+}
+
+g:reviews {
+    ex:R1 a retail:Review ;
+        retail:rating 5 ;
+        retail:reviewOf ex:P1 ;
+        retail:reviewText "Fast and light." ;
+        retail:writtenBy ex:C1 .
+
+    ex:R2 a retail:Review ;
+        retail:rating 4 ;
+        retail:reviewOf ex:P4 ;
+        retail:reviewText "Great intro to graphs." ;
+        retail:writtenBy ex:C2 .
+
+    ex:R3 a retail:Review ;
+        retail:rating 3 ;
+        retail:reviewOf ex:P2 ;
+        retail:reviewText "Good sound, weak battery." ;
+        retail:writtenBy ex:C1 .
+
+    ex:R4 a retail:Review ;
+        retail:rating 5 ;
+        retail:reviewOf ex:P4 ;
+        retail:reviewText "Clear and practical." ;
+        retail:writtenBy ex:C3 .
+}
+

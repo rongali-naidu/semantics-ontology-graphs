@@ -1,0 +1,333 @@
+{
+  "@context": {
+    "@vocab": "https://example.org/retail/ontology#",
+    "ex": "https://example.org/retail/data/",
+    "forProduct": {
+      "@type": "@id"
+    },
+    "hasAddress": {
+      "@type": "@id"
+    },
+    "hasLine": {
+      "@type": "@id"
+    },
+    "inCategory": {
+      "@type": "@id"
+    },
+    "memberSince": {
+      "@type": "xsd:date"
+    },
+    "orderDate": {
+      "@type": "xsd:date"
+    },
+    "placedBy": {
+      "@type": "@id"
+    },
+    "price": {
+      "@type": "xsd:decimal"
+    },
+    "quantity": {
+      "@type": "xsd:positiveInteger"
+    },
+    "reviewOf": {
+      "@type": "@id"
+    },
+    "shipsTo": {
+      "@type": "@id"
+    },
+    "soldBy": {
+      "@type": "@id"
+    },
+    "subCategoryOf": {
+      "@type": "@id"
+    },
+    "unitPrice": {
+      "@type": "xsd:decimal"
+    },
+    "writtenBy": {
+      "@type": "@id"
+    },
+    "xsd": "http://www.w3.org/2001/XMLSchema#"
+  },
+  "@graph": [
+    {
+      "@id": "ex:CAT-COMPUTERS",
+      "@type": "Category",
+      "name": "Computers",
+      "subCategoryOf": "ex:CAT-ELECTRONICS"
+    },
+    {
+      "@id": "ex:P1",
+      "@type": "Product",
+      "inCategory": "ex:CAT-LAPTOPS",
+      "name": "Laptop Pro 14",
+      "price": "1299.00",
+      "sku": "LAP-PRO-14",
+      "soldBy": "ex:S1"
+    },
+    {
+      "@id": "ex:R4",
+      "@type": "Review",
+      "rating": 5,
+      "reviewOf": "ex:P4",
+      "reviewText": "Clear and practical.",
+      "writtenBy": "ex:C3"
+    },
+    {
+      "@id": "ex:O2-L1",
+      "@type": "OrderLine",
+      "forProduct": "ex:P4",
+      "quantity": "1",
+      "unitPrice": "49.99"
+    },
+    {
+      "@id": "ex:O2",
+      "@type": "Order",
+      "hasLine": [
+        "ex:O2-L1",
+        "ex:O2-L2"
+      ],
+      "orderDate": "2026-09-05",
+      "paymentMethod": "PAYPAL",
+      "placedBy": "ex:C2",
+      "shipsTo": "ex:A2",
+      "status": "SHIPPED"
+    },
+    {
+      "@id": "ex:R3",
+      "@type": "Review",
+      "rating": 3,
+      "reviewOf": "ex:P2",
+      "reviewText": "Good sound, weak battery.",
+      "writtenBy": "ex:C1"
+    },
+    {
+      "@id": "ex:A2",
+      "@type": "Address",
+      "city": "Austin",
+      "country": "US",
+      "postalCode": "78701",
+      "state": "TX"
+    },
+    {
+      "@id": "ex:S2",
+      "@type": "Seller",
+      "name": "PageTurner Books"
+    },
+    {
+      "@id": "ex:P3",
+      "@type": "Product",
+      "inCategory": "ex:CAT-ELECTRONICS",
+      "name": "USB-C Charger 65W",
+      "price": "29.99",
+      "sku": "CHG-65W",
+      "soldBy": "ex:S1"
+    },
+    {
+      "@id": "ex:O3-L1",
+      "@type": "OrderLine",
+      "forProduct": "ex:P2",
+      "quantity": "1",
+      "unitPrice": "139.99"
+    },
+    {
+      "@id": "ex:C2",
+      "@type": "Customer",
+      "email": "bob@example.com",
+      "hasAddress": "ex:A2",
+      "name": "Bob Smith"
+    },
+    {
+      "@id": "ex:C3",
+      "@type": "PremiumCustomer",
+      "email": "carol@example.com",
+      "hasAddress": "ex:A3",
+      "memberSince": "2025-11-01",
+      "name": "Carol Diaz"
+    },
+    {
+      "@id": "ex:O4-L2",
+      "@type": "OrderLine",
+      "forProduct": "ex:P4",
+      "quantity": "2",
+      "unitPrice": "49.99"
+    },
+    {
+      "@id": "ex:O4-L1",
+      "@type": "OrderLine",
+      "forProduct": "ex:P5",
+      "quantity": "1",
+      "unitPrice": "79.50"
+    },
+    {
+      "@id": "ex:O1-L1",
+      "@type": "OrderLine",
+      "forProduct": "ex:P1",
+      "quantity": "1",
+      "unitPrice": "1299.00"
+    },
+    {
+      "@id": "ex:P4",
+      "@type": "Product",
+      "inCategory": "ex:CAT-BOOKS",
+      "name": "Knowledge Graphs 101",
+      "price": "49.99",
+      "sku": "BK-KG101",
+      "soldBy": "ex:S2"
+    },
+    {
+      "@id": "ex:O2-L2",
+      "@type": "OrderLine",
+      "forProduct": "ex:P2",
+      "quantity": "1",
+      "unitPrice": "149.99"
+    },
+    {
+      "@id": "ex:R2",
+      "@type": "Review",
+      "rating": 4,
+      "reviewOf": "ex:P4",
+      "reviewText": "Great intro to graphs.",
+      "writtenBy": "ex:C2"
+    },
+    {
+      "@id": "ex:CAT-AUDIO",
+      "@type": "Category",
+      "name": "Audio",
+      "subCategoryOf": "ex:CAT-ELECTRONICS"
+    },
+    {
+      "@id": "ex:C1",
+      "@type": "PremiumCustomer",
+      "email": "alice@example.com",
+      "hasAddress": "ex:A1",
+      "memberSince": "2024-03-15",
+      "name": "Alice Johnson"
+    },
+    {
+      "@id": "ex:CAT-LAPTOPS",
+      "@type": "Category",
+      "name": "Laptops",
+      "subCategoryOf": "ex:CAT-COMPUTERS"
+    },
+    {
+      "@id": "ex:O1-L2",
+      "@type": "OrderLine",
+      "forProduct": "ex:P3",
+      "quantity": "2",
+      "unitPrice": "29.99"
+    },
+    {
+      "@id": "ex:P5",
+      "@type": "Product",
+      "inCategory": "ex:CAT-KITCHEN",
+      "name": "Chef Knife 8in",
+      "price": "79.50",
+      "sku": "KNF-8",
+      "soldBy": "ex:S3"
+    },
+    {
+      "@id": "ex:O1",
+      "@type": "Order",
+      "hasLine": [
+        "ex:O1-L1",
+        "ex:O1-L2"
+      ],
+      "orderDate": "2026-09-01",
+      "paymentMethod": "CARD",
+      "placedBy": "ex:C1",
+      "shipsTo": "ex:A1",
+      "status": "DELIVERED"
+    },
+    {
+      "@id": "ex:CAT-KITCHEN",
+      "@type": "Category",
+      "name": "Kitchen"
+    },
+    {
+      "@id": "ex:P6",
+      "@type": "Product",
+      "inCategory": "ex:CAT-COMPUTERS",
+      "name": "Mechanical Keyboard",
+      "price": "89.00",
+      "sku": "KBD-MECH",
+      "soldBy": "ex:S1"
+    },
+    {
+      "@id": "ex:CAT-ELECTRONICS",
+      "@type": "Category",
+      "name": "Electronics"
+    },
+    {
+      "@id": "ex:S1",
+      "@type": "Seller",
+      "name": "TechHub Inc"
+    },
+    {
+      "@id": "ex:P2",
+      "@type": "Product",
+      "inCategory": "ex:CAT-AUDIO",
+      "name": "Wireless Earbuds X",
+      "price": "149.99",
+      "sku": "EAR-X",
+      "soldBy": "ex:S1"
+    },
+    {
+      "@id": "ex:S3",
+      "@type": "Seller",
+      "name": "HomeGoods Co"
+    },
+    {
+      "@id": "ex:R1",
+      "@type": "Review",
+      "rating": 5,
+      "reviewOf": "ex:P1",
+      "reviewText": "Fast and light.",
+      "writtenBy": "ex:C1"
+    },
+    {
+      "@id": "ex:A3",
+      "@type": "Address",
+      "city": "New York",
+      "country": "US",
+      "postalCode": "10001",
+      "state": "NY"
+    },
+    {
+      "@id": "ex:A1",
+      "@type": "Address",
+      "city": "Seattle",
+      "country": "US",
+      "postalCode": "98101",
+      "state": "WA"
+    },
+    {
+      "@id": "ex:O3",
+      "@type": "Order",
+      "hasLine": "ex:O3-L1",
+      "orderDate": "2026-09-20",
+      "paymentMethod": "CARD",
+      "placedBy": "ex:C1",
+      "shipsTo": "ex:A1",
+      "status": "DELIVERED"
+    },
+    {
+      "@id": "ex:CAT-BOOKS",
+      "@type": "Category",
+      "name": "Books"
+    },
+    {
+      "@id": "ex:O4",
+      "@type": "Order",
+      "hasLine": [
+        "ex:O4-L1",
+        "ex:O4-L2"
+      ],
+      "orderDate": "2026-10-02",
+      "paymentMethod": "GIFT_CARD",
+      "placedBy": "ex:C3",
+      "shipsTo": "ex:A3",
+      "status": "PLACED"
+    }
+  ]
+}

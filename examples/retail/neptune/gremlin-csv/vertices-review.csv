@@ -1,0 +1,5 @@
+~id,~label,rating:Int(single),reviewText:String(single)
+R1,Review,5,Fast and light.
+R2,Review,4,Great intro to graphs.
+R3,Review,3,"Good sound, weak battery."
+R4,Review,5,Clear and practical.

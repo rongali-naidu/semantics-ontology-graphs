@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rdf:RDF
+  xmlns:retail="https://example.org/retail/ontology#"
+  xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+>
+  <retail:Review rdf:about="https://example.org/retail/data/R2">
+    <retail:writtenBy>
+      <retail:Customer rdf:about="https://example.org/retail/data/C2">
+        <retail:name>Bob Smith</retail:name>
+        <retail:email>bob@example.com</retail:email>
+        <retail:hasAddress rdf:resource="https://example.org/retail/data/A2"/>
+      </retail:Customer>
+    </retail:writtenBy>
+    <retail:reviewOf>
+      <retail:Product rdf:about="https://example.org/retail/data/P4">
+        <retail:name>Knowledge Graphs 101</retail:name>
+        <retail:sku>BK-KG101</retail:sku>
+        <retail:price rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">49.99</retail:price>
+        <retail:inCategory rdf:resource="https://example.org/retail/data/CAT-BOOKS"/>
+        <retail:soldBy rdf:resource="https://example.org/retail/data/S2"/>
+      </retail:Product>
+    </retail:reviewOf>
+    <retail:rating rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">4</retail:rating>
+    <retail:reviewText>Great intro to graphs.</retail:reviewText>
+  </retail:Review>
+  <retail:Order rdf:about="https://example.org/retail/data/O4">
+    <retail:placedBy>
+      <retail:PremiumCustomer rdf:about="https://example.org/retail/data/C3">
+        <retail:name>Carol Diaz</retail:name>
+        <retail:email>carol@example.com</retail:email>
+        <retail:memberSince rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2025-11-01</retail:memberSince>
+        <retail:hasAddress rdf:resource="https://example.org/retail/data/A3"/>
+      </retail:PremiumCustomer>
+    </retail:placedBy>
+    <retail:orderDate rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2026-10-02</retail:orderDate>
+    <retail:status>PLACED</retail:status>
+    <retail:paymentMethod>GIFT_CARD</retail:paymentMethod>
+    <retail:shipsTo>
+      <retail:Address rdf:about="https://example.org/retail/data/A3">
+        <retail:city>New York</retail:city>
+        <retail:state>NY</retail:state>
+        <retail:postalCode>10001</retail:postalCode>
+        <retail:country>US</retail:country>
+      </retail:Address>
+    </retail:shipsTo>
+    <retail:hasLine>
+      <retail:OrderLine rdf:about="https://example.org/retail/data/O4-L1">
+        <retail:forProduct rdf:resource="https://example.org/retail/data/P5"/>
+        <retail:quantity rdf:datatype="http://www.w3.org/2001/XMLSchema#positiveInteger">1</retail:quantity>
+        <retail:unitPrice rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">79.50</retail:unitPrice>
+      </retail:OrderLine>
+    </retail:hasLine>
+    <retail:hasLine>
+      <retail:OrderLine rdf:about="https://example.org/retail/data/O4-L2">
+        <retail:forProduct rdf:resource="https://example.org/retail/data/P4"/>
+        <retail:quantity rdf:datatype="http://www.w3.org/2001/XMLSchema#positiveInteger">2</retail:quantity>
+        <retail:unitPrice rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">49.99</retail:unitPrice>
+      </retail:OrderLine>
+    </retail:hasLine>
+  </retail:Order>
+  <retail:Product rdf:about="https://example.org/retail/data/P6">
+    <retail:name>Mechanical Keyboard</retail:name>
+    <retail:sku>KBD-MECH</retail:sku>
+    <retail:price rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">89.00</retail:price>
+    <retail:inCategory>
+      <retail:Category rdf:about="https://example.org/retail/data/CAT-COMPUTERS">
+        <retail:name>Computers</retail:name>
+        <retail:subCategoryOf rdf:resource="https://example.org/retail/data/CAT-ELECTRONICS"/>
+      </retail:Category>
+    </retail:inCategory>
+    <retail:soldBy>
+      <retail:Seller rdf:about="https://example.org/retail/data/S1">
+        <retail:name>TechHub Inc</retail:name>
+      </retail:Seller>
+    </retail:soldBy>
+  </retail:Product>
+  <retail:Order rdf:about="https://example.org/retail/data/O2">
+    <retail:placedBy rdf:resource="https://example.org/retail/data/C2"/>
+    <retail:orderDate rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2026-09-05</retail:orderDate>
+    <retail:status>SHIPPED</retail:status>
+    <retail:paymentMethod>PAYPAL</retail:paymentMethod>
+    <retail:shipsTo>
+      <retail:Address rdf:about="https://example.org/retail/data/A2">
+        <retail:city>Austin</retail:city>
+        <retail:state>TX</retail:state>
+        <retail:postalCode>78701</retail:postalCode>
+        <retail:country>US</retail:country>
+      </retail:Address>
+    </retail:shipsTo>
+    <retail:hasLine>
+      <retail:OrderLine rdf:about="https://example.org/retail/data/O2-L1">
+        <retail:forProduct rdf:resource="https://example.org/retail/data/P4"/>
+        <retail:quantity rdf:datatype="http://www.w3.org/2001/XMLSchema#positiveInteger">1</retail:quantity>
+        <retail:unitPrice rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">49.99</retail:unitPrice>
+      </retail:OrderLine>
+    </retail:hasLine>
+    <retail:hasLine>
+      <retail:OrderLine rdf:about="https://example.org/retail/data/O2-L2">
+        <retail:forProduct rdf:resource="https://example.org/retail/data/P2"/>
+        <retail:quantity rdf:datatype="http://www.w3.org/2001/XMLSchema#positiveInteger">1</retail:quantity>
+        <retail:unitPrice rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">149.99</retail:unitPrice>
+      </retail:OrderLine>
+    </retail:hasLine>
+  </retail:Order>
+  <retail:Order rdf:about="https://example.org/retail/data/O3">
+    <retail:placedBy>
+      <retail:PremiumCustomer rdf:about="https://example.org/retail/data/C1">
+        <retail:name>Alice Johnson</retail:name>
+        <retail:email>alice@example.com</retail:email>
+        <retail:memberSince rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2024-03-15</retail:memberSince>
+        <retail:hasAddress rdf:resource="https://example.org/retail/data/A1"/>
+      </retail:PremiumCustomer>
+    </retail:placedBy>
+    <retail:orderDate rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2026-09-20</retail:orderDate>
+    <retail:status>DELIVERED</retail:status>
+    <retail:paymentMethod>CARD</retail:paymentMethod>
+    <retail:shipsTo>
+      <retail:Address rdf:about="https://example.org/retail/data/A1">
+        <retail:city>Seattle</retail:city>
+        <retail:state>WA</retail:state>
+        <retail:postalCode>98101</retail:postalCode>
+        <retail:country>US</retail:country>
+      </retail:Address>
+    </retail:shipsTo>
+    <retail:hasLine>
+      <retail:OrderLine rdf:about="https://example.org/retail/data/O3-L1">
+        <retail:forProduct rdf:resource="https://example.org/retail/data/P2"/>
+        <retail:quantity rdf:datatype="http://www.w3.org/2001/XMLSchema#positiveInteger">1</retail:quantity>
+        <retail:unitPrice rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">139.99</retail:unitPrice>
+      </retail:OrderLine>
+    </retail:hasLine>
+  </retail:Order>
+  <retail:Review rdf:about="https://example.org/retail/data/R4">
+    <retail:writtenBy rdf:resource="https://example.org/retail/data/C3"/>
+    <retail:reviewOf rdf:resource="https://example.org/retail/data/P4"/>
+    <retail:rating rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">5</retail:rating>
+    <retail:reviewText>Clear and practical.</retail:reviewText>
+  </retail:Review>
+  <retail:Review rdf:about="https://example.org/retail/data/R1">
+    <retail:writtenBy rdf:resource="https://example.org/retail/data/C1"/>
+    <retail:reviewOf>
+      <retail:Product rdf:about="https://example.org/retail/data/P1">
+        <retail:name>Laptop Pro 14</retail:name>
+        <retail:sku>LAP-PRO-14</retail:sku>
+        <retail:price rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">1299.00</retail:price>
+        <retail:inCategory rdf:resource="https://example.org/retail/data/CAT-LAPTOPS"/>
+        <retail:soldBy rdf:resource="https://example.org/retail/data/S1"/>
+      </retail:Product>
+    </retail:reviewOf>
+    <retail:rating rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">5</retail:rating>
+    <retail:reviewText>Fast and light.</retail:reviewText>
+  </retail:Review>
+  <retail:Review rdf:about="https://example.org/retail/data/R3">
+    <retail:writtenBy rdf:resource="https://example.org/retail/data/C1"/>
+    <retail:reviewOf>
+      <retail:Product rdf:about="https://example.org/retail/data/P2">
+        <retail:name>Wireless Earbuds X</retail:name>
+        <retail:sku>EAR-X</retail:sku>
+        <retail:price rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">149.99</retail:price>
+        <retail:inCategory rdf:resource="https://example.org/retail/data/CAT-AUDIO"/>
+        <retail:soldBy rdf:resource="https://example.org/retail/data/S1"/>
+      </retail:Product>
+    </retail:reviewOf>
+    <retail:rating rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">3</retail:rating>
+    <retail:reviewText>Good sound, weak battery.</retail:reviewText>
+  </retail:Review>
+  <retail:Order rdf:about="https://example.org/retail/data/O1">
+    <retail:placedBy rdf:resource="https://example.org/retail/data/C1"/>
+    <retail:orderDate rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2026-09-01</retail:orderDate>
+    <retail:status>DELIVERED</retail:status>
+    <retail:paymentMethod>CARD</retail:paymentMethod>
+    <retail:shipsTo rdf:resource="https://example.org/retail/data/A1"/>
+    <retail:hasLine>
+      <retail:OrderLine rdf:about="https://example.org/retail/data/O1-L1">
+        <retail:forProduct rdf:resource="https://example.org/retail/data/P1"/>
+        <retail:quantity rdf:datatype="http://www.w3.org/2001/XMLSchema#positiveInteger">1</retail:quantity>
+        <retail:unitPrice rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">1299.00</retail:unitPrice>
+      </retail:OrderLine>
+    </retail:hasLine>
+    <retail:hasLine>
+      <retail:OrderLine rdf:about="https://example.org/retail/data/O1-L2">
+        <retail:forProduct rdf:resource="https://example.org/retail/data/P3"/>
+        <retail:quantity rdf:datatype="http://www.w3.org/2001/XMLSchema#positiveInteger">2</retail:quantity>
+        <retail:unitPrice rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">29.99</retail:unitPrice>
+      </retail:OrderLine>
+    </retail:hasLine>
+  </retail:Order>
+  <retail:Category rdf:about="https://example.org/retail/data/CAT-LAPTOPS">
+    <retail:name>Laptops</retail:name>
+    <retail:subCategoryOf rdf:resource="https://example.org/retail/data/CAT-COMPUTERS"/>
+  </retail:Category>
+  <retail:Category rdf:about="https://example.org/retail/data/CAT-AUDIO">
+    <retail:name>Audio</retail:name>
+    <retail:subCategoryOf>
+      <retail:Category rdf:about="https://example.org/retail/data/CAT-ELECTRONICS">
+        <retail:name>Electronics</retail:name>
+      </retail:Category>
+    </retail:subCategoryOf>
+  </retail:Category>
+  <retail:Product rdf:about="https://example.org/retail/data/P5">
+    <retail:name>Chef Knife 8in</retail:name>
+    <retail:sku>KNF-8</retail:sku>
+    <retail:price rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">79.50</retail:price>
+    <retail:inCategory>
+      <retail:Category rdf:about="https://example.org/retail/data/CAT-KITCHEN">
+        <retail:name>Kitchen</retail:name>
+      </retail:Category>
+    </retail:inCategory>
+    <retail:soldBy>
+      <retail:Seller rdf:about="https://example.org/retail/data/S3">
+        <retail:name>HomeGoods Co</retail:name>
+      </retail:Seller>
+    </retail:soldBy>
+  </retail:Product>
+  <retail:Seller rdf:about="https://example.org/retail/data/S2">
+    <retail:name>PageTurner Books</retail:name>
+  </retail:Seller>
+  <retail:Category rdf:about="https://example.org/retail/data/CAT-BOOKS">
+    <retail:name>Books</retail:name>
+  </retail:Category>
+  <retail:Product rdf:about="https://example.org/retail/data/P3">
+    <retail:name>USB-C Charger 65W</retail:name>
+    <retail:sku>CHG-65W</retail:sku>
+    <retail:price rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">29.99</retail:price>
+    <retail:inCategory rdf:resource="https://example.org/retail/data/CAT-ELECTRONICS"/>
+    <retail:soldBy rdf:resource="https://example.org/retail/data/S1"/>
+  </retail:Product>
+</rdf:RDF>

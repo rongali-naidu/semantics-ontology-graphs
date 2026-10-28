@@ -1,0 +1,7 @@
+~id,~label,name:String(single),sku:String(single),price:Double(single)
+P1,Product,Laptop Pro 14,LAP-PRO-14,1299.00
+P2,Product,Wireless Earbuds X,EAR-X,149.99
+P3,Product,USB-C Charger 65W,CHG-65W,29.99
+P4,Product,Knowledge Graphs 101,BK-KG101,49.99
+P5,Product,Chef Knife 8in,KNF-8,79.50
+P6,Product,Mechanical Keyboard,KBD-MECH,89.00

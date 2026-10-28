@@ -1,0 +1,237 @@
+<https://example.org/retail/ontology#city> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#DatatypeProperty> .
+_:n7a945c9f21434f6f8ede2e67b9857cc9b18 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> _:n7a945c9f21434f6f8ede2e67b9857cc9b19 .
+<https://example.org/retail/ontology#shipsTo> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#ObjectProperty> .
+_:n7a945c9f21434f6f8ede2e67b9857cc9b8 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> _:n7a945c9f21434f6f8ede2e67b9857cc9b9 .
+<https://example.org/retail/ontology#unitPrice> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#FunctionalProperty> .
+<https://example.org/retail/ontology#hasAddress> <http://www.w3.org/2000/01/rdf-schema#domain> <https://example.org/retail/ontology#Customer> .
+_:n7a945c9f21434f6f8ede2e67b9857cc9b19 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> <http://www.w3.org/1999/02/22-rdf-syntax-ns#nil> .
+_:n7a945c9f21434f6f8ede2e67b9857cc9b8 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <https://example.org/retail/ontology#Order> .
+<https://example.org/retail/ontology#orderDate> <http://www.w3.org/2000/01/rdf-schema#range> <http://www.w3.org/2001/XMLSchema#date> .
+<https://example.org/retail/ontology#email> <http://www.w3.org/2000/01/rdf-schema#label> "email"@en .
+<https://example.org/retail/ontology#country> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#DatatypeProperty> .
+<https://example.org/retail/ontology#name> <http://www.w3.org/2000/01/rdf-schema#range> <http://www.w3.org/2001/XMLSchema#string> .
+<https://example.org/retail/ontology#inCategory> <http://www.w3.org/2000/01/rdf-schema#domain> <https://example.org/retail/ontology#Product> .
+<https://example.org/retail/ontology#paymentMethod> <http://www.w3.org/2000/01/rdf-schema#range> <http://www.w3.org/2001/XMLSchema#string> .
+_:n7a945c9f21434f6f8ede2e67b9857cc9b17 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> "SHIPPED" .
+<https://example.org/retail/ontology#Review> <http://www.w3.org/2004/02/skos/core#definition> "A customer's rating (1-5) and optional text about a product."@en .
+<https://example.org/retail/ontology#Customer> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+<https://example.org/retail/ontology> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Ontology> .
+<https://example.org/retail/ontology#Order> <http://www.w3.org/2000/01/rdf-schema#label> "Order"@en .
+<https://example.org/retail/ontology#Review> <http://www.w3.org/2000/01/rdf-schema#label> "Review"@en .
+<https://example.org/retail/ontology#sku> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#DatatypeProperty> .
+<https://example.org/retail/ontology#forProduct> <http://www.w3.org/2000/01/rdf-schema#label> "for product"@en .
+<https://example.org/retail/ontology#placedBy> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#FunctionalProperty> .
+<https://example.org/retail/ontology#OrderLine> <http://www.w3.org/2000/01/rdf-schema#label> "Order line"@en .
+<https://example.org/retail/ontology#Customer> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <https://example.org/retail/ontology#Party> .
+<https://example.org/retail/ontology#shipsTo> <http://www.w3.org/2000/01/rdf-schema#range> <https://example.org/retail/ontology#Address> .
+<https://example.org/retail/ontology#status> <http://www.w3.org/2000/01/rdf-schema#domain> <https://example.org/retail/ontology#Order> .
+<https://example.org/retail/ontology#postalCode> <http://www.w3.org/2000/01/rdf-schema#domain> <https://example.org/retail/ontology#Address> .
+<https://example.org/retail/ontology#Party> <http://www.w3.org/2000/01/rdf-schema#label> "Party"@en .
+_:n7a945c9f21434f6f8ede2e67b9857cc9b2 <http://www.w3.org/2002/07/owl#minQualifiedCardinality> "1"^^<http://www.w3.org/2001/XMLSchema#nonNegativeInteger> .
+<https://example.org/retail/ontology#PremiumCustomer> <http://www.w3.org/2000/01/rdf-schema#label> "Premium customer"@en .
+<https://example.org/retail/ontology> <http://purl.org/dc/terms/created> "2026-10-28"^^<http://www.w3.org/2001/XMLSchema#date> .
+_:n7a945c9f21434f6f8ede2e67b9857cc9b19 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> "CANCELLED" .
+<https://example.org/retail/ontology#quantity> <http://www.w3.org/2000/01/rdf-schema#domain> <https://example.org/retail/ontology#OrderLine> .
+<https://example.org/retail/ontology#purchased> <http://www.w3.org/2000/01/rdf-schema#label> "purchased"@en .
+<https://example.org/retail/ontology#sku> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#FunctionalProperty> .
+<https://example.org/retail/ontology#Review> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+<https://example.org/retail/ontology#Product> <http://www.w3.org/2000/01/rdf-schema#label> "Product"@en .
+<https://example.org/retail/ontology#memberSince> <http://www.w3.org/2000/01/rdf-schema#domain> <https://example.org/retail/ontology#PremiumCustomer> .
+<https://example.org/retail/ontology> <http://www.w3.org/2000/01/rdf-schema#comment> "Instance data is kept in a separate file (ABox) from this schema (TBox)."@en .
+<https://example.org/retail/ontology#Customer> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <https://schema.org/Person> .
+<https://example.org/retail/ontology#subCategoryOf> <http://www.w3.org/2000/01/rdf-schema#range> <https://example.org/retail/ontology#Category> .
+<https://example.org/retail/ontology#country> <http://www.w3.org/2000/01/rdf-schema#range> <http://www.w3.org/2001/XMLSchema#string> .
+<https://example.org/retail/ontology#rating> <http://www.w3.org/2000/01/rdf-schema#label> "rating"@en .
+<https://example.org/retail/ontology#OrderLine> <http://www.w3.org/2004/02/skos/core#definition> "One product + quantity + price within an order. Reifies the Order-Product relationship so it can carry attributes."@en .
+<https://example.org/retail/ontology#purchased> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#ObjectProperty> .
+_:n7a945c9f21434f6f8ede2e67b9857cc9b12 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <https://example.org/retail/ontology#placedOrder> .
+_:n7a945c9f21434f6f8ede2e67b9857cc9b11 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <https://example.org/retail/ontology#Review> .
+_:n7a945c9f21434f6f8ede2e67b9857cc9b22 <http://www.w3.org/2001/XMLSchema#maxInclusive> "5"^^<http://www.w3.org/2001/XMLSchema#integer> .
+<https://example.org/retail/ontology#sku> <http://www.w3.org/2000/01/rdf-schema#range> <http://www.w3.org/2001/XMLSchema#string> .
+<https://example.org/retail/ontology#hasLine> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#InverseFunctionalProperty> .
+<https://example.org/retail/ontology#forProduct> <http://www.w3.org/2000/01/rdf-schema#range> <https://example.org/retail/ontology#Product> .
+<https://example.org/retail/ontology#rating> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#DatatypeProperty> .
+<https://example.org/retail/ontology#Review> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <https://schema.org/Review> .
+<https://example.org/retail/ontology#state> <http://www.w3.org/2000/01/rdf-schema#domain> <https://example.org/retail/ontology#Address> .
+<https://example.org/retail/ontology#reviewOf> <http://www.w3.org/2000/01/rdf-schema#range> <https://example.org/retail/ontology#Product> .
+<https://example.org/retail/ontology#unitPrice> <http://www.w3.org/2000/01/rdf-schema#domain> <https://example.org/retail/ontology#OrderLine> .
+<https://example.org/retail/ontology#soldBy> <http://www.w3.org/2000/01/rdf-schema#domain> <https://example.org/retail/ontology#Product> .
+_:n7a945c9f21434f6f8ede2e67b9857cc9b10 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <https://example.org/retail/ontology#Address> .
+_:n7a945c9f21434f6f8ede2e67b9857cc9b7 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <https://example.org/retail/ontology#Category> .
+<https://example.org/retail/ontology#PremiumCustomer> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+_:n7a945c9f21434f6f8ede2e67b9857cc9b7 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> _:n7a945c9f21434f6f8ede2e67b9857cc9b8 .
+<https://example.org/retail/ontology#purchased> <http://www.w3.org/2000/01/rdf-schema#domain> <https://example.org/retail/ontology#Customer> .
+<https://example.org/retail/ontology#shipsTo> <http://www.w3.org/2000/01/rdf-schema#domain> <https://example.org/retail/ontology#Order> .
+<https://example.org/retail/ontology#email> <http://www.w3.org/2000/01/rdf-schema#range> <http://www.w3.org/2001/XMLSchema#string> .
+_:n7a945c9f21434f6f8ede2e67b9857cc9b17 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> _:n7a945c9f21434f6f8ede2e67b9857cc9b18 .
+_:n7a945c9f21434f6f8ede2e67b9857cc9b15 <http://www.w3.org/2002/07/owl#oneOf> _:n7a945c9f21434f6f8ede2e67b9857cc9b16 .
+_:n7a945c9f21434f6f8ede2e67b9857cc9b24 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> <http://www.w3.org/1999/02/22-rdf-syntax-ns#nil> .
+<https://example.org/retail/ontology#postalCode> <http://www.w3.org/2000/01/rdf-schema#range> <http://www.w3.org/2001/XMLSchema#string> .
+_:n7a945c9f21434f6f8ede2e67b9857cc9b21 <http://www.w3.org/2001/XMLSchema#minInclusive> "1"^^<http://www.w3.org/2001/XMLSchema#integer> .
+<https://example.org/retail/ontology#rating> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#FunctionalProperty> .
+_:n7a945c9f21434f6f8ede2e67b9857cc9b4 <http://www.w3.org/2002/07/owl#members> _:n7a945c9f21434f6f8ede2e67b9857cc9b5 .
+<https://example.org/retail/ontology#writtenBy> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#ObjectProperty> .
+<https://example.org/retail/ontology#memberSince> <http://www.w3.org/2000/01/rdf-schema#label> "member since"@en .
+<https://example.org/retail/ontology#placedBy> <http://www.w3.org/2000/01/rdf-schema#label> "placed by"@en .
+<https://example.org/retail/ontology#Customer> <http://www.w3.org/2002/07/owl#disjointWith> <https://example.org/retail/ontology#Seller> .
+<https://example.org/retail/ontology#Address> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+<https://example.org/retail/ontology#postalCode> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#DatatypeProperty> .
+<https://example.org/retail/ontology> <http://purl.org/dc/terms/license> <https://creativecommons.org/licenses/by/4.0/> .
+_:n7a945c9f21434f6f8ede2e67b9857cc9b23 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> _:n7a945c9f21434f6f8ede2e67b9857cc9b21 .
+<https://example.org/retail/ontology#quantity> <http://www.w3.org/2000/01/rdf-schema#range> <http://www.w3.org/2001/XMLSchema#positiveInteger> .
+<https://example.org/retail/ontology#Order> <http://www.w3.org/2000/01/rdf-schema#subClassOf> _:n7a945c9f21434f6f8ede2e67b9857cc9b1 .
+<https://example.org/retail/ontology#Order> <http://www.w3.org/2004/02/skos/core#definition> "A purchase placed by exactly one customer, containing one or more order lines."@en .
+<https://example.org/retail/ontology#placedOrder> <http://www.w3.org/2000/01/rdf-schema#domain> <https://example.org/retail/ontology#Customer> .
+_:n7a945c9f21434f6f8ede2e67b9857cc9b20 <http://www.w3.org/2002/07/owl#onDatatype> <http://www.w3.org/2001/XMLSchema#integer> .
+<https://example.org/retail/ontology> <http://purl.org/dc/terms/description> "Teaching ontology for an online marketplace: customers, orders, products, categories, sellers and reviews."@en .
+<https://example.org/retail/ontology#sku> <http://www.w3.org/2000/01/rdf-schema#domain> <https://example.org/retail/ontology#Product> .
+<https://example.org/retail/ontology#state> <http://www.w3.org/2000/01/rdf-schema#range> <http://www.w3.org/2001/XMLSchema#string> .
+<https://example.org/retail/ontology#OrderLine> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+_:n7a945c9f21434f6f8ede2e67b9857cc9b12 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> _:n7a945c9f21434f6f8ede2e67b9857cc9b13 .
+<https://example.org/retail/ontology#orderDate> <http://www.w3.org/2000/01/rdf-schema#label> "order date"@en .
+<https://example.org/retail/ontology#price> <http://www.w3.org/2000/01/rdf-schema#range> <http://www.w3.org/2001/XMLSchema#decimal> .
+<https://example.org/retail/ontology#writtenBy> <http://www.w3.org/2000/01/rdf-schema#domain> <https://example.org/retail/ontology#Review> .
+<https://example.org/retail/ontology#soldBy> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#ObjectProperty> .
+_:n7a945c9f21434f6f8ede2e67b9857cc9b9 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <https://example.org/retail/ontology#OrderLine> .
+<https://example.org/retail/ontology#memberSince> <http://www.w3.org/2000/01/rdf-schema#range> <http://www.w3.org/2001/XMLSchema#date> .
+<https://example.org/retail/ontology#name> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#DatatypeProperty> .
+<https://example.org/retail/ontology#paymentMethod> <http://www.w3.org/2000/01/rdf-schema#domain> <https://example.org/retail/ontology#Order> .
+<https://example.org/retail/ontology#hasLine> <http://www.w3.org/2000/01/rdf-schema#domain> <https://example.org/retail/ontology#Order> .
+<https://example.org/retail/ontology#reviewText> <http://www.w3.org/2000/01/rdf-schema#label> "review text"@en .
+_:n7a945c9f21434f6f8ede2e67b9857cc9b9 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> _:n7a945c9f21434f6f8ede2e67b9857cc9b10 .
+<https://example.org/retail/ontology#state> <http://www.w3.org/2000/01/rdf-schema#label> "state"@en .
+<https://example.org/retail/ontology#country> <http://www.w3.org/2000/01/rdf-schema#label> "country"@en .
+<https://example.org/retail/ontology#Party> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+<https://example.org/retail/ontology#orderDate> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#DatatypeProperty> .
+<https://example.org/retail/ontology#hasAddress> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#ObjectProperty> .
+<https://example.org/retail/ontology#PremiumCustomer> <http://www.w3.org/2004/02/skos/core#definition> "A customer with a paid membership (free shipping, etc.)."@en .
+<https://example.org/retail/ontology#postalCode> <http://www.w3.org/2000/01/rdf-schema#label> "postal code"@en .
+<https://example.org/retail/ontology#forProduct> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#FunctionalProperty> .
+_:n7a945c9f21434f6f8ede2e67b9857cc9b3 <http://www.w3.org/2002/07/owl#onProperty> <https://example.org/retail/ontology#forProduct> .
+<https://example.org/retail/ontology#name> <http://www.w3.org/2000/01/rdf-schema#subPropertyOf> <https://schema.org/name> .
+<https://example.org/retail/ontology#reviewOf> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#FunctionalProperty> .
+<https://example.org/retail/ontology#paymentMethod> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#DatatypeProperty> .
+<https://example.org/retail/ontology#Order> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+_:n7a945c9f21434f6f8ede2e67b9857cc9b16 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> _:n7a945c9f21434f6f8ede2e67b9857cc9b17 .
+<https://example.org/retail/ontology#placedBy> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#ObjectProperty> .
+<https://example.org/retail/ontology#quantity> <http://www.w3.org/2000/01/rdf-schema#label> "quantity"@en .
+<https://example.org/retail/ontology#Seller> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <https://example.org/retail/ontology#Party> .
+_:n7a945c9f21434f6f8ede2e67b9857cc9b13 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> _:n7a945c9f21434f6f8ede2e67b9857cc9b14 .
+_:n7a945c9f21434f6f8ede2e67b9857cc9b3 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Restriction> .
+<https://example.org/retail/ontology#placedBy> <http://www.w3.org/2000/01/rdf-schema#domain> <https://example.org/retail/ontology#Order> .
+_:n7a945c9f21434f6f8ede2e67b9857cc9b2 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Restriction> .
+<https://example.org/retail/ontology#writtenBy> <http://www.w3.org/2000/01/rdf-schema#range> <https://example.org/retail/ontology#Customer> .
+<https://example.org/retail/ontology#status> <http://www.w3.org/2000/01/rdf-schema#label> "status"@en .
+<https://example.org/retail/ontology#orderDate> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#FunctionalProperty> .
+<https://example.org/retail/ontology#Seller> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+<https://example.org/retail/ontology#state> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#DatatypeProperty> .
+_:n7a945c9f21434f6f8ede2e67b9857cc9b2 <http://www.w3.org/2002/07/owl#onProperty> <https://example.org/retail/ontology#hasLine> .
+_:n7a945c9f21434f6f8ede2e67b9857cc9b1 <http://www.w3.org/2002/07/owl#qualifiedCardinality> "1"^^<http://www.w3.org/2001/XMLSchema#nonNegativeInteger> .
+<https://example.org/retail/ontology#paymentMethod> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#FunctionalProperty> .
+<https://example.org/retail/ontology#Product> <http://www.w3.org/2004/02/skos/core#definition> "An item offered for sale, identified by a SKU."@en .
+_:n7a945c9f21434f6f8ede2e67b9857cc9b6 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> _:n7a945c9f21434f6f8ede2e67b9857cc9b7 .
+<https://example.org/retail/ontology#reviewOf> <http://www.w3.org/2000/01/rdf-schema#label> "review of"@en .
+<https://example.org/retail/ontology#unitPrice> <http://www.w3.org/2000/01/rdf-schema#label> "unit price paid (USD)"@en .
+<https://example.org/retail/ontology#Category> <http://www.w3.org/2000/01/rdf-schema#label> "Category"@en .
+_:n7a945c9f21434f6f8ede2e67b9857cc9b1 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Restriction> .
+_:n7a945c9f21434f6f8ede2e67b9857cc9b3 <http://www.w3.org/2002/07/owl#qualifiedCardinality> "1"^^<http://www.w3.org/2001/XMLSchema#nonNegativeInteger> .
+_:n7a945c9f21434f6f8ede2e67b9857cc9b13 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <https://example.org/retail/ontology#hasLine> .
+<https://example.org/retail/ontology#subCategoryOf> <http://www.w3.org/2000/01/rdf-schema#label> "sub-category of"@en .
+_:n7a945c9f21434f6f8ede2e67b9857cc9b1 <http://www.w3.org/2002/07/owl#onProperty> <https://example.org/retail/ontology#placedBy> .
+<https://example.org/retail/ontology#hasLine> <http://www.w3.org/2000/01/rdf-schema#range> <https://example.org/retail/ontology#OrderLine> .
+<https://example.org/retail/ontology#price> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#DatatypeProperty> .
+_:n7a945c9f21434f6f8ede2e67b9857cc9b24 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> _:n7a945c9f21434f6f8ede2e67b9857cc9b22 .
+<https://example.org/retail/ontology#soldBy> <http://www.w3.org/2000/01/rdf-schema#label> "sold by"@en .
+<https://example.org/retail/ontology#purchased> <http://www.w3.org/2000/01/rdf-schema#range> <https://example.org/retail/ontology#Product> .
+<https://example.org/retail/ontology#unitPrice> <http://www.w3.org/2000/01/rdf-schema#range> <http://www.w3.org/2001/XMLSchema#decimal> .
+<https://example.org/retail/ontology#inCategory> <http://www.w3.org/2000/01/rdf-schema#range> <https://example.org/retail/ontology#Category> .
+<https://example.org/retail/ontology#quantity> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#DatatypeProperty> .
+<https://example.org/retail/ontology#memberSince> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#DatatypeProperty> .
+<https://example.org/retail/ontology#name> <http://www.w3.org/2000/01/rdf-schema#label> "name"@en .
+<https://example.org/retail/ontology#city> <http://www.w3.org/2000/01/rdf-schema#label> "city"@en .
+_:n7a945c9f21434f6f8ede2e67b9857cc9b11 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> <http://www.w3.org/1999/02/22-rdf-syntax-ns#nil> .
+<https://example.org/retail/ontology#Seller> <http://www.w3.org/2000/01/rdf-schema#label> "Seller"@en .
+<https://example.org/retail/ontology#writtenBy> <http://www.w3.org/2000/01/rdf-schema#label> "written by"@en .
+<https://example.org/retail/ontology#Party> <http://www.w3.org/2004/02/skos/core#definition> "Any person or organization that takes part in a retail transaction."@en .
+<https://example.org/retail/ontology#email> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#DatatypeProperty> .
+<https://example.org/retail/ontology#shipsTo> <http://www.w3.org/2000/01/rdf-schema#label> "ships to"@en .
+<https://example.org/retail/ontology#price> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#FunctionalProperty> .
+<https://example.org/retail/ontology#placedOrder> <http://www.w3.org/2000/01/rdf-schema#label> "placed order"@en .
+<https://example.org/retail/ontology#Customer> <http://www.w3.org/2004/02/skos/core#definition> "A person with an account who can place orders and write reviews."@en .
+<https://example.org/retail/ontology#Product> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+<https://example.org/retail/ontology#reviewText> <http://www.w3.org/2000/01/rdf-schema#domain> <https://example.org/retail/ontology#Review> .
+<https://example.org/retail/ontology#Product> <http://www.w3.org/2002/07/owl#equivalentClass> <https://schema.org/Product> .
+<https://example.org/retail/ontology#orderDate> <http://www.w3.org/2000/01/rdf-schema#domain> <https://example.org/retail/ontology#Order> .
+<https://example.org/retail/ontology#quantity> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#FunctionalProperty> .
+<https://example.org/retail/ontology#Order> <http://www.w3.org/2000/01/rdf-schema#subClassOf> _:n7a945c9f21434f6f8ede2e67b9857cc9b2 .
+<https://example.org/retail/ontology#Category> <http://www.w3.org/2004/02/skos/core#definition> "A node in the product taxonomy (e.g. Electronics > Computers)."@en .
+<https://example.org/retail/ontology#memberSince> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#FunctionalProperty> .
+_:n7a945c9f21434f6f8ede2e67b9857cc9b20 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2000/01/rdf-schema#Datatype> .
+<https://example.org/retail/ontology#status> <http://www.w3.org/2000/01/rdf-schema#range> _:n7a945c9f21434f6f8ede2e67b9857cc9b15 .
+<https://example.org/retail/ontology#Order> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <https://schema.org/Order> .
+<https://example.org/retail/ontology#hasLine> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#ObjectProperty> .
+<https://example.org/retail/ontology#inCategory> <http://www.w3.org/2000/01/rdf-schema#label> "in category"@en .
+<https://example.org/retail/ontology#city> <http://www.w3.org/2000/01/rdf-schema#domain> <https://example.org/retail/ontology#Address> .
+_:n7a945c9f21434f6f8ede2e67b9857cc9b10 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> _:n7a945c9f21434f6f8ede2e67b9857cc9b11 .
+<https://example.org/retail/ontology#unitPrice> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#DatatypeProperty> .
+<https://example.org/retail/ontology#unitPrice> <http://www.w3.org/2000/01/rdf-schema#comment> "Price at time of purchase; may differ from the product's current list price."@en .
+<https://example.org/retail/ontology#email> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#FunctionalProperty> .
+_:n7a945c9f21434f6f8ede2e67b9857cc9b14 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> <http://www.w3.org/1999/02/22-rdf-syntax-ns#nil> .
+<https://example.org/retail/ontology#paymentMethod> <http://www.w3.org/2000/01/rdf-schema#label> "payment method"@en .
+<https://example.org/retail/ontology#subCategoryOf> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#TransitiveProperty> .
+<https://example.org/retail/ontology#subCategoryOf> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#ObjectProperty> .
+<https://example.org/retail/ontology> <http://purl.org/dc/terms/title> "Retail Ordering Ontology"@en .
+<https://example.org/retail/ontology#Category> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#Class> .
+<https://example.org/retail/ontology#subCategoryOf> <http://www.w3.org/2000/01/rdf-schema#subPropertyOf> <http://www.w3.org/2004/02/skos/core#broader> .
+_:n7a945c9f21434f6f8ede2e67b9857cc9b5 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <https://example.org/retail/ontology#Party> .
+<https://example.org/retail/ontology#soldBy> <http://www.w3.org/2000/01/rdf-schema#range> <https://example.org/retail/ontology#Seller> .
+<https://example.org/retail/ontology#price> <http://www.w3.org/2000/01/rdf-schema#label> "list price (USD)"@en .
+<https://example.org/retail/ontology#PremiumCustomer> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <https://example.org/retail/ontology#Customer> .
+_:n7a945c9f21434f6f8ede2e67b9857cc9b15 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2000/01/rdf-schema#Datatype> .
+<https://example.org/retail/ontology#rating> <http://www.w3.org/2000/01/rdf-schema#domain> <https://example.org/retail/ontology#Review> .
+<https://example.org/retail/ontology#reviewText> <http://www.w3.org/2000/01/rdf-schema#range> <http://www.w3.org/2001/XMLSchema#string> .
+_:n7a945c9f21434f6f8ede2e67b9857cc9b23 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> _:n7a945c9f21434f6f8ede2e67b9857cc9b24 .
+<https://example.org/retail/ontology#Seller> <http://www.w3.org/2004/02/skos/core#definition> "An organization that lists products on the marketplace."@en .
+<https://example.org/retail/ontology#sku> <http://www.w3.org/2000/01/rdf-schema#label> "SKU"@en .
+<https://example.org/retail/ontology#placedOrder> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#ObjectProperty> .
+_:n7a945c9f21434f6f8ede2e67b9857cc9b5 <http://www.w3.org/1999/02/22-rdf-syntax-ns#rest> _:n7a945c9f21434f6f8ede2e67b9857cc9b6 .
+_:n7a945c9f21434f6f8ede2e67b9857cc9b2 <http://www.w3.org/2002/07/owl#onClass> <https://example.org/retail/ontology#OrderLine> .
+_:n7a945c9f21434f6f8ede2e67b9857cc9b16 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> "PLACED" .
+_:n7a945c9f21434f6f8ede2e67b9857cc9b1 <http://www.w3.org/2002/07/owl#onClass> <https://example.org/retail/ontology#Customer> .
+<https://example.org/retail/ontology> <http://purl.org/dc/terms/creator> "codesnippets / ontology-knowledge-graphs" .
+<https://example.org/retail/ontology#purchased> <http://www.w3.org/2002/07/owl#propertyChainAxiom> _:n7a945c9f21434f6f8ede2e67b9857cc9b12 .
+_:n7a945c9f21434f6f8ede2e67b9857cc9b3 <http://www.w3.org/2002/07/owl#onClass> <https://example.org/retail/ontology#Product> .
+<https://example.org/retail/ontology#subCategoryOf> <http://www.w3.org/2000/01/rdf-schema#domain> <https://example.org/retail/ontology#Category> .
+<https://example.org/retail/ontology#forProduct> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#ObjectProperty> .
+<https://example.org/retail/ontology#hasAddress> <http://www.w3.org/2000/01/rdf-schema#label> "has address"@en .
+_:n7a945c9f21434f6f8ede2e67b9857cc9b4 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#AllDisjointClasses> .
+<https://example.org/retail/ontology#reviewOf> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#ObjectProperty> .
+<https://example.org/retail/ontology#placedOrder> <http://www.w3.org/2000/01/rdf-schema#range> <https://example.org/retail/ontology#Order> .
+<https://example.org/retail/ontology#price> <http://www.w3.org/2000/01/rdf-schema#domain> <https://example.org/retail/ontology#Product> .
+<https://example.org/retail/ontology> <http://www.w3.org/2002/07/owl#versionIRI> <https://example.org/retail/ontology/1.0.0> .
+<https://example.org/retail/ontology#city> <http://www.w3.org/2000/01/rdf-schema#range> <http://www.w3.org/2001/XMLSchema#string> .
+<https://example.org/retail/ontology#status> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#DatatypeProperty> .
+<https://example.org/retail/ontology#Address> <http://www.w3.org/2000/01/rdf-schema#label> "Address"@en .
+<https://example.org/retail/ontology#reviewText> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#DatatypeProperty> .
+<https://example.org/retail/ontology#Customer> <http://www.w3.org/2000/01/rdf-schema#label> "Customer"@en .
+<https://example.org/retail/ontology#rating> <http://www.w3.org/2000/01/rdf-schema#range> _:n7a945c9f21434f6f8ede2e67b9857cc9b20 .
+<https://example.org/retail/ontology#Address> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <https://schema.org/PostalAddress> .
+<https://example.org/retail/ontology#hasLine> <http://www.w3.org/2000/01/rdf-schema#label> "has line"@en .
+<https://example.org/retail/ontology#reviewOf> <http://www.w3.org/2000/01/rdf-schema#domain> <https://example.org/retail/ontology#Review> .
+<https://example.org/retail/ontology#subCategoryOf> <http://www.w3.org/2000/01/rdf-schema#comment> "Transitive: Computers subCategoryOf Electronics and Laptops subCategoryOf Computers entails Laptops subCategoryOf Electronics."@en .
+<https://example.org/retail/ontology#forProduct> <http://www.w3.org/2000/01/rdf-schema#domain> <https://example.org/retail/ontology#OrderLine> .
+<https://example.org/retail/ontology#inCategory> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#ObjectProperty> .
+<https://example.org/retail/ontology#OrderLine> <http://www.w3.org/2000/01/rdf-schema#subClassOf> _:n7a945c9f21434f6f8ede2e67b9857cc9b3 .
+<https://example.org/retail/ontology#placedBy> <http://www.w3.org/2000/01/rdf-schema#range> <https://example.org/retail/ontology#Customer> .
+<https://example.org/retail/ontology#email> <http://www.w3.org/2000/01/rdf-schema#domain> <https://example.org/retail/ontology#Customer> .
+<https://example.org/retail/ontology> <http://www.w3.org/2002/07/owl#versionInfo> "1.0.0" .
+_:n7a945c9f21434f6f8ede2e67b9857cc9b14 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <https://example.org/retail/ontology#forProduct> .
+_:n7a945c9f21434f6f8ede2e67b9857cc9b20 <http://www.w3.org/2002/07/owl#withRestrictions> _:n7a945c9f21434f6f8ede2e67b9857cc9b23 .
+<https://example.org/retail/ontology#writtenBy> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#FunctionalProperty> .
+<https://example.org/retail/ontology#status> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#FunctionalProperty> .
+<https://example.org/retail/ontology#hasAddress> <http://www.w3.org/2000/01/rdf-schema#range> <https://example.org/retail/ontology#Address> .
+<https://example.org/retail/ontology#Seller> <http://www.w3.org/2000/01/rdf-schema#subClassOf> <https://schema.org/Organization> .
+_:n7a945c9f21434f6f8ede2e67b9857cc9b6 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> <https://example.org/retail/ontology#Product> .
+_:n7a945c9f21434f6f8ede2e67b9857cc9b18 <http://www.w3.org/1999/02/22-rdf-syntax-ns#first> "DELIVERED" .
+<https://example.org/retail/ontology#country> <http://www.w3.org/2000/01/rdf-schema#domain> <https://example.org/retail/ontology#Address> .
+<https://example.org/retail/ontology#placedBy> <http://www.w3.org/2002/07/owl#inverseOf> <https://example.org/retail/ontology#placedOrder> .

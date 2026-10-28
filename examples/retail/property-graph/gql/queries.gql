@@ -1,0 +1,61 @@
+-- ===========================================================================
+-- Retail graph in ISO GQL (ISO/IEC 39075:2024)
+-- GQL is the first ISO standard graph query language. It grew out of
+-- Cypher, PGQL and G-CORE, so it reads very much like Cypher.
+-- Engine support is still arriving (e.g. Neo4j 5 is converging its Cypher
+-- toward GQL, Google Spanner Graph, Microsoft Fabric Graph, Ultipa); check
+-- your engine's docs for the exact subset it implements.
+-- Standard: https://www.iso.org/standard/76120.html
+-- ===========================================================================
+
+-- A graph TYPE is GQL's built-in schema - the closest thing to an ontology
+-- in the property-graph world (closed, structural, no inference).
+CREATE GRAPH TYPE RetailType {
+  NODE Customer  (:Customer  {name STRING, email STRING, premium BOOLEAN, memberSince DATE}),
+  NODE Address   (:Address   {city STRING, state STRING, postalCode STRING, country STRING}),
+  NODE Seller    (:Seller    {name STRING}),
+  NODE Category  (:Category  {name STRING}),
+  NODE Product   (:Product   {name STRING, sku STRING, price FLOAT64}),
+  NODE "Order"   (:"Order"   {orderDate DATE, status STRING, paymentMethod STRING}),
+  NODE Review    (:Review    {rating INT32, reviewText STRING}),
+
+  DIRECTED EDGE PLACED         (:Customer)-[:PLACED]->(:"Order"),
+  DIRECTED EDGE CONTAINS       (:"Order")-[:CONTAINS {quantity INT32, unitPrice FLOAT64}]->(:Product),
+  DIRECTED EDGE SHIPS_TO       (:"Order")-[:SHIPS_TO]->(:Address),
+  DIRECTED EDGE HAS_ADDRESS    (:Customer)-[:HAS_ADDRESS]->(:Address),
+  DIRECTED EDGE IN_CATEGORY    (:Product)-[:IN_CATEGORY]->(:Category),
+  DIRECTED EDGE SUBCATEGORY_OF (:Category)-[:SUBCATEGORY_OF]->(:Category),
+  DIRECTED EDGE SOLD_BY        (:Product)-[:SOLD_BY]->(:Seller),
+  DIRECTED EDGE WROTE          (:Customer)-[:WROTE]->(:Review),
+  DIRECTED EDGE REVIEWS        (:Review)-[:REVIEWS]->(:Product)
+}
+
+CREATE GRAPH retail TYPED RetailType
+
+USE retail
+
+-- Q2. Products under Electronics. GQL quantifiers: {0,} * + {m,n}
+MATCH (root:Category {name: 'Electronics'})<-[:SUBCATEGORY_OF]-{0,}(c:Category)<-[:IN_CATEGORY]-(p:Product)
+RETURN p.name AS product, c.name AS category
+ORDER BY product
+
+-- Q3. Spend per customer
+MATCH (c:Customer)-[:PLACED]->(o:"Order")-[l:CONTAINS]->(:Product)
+RETURN c.name AS customer, COUNT(DISTINCT o) AS orders, SUM(l.quantity * l.unitPrice) AS totalSpent
+ORDER BY totalSpent DESC
+
+-- Q5. Also bought
+MATCH (target:Product {name: 'Wireless Earbuds X'})<-[:CONTAINS]-(:"Order")<-[:PLACED]-(c:Customer),
+      (c)-[:PLACED]->(:"Order")-[:CONTAINS]->(other:Product)
+FILTER other <> target
+RETURN other.name AS product, COUNT(DISTINCT c) AS buyers
+ORDER BY buyers DESC, product
+
+-- Q8. Shortest path is part of the standard (path search prefixes)
+MATCH ANY SHORTEST p = (a:Customer {name: 'Alice Johnson'})-[:PLACED|CONTAINS]-{1,8}(b:Customer {name: 'Carol Diaz'})
+RETURN p
+
+-- W1. Insert
+MATCH (c:Customer {name: 'Bob Smith'}), (p:Product {sku: 'KBD-MECH'})
+INSERT (c)-[:PLACED]->(o:"Order" {orderDate: DATE '2026-10-20', status: 'PLACED', paymentMethod: 'CARD'})
+            -[:CONTAINS {quantity: 1, unitPrice: 89.00}]->(p)

@@ -1,0 +1,20 @@
+# Q3. Revenue per customer = SUM(quantity * unitPrice) over all their lines.
+# Expected: Alice Johnson 1498.97 (2 orders), Bob Smith 199.98, Carol Diaz 179.48
+PREFIX rdf:    <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs:   <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl:    <http://www.w3.org/2002/07/owl#>
+PREFIX xsd:    <http://www.w3.org/2001/XMLSchema#>
+PREFIX retail: <https://example.org/retail/ontology#>
+PREFIX ex:     <https://example.org/retail/data/>
+
+SELECT ?customerName (COUNT(DISTINCT ?order) AS ?orders) (SUM(?qty * ?price) AS ?totalSpent)
+WHERE {
+  ?order a retail:Order ;
+         retail:placedBy ?customer ;
+         retail:hasLine ?line .
+  ?line retail:quantity ?qty ;
+        retail:unitPrice ?price .
+  ?customer retail:name ?customerName .
+}
+GROUP BY ?customerName
+ORDER BY DESC(?totalSpent)

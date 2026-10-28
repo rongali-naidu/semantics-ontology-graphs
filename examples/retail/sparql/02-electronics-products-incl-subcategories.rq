@@ -1,0 +1,22 @@
+# Q2. All products under "Electronics", at any depth of the taxonomy.
+# The property path  retail:subCategoryOf*  walks 0..n hops, so it works
+# even WITHOUT an OWL reasoner materialising the transitive closure.
+# Expected: Laptop Pro 14 (Laptops), Wireless Earbuds X (Audio),
+#           USB-C Charger 65W (Electronics), Mechanical Keyboard (Computers)
+PREFIX rdf:    <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs:   <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl:    <http://www.w3.org/2002/07/owl#>
+PREFIX xsd:    <http://www.w3.org/2001/XMLSchema#>
+PREFIX retail: <https://example.org/retail/ontology#>
+PREFIX ex:     <https://example.org/retail/data/>
+
+SELECT ?product ?productName ?categoryName
+WHERE {
+  ?root retail:name "Electronics" .
+  ?product a retail:Product ;
+           retail:name ?productName ;
+           retail:inCategory ?cat .
+  ?cat retail:subCategoryOf* ?root ;
+       retail:name ?categoryName .
+}
+ORDER BY ?productName

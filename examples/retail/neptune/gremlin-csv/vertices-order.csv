@@ -1,0 +1,5 @@
+~id,~label,orderDate:Date(single),status:String(single),paymentMethod:String(single)
+O1,Order,2026-09-01,DELIVERED,CARD
+O2,Order,2026-09-05,SHIPPED,PAYPAL
+O3,Order,2026-09-20,DELIVERED,CARD
+O4,Order,2026-10-02,PLACED,GIFT_CARD

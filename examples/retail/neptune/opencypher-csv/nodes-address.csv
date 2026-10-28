@@ -1,0 +1,4 @@
+:ID,:LABEL,city:String,state:String,postalCode:String,country:String
+A1,Address,Seattle,WA,98101,US
+A2,Address,Austin,TX,78701,US
+A3,Address,New York,NY,10001,US

@@ -1,0 +1,165 @@
+<https://example.org/retail/data/P2> <https://example.org/retail/ontology#name> "Wireless Earbuds X" .
+<https://example.org/retail/data/C2> <https://example.org/retail/ontology#email> "bob@example.com" .
+<https://example.org/retail/data/O1-L2> <https://example.org/retail/ontology#quantity> "2"^^<http://www.w3.org/2001/XMLSchema#positiveInteger> .
+<https://example.org/retail/data/A2> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://example.org/retail/ontology#Address> .
+<https://example.org/retail/data/O2-L1> <https://example.org/retail/ontology#quantity> "1"^^<http://www.w3.org/2001/XMLSchema#positiveInteger> .
+<https://example.org/retail/data/C2> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://example.org/retail/ontology#Customer> .
+<https://example.org/retail/data/O4-L1> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://example.org/retail/ontology#OrderLine> .
+<https://example.org/retail/data/R2> <https://example.org/retail/ontology#rating> "4"^^<http://www.w3.org/2001/XMLSchema#integer> .
+<https://example.org/retail/data/O4> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://example.org/retail/ontology#Order> .
+<https://example.org/retail/data/P6> <https://example.org/retail/ontology#price> "89.00"^^<http://www.w3.org/2001/XMLSchema#decimal> .
+<https://example.org/retail/data/C2> <https://example.org/retail/ontology#hasAddress> <https://example.org/retail/data/A2> .
+<https://example.org/retail/data/O1-L1> <https://example.org/retail/ontology#quantity> "1"^^<http://www.w3.org/2001/XMLSchema#positiveInteger> .
+<https://example.org/retail/data/O4-L2> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://example.org/retail/ontology#OrderLine> .
+<https://example.org/retail/data/CAT-LAPTOPS> <https://example.org/retail/ontology#subCategoryOf> <https://example.org/retail/data/CAT-COMPUTERS> .
+<https://example.org/retail/data/CAT-AUDIO> <https://example.org/retail/ontology#name> "Audio" .
+<https://example.org/retail/data/O2> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://example.org/retail/ontology#Order> .
+<https://example.org/retail/data/CAT-LAPTOPS> <https://example.org/retail/ontology#name> "Laptops" .
+<https://example.org/retail/data/O3> <https://example.org/retail/ontology#shipsTo> <https://example.org/retail/data/A1> .
+<https://example.org/retail/data/CAT-COMPUTERS> <https://example.org/retail/ontology#subCategoryOf> <https://example.org/retail/data/CAT-ELECTRONICS> .
+<https://example.org/retail/data/P2> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://example.org/retail/ontology#Product> .
+<https://example.org/retail/data/CAT-LAPTOPS> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://example.org/retail/ontology#Category> .
+<https://example.org/retail/data/A3> <https://example.org/retail/ontology#country> "US" .
+<https://example.org/retail/data/O1-L2> <https://example.org/retail/ontology#forProduct> <https://example.org/retail/data/P3> .
+<https://example.org/retail/data/O2-L1> <https://example.org/retail/ontology#forProduct> <https://example.org/retail/data/P4> .
+<https://example.org/retail/data/P1> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://example.org/retail/ontology#Product> .
+<https://example.org/retail/data/R2> <https://example.org/retail/ontology#reviewOf> <https://example.org/retail/data/P4> .
+<https://example.org/retail/data/P5> <https://example.org/retail/ontology#sku> "KNF-8" .
+<https://example.org/retail/data/A1> <https://example.org/retail/ontology#state> "WA" .
+<https://example.org/retail/data/A1> <https://example.org/retail/ontology#postalCode> "98101" .
+<https://example.org/retail/data/R2> <https://example.org/retail/ontology#reviewText> "Great intro to graphs." .
+<https://example.org/retail/data/O2> <https://example.org/retail/ontology#hasLine> <https://example.org/retail/data/O2-L1> .
+<https://example.org/retail/data/R4> <https://example.org/retail/ontology#reviewText> "Clear and practical." .
+<https://example.org/retail/data/P5> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://example.org/retail/ontology#Product> .
+<https://example.org/retail/data/P1> <https://example.org/retail/ontology#price> "1299.00"^^<http://www.w3.org/2001/XMLSchema#decimal> .
+<https://example.org/retail/data/O1-L1> <https://example.org/retail/ontology#forProduct> <https://example.org/retail/data/P1> .
+<https://example.org/retail/data/R1> <https://example.org/retail/ontology#reviewText> "Fast and light." .
+<https://example.org/retail/data/C1> <https://example.org/retail/ontology#hasAddress> <https://example.org/retail/data/A1> .
+<https://example.org/retail/data/O2> <https://example.org/retail/ontology#placedBy> <https://example.org/retail/data/C2> .
+<https://example.org/retail/data/O3-L1> <https://example.org/retail/ontology#unitPrice> "139.99"^^<http://www.w3.org/2001/XMLSchema#decimal> .
+<https://example.org/retail/data/R3> <https://example.org/retail/ontology#rating> "3"^^<http://www.w3.org/2001/XMLSchema#integer> .
+<https://example.org/retail/data/O1> <https://example.org/retail/ontology#hasLine> <https://example.org/retail/data/O1-L2> .
+<https://example.org/retail/data/O3-L1> <https://example.org/retail/ontology#quantity> "1"^^<http://www.w3.org/2001/XMLSchema#positiveInteger> .
+<https://example.org/retail/data/CAT-ELECTRONICS> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://example.org/retail/ontology#Category> .
+<https://example.org/retail/data/R1> <https://example.org/retail/ontology#rating> "5"^^<http://www.w3.org/2001/XMLSchema#integer> .
+<https://example.org/retail/data/O3> <https://example.org/retail/ontology#orderDate> "2026-09-20"^^<http://www.w3.org/2001/XMLSchema#date> .
+<https://example.org/retail/data/C3> <https://example.org/retail/ontology#hasAddress> <https://example.org/retail/data/A3> .
+<https://example.org/retail/data/CAT-KITCHEN> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://example.org/retail/ontology#Category> .
+<https://example.org/retail/data/S2> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://example.org/retail/ontology#Seller> .
+<https://example.org/retail/data/O4> <https://example.org/retail/ontology#hasLine> <https://example.org/retail/data/O4-L1> .
+<https://example.org/retail/data/A3> <https://example.org/retail/ontology#city> "New York" .
+<https://example.org/retail/data/O2> <https://example.org/retail/ontology#status> "SHIPPED" .
+<https://example.org/retail/data/P6> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://example.org/retail/ontology#Product> .
+<https://example.org/retail/data/P2> <https://example.org/retail/ontology#price> "149.99"^^<http://www.w3.org/2001/XMLSchema#decimal> .
+<https://example.org/retail/data/CAT-AUDIO> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://example.org/retail/ontology#Category> .
+<https://example.org/retail/data/R3> <https://example.org/retail/ontology#reviewText> "Good sound, weak battery." .
+<https://example.org/retail/data/O2-L1> <https://example.org/retail/ontology#unitPrice> "49.99"^^<http://www.w3.org/2001/XMLSchema#decimal> .
+<https://example.org/retail/data/O2-L2> <https://example.org/retail/ontology#quantity> "1"^^<http://www.w3.org/2001/XMLSchema#positiveInteger> .
+<https://example.org/retail/data/R1> <https://example.org/retail/ontology#writtenBy> <https://example.org/retail/data/C1> .
+<https://example.org/retail/data/P6> <https://example.org/retail/ontology#sku> "KBD-MECH" .
+<https://example.org/retail/data/P6> <https://example.org/retail/ontology#name> "Mechanical Keyboard" .
+<https://example.org/retail/data/O3> <https://example.org/retail/ontology#paymentMethod> "CARD" .
+<https://example.org/retail/data/C1> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://example.org/retail/ontology#PremiumCustomer> .
+<https://example.org/retail/data/A1> <https://example.org/retail/ontology#city> "Seattle" .
+<https://example.org/retail/data/O3> <https://example.org/retail/ontology#status> "DELIVERED" .
+<https://example.org/retail/data/O4-L1> <https://example.org/retail/ontology#unitPrice> "79.50"^^<http://www.w3.org/2001/XMLSchema#decimal> .
+<https://example.org/retail/data/A2> <https://example.org/retail/ontology#country> "US" .
+<https://example.org/retail/data/P6> <https://example.org/retail/ontology#soldBy> <https://example.org/retail/data/S1> .
+<https://example.org/retail/data/S2> <https://example.org/retail/ontology#name> "PageTurner Books" .
+<https://example.org/retail/data/R3> <https://example.org/retail/ontology#reviewOf> <https://example.org/retail/data/P2> .
+<https://example.org/retail/data/R4> <https://example.org/retail/ontology#rating> "5"^^<http://www.w3.org/2001/XMLSchema#integer> .
+<https://example.org/retail/data/P4> <https://example.org/retail/ontology#inCategory> <https://example.org/retail/data/CAT-BOOKS> .
+<https://example.org/retail/data/P6> <https://example.org/retail/ontology#inCategory> <https://example.org/retail/data/CAT-COMPUTERS> .
+<https://example.org/retail/data/R1> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://example.org/retail/ontology#Review> .
+<https://example.org/retail/data/O2> <https://example.org/retail/ontology#orderDate> "2026-09-05"^^<http://www.w3.org/2001/XMLSchema#date> .
+<https://example.org/retail/data/A1> <https://example.org/retail/ontology#country> "US" .
+<https://example.org/retail/data/O1> <https://example.org/retail/ontology#paymentMethod> "CARD" .
+<https://example.org/retail/data/S3> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://example.org/retail/ontology#Seller> .
+<https://example.org/retail/data/R4> <https://example.org/retail/ontology#reviewOf> <https://example.org/retail/data/P4> .
+<https://example.org/retail/data/P5> <https://example.org/retail/ontology#soldBy> <https://example.org/retail/data/S3> .
+<https://example.org/retail/data/C2> <https://example.org/retail/ontology#name> "Bob Smith" .
+<https://example.org/retail/data/O4> <https://example.org/retail/ontology#orderDate> "2026-10-02"^^<http://www.w3.org/2001/XMLSchema#date> .
+<https://example.org/retail/data/C3> <https://example.org/retail/ontology#email> "carol@example.com" .
+<https://example.org/retail/data/O3> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://example.org/retail/ontology#Order> .
+<https://example.org/retail/data/A3> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://example.org/retail/ontology#Address> .
+<https://example.org/retail/data/O4> <https://example.org/retail/ontology#shipsTo> <https://example.org/retail/data/A3> .
+<https://example.org/retail/data/O4-L1> <https://example.org/retail/ontology#quantity> "1"^^<http://www.w3.org/2001/XMLSchema#positiveInteger> .
+<https://example.org/retail/data/P4> <https://example.org/retail/ontology#price> "49.99"^^<http://www.w3.org/2001/XMLSchema#decimal> .
+<https://example.org/retail/data/O1-L2> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://example.org/retail/ontology#OrderLine> .
+<https://example.org/retail/data/CAT-KITCHEN> <https://example.org/retail/ontology#name> "Kitchen" .
+<https://example.org/retail/data/CAT-BOOKS> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://example.org/retail/ontology#Category> .
+<https://example.org/retail/data/A1> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://example.org/retail/ontology#Address> .
+<https://example.org/retail/data/O4> <https://example.org/retail/ontology#placedBy> <https://example.org/retail/data/C3> .
+<https://example.org/retail/data/O1> <https://example.org/retail/ontology#status> "DELIVERED" .
+<https://example.org/retail/data/R3> <https://example.org/retail/ontology#writtenBy> <https://example.org/retail/data/C1> .
+<https://example.org/retail/data/P5> <https://example.org/retail/ontology#name> "Chef Knife 8in" .
+<https://example.org/retail/data/O1> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://example.org/retail/ontology#Order> .
+<https://example.org/retail/data/P3> <https://example.org/retail/ontology#inCategory> <https://example.org/retail/data/CAT-ELECTRONICS> .
+<https://example.org/retail/data/CAT-COMPUTERS> <https://example.org/retail/ontology#name> "Computers" .
+<https://example.org/retail/data/O4> <https://example.org/retail/ontology#paymentMethod> "GIFT_CARD" .
+<https://example.org/retail/data/O4-L2> <https://example.org/retail/ontology#quantity> "2"^^<http://www.w3.org/2001/XMLSchema#positiveInteger> .
+<https://example.org/retail/data/S1> <https://example.org/retail/ontology#name> "TechHub Inc" .
+<https://example.org/retail/data/A3> <https://example.org/retail/ontology#postalCode> "10001" .
+<https://example.org/retail/data/O4> <https://example.org/retail/ontology#status> "PLACED" .
+<https://example.org/retail/data/A2> <https://example.org/retail/ontology#postalCode> "78701" .
+<https://example.org/retail/data/O1-L1> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://example.org/retail/ontology#OrderLine> .
+<https://example.org/retail/data/P5> <https://example.org/retail/ontology#inCategory> <https://example.org/retail/data/CAT-KITCHEN> .
+<https://example.org/retail/data/A3> <https://example.org/retail/ontology#state> "NY" .
+<https://example.org/retail/data/O1> <https://example.org/retail/ontology#orderDate> "2026-09-01"^^<http://www.w3.org/2001/XMLSchema#date> .
+<https://example.org/retail/data/P5> <https://example.org/retail/ontology#price> "79.50"^^<http://www.w3.org/2001/XMLSchema#decimal> .
+<https://example.org/retail/data/O3-L1> <https://example.org/retail/ontology#forProduct> <https://example.org/retail/data/P2> .
+<https://example.org/retail/data/CAT-COMPUTERS> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://example.org/retail/ontology#Category> .
+<https://example.org/retail/data/P1> <https://example.org/retail/ontology#sku> "LAP-PRO-14" .
+<https://example.org/retail/data/CAT-ELECTRONICS> <https://example.org/retail/ontology#name> "Electronics" .
+<https://example.org/retail/data/R1> <https://example.org/retail/ontology#reviewOf> <https://example.org/retail/data/P1> .
+<https://example.org/retail/data/CAT-BOOKS> <https://example.org/retail/ontology#name> "Books" .
+<https://example.org/retail/data/P3> <https://example.org/retail/ontology#sku> "CHG-65W" .
+<https://example.org/retail/data/P3> <https://example.org/retail/ontology#price> "29.99"^^<http://www.w3.org/2001/XMLSchema#decimal> .
+<https://example.org/retail/data/O2-L2> <https://example.org/retail/ontology#unitPrice> "149.99"^^<http://www.w3.org/2001/XMLSchema#decimal> .
+<https://example.org/retail/data/C1> <https://example.org/retail/ontology#memberSince> "2024-03-15"^^<http://www.w3.org/2001/XMLSchema#date> .
+<https://example.org/retail/data/O1> <https://example.org/retail/ontology#shipsTo> <https://example.org/retail/data/A1> .
+<https://example.org/retail/data/O3> <https://example.org/retail/ontology#hasLine> <https://example.org/retail/data/O3-L1> .
+<https://example.org/retail/data/C3> <https://example.org/retail/ontology#memberSince> "2025-11-01"^^<http://www.w3.org/2001/XMLSchema#date> .
+<https://example.org/retail/data/P1> <https://example.org/retail/ontology#soldBy> <https://example.org/retail/data/S1> .
+<https://example.org/retail/data/O2> <https://example.org/retail/ontology#hasLine> <https://example.org/retail/data/O2-L2> .
+<https://example.org/retail/data/O2> <https://example.org/retail/ontology#paymentMethod> "PAYPAL" .
+<https://example.org/retail/data/CAT-AUDIO> <https://example.org/retail/ontology#subCategoryOf> <https://example.org/retail/data/CAT-ELECTRONICS> .
+<https://example.org/retail/data/S3> <https://example.org/retail/ontology#name> "HomeGoods Co" .
+<https://example.org/retail/data/C3> <https://example.org/retail/ontology#name> "Carol Diaz" .
+<https://example.org/retail/data/O3> <https://example.org/retail/ontology#placedBy> <https://example.org/retail/data/C1> .
+<https://example.org/retail/data/A2> <https://example.org/retail/ontology#city> "Austin" .
+<https://example.org/retail/data/R2> <https://example.org/retail/ontology#writtenBy> <https://example.org/retail/data/C2> .
+<https://example.org/retail/data/C1> <https://example.org/retail/ontology#email> "alice@example.com" .
+<https://example.org/retail/data/P2> <https://example.org/retail/ontology#sku> "EAR-X" .
+<https://example.org/retail/data/O2-L1> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://example.org/retail/ontology#OrderLine> .
+<https://example.org/retail/data/O3-L1> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://example.org/retail/ontology#OrderLine> .
+<https://example.org/retail/data/P2> <https://example.org/retail/ontology#inCategory> <https://example.org/retail/data/CAT-AUDIO> .
+<https://example.org/retail/data/P4> <https://example.org/retail/ontology#name> "Knowledge Graphs 101" .
+<https://example.org/retail/data/O1-L1> <https://example.org/retail/ontology#unitPrice> "1299.00"^^<http://www.w3.org/2001/XMLSchema#decimal> .
+<https://example.org/retail/data/P4> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://example.org/retail/ontology#Product> .
+<https://example.org/retail/data/P3> <https://example.org/retail/ontology#soldBy> <https://example.org/retail/data/S1> .
+<https://example.org/retail/data/R2> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://example.org/retail/ontology#Review> .
+<https://example.org/retail/data/R3> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://example.org/retail/ontology#Review> .
+<https://example.org/retail/data/O1-L2> <https://example.org/retail/ontology#unitPrice> "29.99"^^<http://www.w3.org/2001/XMLSchema#decimal> .
+<https://example.org/retail/data/P4> <https://example.org/retail/ontology#soldBy> <https://example.org/retail/data/S2> .
+<https://example.org/retail/data/O2-L2> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://example.org/retail/ontology#OrderLine> .
+<https://example.org/retail/data/O1> <https://example.org/retail/ontology#placedBy> <https://example.org/retail/data/C1> .
+<https://example.org/retail/data/O4-L2> <https://example.org/retail/ontology#unitPrice> "49.99"^^<http://www.w3.org/2001/XMLSchema#decimal> .
+<https://example.org/retail/data/O4> <https://example.org/retail/ontology#hasLine> <https://example.org/retail/data/O4-L2> .
+<https://example.org/retail/data/P4> <https://example.org/retail/ontology#sku> "BK-KG101" .
+<https://example.org/retail/data/R4> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://example.org/retail/ontology#Review> .
+<https://example.org/retail/data/C3> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://example.org/retail/ontology#PremiumCustomer> .
+<https://example.org/retail/data/O4-L2> <https://example.org/retail/ontology#forProduct> <https://example.org/retail/data/P4> .
+<https://example.org/retail/data/A2> <https://example.org/retail/ontology#state> "TX" .
+<https://example.org/retail/data/C1> <https://example.org/retail/ontology#name> "Alice Johnson" .
+<https://example.org/retail/data/P2> <https://example.org/retail/ontology#soldBy> <https://example.org/retail/data/S1> .
+<https://example.org/retail/data/P1> <https://example.org/retail/ontology#inCategory> <https://example.org/retail/data/CAT-LAPTOPS> .
+<https://example.org/retail/data/O2> <https://example.org/retail/ontology#shipsTo> <https://example.org/retail/data/A2> .
+<https://example.org/retail/data/P3> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://example.org/retail/ontology#Product> .
+<https://example.org/retail/data/O1> <https://example.org/retail/ontology#hasLine> <https://example.org/retail/data/O1-L1> .
+<https://example.org/retail/data/S1> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://example.org/retail/ontology#Seller> .
+<https://example.org/retail/data/P3> <https://example.org/retail/ontology#name> "USB-C Charger 65W" .
+<https://example.org/retail/data/R4> <https://example.org/retail/ontology#writtenBy> <https://example.org/retail/data/C3> .
+<https://example.org/retail/data/P1> <https://example.org/retail/ontology#name> "Laptop Pro 14" .
+<https://example.org/retail/data/O4-L1> <https://example.org/retail/ontology#forProduct> <https://example.org/retail/data/P5> .
+<https://example.org/retail/data/O2-L2> <https://example.org/retail/ontology#forProduct> <https://example.org/retail/data/P2> .

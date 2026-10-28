@@ -1,0 +1,22 @@
+# Q5. Recommendation: "Customers who bought Wireless Earbuds X also bought ..."
+# A classic graph query: product -> buyers -> their other products.
+# Expected: Knowledge Graphs 101, Laptop Pro 14, USB-C Charger 65W (1 buyer each)
+PREFIX rdf:    <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs:   <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl:    <http://www.w3.org/2002/07/owl#>
+PREFIX xsd:    <http://www.w3.org/2001/XMLSchema#>
+PREFIX retail: <https://example.org/retail/ontology#>
+PREFIX ex:     <https://example.org/retail/data/>
+
+SELECT ?otherName (COUNT(DISTINCT ?customer) AS ?buyers)
+WHERE {
+  ?target retail:name "Wireless Earbuds X" .
+
+  ?o1 retail:placedBy ?customer ; retail:hasLine/retail:forProduct ?target .
+  ?o2 retail:placedBy ?customer ; retail:hasLine/retail:forProduct ?other .
+
+  FILTER(?other != ?target)
+  ?other retail:name ?otherName .
+}
+GROUP BY ?otherName
+ORDER BY DESC(?buyers) ?otherName

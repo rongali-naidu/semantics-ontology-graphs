@@ -1,0 +1,4 @@
+boto3>=1.34          # neptunedata client (loader, openCypher, Gremlin over HTTPS)
+requests>=2.31       # SPARQL over HTTPS with SigV4
+gremlinpython>=3.7   # Gremlin over WebSocket
+neo4j>=5.0           # openCypher over Bolt

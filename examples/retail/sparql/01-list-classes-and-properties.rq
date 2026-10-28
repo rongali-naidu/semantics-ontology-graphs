@@ -1,0 +1,18 @@
+# Q1. Explore the ontology itself (schema is data too!).
+# Lists every class with its label and direct superclasses.
+PREFIX rdf:    <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs:   <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl:    <http://www.w3.org/2002/07/owl#>
+PREFIX xsd:    <http://www.w3.org/2001/XMLSchema#>
+PREFIX retail: <https://example.org/retail/ontology#>
+PREFIX ex:     <https://example.org/retail/data/>
+
+SELECT ?class ?label (GROUP_CONCAT(DISTINCT STR(?super); separator=", ") AS ?superClasses)
+WHERE {
+  ?class a owl:Class .
+  FILTER(isIRI(?class))
+  OPTIONAL { ?class rdfs:label ?label }
+  OPTIONAL { ?class rdfs:subClassOf ?super . FILTER(isIRI(?super)) }
+}
+GROUP BY ?class ?label
+ORDER BY ?class

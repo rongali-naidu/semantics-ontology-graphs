@@ -1,0 +1,4 @@
+~id,~label,name:String(single),email:String(single),premium:Bool(single),memberSince:Date(single)
+C1,Customer,Alice Johnson,alice@example.com,true,2024-03-15
+C2,Customer,Bob Smith,bob@example.com,false,
+C3,Customer,Carol Diaz,carol@example.com,true,2025-11-01
