@@ -1,5 +1,8 @@
 # dbt Labs: dbt Semantic Layer (MetricFlow)
 
+> **Verification:** ✅ executed: `dbt build`, `mf validate-configs` and `mf query` on DuckDB, checked in CI against the SPARQL answers.
+> Last reviewed 2026-11-02. Legend: [vendors/README.md](../README.md#verification-levels).
+
 | Concept | dbt | Retail example |
 |---|---|---|
 | Transformation to a star schema | dbt models (SQL) | [`retail_dbt/models/marts/`](retail_dbt/models/marts/) |
@@ -10,11 +13,17 @@
 
 ## ✅ Executed
 
-This one runs end to end on DuckDB, no cloud account needed:
+This one runs end to end on DuckDB, no cloud account needed. From the repo root:
 
 ```bash
-cd retail_dbt
-pip install dbt-duckdb "dbt-metricflow[duckdb]"
+pip install -r vendors/dbt-labs/requirements.txt
+make dbt        # dbt build + mf validate-configs + check_metricflow.py (compares results with the SPARQL answers)
+```
+
+Or by hand:
+
+```bash
+cd vendors/dbt-labs/retail_dbt
 export DBT_PROFILES_DIR=.
 dbt build                     # seeds (= warehouse/data) + marts + time spine
 mf validate-configs           # semantic model validated against the warehouse
@@ -28,7 +37,7 @@ mf query --metrics premium_revenue
 #   1678.45   (Alice + Carol: the ontology's PremiumCustomer class as a metric filter)
 ```
 
-Tested with dbt-core 1.12.6, dbt-duckdb 1.11.1, MetricFlow 0.15.0.
+Tested with dbt-core 1.12.6, dbt-duckdb 1.11.1, dbt-metricflow 0.15.0 (pinned in [`requirements.txt`](requirements.txt)); CI runs [`check_metricflow.py`](check_metricflow.py) on every push.
 
 ## How the generic concepts map
 

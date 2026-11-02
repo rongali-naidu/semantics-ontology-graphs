@@ -1,0 +1,45 @@
+name: checks
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  schedule:
+    - cron: "17 6 * * 1"     # weekly: catches upstream breakage (pinned deps, Ossie commit)
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  graph-and-semantic:
+    name: Graph + semantic model checks
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: requirements.txt
+      - run: make install
+      - name: Derived files are up to date
+        run: make check-generated
+      - name: Links, SPARQL, SHACL, consistency, semantic model
+        run: make check
+      - name: Apache Ossie official schemas (pinned commit)
+        run: make check-ossie
+
+  dbt-metricflow:
+    name: dbt + MetricFlow (DuckDB)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: vendors/dbt-labs/requirements.txt
+      - run: python -m pip install -r vendors/dbt-labs/requirements.txt
+      - name: dbt build, mf validate-configs, compare mf query results
+        run: make dbt PYTHON=python

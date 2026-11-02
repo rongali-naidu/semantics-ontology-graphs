@@ -1,5 +1,8 @@
 # Snowflake
 
+> **Verification:** ⚪ written to documented syntax; not run on Snowflake.
+> Last reviewed 2026-11-02. Legend: [vendors/README.md](../README.md#verification-levels).
+
 | Concept | Snowflake product | Retail example |
 |---|---|---|
 | Semantic model | **Semantic views** (`CREATE SEMANTIC VIEW`; query with `SEMANTIC_VIEW(...)` or standard SQL) | [`retail_semantic_view.sql`](retail_semantic_view.sql) |

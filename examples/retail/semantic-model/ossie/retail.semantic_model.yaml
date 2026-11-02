@@ -11,7 +11,7 @@
 # dialect); `dialects:` can add engine-specific variants where needed.
 # Validate: python scripts/check_semantic_model.py --ossie-repo <apache/ossie clone>
 # ===========================================================================
-version: 0.2.0.dev0
+version: 0.2.0.dev0      # pinned: see README.md in this folder
 name: retail_semantic_model
 description: >-
   Online marketplace orders: customers, orders, order lines, products,

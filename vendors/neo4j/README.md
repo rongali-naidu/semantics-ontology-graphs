@@ -1,5 +1,8 @@
 # Neo4j
 
+> **Verification:** ⚪ written to documented syntax; not run on Neo4j.
+> Last reviewed 2026-11-02. Legend: [vendors/README.md](../README.md#verification-levels).
+
 | Concept | Neo4j | Retail example |
 |---|---|---|
 | Property graph DB | **Neo4j** (AuraDB managed or self-hosted); Cypher, converging with ISO GQL | [`02-queries.cypher`](../../examples/retail/property-graph/cypher/02-queries.cypher), [`01-create-retail-graph.cypher`](../../examples/retail/property-graph/cypher/01-create-retail-graph.cypher) |

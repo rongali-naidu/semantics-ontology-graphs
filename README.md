@@ -1,5 +1,7 @@
 # semantics-ontology-graphs
 
+[![checks](https://github.com/rongali-naidu/semantics-ontology-graphs/actions/workflows/checks.yml/badge.svg)](https://github.com/rongali-naidu/semantics-ontology-graphs/actions/workflows/checks.yml)
+
 A hands-on reference for **semantics**: ontologies, knowledge graphs, graph
 databases and semantic models (semantic layers), from first principles to
 vendor implementations.
@@ -7,32 +9,33 @@ vendor implementations.
 One running example, an **Amazon-style retail ordering domain**, is
 expressed in every form: an OWL ontology, RDF in six serializations, a
 property graph, warehouse tables, an **Apache Ossie** semantic model, and
-vendor formats for AWS, Google Cloud, Microsoft, Databricks, Snowflake, dbt,
-AtScale, Cube and Neo4j. Scripts check that all of them give the same
+vendor formats for AWS, Google Cloud, Microsoft, Oracle, Databricks,
+Snowflake, dbt, AtScale, Cube and Neo4j. Scripts check that all of them give the same
 answers.
 
 ```
-               concepts/ (vendor-neutral)                          vendors/ (implementations)
- ┌──────────────────────────────────────────────────────┐   ┌──────────────────────────────────┐
- │ A. Ontologies & graphs      B. Semantic modelling     │   │ aws        Neptune (RDF + LPG)    │
- │  ontology, history,          semantic model basics,   │   │ gcp        Spanner/BigQuery Graph,│
- │  OWL/RDFS/SKOS/SHACL,        BI tools (Power BI,      │──►│            Looker                 │
- │  Turtle/JSON-LD/...,         Looker, Tableau...),     │   │ microsoft  Fabric Graph/IQ, Power │
- │  SPARQL, property graphs,    Apache Ossie & open      │   │            BI (TMDL), DTDL        │
- │  graph DBs, Cypher/Gremlin/  formats, ontology ⇄      │   │ databricks metric views, GraphFr. │
- │  GQL/SQL-PGQ                 semantic layer           │   │ snowflake  semantic views         │
- └───────────────────────────┬──────────────────────────┘   │ dbt-labs   MetricFlow ✅ executed │
-                             │                              │ atscale    SML                    │
-          examples/retail/ ◄─┘ one domain, every format     │ cube       Cube data model        │
-                                                            │ neo4j      Cypher + n10s (OWL)    │
-                                                            └──────────────────────────────────┘
+              concepts/ (vendor-neutral)                          vendors/ (implementations)
+ ┌─────────────────────────────────────────────────────┐   ┌───────────────────────────────────┐
+ │ A. Ontologies & graphs     B. Semantic modelling    │   │ aws        Neptune (RDF + LPG)    │
+ │  ontology, history,         semantic model basics,  │   │ gcp        Spanner/BigQuery Graph,│
+ │  OWL/RDFS/SKOS/SHACL,       BI tools (Power BI,     │   │            Looker                 │
+ │  Turtle/JSON-LD/...,        Looker, Tableau...),    │──►│ microsoft  Fabric Graph/IQ, Power │
+ │  SPARQL, property graphs,   where models are stored │   │            BI (TMDL/PBIP), DTDL   │
+ │  graph DBs, Cypher/Gremlin/ (RPD, PBIP, LookML),    │   │ oracle     RPD / Semantic Modeler │
+ │  GQL/SQL-PGQ                Apache Ossie, ontology  │   │ databricks metric views, GraphFr. │
+ │                             ⇄ semantic layer        │   │ snowflake  semantic views         │
+ └──────────────────────────┬──────────────────────────┘   │ dbt-labs   MetricFlow ✅ executed │
+                            │                              │ atscale    SML                    │
+         examples/retail/ ◄─┘ one domain, every format     │ cube       Cube data model        │
+                                                           │ neo4j      Cypher + n10s (OWL)    │
+                                                           └───────────────────────────────────┘
 ```
 
 ## Start here
 
 * **New to ontologies?** → [concepts/ontologies-and-graphs/01](concepts/ontologies-and-graphs/01-what-is-an-ontology.md)
 * **Coming from BI / analytics?** → [concepts/semantic-modelling/01](concepts/semantic-modelling/01-what-is-a-semantic-model.md)
-* **Want the big picture of how they connect?** → [semantic models and ontologies](concepts/semantic-modelling/04-semantic-models-and-ontologies.md)
+* **Want the big picture of how they connect?** → [semantic models and ontologies](concepts/semantic-modelling/05-semantic-models-and-ontologies.md)
 * **Looking for a specific platform?** → [vendors/README.md](vendors/README.md) (concept → vendor matrix)
 * **Need a spec link or a definition?** → [reference/standards-links-glossary.md](reference/standards-links-glossary.md)
 
@@ -44,7 +47,7 @@ Full table of contents: [concepts/README.md](concepts/README.md).
 semantics-ontology-graphs/
 ├── concepts/
 │   ├── ontologies-and-graphs/   9 chapters: ontology → RDF/OWL → SPARQL → property graphs → graph DBs
-│   └── semantic-modelling/      5 chapters: semantic layers → BI tools → Apache Ossie → ontology ⇄ metrics
+│   └── semantic-modelling/      6 chapters: semantic layers → BI tools → model repositories → Apache Ossie → ontology ⇄ metrics
 ├── examples/retail/             the shared example (vendor-neutral)
 │   ├── ontology/                OWL 2 ontology + SHACL shapes
 │   ├── rdf/                     data in Turtle, N-Triples, N-Quads, TriG, RDF/XML, JSON-LD
@@ -53,8 +56,11 @@ semantics-ontology-graphs/
 │   ├── warehouse/               star schema, data CSVs, canonical metrics.sql
 │   ├── semantic-model/ossie/    Apache Ossie semantic model + ontology + mapping
 │   └── scripts/                 generators and consistency checks
-├── vendors/                     aws · gcp · microsoft · databricks · snowflake · dbt-labs · atscale · cube · neo4j
-└── reference/                   standards, links, tools, reading list, glossary
+├── vendors/                     aws · gcp · microsoft · oracle · databricks · snowflake · dbt-labs · atscale · cube · neo4j
+├── reference/                   standards, links, tools, reading list, glossary
+├── tools/                       repo-wide checks (link checker)
+├── Makefile                     generate, check, check-ossie, dbt
+└── ROADMAP.md, CONTRIBUTING.md, LICENSE (Apache 2.0), LICENSE-docs.md (CC BY 4.0)
 ```
 
 ## The example at a glance
@@ -77,48 +83,44 @@ levels) · 3 sellers · 4 reviews.
 ## Run the checks (no cloud account needed)
 
 ```bash
-cd examples/retail
-pip install rdflib pyshacl owlrl pyyaml jsonschema
-
-python scripts/run_sparql_local.py --shacl     # all SPARQL + SHACL validation
-python scripts/check_consistency.py            # 6 RDF formats + Neptune CSVs agree
-python scripts/check_semantic_model.py         # warehouse + Ossie metrics = SPARQL answers
-git clone https://github.com/apache/ossie /tmp/ossie
-python scripts/check_semantic_model.py --ossie-repo /tmp/ossie   # + official Ossie schemas
-
-cd ../../vendors/dbt-labs/retail_dbt           # dbt + MetricFlow on DuckDB
-pip install dbt-duckdb "dbt-metricflow[duckdb]" && export DBT_PROFILES_DIR=.
-dbt build && mf query --metrics revenue,order_count --group-by customer__customer_name
+make install          # pinned Python dependencies
+make check            # links, SPARQL, SHACL, OWL RL, graph consistency, warehouse + Ossie metrics
+make check-ossie      # + official Apache Ossie schemas at the pinned commit
+pip install -r vendors/dbt-labs/requirements.txt
+make dbt              # dbt build + MetricFlow, results compared with the SPARQL answers
+make help             # all targets
 ```
 
-Regenerate derived files after editing `examples/retail/rdf/retail-data.ttl`:
-
-```bash
-python scripts/build_rdf_formats.py       # → .nt .nq .trig .rdf .jsonld (+ vendors/aws/rdf)
-python scripts/rdf_to_property_graph.py   # → vendors/aws/*-csv, Cypher + Gremlin create scripts
-python scripts/rdf_to_tables.py           # → warehouse/data/*.csv
-```
+`examples/retail/rdf/retail-data.ttl` is the only hand-edited data file;
+`make generate` rebuilds every other format from it (data flow in the
+[Makefile](Makefile) and [CONTRIBUTING.md](CONTRIBUTING.md#the-data-rule)).
+CI runs all checks on every push and weekly.
 
 ## What's verified, and what isn't
 
-| Verified by running | Written to documented syntax, not executed here |
-|---|---|
-| SPARQL queries/updates, SHACL, OWL RL reasoning (rdflib, pySHACL, owlrl) | Cypher, Gremlin, GQL, SQL/PGQ |
-| 6 RDF serializations isomorphic; Neptune CSVs reproduce SPARQL answers | Neptune loader + Python clients |
-| Warehouse metrics = SPARQL answers (SQLite) | Looker, Power BI TMDL, Snowflake, Databricks, Cube, AtScale SML |
-| Apache Ossie model, ontology and mapping: official JSON schemas; metrics compiled and executed; IRIs resolve in OWL | Spanner Graph, BigQuery Graph, Fabric Graph, DTDL, GraphFrames, Neo4j n10s |
-| dbt + MetricFlow: `dbt build`, `mf validate-configs`, `mf query` on DuckDB | |
+Every vendor folder starts with a verification level and review date
+([legend](vendors/README.md#verification-levels)):
 
-If something doesn't run on your engine version, please open an issue or a PR.
+| ✅ Executed in CI, compared with the SPARQL answers | 🟡 Checked (parsed / consistency-proven) | ⚪ Written to documented syntax, not run |
+|---|---|---|
+| SPARQL queries + updates, SHACL, OWL RL reasoning | Neptune CSV + RDF load files | Cypher, Gremlin, GQL, SQL/PGQ |
+| 6 RDF serializations (isomorphic) | AtScale SML, Cube model | Neptune loader + Python clients |
+| Warehouse `metrics.sql` (SQLite) | | Looker, Power BI TMDL, Oracle (design), Snowflake, Databricks |
+| Apache Ossie model, ontology, mapping (official schemas; metrics executed; IRIs resolve in OWL) | | Spanner Graph, BigQuery Graph, Fabric Graph, DTDL, GraphFrames, Neo4j n10s |
+| dbt + MetricFlow (DuckDB) | | |
 
-## Contributing a vendor
+Moving the ⚪ items to ✅ is the plan in [ROADMAP.md](ROADMAP.md). If
+something doesn't run on your engine version, please open an issue or PR.
 
-Copy an existing `vendors/<name>/` folder, implement the retail example in
-that vendor's formats against `examples/retail/warehouse/` (or the graph
-files), and add a column to the matrix in [`vendors/README.md`](vendors/README.md).
+## Contributing
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) (data rule, adding a vendor,
+verification levels) and [ROADMAP.md](ROADMAP.md) (what's next).
 
 ## License
 
-Text and examples: [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).
-Apache Ossie, SML and other specifications referenced here belong to their
-respective projects and licenses.
+* Code, scripts, queries, data and model files: [Apache 2.0](LICENSE)
+* Documentation: [CC BY 4.0](LICENSE-docs.md)
+
+Apache Ossie, AtScale SML, W3C/ISO standards and vendor formats referenced
+here remain under their own licenses.

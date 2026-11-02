@@ -1,5 +1,8 @@
 # Databricks
 
+> **Verification:** ⚪ written to documented syntax (metric-view structure follows the Ossie converter fixtures); not run on Databricks.
+> Last reviewed 2026-11-02. Legend: [vendors/README.md](../README.md#verification-levels).
+
 | Concept | Databricks product | Retail example |
 |---|---|---|
 | Semantic model | **Unity Catalog metric views** (YAML 1.1; `MEASURE()` in SQL), part of Unity Catalog business semantics | [`retail_metric_view.sql`](retail_metric_view.sql) |

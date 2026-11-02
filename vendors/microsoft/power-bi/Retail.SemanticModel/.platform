@@ -1,0 +1,12 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "SemanticModel",
+    "displayName": "Retail",
+    "description": "Retail orders semantic model (same metrics as examples/retail/warehouse/metrics.sql)"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "6f1c2b7e-3d4a-4b8e-9c21-5a7d0e9f4b11"
+  }
+}

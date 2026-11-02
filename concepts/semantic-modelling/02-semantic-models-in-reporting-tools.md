@@ -99,6 +99,6 @@ Key BI-modelling ideas visible there:
 | Have several BI tools + notebooks + apps + AI agents | Headless (dbt SL, Cube, AtScale) or warehouse-native |
 | Are all-in on one data platform | Warehouse-native (Snowflake semantic views, Databricks metric views, Fabric) |
 | Want to avoid lock-in either way | Keep an **Apache Ossie** export as the portable source |
-| Need meaning beyond metrics (identity, integration across domains, reasoning) | Add an **ontology / knowledge graph** ([chapter 4](04-semantic-models-and-ontologies.md)) |
+| Need meaning beyond metrics (identity, integration across domains, reasoning) | Add an **ontology / knowledge graph** ([chapter 5](05-semantic-models-and-ontologies.md)) |
 
-Next: [3. Open semantic formats](03-open-semantic-formats.md)
+Next: [3. Where semantic models live: repositories and model-as-code](03-semantic-model-repositories.md)

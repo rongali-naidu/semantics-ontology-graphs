@@ -10,6 +10,7 @@ Ontology + data are loaded into one graph (like loading both into Neptune).
 Q11 (named graphs) is run against the TriG file.
 """
 import argparse
+import sys
 from pathlib import Path
 
 from rdflib import Dataset, Graph
@@ -76,6 +77,7 @@ def main() -> None:
         print("\n=== SHACL validation:", "CONFORMS" if conforms else "VIOLATIONS")
         if not conforms:
             print(report)
+            sys.exit(1)
 
 
 if __name__ == "__main__":

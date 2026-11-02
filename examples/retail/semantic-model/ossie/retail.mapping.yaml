@@ -6,7 +6,7 @@
 # ontology (retail.ontology.yaml). This is the same job R2RML/RML does for
 # RDF: turning tables into a knowledge graph.
 # ===========================================================================
-version: 0.2.0.dev0
+version: 0.2.0.dev0      # pinned: see README.md in this folder
 name: retail_mapping
 description: Maps the retail ontology onto the retail semantic model
 ontology_ref:

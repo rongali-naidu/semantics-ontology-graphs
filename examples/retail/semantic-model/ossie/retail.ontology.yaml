@@ -14,7 +14,7 @@
 #     including aggregates - something OWL cannot express.
 #   * Closed-world `requires` constraints play the role of SHACL.
 # ===========================================================================
-version: 0.2.0.dev0
+version: 0.2.0.dev0      # pinned: see README.md in this folder
 name: RetailOntology
 description: Conceptual model of an online marketplace (aligned with the OWL retail ontology).
 prefixes:

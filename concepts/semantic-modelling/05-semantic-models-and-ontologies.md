@@ -1,4 +1,4 @@
-# 4. Semantic models and ontologies: how they fit together
+# 5. Semantic models and ontologies: how they fit together
 
 "Semantic layer" and "ontology" both promise *meaning*, but they mean
 different things by it.
@@ -99,4 +99,4 @@ built on it.
 | Explaining *why* an answer is what it is | Knowledge graph (paths, provenance) |
 | All of the above for AI agents | Ontology → mapping → semantic model + KG |
 
-Next: [5. The retail semantic model, end to end](05-retail-semantic-model.md)
+Next: [6. The retail semantic model, end to end](06-retail-semantic-model.md)

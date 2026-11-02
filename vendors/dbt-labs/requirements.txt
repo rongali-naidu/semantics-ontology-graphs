@@ -1,0 +1,4 @@
+# dbt + MetricFlow on DuckDB (versions last verified with)
+dbt-core==1.12.6
+dbt-duckdb==1.11.1
+dbt-metricflow[duckdb]==0.15.0

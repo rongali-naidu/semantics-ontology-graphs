@@ -102,6 +102,6 @@ synonyms, descriptions and "AI context" in its semantic model.
 
 They're complementary, and converging; Apache Ossie even has both layers
 plus a mapping between them. Full comparison in
-[chapter 4](04-semantic-models-and-ontologies.md).
+[chapter 5](05-semantic-models-and-ontologies.md).
 
 Next: [2. Semantic models in reporting tools](02-semantic-models-in-reporting-tools.md)

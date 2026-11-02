@@ -1,4 +1,4 @@
-# 3. Open semantic formats: Apache Ossie and friends
+# 4. Open semantic formats: Apache Ossie and friends
 
 For thirty years every semantic model was locked inside the tool that
 defined it. Moving from Looker to Power BI meant rewriting every metric.
@@ -162,4 +162,4 @@ Sigma, Omni, Hex, Lightdash, Holistics, Honeydew, RelationalAI, Palantir,
 NVIDIA and more, plus an interop test harness. Maturity varies by converter
 (many are alpha), so test round-trips on your own models.
 
-Next: [4. Semantic models and ontologies](04-semantic-models-and-ontologies.md)
+Next: [5. Semantic models and ontologies](05-semantic-models-and-ontologies.md)

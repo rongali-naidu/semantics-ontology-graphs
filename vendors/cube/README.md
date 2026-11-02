@@ -1,5 +1,8 @@
 # Cube: headless semantic layer
 
+> **Verification:** 🟡 syntax-checked: YAML parses and follows the Cube data-model reference; not run in Cube.
+> Last reviewed 2026-11-02. Legend: [vendors/README.md](../README.md#verification-levels).
+
 | Concept | Cube | Retail example |
 |---|---|---|
 | Semantic model | **cubes** (dimensions, measures, joins, hierarchies) + **views** (curated, consumer-facing) | [`model/`](model/) |

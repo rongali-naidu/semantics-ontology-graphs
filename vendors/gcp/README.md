@@ -1,9 +1,12 @@
 # Google Cloud
 
+> **Verification:** ⚪ written to documented syntax; not run on Google Cloud.
+> Last reviewed 2026-11-02. Legend: [vendors/README.md](../README.md#verification-levels).
+
 | Concept | Google Cloud product | Retail example |
 |---|---|---|
-| Property graph DB (ISO GQL) | **Spanner Graph** (GA Jan 2025): a property graph mapped onto Spanner tables | [`spanner-graph/retail-graph.sql`](spanner-graph/retail-graph.sql) |
-| Graph over the warehouse | **BigQuery Graph** (GQL over BigQuery tables; GA 2026) | [`bigquery-graph/retail-graph.sql`](bigquery-graph/retail-graph.sql) |
+| Property graph DB (ISO GQL) | **Spanner Graph**: a property graph mapped onto Spanner tables | [`spanner-graph/retail-graph.sql`](spanner-graph/retail-graph.sql) |
+| Graph over the warehouse | **BigQuery Graph** (GQL over BigQuery tables) | [`bigquery-graph/retail-graph.sql`](bigquery-graph/retail-graph.sql) |
 | Semantic model | **Looker** (LookML); Looker semantic layer also serves Looker Studio, Sheets, Tableau and others via connectors | [`looker/`](looker/) |
 | Knowledge graph service | Enterprise Knowledge Graph API (entity reconciliation), Google Knowledge Graph Search API | — |
 | GraphRAG / AI | Vertex AI + Spanner Graph / BigQuery Graph; Looker conversational analytics | — |

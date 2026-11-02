@@ -1,4 +1,4 @@
-# 5. The retail semantic model, end to end
+# 6. The retail semantic model, end to end
 
 ## 5.1 From graph to tables
 
@@ -51,6 +51,7 @@ Kitchen 79.50 (= SPARQL roll-up over `subCategoryOf*`).
 | Power BI TMDL + DAX | [`vendors/microsoft/power-bi/`](../../vendors/microsoft/power-bi/Retail.SemanticModel/definition/) | written to documented syntax |
 | Snowflake semantic view | [`vendors/snowflake/`](../../vendors/snowflake/) | written to documented syntax |
 | Databricks metric view | [`vendors/databricks/`](../../vendors/databricks/) | written to documented syntax |
+| Oracle Analytics (RPD / Semantic Modeler) | [`vendors/oracle/`](../../vendors/oracle/) | layer-by-layer design, no model file yet |
 
 "Written to documented syntax" means not executed against the vendor's
 engine here. Please open an issue if one doesn't load.

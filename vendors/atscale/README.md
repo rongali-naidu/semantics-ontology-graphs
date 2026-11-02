@@ -1,5 +1,8 @@
 # AtScale: universal semantic layer + SML
 
+> **Verification:** 🟡 syntax-checked: YAML parses and follows the SML reference; not deployed to AtScale.
+> Last reviewed 2026-11-02. Legend: [vendors/README.md](../README.md#verification-levels).
+
 | Concept | AtScale | Retail example |
 |---|---|---|
 | Semantic model | AtScale semantic model, defined in **SML** (Semantic Modeling Language, Apache 2.0) | [`sml/`](sml/) |

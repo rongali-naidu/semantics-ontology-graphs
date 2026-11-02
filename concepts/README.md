@@ -1,7 +1,7 @@
 # Concepts (vendor-neutral)
 
 Two tracks, one shared retail example. Read the first track for meaning and
-graphs, the second for metrics and BI. Chapter 4 of track B ties them
+graphs, the second for metrics and BI. Chapter 5 of track B ties them
 together.
 
 ## A. Ontologies, knowledge graphs and graph databases
@@ -24,8 +24,9 @@ together.
 |---|---|
 | 1 | [What is a semantic model?](semantic-modelling/01-what-is-a-semantic-model.md) |
 | 2 | [How reporting tools do it: Power BI, Looker, Tableau, Qlik...](semantic-modelling/02-semantic-models-in-reporting-tools.md) |
-| 3 | [Open formats: Apache Ossie, MetricFlow, SML, Cube, Malloy](semantic-modelling/03-open-semantic-formats.md) |
-| 4 | [Semantic models and ontologies: how they fit together](semantic-modelling/04-semantic-models-and-ontologies.md) |
-| 5 | [The retail semantic model, end to end](semantic-modelling/05-retail-semantic-model.md) |
+| 3 | [Where semantic models live: BI metadata repositories vs git (Oracle Analytics RPD/SMML, Power BI PBIP/TMDL, Looker, BusinessObjects...)](semantic-modelling/03-semantic-model-repositories.md) |
+| 4 | [Open formats: Apache Ossie, MetricFlow, SML, Cube, Malloy](semantic-modelling/04-open-semantic-formats.md) |
+| 5 | [Semantic models and ontologies: how they fit together](semantic-modelling/05-semantic-models-and-ontologies.md) |
+| 6 | [The retail semantic model, end to end](semantic-modelling/06-retail-semantic-model.md) |
 
 Then: [vendors](../vendors/README.md) · [standards, links & glossary](../reference/standards-links-glossary.md)

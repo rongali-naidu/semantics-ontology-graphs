@@ -1,10 +1,13 @@
 # Microsoft (Fabric, Power BI, Azure)
 
+> **Verification:** ⚪ written to documented syntax (TMDL layout follows the Ossie converter fixtures; DTDL and PBIP JSON files parse); not run in Power BI / Fabric / Azure.
+> Last reviewed 2026-11-02. Legend: [vendors/README.md](../README.md#verification-levels).
+
 | Concept | Microsoft product | Retail example |
 |---|---|---|
 | Semantic model | **Power BI / Fabric semantic model** (Tabular: TMDL + DAX; Import, DirectQuery, Direct Lake) | [`power-bi/Retail.SemanticModel/definition/`](power-bi/Retail.SemanticModel/definition/) |
-| Property graph (ISO GQL) | **Graph in Microsoft Fabric** (GA): graph model over OneLake tables | [`fabric-graph/retail-queries.gql`](fabric-graph/retail-queries.gql) |
-| Ontology | **Fabric IQ ontology** (preview as of Oct 2026): entity types, relationships and rules bound to semantic models / lakehouse tables | conceptually = [`retail-ontology.ttl`](../../examples/retail/ontology/retail-ontology.ttl) / [Ossie ontology](../../examples/retail/semantic-model/ossie/retail.ontology.yaml) |
+| Property graph (ISO GQL) | **Graph in Microsoft Fabric**: graph model over OneLake tables | [`fabric-graph/retail-queries.gql`](fabric-graph/retail-queries.gql) |
+| Ontology | **Fabric IQ ontology**: entity types, relationships and rules bound to semantic models / lakehouse tables | conceptually = [`retail-ontology.ttl`](../../examples/retail/ontology/retail-ontology.ttl) / [Ossie ontology](../../examples/retail/semantic-model/ossie/retail.ontology.yaml) |
 | Ontology language (IoT / twins) | **Azure Digital Twins – DTDL v3** | [`digital-twins-dtdl/retail-ontology.json`](digital-twins-dtdl/retail-ontology.json) |
 | Gremlin graph DB | **Azure Cosmos DB for Apache Gremlin** | reuse [`02-queries.groovy`](../../examples/retail/property-graph/gremlin/02-queries.groovy) |
 | Graph in SQL | **SQL Server / Azure SQL graph tables** (`NODE`/`EDGE` tables, `MATCH`) | — |

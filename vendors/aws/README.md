@@ -1,5 +1,8 @@
 # AWS
 
+> **Verification:** 🟡 data checked: the Neptune CSVs and RDF files are generated and proven to reproduce the SPARQL answers; the loader script and Python clients were not run against a Neptune cluster.
+> Last reviewed 2026-11-02. Legend: [vendors/README.md](../README.md#verification-levels).
+
 | Concept | AWS product | Files here |
 |---|---|---|
 | RDF store + SPARQL | **Amazon Neptune Database** | [`rdf/`](rdf/), [`loading.md`](loading.md), [`querying.md`](querying.md) |
