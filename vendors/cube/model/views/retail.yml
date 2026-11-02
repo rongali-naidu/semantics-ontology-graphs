@@ -1,0 +1,15 @@
+# The curated, consumer-facing view (what BI tools / AI agents query)
+views:
+  - name: retail
+    description: Retail orders - revenue, orders and buyers by customer, product and category
+    cubes:
+      - join_path: order_lines
+        includes: [revenue, units_sold, order_count, average_order_value, discount_amount]
+      - join_path: order_lines.orders
+        includes: [order_date, status, payment_method, buyer_count]
+      - join_path: order_lines.orders.customers
+        prefix: true
+        includes: [customer_name, is_premium, city, state]
+      - join_path: order_lines.products
+        prefix: true
+        includes: [product_name, category_level_1, category_level_2, seller_name]

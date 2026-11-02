@@ -1,0 +1,31 @@
+table Orders
+
+	column 'Order ID'
+		dataType: string
+		isKey
+		sourceColumn: order_id
+
+	column 'Customer ID'
+		dataType: string
+		sourceColumn: customer_id
+
+	column 'Order Date'
+		dataType: dateTime
+		sourceColumn: order_date
+
+	column Status
+		dataType: string
+		sourceColumn: status
+
+	column 'Payment Method'
+		dataType: string
+		sourceColumn: payment_method
+
+	partition 'Orders' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database(Server, Database),
+				    Data = Source{[Schema = "retail", Item = "orders"]}[Data]
+				in
+				    Data

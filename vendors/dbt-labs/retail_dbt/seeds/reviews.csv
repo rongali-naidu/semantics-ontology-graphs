@@ -1,0 +1,5 @@
+review_id,customer_id,product_id,rating,review_text
+R1,C1,P1,5,Fast and light.
+R2,C2,P4,4,Great intro to graphs.
+R3,C1,P2,3,"Good sound, weak battery."
+R4,C3,P4,5,Clear and practical.

@@ -1,0 +1,25 @@
+cubes:
+  - name: orders
+    sql_table: retail.orders
+    joins:
+      - name: customers
+        sql: '{CUBE}.customer_id = {customers}.customer_id'
+        relationship: many_to_one
+    dimensions:
+      - name: order_id
+        sql: order_id
+        type: string
+        primary_key: true
+      - name: order_date
+        sql: order_date
+        type: time
+      - name: status
+        sql: status
+        type: string
+      - name: payment_method
+        sql: payment_method
+        type: string
+    measures:
+      - name: buyer_count
+        sql: customer_id
+        type: count_distinct

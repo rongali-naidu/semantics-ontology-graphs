@@ -1,0 +1,40 @@
+unique_name: Customer Dimension
+object_type: dimension
+label: Customer
+type: standard
+
+hierarchies:
+  - unique_name: Customer Geography
+    label: Customer Geography
+    levels:
+      - unique_name: Customer State
+      - unique_name: Customer City
+      - unique_name: Customer Name
+        secondary_attributes:
+          - unique_name: Customer Is Premium
+            label: Is Premium
+            dataset: customers
+            name_column: is_premium
+            key_columns:
+              - customer_id
+
+level_attributes:
+  - unique_name: Customer State
+    label: State
+    dataset: customers
+    name_column: state
+    key_columns:
+      - state
+  - unique_name: Customer City
+    label: City
+    dataset: customers
+    name_column: city
+    key_columns:
+      - state
+      - city
+  - unique_name: Customer Name
+    label: Customer
+    dataset: customers
+    name_column: name
+    key_columns:
+      - customer_id

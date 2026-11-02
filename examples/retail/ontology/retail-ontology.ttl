@@ -31,7 +31,8 @@
     owl:versionInfo "1.0.0" ;
     dcterms:title "Retail Ordering Ontology"@en ;
     dcterms:description "Teaching ontology for an online marketplace: customers, orders, products, categories, sellers and reviews."@en ;
-    dcterms:creator "codesnippets / ontology-knowledge-graphs" ;
+    dcterms:creator "semantics-ontology-graphs" ;
+    dcterms:source <https://github.com/rongali-naidu/semantics-ontology-graphs> ;
     dcterms:license <https://creativecommons.org/licenses/by/4.0/> ;
     dcterms:created "2026-10-28"^^xsd:date ;
     rdfs:comment "Instance data is kept in a separate file (ABox) from this schema (TBox)."@en .

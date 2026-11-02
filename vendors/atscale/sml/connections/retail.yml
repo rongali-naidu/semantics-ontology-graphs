@@ -1,0 +1,6 @@
+unique_name: Connection - Retail
+object_type: connection
+label: Connection - Retail
+as_connection: Snowflake        # name of the platform connection configured in AtScale
+database: analytics
+schema: retail

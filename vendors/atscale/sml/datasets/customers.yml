@@ -1,0 +1,18 @@
+unique_name: customers
+object_type: dataset
+label: Customers
+connection_id: Connection - Retail
+sql: >-
+  SELECT c.customer_id, c.name, c.is_premium, a.city, a.state
+  FROM retail.customers c LEFT JOIN retail.addresses a ON a.address_id = c.address_id
+columns:
+  - name: customer_id
+    data_type: string
+  - name: name
+    data_type: string
+  - name: is_premium
+    data_type: boolean
+  - name: city
+    data_type: string
+  - name: state
+    data_type: string

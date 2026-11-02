@@ -1,0 +1,53 @@
+/// One row per product line within an order
+table 'Order Lines'
+
+	/// Sum of quantity * unit price paid
+	measure Revenue = SUMX ( 'Order Lines', 'Order Lines'[Quantity] * 'Order Lines'[Unit Price] )
+		formatString: \$#,0.00
+
+	measure 'Units Sold' = SUM ( 'Order Lines'[Quantity] )
+		formatString: #,0
+
+	measure 'Order Count' = DISTINCTCOUNT ( 'Order Lines'[Order ID] )
+		formatString: #,0
+
+	measure 'Average Order Value' = DIVIDE ( [Revenue], [Order Count] )
+		formatString: \$#,0.00
+
+	/// Customers with at least one order (filter flows Order Lines -> Orders)
+	measure 'Buyer Count' = CALCULATE ( DISTINCTCOUNT ( Orders[Customer ID] ), 'Order Lines' )
+		formatString: #,0
+
+	/// Money given away versus list price
+	measure 'Discount Amount' = SUMX ( 'Order Lines', 'Order Lines'[Quantity] * ( RELATED ( Products[List Price] ) - 'Order Lines'[Unit Price] ) )
+		formatString: \$#,0.00
+
+	column 'Order Line ID'
+		dataType: string
+		isKey
+		sourceColumn: order_line_id
+
+	column 'Order ID'
+		dataType: string
+		sourceColumn: order_id
+
+	column 'Product ID'
+		dataType: string
+		sourceColumn: product_id
+
+	column Quantity
+		dataType: int64
+		sourceColumn: quantity
+
+	column 'Unit Price'
+		dataType: decimal
+		sourceColumn: unit_price
+
+	partition 'Order Lines' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database(Server, Database),
+				    Data = Source{[Schema = "retail", Item = "order_lines"]}[Data]
+				in
+				    Data

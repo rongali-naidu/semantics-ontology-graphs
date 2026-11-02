@@ -1,0 +1,4 @@
+customer_id,name,email,is_premium,member_since,address_id
+C1,Alice Johnson,alice@example.com,true,2024-03-15,A1
+C2,Bob Smith,bob@example.com,false,,A2
+C3,Carol Diaz,carol@example.com,true,2025-11-01,A3

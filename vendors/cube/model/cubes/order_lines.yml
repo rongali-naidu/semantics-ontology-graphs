@@ -1,0 +1,47 @@
+# Retail semantic layer - Cube (https://cube.dev/docs/product/data-modeling/reference/cube)
+# Ossie dataset -> cube, field -> dimension, metric -> measure, relationship -> join.
+cubes:
+  - name: order_lines
+    sql_table: retail.order_lines
+    description: One row per product line within an order
+    joins:
+      - name: orders
+        sql: '{CUBE}.order_id = {orders}.order_id'
+        relationship: many_to_one
+      - name: products
+        sql: '{CUBE}.product_id = {products}.product_id'
+        relationship: many_to_one
+    dimensions:
+      - name: order_line_id
+        sql: order_line_id
+        type: string
+        primary_key: true
+      - name: quantity
+        sql: quantity
+        type: number
+      - name: unit_price
+        sql: unit_price
+        type: number
+    measures:
+      - name: revenue
+        sql: '{CUBE}.quantity * {CUBE}.unit_price'
+        type: sum
+        format: currency
+        description: Sum of quantity * unit price paid
+        meta:
+          synonyms: [sales, GMV, turnover]
+      - name: units_sold
+        sql: quantity
+        type: sum
+      - name: order_count
+        sql: order_id
+        type: count_distinct
+      - name: discount_amount
+        sql: '{CUBE}.quantity * ({products}.list_price - {CUBE}.unit_price)'
+        type: sum
+        format: currency
+      - name: average_order_value
+        sql: '{revenue} / NULLIF({order_count}, 0)'
+        type: number
+        format: currency
+        description: Revenue per order (a calculated measure built from other measures)

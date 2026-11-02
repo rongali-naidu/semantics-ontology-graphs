@@ -1,0 +1,5 @@
+order_id,customer_id,order_date,status,payment_method,ship_address_id
+O1,C1,2026-09-01,DELIVERED,CARD,A1
+O2,C2,2026-09-05,SHIPPED,PAYPAL,A2
+O3,C1,2026-09-20,DELIVERED,CARD,A1
+O4,C3,2026-10-02,PLACED,GIFT_CARD,A3

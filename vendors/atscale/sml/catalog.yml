@@ -1,0 +1,6 @@
+# AtScale SML (Semantic Modeling Language) repository for the retail example
+# Spec: https://github.com/semanticdatalayer/sml (Apache 2.0)
+unique_name: retail-sml
+object_type: catalog
+label: Retail Semantic Model
+version: 1.0

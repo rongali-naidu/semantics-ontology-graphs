@@ -1,0 +1,19 @@
+relationship OrderLines_Orders
+	fromColumn: 'Order Lines'.'Order ID'
+	toColumn: Orders.'Order ID'
+
+relationship OrderLines_Products
+	fromColumn: 'Order Lines'.'Product ID'
+	toColumn: Products.'Product ID'
+
+relationship Orders_Customers
+	fromColumn: Orders.'Customer ID'
+	toColumn: Customers.'Customer ID'
+
+relationship Products_Categories
+	fromColumn: Products.'Category ID'
+	toColumn: Categories.'Category ID'
+
+relationship Reviews_Products
+	fromColumn: Reviews.'Product ID'
+	toColumn: Products.'Product ID'

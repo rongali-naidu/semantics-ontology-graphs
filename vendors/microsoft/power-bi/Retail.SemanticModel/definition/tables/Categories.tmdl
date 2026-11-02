@@ -1,0 +1,43 @@
+/// The ontology's subCategoryOf tree, flattened to levels for a drill-down hierarchy
+table Categories
+
+	column 'Category ID'
+		dataType: string
+		isKey
+		sourceColumn: category_id
+
+	column 'Category Name'
+		dataType: string
+		sourceColumn: name
+
+	column 'Level 1'
+		dataType: string
+		sourceColumn: category_level_1
+
+	column 'Level 2'
+		dataType: string
+		sourceColumn: category_level_2
+
+	column 'Level 3'
+		dataType: string
+		sourceColumn: category_level_3
+
+	hierarchy 'Category Hierarchy'
+
+		level 'Level 1'
+			column: 'Level 1'
+
+		level 'Level 2'
+			column: 'Level 2'
+
+		level 'Level 3'
+			column: 'Level 3'
+
+	partition 'Categories' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database(Server, Database),
+				    Data = Source{[Schema = "retail", Item = "categories"]}[Data]
+				in
+				    Data

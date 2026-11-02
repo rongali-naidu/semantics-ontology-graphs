@@ -1,0 +1,305 @@
+# ===========================================================================
+# Retail semantic model - Apache Ossie (incubating) core spec 0.2.0.dev0
+# https://github.com/apache/ossie/blob/main/core-spec/spec.md
+#
+# The vendor-neutral semantic layer over ../../warehouse/schema.sql.
+# Datasets = tables, fields = dimensions/attributes, relationships = joins,
+# metrics = governed aggregations. Every vendor model under /vendors encodes
+# the same metrics (see ../../warehouse/metrics.sql for the plain-SQL truth).
+#
+# Expressions use the top-level `sql` key (Ossie's portable OSSIE_SQL_2026
+# dialect); `dialects:` can add engine-specific variants where needed.
+# Validate: python scripts/check_semantic_model.py --ossie-repo <apache/ossie clone>
+# ===========================================================================
+version: 0.2.0.dev0
+name: retail_semantic_model
+description: >-
+  Online marketplace orders: customers, orders, order lines, products,
+  categories, sellers and reviews. Main fact = order_lines (one row per
+  product in an order).
+ai_context:
+  instructions: >-
+    Revenue always means quantity * unit_price actually paid, not list price.
+    An order can contain several products; count orders with order_count,
+    never by counting order lines. Categories form a tree: use
+    category_level_1 for top-level categories such as Electronics.
+
+datasets:
+  # --- facts ----------------------------------------------------------------
+  - name: order_lines
+    source: retail.order_lines
+    primary_key: [order_line_id]
+    description: One row per product line within an order (grain of the main fact)
+    ai_context:
+      synonyms: [line items, order items, sales lines]
+    fields:
+      - name: order_line_id
+        expression: { sql: order_line_id }
+        datatype: String
+      - name: order_id
+        expression: { sql: order_id }
+        datatype: String
+      - name: product_id
+        expression: { sql: product_id }
+        datatype: String
+      - name: quantity
+        expression: { sql: quantity }
+        datatype: Integer
+        description: Units of the product in this line
+      - name: unit_price
+        expression: { sql: unit_price }
+        datatype: Decimal
+        description: Price paid per unit (may be below list price when on sale)
+      - name: line_amount
+        expression: { sql: quantity * unit_price }
+        datatype: Decimal
+        description: Revenue of the line
+    metrics:
+      - name: revenue
+        expression: { sql: SUM(line_amount) }
+        datatype: Decimal
+        description: Sum of quantity * unit price paid
+        ai_context:
+          synonyms: [sales, gross merchandise value, GMV, turnover]
+      - name: units_sold
+        expression: { sql: SUM(quantity) }
+        datatype: Integer
+        ai_context:
+          synonyms: [units, items sold, quantity sold]
+      - name: order_count
+        expression: { sql: COUNT(DISTINCT order_id) }
+        datatype: Integer
+        ai_context:
+          synonyms: [number of orders, orders]
+
+  - name: orders
+    source: retail.orders
+    primary_key: [order_id]
+    description: One row per order (header)
+    ai_context:
+      synonyms: [purchases, transactions]
+    fields:
+      - name: order_id
+        expression: { sql: order_id }
+        datatype: String
+      - name: customer_id
+        expression: { sql: customer_id }
+        datatype: String
+      - name: ship_address_id
+        expression: { sql: ship_address_id }
+        datatype: String
+      - name: order_date
+        expression: { sql: order_date }
+        datatype: Date
+        dimension: { is_time: true }
+        ai_context:
+          synonyms: [purchase date, date ordered]
+      - name: status
+        expression: { sql: status }
+        datatype: String
+        description: PLACED, SHIPPED, DELIVERED or CANCELLED
+      - name: payment_method
+        expression: { sql: payment_method }
+        datatype: String
+
+  - name: reviews
+    source: retail.reviews
+    primary_key: [review_id]
+    description: One row per product review (a second fact, at its own grain)
+    fields:
+      - name: review_id
+        expression: { sql: review_id }
+        datatype: String
+      - name: customer_id
+        expression: { sql: customer_id }
+        datatype: String
+      - name: product_id
+        expression: { sql: product_id }
+        datatype: String
+      - name: rating
+        expression: { sql: rating }
+        datatype: Integer
+        description: 1 (worst) to 5 (best) stars
+    metrics:
+      - name: average_rating
+        expression: { sql: AVG(rating) }
+        datatype: Decimal
+        ai_context:
+          synonyms: [stars, average stars, score]
+      - name: review_count
+        expression: { sql: COUNT(review_id) }
+        datatype: Integer
+
+  # --- dimensions -----------------------------------------------------------
+  - name: customers
+    source: retail.customers
+    primary_key: [customer_id]
+    unique_keys: [[email]]
+    ai_context:
+      synonyms: [buyers, shoppers, clients]
+    fields:
+      - name: customer_id
+        expression: { sql: customer_id }
+        datatype: String
+      - name: customer_name
+        expression: { sql: name }
+        datatype: String
+      - name: email
+        expression: { sql: email }
+        datatype: String
+      - name: is_premium
+        expression: { sql: is_premium }
+        datatype: Boolean
+        description: Paid membership (the ontology class PremiumCustomer)
+        ai_context:
+          synonyms: [member, premium member, subscriber]
+      - name: member_since
+        expression: { sql: member_since }
+        datatype: Date
+        dimension: { is_time: false }
+      - name: address_id
+        expression: { sql: address_id }
+        datatype: String
+
+  - name: addresses
+    source: retail.addresses
+    primary_key: [address_id]
+    fields:
+      - name: address_id
+        expression: { sql: address_id }
+        datatype: String
+      - name: city
+        expression: { sql: city }
+        datatype: String
+      - name: state
+        expression: { sql: state }
+        datatype: String
+      - name: country
+        expression: { sql: country }
+        datatype: String
+
+  - name: products
+    source: retail.products
+    primary_key: [product_id]
+    unique_keys: [[sku]]
+    fields:
+      - name: product_id
+        expression: { sql: product_id }
+        datatype: String
+      - name: sku
+        expression: { sql: sku }
+        datatype: String
+      - name: product_name
+        expression: { sql: name }
+        datatype: String
+        ai_context:
+          synonyms: [item, article]
+      - name: list_price
+        expression: { sql: list_price }
+        datatype: Decimal
+      - name: category_id
+        expression: { sql: category_id }
+        datatype: String
+      - name: seller_id
+        expression: { sql: seller_id }
+        datatype: String
+
+  - name: categories
+    source: retail.categories
+    primary_key: [category_id]
+    description: Product taxonomy, flattened into up to three levels
+    fields:
+      - name: category_id
+        expression: { sql: category_id }
+        datatype: String
+      - name: category_name
+        expression: { sql: name }
+        datatype: String
+      - name: category_level_1
+        expression: { sql: category_level_1 }
+        datatype: String
+        description: Top-level department, e.g. Electronics
+        ai_context:
+          synonyms: [department, top category]
+      - name: category_level_2
+        expression: { sql: category_level_2 }
+        datatype: String
+      - name: category_level_3
+        expression: { sql: category_level_3 }
+        datatype: String
+
+  - name: sellers
+    source: retail.sellers
+    primary_key: [seller_id]
+    fields:
+      - name: seller_id
+        expression: { sql: seller_id }
+        datatype: String
+      - name: seller_name
+        expression: { sql: name }
+        datatype: String
+        ai_context:
+          synonyms: [merchant, vendor, store]
+
+relationships:
+  - name: order_lines_to_orders
+    from: order_lines
+    to: orders
+    from_columns: [order_id]
+    to_columns: [order_id]
+  - name: order_lines_to_products
+    from: order_lines
+    to: products
+    from_columns: [product_id]
+    to_columns: [product_id]
+  - name: orders_to_customers
+    from: orders
+    to: customers
+    from_columns: [customer_id]
+    to_columns: [customer_id]
+  - name: orders_to_ship_address
+    from: orders
+    to: addresses
+    from_columns: [ship_address_id]
+    to_columns: [address_id]
+  - name: products_to_categories
+    from: products
+    to: categories
+    from_columns: [category_id]
+    to_columns: [category_id]
+  - name: products_to_sellers
+    from: products
+    to: sellers
+    from_columns: [seller_id]
+    to_columns: [seller_id]
+  - name: reviews_to_products
+    from: reviews
+    to: products
+    from_columns: [product_id]
+    to_columns: [product_id]
+  - name: reviews_to_customers
+    from: reviews
+    to: customers
+    from_columns: [customer_id]
+    to_columns: [customer_id]
+
+# Model-scoped metrics combine fields of several datasets (dataset.field)
+metrics:
+  - name: average_order_value
+    expression: { sql: SUM(order_lines.line_amount) / COUNT(DISTINCT order_lines.order_id) }
+    datatype: Decimal
+    description: Revenue per order
+    ai_context:
+      synonyms: [AOV, basket size, average basket]
+  - name: buyer_count
+    expression: { sql: COUNT(DISTINCT orders.customer_id) }
+    datatype: Integer
+    description: Customers with at least one order
+    ai_context:
+      synonyms: [active customers, number of buyers]
+  - name: discount_amount
+    expression: { sql: SUM(order_lines.quantity * (products.list_price - order_lines.unit_price)) }
+    datatype: Decimal
+    description: Money given away versus list price
+    ai_context:
+      synonyms: [discounts, markdowns, savings]

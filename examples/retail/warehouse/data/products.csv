@@ -1,0 +1,7 @@
+product_id,sku,name,list_price,category_id,seller_id
+P1,LAP-PRO-14,Laptop Pro 14,1299.00,CAT-LAPTOPS,S1
+P2,EAR-X,Wireless Earbuds X,149.99,CAT-AUDIO,S1
+P3,CHG-65W,USB-C Charger 65W,29.99,CAT-ELECTRONICS,S1
+P4,BK-KG101,Knowledge Graphs 101,49.99,CAT-BOOKS,S2
+P5,KNF-8,Chef Knife 8in,79.50,CAT-KITCHEN,S3
+P6,KBD-MECH,Mechanical Keyboard,89.00,CAT-COMPUTERS,S1

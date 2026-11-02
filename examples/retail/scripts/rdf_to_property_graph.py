@@ -5,7 +5,7 @@
     python scripts/rdf_to_property_graph.py
 
 This is the RDF -> property graph mapping explained in
-docs/07-property-graphs.md, written out as code:
+concepts/ontologies-and-graphs/07-property-graphs.md, written out as code:
 
   RDF                                   Property graph
   ------------------------------------  ------------------------------------
@@ -19,8 +19,8 @@ docs/07-property-graphs.md, written out as code:
   Review writtenBy Customer             (Customer)-[:WROTE]->(Review)
 
 Writes (all from the same in-memory graph, so they always agree):
-  neptune/gremlin-csv/      Neptune bulk-load "csv" format   (Gremlin)
-  neptune/opencypher-csv/   Neptune bulk-load "opencypher" format
+  ../../vendors/aws/gremlin-csv/     Neptune bulk-load "csv" format   (Gremlin)
+  ../../vendors/aws/opencypher-csv/  Neptune bulk-load "opencypher" format
   property-graph/cypher/01-create-retail-graph.cypher
   property-graph/gremlin/01-create-retail-graph.groovy
 """
@@ -32,6 +32,7 @@ from rdflib import Graph, Literal, Namespace
 from rdflib.namespace import RDF
 
 ROOT = Path(__file__).resolve().parent.parent
+AWS = ROOT.parent.parent / "vendors/aws"      # Neptune-specific load files
 RETAIL = Namespace("https://example.org/retail/ontology#")
 EX = "https://example.org/retail/data/"
 
@@ -159,7 +160,7 @@ def write_neptune_csv(nodes, edges):
     edge_cols = ["quantity", "unitPrice"]
 
     # ---- Gremlin CSV:  ~id, ~label, name:Type(single) ...
-    gdir = ROOT / "neptune/gremlin-csv"
+    gdir = AWS / "gremlin-csv"
     for label in NODE_ORDER:
         items = groups[label]
         cols = prop_columns(items)
@@ -175,7 +176,7 @@ def write_neptune_csv(nodes, edges):
                for e in contains])
 
     # ---- openCypher CSV:  :ID, :LABEL, name:Type ...
-    odir = ROOT / "neptune/opencypher-csv"
+    odir = AWS / "opencypher-csv"
     for label in NODE_ORDER:
         items = groups[label]
         cols = prop_columns(items)

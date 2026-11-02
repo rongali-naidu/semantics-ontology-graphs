@@ -1,0 +1,31 @@
+table Products
+
+	column 'Product ID'
+		dataType: string
+		isKey
+		sourceColumn: product_id
+
+	column SKU
+		dataType: string
+		sourceColumn: sku
+
+	column 'Product Name'
+		dataType: string
+		sourceColumn: name
+
+	column 'List Price'
+		dataType: decimal
+		sourceColumn: list_price
+
+	column 'Category ID'
+		dataType: string
+		sourceColumn: category_id
+
+	partition 'Products' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database(Server, Database),
+				    Data = Source{[Schema = "retail", Item = "products"]}[Data]
+				in
+				    Data

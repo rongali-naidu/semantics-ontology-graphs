@@ -1,0 +1,20 @@
+unique_name: products
+object_type: dataset
+label: Products
+connection_id: Connection - Retail
+sql: >-
+  SELECT p.product_id, p.name, p.sku, cat.category_level_1, s.name AS seller_name
+  FROM retail.products p
+  JOIN retail.categories cat ON cat.category_id = p.category_id
+  JOIN retail.sellers s      ON s.seller_id     = p.seller_id
+columns:
+  - name: product_id
+    data_type: string
+  - name: name
+    data_type: string
+  - name: sku
+    data_type: string
+  - name: category_level_1
+    data_type: string
+  - name: seller_name
+    data_type: string

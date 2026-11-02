@@ -1,0 +1,6 @@
+unique_name: discount_amount
+object_type: metric
+label: Discount Amount
+calculation_method: sum
+dataset: order_lines_fact
+column: discount_amount

@@ -1,0 +1,328 @@
+# ===========================================================================
+# Retail ontology - Apache Ossie ontology spec 0.2.0.dev0
+# https://github.com/apache/ossie/blob/main/ontology/ontology.md
+#
+# The SAME conceptual model as ../../ontology/retail-ontology.ttl (OWL 2),
+# written in Ossie's ontology language. Each concept/relationship carries an
+# `iri` pointing at its OWL counterpart, so tools can translate between the
+# two. Differences worth noticing:
+#   * Ossie separates EntityTypes (things) from ValueTypes (typed values with
+#     rules, e.g. Rating 1..5) - OWL uses classes vs datatypes + SHACL.
+#   * Relationships are declared under the concept playing the first role
+#     and can be n-ary; each has a natural-language "verbalization".
+#   * derived_by gives rules (like OWL property chains / SPARQL CONSTRUCT),
+#     including aggregates - something OWL cannot express.
+#   * Closed-world `requires` constraints play the role of SHACL.
+# ===========================================================================
+version: 0.2.0.dev0
+name: RetailOntology
+description: Conceptual model of an online marketplace (aligned with the OWL retail ontology).
+prefixes:
+  retail: https://example.org/retail/ontology#
+  schema: https://schema.org/
+requires:
+  - COUNT[Product] > 0
+
+ontology:
+# --- value types ------------------------------------------------------------
+- concept: CustomerId
+  type: ValueType
+  extends: [ String ]
+- concept: OrderId
+  type: ValueType
+  extends: [ String ]
+- concept: OrderLineId
+  type: ValueType
+  extends: [ String ]
+- concept: CategoryId
+  type: ValueType
+  extends: [ String ]
+- concept: ProductId
+  type: ValueType
+  extends: [ String ]
+- concept: SellerId
+  type: ValueType
+  extends: [ String ]
+- concept: AddressId
+  type: ValueType
+  extends: [ String ]
+- concept: ReviewId
+  type: ValueType
+  extends: [ String ]
+- concept: Sku
+  description: "Stock keeping unit that identifies a product"
+  type: ValueType
+  extends: [ String ]
+- concept: Email
+  type: ValueType
+  extends: [ String ]
+- concept: CityName
+  type: ValueType
+  extends: [ String ]
+- concept: Money
+  description: "An amount in USD"
+  type: ValueType
+  extends: [ Decimal ]
+  requires: [ Money >= 0 ]
+- concept: Quantity
+  type: ValueType
+  extends: [ Integer ]
+  requires: [ Quantity > 0 ]
+- concept: Rating
+  description: "Stars given in a review"
+  type: ValueType
+  extends: [ Integer ]
+  requires: [ 1 <= Rating, Rating <= 5 ]
+- concept: OrderStatus
+  type: ValueType
+  extends: [ String ]
+  requires: [ OrderStatus == 'PLACED' OR OrderStatus == 'SHIPPED' OR OrderStatus == 'DELIVERED' OR OrderStatus == 'CANCELLED' ]
+
+# --- entity types -----------------------------------------------------------
+- concept: Party
+  description: "Any person or organization taking part in a retail transaction"
+  type: EntityType
+  iri: retail:Party
+
+- concept: Address
+  type: EntityType
+  iri: retail:Address
+  identify_by: [ id ]
+  relationships:
+  - name: id
+    roles: [ concept: AddressId ]
+    multiplicity: OneToOne
+    verbalizes: [ '{Address} is identified by {AddressId}' ]
+  - name: city
+    iri: retail:city
+    roles: [ concept: CityName ]
+    multiplicity: ManyToOne
+    verbalizes: [ '{Address} is in {CityName}' ]
+
+- concept: Customer
+  description: "A person with an account who can place orders and write reviews"
+  type: EntityType
+  extends: [ Party ]
+  iri: retail:Customer
+  identify_by: [ id ]
+  relationships:
+  - name: id
+    roles: [ concept: CustomerId ]
+    multiplicity: OneToOne
+    verbalizes: [ '{Customer} is identified by {CustomerId}' ]
+  - name: name
+    iri: retail:name
+    roles: [ concept: String ]
+    multiplicity: ManyToOne
+    verbalizes: [ '{Customer} is named {String}' ]
+  - name: email
+    iri: retail:email
+    roles: [ concept: Email ]
+    multiplicity: OneToOne
+    verbalizes: [ '{Customer} has {Email}' ]
+  - name: is_premium
+    roles: []
+    verbalizes: [ '{Customer} is a premium member' ]
+  - name: has_address
+    iri: retail:hasAddress
+    roles: [ concept: Address ]
+    verbalizes: [ '{Customer} has {Address}' ]
+  # OWL: owl:propertyChainAxiom ( placedOrder hasLine forProduct )
+  - name: purchased
+    iri: retail:purchased
+    roles: [ concept: Product ]
+    verbalizes: [ '{Customer} purchased {Product}', '{Product} was purchased by {Customer}' ]
+    derived_by: [ 'OrderLine.order.placed_by(Customer) AND OrderLine.for_product(Product)' ]
+  # Not expressible in OWL: an aggregate - this is where ontology meets metrics
+  - name: lifetime_revenue
+    roles: [ concept: Money ]
+    multiplicity: ManyToOne
+    verbalizes: [ '{Customer} has lifetime revenue {Money}' ]
+    derived_by: [ 'Money == SUM[OrderLine.amount WHERE OrderLine.order.placed_by(Customer) GROUP BY Customer]' ]
+
+# OWL: retail:PremiumCustomer rdfs:subClassOf retail:Customer
+- concept: PremiumCustomer
+  type: EntityType
+  extends: [ Customer ]
+  iri: retail:PremiumCustomer
+  derived_by: [ 'Customer.is_premium' ]
+  relationships:
+  - name: member_since
+    iri: retail:memberSince
+    roles: [ concept: Date ]
+    multiplicity: ManyToOne
+    verbalizes: [ '{PremiumCustomer} has been a member since {Date}' ]
+
+- concept: Seller
+  type: EntityType
+  extends: [ Party ]
+  iri: retail:Seller
+  identify_by: [ id ]
+  relationships:
+  - name: id
+    roles: [ concept: SellerId ]
+    multiplicity: OneToOne
+    verbalizes: [ '{Seller} is identified by {SellerId}' ]
+  - name: name
+    iri: retail:name
+    roles: [ concept: String ]
+    multiplicity: ManyToOne
+    verbalizes: [ '{Seller} is named {String}' ]
+
+- concept: Category
+  type: EntityType
+  iri: retail:Category
+  identify_by: [ id ]
+  relationships:
+  - name: id
+    roles: [ concept: CategoryId ]
+    multiplicity: OneToOne
+    verbalizes: [ '{Category} is identified by {CategoryId}' ]
+  - name: name
+    iri: retail:name
+    roles: [ concept: String ]
+    multiplicity: ManyToOne
+    verbalizes: [ '{Category} is named {String}' ]
+  - name: sub_category_of
+    iri: retail:subCategoryOf
+    roles:
+    - concept: Category
+      name: parent
+    multiplicity: ManyToOne
+    verbalizes: [ '{Category} is a sub-category of {Category:parent}' ]
+  # OWL: owl:TransitiveProperty - written here as a recursive rule
+  - name: within
+    roles:
+    - concept: Category
+      name: ancestor
+    verbalizes: [ '{Category} is within {Category:ancestor}' ]
+    derived_by:
+    - 'Category.sub_category_of(ancestor)'
+    - 'Category.sub_category_of.within(ancestor)'
+
+- concept: Product
+  type: EntityType
+  iri: retail:Product
+  identify_by: [ id ]
+  relationships:
+  - name: id
+    roles: [ concept: ProductId ]
+    multiplicity: OneToOne
+    verbalizes: [ '{Product} is identified by {ProductId}' ]
+  - name: sku
+    iri: retail:sku
+    roles: [ concept: Sku ]
+    multiplicity: OneToOne
+    verbalizes: [ '{Product} has SKU {Sku}' ]
+  - name: name
+    iri: retail:name
+    roles: [ concept: String ]
+    multiplicity: ManyToOne
+    verbalizes: [ '{Product} is named {String}' ]
+  - name: list_price
+    iri: retail:price
+    roles: [ concept: Money ]
+    multiplicity: ManyToOne
+    verbalizes: [ '{Product} lists at {Money}' ]
+  - name: in_category
+    iri: retail:inCategory
+    roles: [ concept: Category ]
+    multiplicity: ManyToOne
+    verbalizes: [ '{Product} is in {Category}' ]
+  - name: sold_by
+    iri: retail:soldBy
+    roles: [ concept: Seller ]
+    multiplicity: ManyToOne
+    verbalizes: [ '{Product} is sold by {Seller}' ]
+
+- concept: Order
+  type: EntityType
+  iri: retail:Order
+  identify_by: [ id ]
+  requires: [ 'Order.placed_by' ]          # like owl:qualifiedCardinality 1 / sh:minCount 1
+  relationships:
+  - name: id
+    roles: [ concept: OrderId ]
+    multiplicity: OneToOne
+    verbalizes: [ '{Order} is identified by {OrderId}' ]
+  - name: placed_by
+    iri: retail:placedBy
+    roles: [ concept: Customer ]
+    multiplicity: ManyToOne
+    verbalizes: [ '{Order} was placed by {Customer}', '{Customer} placed {Order}' ]
+  - name: order_date
+    iri: retail:orderDate
+    roles: [ concept: Date ]
+    multiplicity: ManyToOne
+    verbalizes: [ '{Order} was placed on {Date}' ]
+  - name: status
+    iri: retail:status
+    roles: [ concept: OrderStatus ]
+    multiplicity: ManyToOne
+    verbalizes: [ '{Order} has status {OrderStatus}' ]
+  - name: ships_to
+    iri: retail:shipsTo
+    roles: [ concept: Address ]
+    multiplicity: ManyToOne
+    verbalizes: [ '{Order} ships to {Address}' ]
+
+- concept: OrderLine
+  description: "One product + quantity + price paid within an order"
+  type: EntityType
+  iri: retail:OrderLine
+  identify_by: [ id ]
+  requires: [ 'OrderLine.order', 'OrderLine.for_product', 'OrderLine.quantity' ]
+  relationships:
+  - name: id
+    roles: [ concept: OrderLineId ]
+    multiplicity: OneToOne
+    verbalizes: [ '{OrderLine} is identified by {OrderLineId}' ]
+  - name: order
+    roles: [ concept: Order ]
+    multiplicity: ManyToOne
+    verbalizes: [ '{OrderLine} belongs to {Order}', '{Order} has line {OrderLine}' ]
+  - name: for_product
+    iri: retail:forProduct
+    roles: [ concept: Product ]
+    multiplicity: ManyToOne
+    verbalizes: [ '{OrderLine} is for {Product}' ]
+  - name: quantity
+    iri: retail:quantity
+    roles: [ concept: Quantity ]
+    multiplicity: ManyToOne
+    verbalizes: [ '{OrderLine} has quantity {Quantity}' ]
+  - name: unit_price
+    iri: retail:unitPrice
+    roles: [ concept: Money ]
+    multiplicity: ManyToOne
+    verbalizes: [ '{OrderLine} was paid {Money} per unit' ]
+  - name: amount
+    roles: [ concept: Money ]
+    multiplicity: ManyToOne
+    verbalizes: [ '{OrderLine} amounts to {Money}' ]
+    derived_by: [ 'Money == OrderLine.quantity * OrderLine.unit_price' ]
+
+- concept: Review
+  type: EntityType
+  iri: retail:Review
+  identify_by: [ id ]
+  relationships:
+  - name: id
+    roles: [ concept: ReviewId ]
+    multiplicity: OneToOne
+    verbalizes: [ '{Review} is identified by {ReviewId}' ]
+  - name: written_by
+    iri: retail:writtenBy
+    roles: [ concept: Customer ]
+    multiplicity: ManyToOne
+    verbalizes: [ '{Review} was written by {Customer}' ]
+  - name: review_of
+    iri: retail:reviewOf
+    roles: [ concept: Product ]
+    multiplicity: ManyToOne
+    verbalizes: [ '{Review} is about {Product}' ]
+  - name: rating
+    iri: retail:rating
+    roles: [ concept: Rating ]
+    multiplicity: ManyToOne
+    verbalizes: [ '{Review} gives {Rating} stars' ]

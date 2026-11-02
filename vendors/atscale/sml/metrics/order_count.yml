@@ -1,0 +1,6 @@
+unique_name: order_count
+object_type: metric
+label: Orders
+calculation_method: count distinct
+dataset: order_lines_fact
+column: order_id

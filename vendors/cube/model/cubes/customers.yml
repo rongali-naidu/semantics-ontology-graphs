@@ -1,0 +1,25 @@
+cubes:
+  - name: customers
+    sql: >
+      SELECT c.*, a.city, a.state, a.country
+      FROM retail.customers c LEFT JOIN retail.addresses a ON a.address_id = c.address_id
+    dimensions:
+      - name: customer_id
+        sql: customer_id
+        type: string
+        primary_key: true
+      - name: customer_name
+        sql: name
+        type: string
+      - name: is_premium
+        sql: is_premium
+        type: boolean
+      - name: member_since
+        sql: member_since
+        type: time
+      - name: city
+        sql: city
+        type: string
+      - name: state
+        sql: state
+        type: string

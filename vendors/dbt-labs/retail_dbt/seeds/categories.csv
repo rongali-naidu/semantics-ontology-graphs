@@ -1,0 +1,7 @@
+category_id,name,parent_category_id,category_level_1,category_level_2,category_level_3
+CAT-AUDIO,Audio,CAT-ELECTRONICS,Electronics,Audio,
+CAT-BOOKS,Books,,Books,,
+CAT-COMPUTERS,Computers,CAT-ELECTRONICS,Electronics,Computers,
+CAT-ELECTRONICS,Electronics,,Electronics,,
+CAT-KITCHEN,Kitchen,,Kitchen,,
+CAT-LAPTOPS,Laptops,CAT-COMPUTERS,Electronics,Computers,Laptops

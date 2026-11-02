@@ -1,0 +1,16 @@
+# dbt project for the retail example. Seeds = warehouse/data/*.csv (copied).
+#   pip install dbt-duckdb dbt-metricflow
+#   dbt seed && dbt build
+#   mf query --metrics revenue,order_count --group-by customer__customer_name
+name: retail
+version: "1.0.0"
+config-version: 2
+profile: retail
+model-paths: ["models"]
+seed-paths: ["seeds"]
+seeds:
+  retail:
+    +schema: retail
+    +column_types:
+      unit_price: decimal(10,2)
+      list_price: decimal(10,2)

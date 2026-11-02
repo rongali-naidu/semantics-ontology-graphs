@@ -1,0 +1,42 @@
+cubes:
+  - name: products
+    sql: >
+      SELECT p.*, cat.category_level_1, cat.category_level_2, cat.category_level_3,
+             s.name AS seller_name
+      FROM retail.products p
+      JOIN retail.categories cat ON cat.category_id = p.category_id
+      JOIN retail.sellers s      ON s.seller_id     = p.seller_id
+    dimensions:
+      - name: product_id
+        sql: product_id
+        type: string
+        primary_key: true
+      - name: sku
+        sql: sku
+        type: string
+      - name: product_name
+        sql: name
+        type: string
+      - name: list_price
+        sql: list_price
+        type: number
+      - name: category_level_1
+        sql: category_level_1
+        type: string
+      - name: category_level_2
+        sql: category_level_2
+        type: string
+      - name: category_level_3
+        sql: category_level_3
+        type: string
+      - name: seller_name
+        sql: seller_name
+        type: string
+    hierarchies:
+      - name: category_tree
+        title: Category
+        levels:
+          - category_level_1
+          - category_level_2
+          - category_level_3
+          - product_name

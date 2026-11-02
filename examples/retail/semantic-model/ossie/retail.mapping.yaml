@@ -1,0 +1,220 @@
+# ===========================================================================
+# Ontology <-> semantic model mapping - Apache Ossie mapping spec 0.2.0.dev0
+#
+# Says how rows/fields of the semantic model (retail.semantic_model.yaml,
+# i.e. warehouse tables) populate the concepts and relationships of the
+# ontology (retail.ontology.yaml). This is the same job R2RML/RML does for
+# RDF: turning tables into a knowledge graph.
+# ===========================================================================
+version: 0.2.0.dev0
+name: retail_mapping
+description: Maps the retail ontology onto the retail semantic model
+ontology_ref:
+  name: RetailOntology
+  iri: ./retail.ontology.yaml
+semantic_model_ref:
+  name: retail_semantic_model
+  iri: ./retail.semantic_model.yaml
+
+concept_mappings:
+- concept: Address
+  object_mappings:
+  - referent_mappings:
+    - relationship: id
+      expression: addresses.address_id
+  link_mappings:
+  - object_mapping:
+      referent_mappings:
+      - relationship: id
+        expression: addresses.address_id
+    children:
+    - object_mapping:
+        concept: CityName
+        expression: addresses.city
+      relationship: city
+
+- concept: Customer
+  object_mappings:
+  - referent_mappings:
+    - relationship: id
+      expression: customers.customer_id
+  link_mappings:
+  - object_mapping:
+      referent_mappings:
+      - relationship: id
+        expression: customers.customer_id
+    children:
+    - object_mapping:
+        concept: String
+        expression: customers.customer_name
+      relationship: name
+    - object_mapping:
+        concept: Email
+        expression: customers.email
+      relationship: email
+    - object_mapping:
+        concept: Address
+        referent_mappings:
+        - relationship: id
+          expression: customers.address_id
+      relationship: has_address
+
+- concept: Seller
+  object_mappings:
+  - referent_mappings:
+    - relationship: id
+      expression: sellers.seller_id
+  link_mappings:
+  - object_mapping:
+      referent_mappings:
+      - relationship: id
+        expression: sellers.seller_id
+    children:
+    - object_mapping:
+        concept: String
+        expression: sellers.seller_name
+      relationship: name
+
+- concept: Category
+  object_mappings:
+  - referent_mappings:
+    - relationship: id
+      expression: categories.category_id
+  link_mappings:
+  - object_mapping:
+      referent_mappings:
+      - relationship: id
+        expression: categories.category_id
+    children:
+    - object_mapping:
+        concept: String
+        expression: categories.category_name
+      relationship: name
+
+- concept: Product
+  object_mappings:
+  - referent_mappings:
+    - relationship: id
+      expression: products.product_id
+  link_mappings:
+  - object_mapping:
+      referent_mappings:
+      - relationship: id
+        expression: products.product_id
+    children:
+    - object_mapping:
+        concept: Sku
+        expression: products.sku
+      relationship: sku
+    - object_mapping:
+        concept: String
+        expression: products.product_name
+      relationship: name
+    - object_mapping:
+        concept: Money
+        expression: products.list_price
+      relationship: list_price
+    - object_mapping:
+        concept: Category
+        referent_mappings:
+        - relationship: id
+          expression: products.category_id
+      relationship: in_category
+    - object_mapping:
+        concept: Seller
+        referent_mappings:
+        - relationship: id
+          expression: products.seller_id
+      relationship: sold_by
+
+- concept: Order
+  object_mappings:
+  - referent_mappings:
+    - relationship: id
+      expression: orders.order_id
+  link_mappings:
+  - object_mapping:
+      referent_mappings:
+      - relationship: id
+        expression: orders.order_id
+    children:
+    - object_mapping:
+        concept: Customer
+        referent_mappings:
+        - relationship: id
+          expression: orders.customer_id
+      relationship: placed_by
+    - object_mapping:
+        concept: Date
+        expression: orders.order_date
+      relationship: order_date
+    - object_mapping:
+        concept: OrderStatus
+        expression: orders.status
+      relationship: status
+    - object_mapping:
+        concept: Address
+        referent_mappings:
+        - relationship: id
+          expression: orders.ship_address_id
+      relationship: ships_to
+
+- concept: OrderLine
+  object_mappings:
+  - referent_mappings:
+    - relationship: id
+      expression: order_lines.order_line_id
+  link_mappings:
+  - object_mapping:
+      referent_mappings:
+      - relationship: id
+        expression: order_lines.order_line_id
+    children:
+    - object_mapping:
+        concept: Order
+        referent_mappings:
+        - relationship: id
+          expression: order_lines.order_id
+      relationship: order
+    - object_mapping:
+        concept: Product
+        referent_mappings:
+        - relationship: id
+          expression: order_lines.product_id
+      relationship: for_product
+    - object_mapping:
+        concept: Quantity
+        expression: order_lines.quantity
+      relationship: quantity
+    - object_mapping:
+        concept: Money
+        expression: order_lines.unit_price
+      relationship: unit_price
+
+- concept: Review
+  object_mappings:
+  - referent_mappings:
+    - relationship: id
+      expression: reviews.review_id
+  link_mappings:
+  - object_mapping:
+      referent_mappings:
+      - relationship: id
+        expression: reviews.review_id
+    children:
+    - object_mapping:
+        concept: Customer
+        referent_mappings:
+        - relationship: id
+          expression: reviews.customer_id
+      relationship: written_by
+    - object_mapping:
+        concept: Product
+        referent_mappings:
+        - relationship: id
+          expression: reviews.product_id
+      relationship: review_of
+    - object_mapping:
+        concept: Rating
+        expression: reviews.rating
+      relationship: rating

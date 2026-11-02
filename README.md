@@ -1,106 +1,124 @@
-# Ontology & Knowledge Graph Reference
+# semantics-ontology-graphs
 
-A hands-on reference for **ontologies, knowledge graphs, graph databases and
-Amazon Neptune**. One running example, an **Amazon-style retail ordering
-domain**, is modelled as an OWL ontology, expressed as RDF in six
-serializations, turned into a property graph, queried in **SPARQL, openCypher,
-Gremlin, GQL and SQL/PGQ**, and loaded into **Amazon Neptune** in every
-supported format.
+A hands-on reference for **semantics**: ontologies, knowledge graphs, graph
+databases and semantic models (semantic layers), from first principles to
+vendor implementations.
+
+One running example, an **Amazon-style retail ordering domain**, is
+expressed in every form: an OWL ontology, RDF in six serializations, a
+property graph, warehouse tables, an **Apache Ossie** semantic model, and
+vendor formats for AWS, Google Cloud, Microsoft, Databricks, Snowflake, dbt,
+AtScale, Cube and Neo4j. Scripts check that all of them give the same
+answers.
 
 ```
- concepts ─────────────► RDF world ─────────────► property-graph world ───► Neptune
- 1 What is an ontology   4 Documenting (OWL,      7 Property graphs          10 Neptune intro
- 2 History                 RDFS, SKOS, SHACL,     8 Graph databases          11 Loading (6 formats
- 3 Ontology vs KG vs DB    Turtle, JSON-LD ...)   9 Cypher, Gremlin,            + by query)
-                         5 Querying (SPARQL)        GQL, SQL/PGQ             12 Querying (SPARQL,
-                         6 Retail example                                       openCypher, Gremlin)
-                                                                             13 Standards & links
+               concepts/ (vendor-neutral)                          vendors/ (implementations)
+ ┌──────────────────────────────────────────────────────┐   ┌──────────────────────────────────┐
+ │ A. Ontologies & graphs      B. Semantic modelling     │   │ aws        Neptune (RDF + LPG)    │
+ │  ontology, history,          semantic model basics,   │   │ gcp        Spanner/BigQuery Graph,│
+ │  OWL/RDFS/SKOS/SHACL,        BI tools (Power BI,      │──►│            Looker                 │
+ │  Turtle/JSON-LD/...,         Looker, Tableau...),     │   │ microsoft  Fabric Graph/IQ, Power │
+ │  SPARQL, property graphs,    Apache Ossie & open      │   │            BI (TMDL), DTDL        │
+ │  graph DBs, Cypher/Gremlin/  formats, ontology ⇄      │   │ databricks metric views, GraphFr. │
+ │  GQL/SQL-PGQ                 semantic layer           │   │ snowflake  semantic views         │
+ └───────────────────────────┬──────────────────────────┘   │ dbt-labs   MetricFlow ✅ executed │
+                             │                              │ atscale    SML                    │
+          examples/retail/ ◄─┘ one domain, every format     │ cube       Cube data model        │
+                                                            │ neo4j      Cypher + n10s (OWL)    │
+                                                            └──────────────────────────────────┘
 ```
 
-## Contents
+## Start here
 
-| # | Chapter | What you'll learn |
-|---|---|---|
-| 1 | [What is an ontology?](docs/01-what-is-an-ontology.md) | Definitions, classes/properties/axioms, TBox vs ABox, open-world assumption, kinds of ontologies |
-| 2 | [History](docs/02-history.md) | Aristotle → semantic networks → Semantic Web → Google KG → GQL → GraphRAG |
-| 3 | [Ontology vs knowledge graph vs graph database](docs/03-ontology-knowledge-graph-graph-database.md) | The layers, and why graphs at all |
-| 4 | [Documenting ontologies](docs/04-documenting-ontologies.md) | RDFS, OWL 2, SKOS, SHACL; Turtle, N-Triples, N-Quads, TriG, RDF/XML, JSON-LD, Manchester, Functional; diagrams, doc generators, best practice |
-| 5 | [Querying RDF with SPARQL](docs/05-querying-rdf-sparql.md) | SELECT/CONSTRUCT/ASK, property paths, aggregates, inference, SHACL validation |
-| 6 | [Retail example end to end](docs/06-retail-example.md) | The domain, modelling decisions, competency questions → queries |
-| 7 | [Property graphs](docs/07-property-graphs.md) | LPG model, RDF vs LPG, mapping between them, schemas, algorithms |
-| 8 | [Graph databases](docs/08-graph-databases.md) | Triple stores, property-graph DBs, SQL/PGQ, how to choose |
-| 9 | [Querying property graphs](docs/09-querying-property-graphs.md) | Cypher, Gremlin, GQL, SQL/PGQ cheat sheets and phrasebook |
-| 10 | [Amazon Neptune](docs/10-amazon-neptune.md) | Neptune Database vs Analytics, endpoints, setup, ontologies on Neptune |
-| 11 | [Loading into Neptune](docs/11-loading-into-neptune.md) | Gremlin CSV, openCypher CSV, Turtle, N-Triples, N-Quads, RDF/XML, by-query loads |
-| 12 | [Querying Neptune](docs/12-querying-neptune.md) | SPARQL, openCypher (HTTPS/boto3/Bolt), Gremlin (WebSocket/HTTPS), notebooks |
-| 13 | [Standards, links & glossary](docs/13-standards-links-glossary.md) | Every spec, Neptune doc, tool and term in one place |
+* **New to ontologies?** → [concepts/ontologies-and-graphs/01](concepts/ontologies-and-graphs/01-what-is-an-ontology.md)
+* **Coming from BI / analytics?** → [concepts/semantic-modelling/01](concepts/semantic-modelling/01-what-is-a-semantic-model.md)
+* **Want the big picture of how they connect?** → [semantic models and ontologies](concepts/semantic-modelling/04-semantic-models-and-ontologies.md)
+* **Looking for a specific platform?** → [vendors/README.md](vendors/README.md) (concept → vendor matrix)
+* **Need a spec link or a definition?** → [reference/standards-links-glossary.md](reference/standards-links-glossary.md)
+
+Full table of contents: [concepts/README.md](concepts/README.md).
+
+## Repository layout
+
+```
+semantics-ontology-graphs/
+├── concepts/
+│   ├── ontologies-and-graphs/   9 chapters: ontology → RDF/OWL → SPARQL → property graphs → graph DBs
+│   └── semantic-modelling/      5 chapters: semantic layers → BI tools → Apache Ossie → ontology ⇄ metrics
+├── examples/retail/             the shared example (vendor-neutral)
+│   ├── ontology/                OWL 2 ontology + SHACL shapes
+│   ├── rdf/                     data in Turtle, N-Triples, N-Quads, TriG, RDF/XML, JSON-LD
+│   ├── sparql/                  11 queries + 2 updates
+│   ├── property-graph/          Cypher, Gremlin, GQL, SQL/PGQ
+│   ├── warehouse/               star schema, data CSVs, canonical metrics.sql
+│   ├── semantic-model/ossie/    Apache Ossie semantic model + ontology + mapping
+│   └── scripts/                 generators and consistency checks
+├── vendors/                     aws · gcp · microsoft · databricks · snowflake · dbt-labs · atscale · cube · neo4j
+└── reference/                   standards, links, tools, reading list, glossary
+```
 
 ## The example at a glance
 
 ```
-(:Customer)-[:PLACED]->(:Order)-[:CONTAINS {quantity, unitPrice}]->(:Product)-[:IN_CATEGORY]->(:Category)
-     │                     │                                           │                  │
- [:HAS_ADDRESS]        [:SHIPS_TO]                                 [:SOLD_BY]     [:SUBCATEGORY_OF]
-     ▼                     ▼                                           ▼                  ▼
- (:Address)            (:Address)                                  (:Seller)         (:Category)
-
-(:Customer)-[:WROTE]->(:Review {rating})-[:REVIEWS]->(:Product)
+(:Customer)-[:PLACED]->(:Order)-[:CONTAINS {quantity, unitPrice}]->(:Product)-[:IN_CATEGORY]->(:Category)-[:SUBCATEGORY_OF]->(:Category)
+(:Customer)-[:WROTE]->(:Review {rating})-[:REVIEWS]->(:Product)-[:SOLD_BY]->(:Seller)
 ```
 
-3 customers · 4 orders · 7 order lines · 6 products · 6 categories (3 levels)
-· 3 sellers · 4 reviews → **165 RDF triples** (+ 237-triple ontology) or
-**29 nodes / 41 edges**.
+3 customers · 4 orders · 7 order lines · 6 products · 6 categories (3
+levels) · 3 sellers · 4 reviews.
 
-| Folder | Contents |
+| Same data as... | Size | Revenue by customer |
+|---|---|---|
+| RDF (+ OWL ontology) | 165 triples (+ 238) | SPARQL → Alice 1498.97 · Bob 199.98 · Carol 179.48 |
+| Property graph | 29 nodes / 41 edges | Cypher / Gremlin → same |
+| Warehouse tables | 8 tables | SQL → same |
+| Semantic model | 8 datasets, 8 metrics | Ossie / MetricFlow → same |
+
+## Run the checks (no cloud account needed)
+
+```bash
+cd examples/retail
+pip install rdflib pyshacl owlrl pyyaml jsonschema
+
+python scripts/run_sparql_local.py --shacl     # all SPARQL + SHACL validation
+python scripts/check_consistency.py            # 6 RDF formats + Neptune CSVs agree
+python scripts/check_semantic_model.py         # warehouse + Ossie metrics = SPARQL answers
+git clone https://github.com/apache/ossie /tmp/ossie
+python scripts/check_semantic_model.py --ossie-repo /tmp/ossie   # + official Ossie schemas
+
+cd ../../vendors/dbt-labs/retail_dbt           # dbt + MetricFlow on DuckDB
+pip install dbt-duckdb "dbt-metricflow[duckdb]" && export DBT_PROFILES_DIR=.
+dbt build && mf query --metrics revenue,order_count --group-by customer__customer_name
+```
+
+Regenerate derived files after editing `examples/retail/rdf/retail-data.ttl`:
+
+```bash
+python scripts/build_rdf_formats.py       # → .nt .nq .trig .rdf .jsonld (+ vendors/aws/rdf)
+python scripts/rdf_to_property_graph.py   # → vendors/aws/*-csv, Cypher + Gremlin create scripts
+python scripts/rdf_to_tables.py           # → warehouse/data/*.csv
+```
+
+## What's verified, and what isn't
+
+| Verified by running | Written to documented syntax, not executed here |
 |---|---|
-| [`examples/retail/ontology/`](examples/retail/ontology/) | OWL 2 ontology (Turtle + N-Triples) and SHACL shapes |
-| [`examples/retail/rdf/`](examples/retail/rdf/) | Instance data in Turtle, N-Triples, N-Quads, TriG, RDF/XML, JSON-LD |
-| [`examples/retail/sparql/`](examples/retail/sparql/) | 11 queries + 2 updates |
-| [`examples/retail/property-graph/`](examples/retail/property-graph/) | Cypher, Gremlin, GQL, SQL/PGQ versions |
-| [`examples/retail/neptune/`](examples/retail/neptune/) | Bulk-load CSVs, RDF files, `bulk-load.sh`, Python clients |
-| [`examples/retail/scripts/`](examples/retail/scripts/) | Generators, local SPARQL runner, consistency checker |
+| SPARQL queries/updates, SHACL, OWL RL reasoning (rdflib, pySHACL, owlrl) | Cypher, Gremlin, GQL, SQL/PGQ |
+| 6 RDF serializations isomorphic; Neptune CSVs reproduce SPARQL answers | Neptune loader + Python clients |
+| Warehouse metrics = SPARQL answers (SQLite) | Looker, Power BI TMDL, Snowflake, Databricks, Cube, AtScale SML |
+| Apache Ossie model, ontology and mapping: official JSON schemas; metrics compiled and executed; IRIs resolve in OWL | Spanner Graph, BigQuery Graph, Fabric Graph, DTDL, GraphFrames, Neo4j n10s |
+| dbt + MetricFlow: `dbt build`, `mf validate-configs`, `mf query` on DuckDB | |
 
-## Try it locally in two minutes (no database)
+If something doesn't run on your engine version, please open an issue or a PR.
 
-```bash
-cd ontology-knowledge-graphs/examples/retail
-pip install rdflib pyshacl owlrl
+## Contributing a vendor
 
-python scripts/run_sparql_local.py --shacl    # run all SPARQL + validate with SHACL
-python scripts/run_sparql_local.py --reason   # same, after OWL RL inference
-python scripts/check_consistency.py           # prove every format holds the same data
-```
-
-Regenerate the derived files after editing `rdf/retail-data.ttl`:
-
-```bash
-python scripts/build_rdf_formats.py           # → .nt .nq .trig .rdf .jsonld
-python scripts/rdf_to_property_graph.py       # → Neptune CSVs, Cypher + Gremlin create scripts
-```
-
-## Load and query on Amazon Neptune
-
-```bash
-export NEPTUNE_ENDPOINT=... BUCKET=... LOADER_ROLE_ARN=... AWS_REGION=us-east-1
-./examples/retail/neptune/bulk-load.sh                     # S3 upload + loader jobs
-
-cd examples/retail/neptune/python && pip install -r requirements.txt
-python sparql_query.py ../../sparql/05-customers-who-bought-also-bought.rq
-python opencypher_query.py boto3
-python gremlin_query.py ws
-```
-
-## What's verified
-
-* All SPARQL queries/updates and the SHACL shapes run with rdflib/pySHACL
-  (`run_sparql_local.py`).
-* The six RDF serializations are graph-isomorphic, and both Neptune CSV sets
-  reproduce the SPARQL answers (`check_consistency.py`).
-* The Cypher, Gremlin, GQL, SQL/PGQ and Neptune client code is written to the
-  documented syntax but was **not executed** against a live Neo4j, TinkerPop
-  server or Neptune cluster. If something doesn't run on your engine
-  version, open an issue or PR.
+Copy an existing `vendors/<name>/` folder, implement the retail example in
+that vendor's formats against `examples/retail/warehouse/` (or the graph
+files), and add a column to the matrix in [`vendors/README.md`](vendors/README.md).
 
 ## License
 
 Text and examples: [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).
+Apache Ossie, SML and other specifications referenced here belong to their
+respective projects and licenses.

@@ -1,0 +1,26 @@
+table Reviews
+
+	measure 'Average Rating' = AVERAGE ( Reviews[Rating] )
+		formatString: 0.00
+
+	column 'Review ID'
+		dataType: string
+		isKey
+		sourceColumn: review_id
+
+	column 'Product ID'
+		dataType: string
+		sourceColumn: product_id
+
+	column Rating
+		dataType: int64
+		sourceColumn: rating
+
+	partition 'Reviews' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database(Server, Database),
+				    Data = Source{[Schema = "retail", Item = "reviews"]}[Data]
+				in
+				    Data

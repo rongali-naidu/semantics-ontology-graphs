@@ -1,0 +1,6 @@
+unique_name: buyer_count
+object_type: metric
+label: Buyers
+calculation_method: count distinct
+dataset: order_lines_fact
+column: customer_id

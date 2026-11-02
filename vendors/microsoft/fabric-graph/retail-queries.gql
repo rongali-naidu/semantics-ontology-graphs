@@ -1,0 +1,21 @@
+-- ===========================================================================
+-- Retail graph in Microsoft Fabric Graph (ISO GQL)
+-- Fabric Graph builds a graph model over OneLake tables (lakehouse tables =
+-- examples/retail/warehouse/data). Node types and edge types are defined in
+-- the graph model editor: map customers/orders/products/categories tables to
+-- node types and orders/order_lines/products to PLACED / CONTAINS /
+-- IN_CATEGORY / SUBCATEGORY_OF edge types (same mapping as
+-- ../../gcp/spanner-graph/retail-graph.sql). Then query with GQL.
+-- Check the current Fabric docs for the supported GQL subset.
+-- ===========================================================================
+
+-- Revenue per customer (= SPARQL Q3)
+MATCH (c:Customer)-[:PLACED]->(o:`Order`)-[l:CONTAINS]->(:Product)
+RETURN c.name AS customer, count(DISTINCT o) AS orders, sum(l.quantity * l.unit_price) AS revenue
+GROUP BY customer
+ORDER BY revenue DESC
+
+-- Products under Electronics at any depth (= SPARQL Q2)
+MATCH (root:Category {name: 'Electronics'})<-[:SUBCATEGORY_OF]-{0,3}(c:Category)<-[:IN_CATEGORY]-(p:Product)
+RETURN p.name AS product, c.name AS category
+ORDER BY product

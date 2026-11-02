@@ -1,0 +1,21 @@
+cubes:
+  - name: reviews
+    sql_table: retail.reviews
+    joins:
+      - name: products
+        sql: '{CUBE}.product_id = {products}.product_id'
+        relationship: many_to_one
+    dimensions:
+      - name: review_id
+        sql: review_id
+        type: string
+        primary_key: true
+      - name: rating
+        sql: rating
+        type: number
+    measures:
+      - name: average_rating
+        sql: rating
+        type: avg
+      - name: review_count
+        type: count

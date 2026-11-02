@@ -1,0 +1,40 @@
+unique_name: Retail
+object_type: model
+label: Retail Orders
+visible: true
+
+relationships:
+  - unique_name: order_lines_Customer_Dimension
+    from:
+      dataset: order_lines_fact
+      join_columns:
+        - customer_id
+    to:
+      dimension: Customer Dimension
+      level: Customer Name
+  - unique_name: order_lines_Product_Dimension
+    from:
+      dataset: order_lines_fact
+      join_columns:
+        - product_id
+    to:
+      dimension: Product Dimension
+      level: Product Name
+
+dimensions:
+  - Customer Dimension
+  - Product Dimension
+
+metrics:
+  - unique_name: revenue
+    folder: Sales
+  - unique_name: units_sold
+    folder: Sales
+  - unique_name: order_count
+    folder: Sales
+  - unique_name: buyer_count
+    folder: Customers
+  - unique_name: discount_amount
+    folder: Sales
+  - unique_name: average_order_value
+    folder: Sales

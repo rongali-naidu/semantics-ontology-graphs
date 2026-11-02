@@ -1,0 +1,6 @@
+unique_name: units_sold
+object_type: metric
+label: Units Sold
+calculation_method: sum
+dataset: order_lines_fact
+column: quantity

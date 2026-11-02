@@ -1,0 +1,84 @@
+[
+  {
+    "@context": "dtmi:dtdl:context;3",
+    "@id": "dtmi:example:retail:Party;1",
+    "@type": "Interface",
+    "displayName": "Party",
+    "description": "Any person or organization taking part in a retail transaction",
+    "contents": [
+      { "@type": "Property", "name": "name", "schema": "string" }
+    ]
+  },
+  {
+    "@context": "dtmi:dtdl:context;3",
+    "@id": "dtmi:example:retail:Customer;1",
+    "@type": "Interface",
+    "displayName": "Customer",
+    "extends": "dtmi:example:retail:Party;1",
+    "contents": [
+      { "@type": "Property", "name": "email", "schema": "string" },
+      { "@type": "Property", "name": "isPremium", "schema": "boolean" },
+      { "@type": "Relationship", "name": "placedOrder", "target": "dtmi:example:retail:Order;1" }
+    ]
+  },
+  {
+    "@context": "dtmi:dtdl:context;3",
+    "@id": "dtmi:example:retail:Order;1",
+    "@type": "Interface",
+    "displayName": "Order",
+    "contents": [
+      { "@type": "Property", "name": "orderDate", "schema": "date" },
+      {
+        "@type": "Property", "name": "status",
+        "schema": {
+          "@type": "Enum", "valueSchema": "string",
+          "enumValues": [
+            { "name": "PLACED", "enumValue": "PLACED" },
+            { "name": "SHIPPED", "enumValue": "SHIPPED" },
+            { "name": "DELIVERED", "enumValue": "DELIVERED" },
+            { "name": "CANCELLED", "enumValue": "CANCELLED" }
+          ]
+        }
+      },
+      {
+        "@type": "Relationship", "name": "contains",
+        "description": "Order line: relationships can carry properties, like a property-graph edge",
+        "target": "dtmi:example:retail:Product;1",
+        "properties": [
+          { "@type": "Property", "name": "quantity", "schema": "integer" },
+          { "@type": "Property", "name": "unitPrice", "schema": "double" }
+        ]
+      }
+    ]
+  },
+  {
+    "@context": "dtmi:dtdl:context;3",
+    "@id": "dtmi:example:retail:Product;1",
+    "@type": "Interface",
+    "displayName": "Product",
+    "contents": [
+      { "@type": "Property", "name": "name", "schema": "string" },
+      { "@type": "Property", "name": "sku", "schema": "string" },
+      { "@type": "Property", "name": "listPrice", "schema": "double" },
+      { "@type": "Relationship", "name": "inCategory", "target": "dtmi:example:retail:Category;1", "maxMultiplicity": 1 },
+      { "@type": "Relationship", "name": "soldBy", "target": "dtmi:example:retail:Seller;1", "maxMultiplicity": 1 }
+    ]
+  },
+  {
+    "@context": "dtmi:dtdl:context;3",
+    "@id": "dtmi:example:retail:Category;1",
+    "@type": "Interface",
+    "displayName": "Category",
+    "contents": [
+      { "@type": "Property", "name": "name", "schema": "string" },
+      { "@type": "Relationship", "name": "subCategoryOf", "target": "dtmi:example:retail:Category;1", "maxMultiplicity": 1 }
+    ]
+  },
+  {
+    "@context": "dtmi:dtdl:context;3",
+    "@id": "dtmi:example:retail:Seller;1",
+    "@type": "Interface",
+    "displayName": "Seller",
+    "extends": "dtmi:example:retail:Party;1"
+  }
+]

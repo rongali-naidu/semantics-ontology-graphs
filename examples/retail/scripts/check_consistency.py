@@ -18,6 +18,7 @@ from rdflib import Dataset, Graph
 from rdflib.compare import isomorphic
 
 ROOT = Path(__file__).resolve().parent.parent
+AWS = ROOT.parent.parent / "vendors/aws"      # Neptune-specific load files
 
 
 def check_rdf_formats() -> None:
@@ -37,9 +38,9 @@ def check_rdf_formats() -> None:
         print(f"ok  {name:22} {len(merged)} triples in named graphs, isomorphic")
 
 
-def load_pg(folder: str, id_col: str, label_col: str, type_col: str, from_col: str, to_col: str):
+def load_pg(folder: Path, id_col: str, label_col: str, type_col: str, from_col: str, to_col: str):
     nodes, edges = {}, []
-    for f in sorted((ROOT / folder).glob("*.csv")):
+    for f in sorted(Path(folder).glob("*.csv")):
         with f.open(encoding="utf-8") as fh:
             rows = list(csv.DictReader(fh))
         for r in rows:
@@ -108,12 +109,12 @@ def sparql_answers():
 def main() -> None:
     check_rdf_formats()
     expected = sparql_answers()
-    for folder, cols in [("neptune/opencypher-csv", (":ID", ":LABEL", ":TYPE", ":START_ID", ":END_ID")),
-                         ("neptune/gremlin-csv", ("~id", "~label", "~label", "~from", "~to"))]:
+    for folder, cols in [(AWS / "opencypher-csv", (":ID", ":LABEL", ":TYPE", ":START_ID", ":END_ID")),
+                         (AWS / "gremlin-csv", ("~id", "~label", "~label", "~from", "~to"))]:
         got = pg_answers(*load_pg(folder, *cols))
         for qname, e, a in zip(("Q2", "Q3", "Q5", "Q7"), expected, got):
             assert e == a, f"{folder} {qname}: SPARQL={e} PG={a}"
-        print(f"ok  {folder:22} Q2/Q3/Q5/Q7 match SPARQL results")
+        print(f"ok  {Path(folder).name:22} Q2/Q3/Q5/Q7 match SPARQL results")
     print("all consistent")
 
 

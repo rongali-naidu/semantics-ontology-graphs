@@ -1,0 +1,27 @@
+table Customers
+
+	column 'Customer ID'
+		dataType: string
+		isKey
+		sourceColumn: customer_id
+
+	column 'Customer Name'
+		dataType: string
+		sourceColumn: name
+
+	column 'Is Premium'
+		dataType: boolean
+		sourceColumn: is_premium
+
+	column 'Member Since'
+		dataType: dateTime
+		sourceColumn: member_since
+
+	partition 'Customers' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database(Server, Database),
+				    Data = Source{[Schema = "retail", Item = "customers"]}[Data]
+				in
+				    Data

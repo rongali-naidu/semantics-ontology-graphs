@@ -1,0 +1,4 @@
+/// Connection parameters used by every table partition
+expression Server = "your-server.database.windows.net" meta [IsParameterQuery=true, Type="Text", IsParameterQueryRequired=true]
+
+expression Database = "analytics" meta [IsParameterQuery=true, Type="Text", IsParameterQueryRequired=true]

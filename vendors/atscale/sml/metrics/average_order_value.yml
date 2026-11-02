@@ -1,0 +1,5 @@
+# A calculation combines metrics (expressions are MDX-style)
+unique_name: average_order_value
+object_type: metric_calc
+label: Average Order Value
+expression: "[Measures].[revenue]/[Measures].[order_count]"

@@ -1,0 +1,6 @@
+unique_name: revenue
+object_type: metric
+label: Revenue
+calculation_method: sum
+dataset: order_lines_fact
+column: line_amount

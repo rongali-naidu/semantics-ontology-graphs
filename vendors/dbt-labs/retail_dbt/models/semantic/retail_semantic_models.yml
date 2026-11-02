@@ -1,0 +1,135 @@
+# =============================================================================
+# Retail semantic layer - dbt Semantic Layer / MetricFlow
+# https://docs.getdbt.com/docs/build/semantic-models
+# Same metrics as examples/retail/warehouse/metrics.sql and the Apache Ossie
+# model (examples/retail/semantic-model/ossie/).
+#
+# Ossie -> MetricFlow:  dataset -> semantic_model, relationship -> entities
+# (MetricFlow joins on matching entity names), field -> dimension,
+# dataset metric -> measure + simple metric, model metric -> ratio/derived.
+# =============================================================================
+semantic_models:
+  - name: order_lines
+    description: One row per product line within an order.
+    model: ref('fct_order_lines')
+    defaults:
+      agg_time_dimension: order_date
+    entities:
+      - name: order_line
+        type: primary
+        expr: order_line_id
+      - name: order
+        type: foreign
+        expr: order_id
+      - name: customer
+        type: foreign
+        expr: customer_id
+      - name: product
+        type: foreign
+        expr: product_id
+    dimensions:
+      - name: order_date
+        type: time
+        type_params:
+          time_granularity: day
+      - name: status
+        type: categorical
+      - name: payment_method
+        type: categorical
+    measures:
+      - name: revenue
+        description: Sum of quantity * unit price paid
+        agg: sum
+        expr: line_amount
+      - name: units_sold
+        agg: sum
+        expr: quantity
+      - name: order_count
+        agg: count_distinct
+        expr: order_id
+      - name: buyer_count
+        agg: count_distinct
+        expr: customer_id
+      - name: discount_amount
+        agg: sum
+        expr: discount_amount
+
+  - name: customers
+    model: ref('dim_customers')
+    entities:
+      - name: customer
+        type: primary
+        expr: customer_id
+    dimensions:
+      - name: customer_name
+        type: categorical
+      - name: is_premium
+        type: categorical
+      - name: city
+        type: categorical
+      - name: state
+        type: categorical
+
+  - name: products
+    model: ref('dim_products')
+    entities:
+      - name: product
+        type: primary
+        expr: product_id
+    dimensions:
+      - name: product_name
+        type: categorical
+      - name: sku
+        type: categorical
+      - name: category_level_1
+        type: categorical
+      - name: category_level_2
+        type: categorical
+      - name: seller_name
+        type: categorical
+
+# Reviews are left out on purpose: MetricFlow requires every measure to have a
+# time dimension, and the reviews data has no review date. (Ossie, Cube and
+# LookML don't need one - a real difference between semantic layers.)
+
+metrics:
+  - name: revenue
+    label: Revenue
+    description: Sum of quantity * unit price actually paid
+    type: simple
+    type_params:
+      measure: revenue
+  - name: units_sold
+    label: Units sold
+    type: simple
+    type_params:
+      measure: units_sold
+  - name: order_count
+    label: Orders
+    type: simple
+    type_params:
+      measure: order_count
+  - name: buyer_count
+    label: Buyers
+    type: simple
+    type_params:
+      measure: buyer_count
+  - name: discount_amount
+    label: Discount amount
+    type: simple
+    type_params:
+      measure: discount_amount
+  - name: average_order_value
+    label: Average order value
+    description: Revenue per order
+    type: ratio
+    type_params:
+      numerator: revenue
+      denominator: order_count
+  - name: premium_revenue
+    label: Revenue from premium customers
+    type: simple
+    type_params:
+      measure: revenue
+    filter: |
+      {{ Dimension('customer__is_premium') }} = true

@@ -1,0 +1,26 @@
+unique_name: Product Dimension
+object_type: dimension
+label: Product
+type: standard
+
+# The ontology's subCategoryOf tree becomes a level-based hierarchy
+hierarchies:
+  - unique_name: Product Category
+    label: Category
+    levels:
+      - unique_name: Department
+      - unique_name: Product Name
+
+level_attributes:
+  - unique_name: Department
+    label: Department
+    dataset: products
+    name_column: category_level_1
+    key_columns:
+      - category_level_1
+  - unique_name: Product Name
+    label: Product
+    dataset: products
+    name_column: name
+    key_columns:
+      - product_id
