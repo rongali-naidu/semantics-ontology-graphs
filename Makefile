@@ -7,7 +7,7 @@ DBT_DIR      := semantic-models/implementations/tools/dbt/retail_dbt
 OSSIE_COMMIT := 10116f936e628944eadaa70ec7578caf23912e96
 OSSIE_REPO   ?= .cache/ossie
 
-.PHONY: help install generate check check-graph check-semantic check-ossie check-links check-generated dbt clean
+.PHONY: help install generate diagrams check check-graph check-semantic check-ossie check-links check-generated dbt clean
 
 help:            ## list targets
 	@grep -E '^[a-z-]+:.*##' $(MAKEFILE_LIST) | awk -F':.*## ' '{printf "  %-16s %s\n", $$1, $$2}'
@@ -22,6 +22,10 @@ install:         ## install the Python check dependencies
 generate:        ## regenerate every derived file from rdf/retail-data.ttl
 	cd $(RETAIL) && $(PYTHON) scripts/build_rdf_formats.py && \
 	  $(PYTHON) scripts/rdf_to_property_graph.py && $(PYTHON) scripts/rdf_to_tables.py
+	$(PYTHON) tools/diagrams/build_diagrams.py
+
+diagrams:        ## regenerate the SVG diagrams in assets/diagrams/
+	$(PYTHON) tools/diagrams/build_diagrams.py
 
 check: check-links check-graph check-semantic  ## run all fast checks (no network, no dbt)
 
@@ -45,7 +49,7 @@ check-links:     ## relative links and anchors in all Markdown files
 	$(PYTHON) tools/check_links.py
 
 check-generated: generate  ## fail if committed derived files are out of date
-	git diff --exit-code -- examples ontologies graphs semantic-models
+	git diff --exit-code -- examples ontologies graphs semantic-models assets
 
 dbt:             ## build the dbt project and check MetricFlow results (needs semantic-models/implementations/tools/dbt/requirements.txt)
 	cd $(DBT_DIR) && DBT_PROFILES_DIR=. dbt build && DBT_PROFILES_DIR=. mf validate-configs && \
