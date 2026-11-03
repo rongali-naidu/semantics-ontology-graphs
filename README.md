@@ -38,7 +38,7 @@ One running example, an **Amazon-style retail ordering domain**, is
 expressed in every form: an OWL ontology, RDF in six serializations, a
 property graph, warehouse tables, an **Apache Ossie** semantic model, and
 product formats from AWS, Google Cloud, Microsoft, Oracle, Snowflake,
-Databricks, SAP, Salesforce, Palantir, dbt, AtScale, Cube and Neo4j, and
+Databricks, SAP, Salesforce, Palantir, NVIDIA, dbt, AtScale, Cube and Neo4j, and
 [automated checks](#how-do-we-know-the-examples-are-right) prove they all
 give the same answers.
 
@@ -81,6 +81,7 @@ topic's page is complete on its own.
 | **Salesforce** | — | — | [Tableau Semantics](semantic-models/implementations/providers/salesforce/README.md) |
 | **Palantir** | [Foundry Ontology](ontologies/implementations/providers/palantir/README.md) | — | — |
 | **Neo4j** | [neosemantics](ontologies/implementations/tools/neo4j-neosemantics/README.md) | [Neo4j](graphs/implementations/tools/neo4j/README.md) | — |
+| **NVIDIA** | [Auto Ontology, ontology-sql-eval](ontologies/implementations/tools/nvidia-auto-ontology/README.md) | — | — |
 | **dbt** | — | — | [Semantic Layer / MetricFlow](semantic-models/implementations/tools/dbt/README.md) ✅ |
 | **AtScale** | — | — | [SML](semantic-models/implementations/tools/atscale/README.md) |
 | **Cube** | — | — | [Cube](semantic-models/implementations/tools/cube/README.md) |

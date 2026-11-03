@@ -28,6 +28,7 @@ Verification levels: [legend](../../README.md#verification-levels).
 | Tool | What it does for ontologies | Verified |
 |---|---|---|
 | [Neo4j neosemantics (n10s)](tools/neo4j-neosemantics/README.md) | OWL/RDF import into Neo4j, subclass inference, SHACL validation | ⚪ |
+| [NVIDIA Auto Ontology + ontology-sql-eval](tools/nvidia-auto-ontology/README.md) | context layer for data agents generated from metadata (Postgres, MCP); text-to-SQL evaluation on BIRD and others | ⚪ |
 | Apache Ossie ontology spec | vendor-neutral ontology + mapping to semantic models; [retail version](../../examples/retail/semantic-model/ossie/retail.ontology.yaml) | ✅ |
 | rdflib · pySHACL · owlrl (Python) | parse, validate and reason over the retail ontology in CI | ✅ |
 
