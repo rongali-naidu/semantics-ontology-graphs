@@ -3,8 +3,36 @@
 [![checks](https://github.com/rongali-naidu/semantics-ontology-graphs/actions/workflows/checks.yml/badge.svg)](https://github.com/rongali-naidu/semantics-ontology-graphs/actions/workflows/checks.yml)
 
 A hands-on reference for **semantics** in three topics, **ontologies**,
-**graphs** and **semantic models**, from first principles to the products
-that implement them.
+**knowledge graphs** and **semantic models**, from first principles to the
+products that implement them.
+
+## Why learn this now: data agents
+
+Companies are putting **AI agents** in front of their data: "what was
+revenue from premium customers last quarter, and who are they?" An LLM can
+write SQL, but on its own it doesn't know what *your* business means: which
+of five "revenue" columns is the right one, that "client" and "customer" are
+the same thing, how tables join without double counting, or that Alice in
+the CRM is Alice in the order system. So it gives fluent, confident,
+**wrong** answers.
+
+Each topic in this repo supplies one missing piece of context:
+
+| | Gives the agent | Without it, the agent… |
+|---|---|---|
+| **Semantic model** | governed metrics, dimensions and joins: *how much?* | invents formulas and joins; numbers change between runs |
+| **Ontology** | shared meaning: terms, synonyms, hierarchies, rules: *what does it mean?* | misreads business terms, misses that a premium customer is a customer |
+| **Knowledge graph** | connected facts with identity and provenance: *who? how connected?* | can't answer multi-hop questions or say where an answer came from |
+
+That's why every major data platform now ships one or more of these for
+agents: AWS Context Ontology Accelerator, Microsoft Fabric IQ, Google
+Knowledge Catalog, Databricks Genie Ontology, Snowflake semantic views and
+Cortex, Salesforce Tableau Semantics and Apache Ossie. Implementing a data
+agent well means understanding all three, and how they fit together.
+More: [what a data agent needs](foundations/04-data-agents.md) ·
+[why it matters in the AI era](foundations/05-ai-era.md).
+
+## What's here
 
 One running example, an **Amazon-style retail ordering domain**, is
 expressed in every form: an OWL ontology, RDF in six serializations, a
