@@ -17,13 +17,7 @@ The industry has been moving from the left column to the right: **semantic
 model as code**, stored in a repository the customer controls, with the BI
 service acting as the *runtime* that the repository is deployed to.
 
-```
-   developer ──edit──► git repo (your branch) ──PR/review──► main ──deploy──► BI service (runtime)
-     │                     │                                   │                 │
-   desktop / web IDE    text model files                   CI: validate,     dev → test → prod
-   (Desktop, Modeler,   (TMDL, SMML, LookML,               lint, test        workspaces / instances
-    Looker IDE)          YAML)
-```
+![Tool-managed metadata repository flow versus model-as-code in a user-defined git repository](../../assets/diagrams/model-repositories.svg)
 
 ---
 

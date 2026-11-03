@@ -4,20 +4,7 @@ A **semantic model** sits between raw tables and the people (or AI agents)
 asking questions. It gives business names to data and defines, **once**,
 how every metric is calculated and how tables join.
 
-```
-   "What was revenue by department last quarter?"        ← business question
-                         │
-   ┌─────────────────────▼──────────────────────────┐
-   │ Semantic model                                  │
-   │  metric   revenue = SUM(quantity * unit_price)  │
-   │  dimension department = category_level_1        │
-   │  join     order_lines → products → categories   │
-   └─────────────────────┬──────────────────────────┘
-                         │ generates SQL
-   ┌─────────────────────▼──────────────────────────┐
-   │ Warehouse tables: order_lines, orders, products │
-   └─────────────────────────────────────────────────┘
-```
+![A semantic model between warehouse tables and consumers (dashboards, notebooks, spreadsheets, AI agents), defining metrics, dimensions and joins once](../../assets/diagrams/semantic-layer.svg)
 
 Without it, every dashboard, notebook and analyst re-implements "revenue"
 slightly differently. That's how two reports end up with two numbers for the
@@ -47,13 +34,7 @@ Semantic models usually sit on a **dimensional model** (Kimball): narrow,
 tall **fact** tables of events (order lines, reviews) surrounded by
 **dimension** tables of context (customer, product, date).
 
-```
-                 customers ─┐
-                            │
-     categories ─ products ─┼─ order_lines (fact) ─ orders ─ addresses
-                  sellers ──┘                       (header)
-                 reviews (second fact, its own grain) ─ products, customers
-```
+![Retail star schema: order_lines and reviews facts with orders, customers, addresses, products, sellers and categories dimensions](../../assets/diagrams/star-schema.svg)
 
 See [`warehouse/schema.sql`](../../examples/retail/warehouse/schema.sql).
 

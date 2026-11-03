@@ -19,6 +19,8 @@ always hold.**
 
 ## The building blocks
 
+![Retail ontology class diagram: Party, Customer, PremiumCustomer, Seller, Order, OrderLine, Product, Category, Address, Review and their properties](../../assets/diagrams/retail-ontology.svg)
+
 Using the retail example in this repo
 ([`retail-ontology.ttl`](../../examples/retail/ontology/retail-ontology.ttl)):
 

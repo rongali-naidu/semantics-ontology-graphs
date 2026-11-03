@@ -5,6 +5,8 @@ Graph databases and graph engines, each loading or querying the retail graph
 (details on each page). Verification levels: [legend](../../README.md#verification-levels).
 
 
+![Graph products grouped as native graph databases, graphs over tables, RDF stores and graph analytics](../../assets/diagrams/graph-landscape.svg)
+
 ## Providers
 
 | Provider | Product | Model / languages | Status | Verified |

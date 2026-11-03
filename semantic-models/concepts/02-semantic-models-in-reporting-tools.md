@@ -5,18 +5,7 @@ lives**, **what language** defines it, and **who else can use it**.
 
 ## 2.1 Three generations
 
-```
- 1. Inside the BI tool            2. Headless / universal           3. In the data platform
- ─────────────────────            ───────────────────────           ───────────────────────
- Power BI semantic model          dbt Semantic Layer (MetricFlow)   Snowflake semantic views
- Looker (LookML)                  Cube                              Databricks metric views
- Tableau data model / Semantics   AtScale (SML)                     Microsoft Fabric semantic models
- Qlik, MicroStrategy, BO universe Malloy                            BigQuery + Looker modeler
-        │                                 │                                 │
- one tool consumes it             any tool via SQL/JDBC/MDX/API     anything that queries the platform
-                                                                    (+ the platform's AI assistant)
-                     ─────────── all exchanging via Apache Ossie ───────────
-```
+![Semantic-model products grouped as inside a BI tool, headless, and in the data platform, with Apache Ossie as interchange](../../assets/diagrams/semantic-landscape.svg)
 
 ## 2.2 BI tools
 

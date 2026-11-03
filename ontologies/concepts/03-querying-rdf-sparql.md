@@ -16,7 +16,7 @@ both.
 | [SPARQL 1.2](https://www.w3.org/TR/sparql12-query/) (in progress) | Triple terms (RDF 1.2), new functions |
 | [GeoSPARQL](https://www.ogc.org/standard/geosparql/) | Spatial queries (OGC) |
 
-## 5.1 Anatomy of a SPARQL query
+## 3.1 Anatomy of a SPARQL query
 
 ```sparql
 PREFIX retail: <https://example.org/retail/ontology#>      # 1. prefixes
@@ -38,7 +38,7 @@ LIMIT 10
 A query is a **pattern of triples with holes**; the engine finds every way
 to fill the holes from the graph.
 
-## 5.2 Four query forms
+## 3.2 Four query forms
 
 | Form | Returns | Example file |
 |---|---|---|
@@ -47,7 +47,7 @@ to fill the holes from the graph.
 | `ASK` | true / false | [10-ask-and-describe.rq](../../examples/retail/sparql/10-ask-and-describe.rq) |
 | `DESCRIBE` | "everything about" a resource (implementation-defined) | `DESCRIBE <https://example.org/retail/data/P4>` |
 
-## 5.3 The features you'll use most
+## 3.3 The features you'll use most
 
 | Feature | Syntax | Retail example |
 |---|---|---|
@@ -63,7 +63,7 @@ to fill the holes from the graph.
 | Named graphs | `GRAPH ?g { ... }`, `FROM`, `FROM NAMED` | Q11 |
 | Federation | `SERVICE <https://query.wikidata.org/sparql> { ... }` | |
 
-## 5.4 Querying the ontology itself
+## 3.4 Querying the ontology itself
 
 Because the schema is in the graph, you can ask questions *about the model*:
 
@@ -80,7 +80,7 @@ SELECT ?c WHERE { ?c a owl:Class . FILTER NOT EXISTS { ?c skos:definition ?d } F
 
 See [01-list-classes-and-properties.rq](../../examples/retail/sparql/01-list-classes-and-properties.rq).
 
-## 5.5 Inference: three ways to get "implicit" answers
+## 3.5 Inference: three ways to get "implicit" answers
 
 Alice and Carol are typed **only** as `retail:PremiumCustomer`. Asking for
 `?c a retail:Customer` returns only Bob — unless:
@@ -100,7 +100,7 @@ Alice and Carol are typed **only** as `retail:PremiumCustomer`. Asking for
    (InfModel) and Virtuoso can reason at load or query time.
    **Amazon Neptune does not perform OWL/RDFS inference** — use (1) or (2).
 
-## 5.6 Validation with SHACL
+## 3.6 Validation with SHACL
 
 SHACL isn't a query language, but it's the other half of "using" an ontology:
 
@@ -113,7 +113,7 @@ pyshacl -s ontology/retail-shapes.ttl -e ontology/retail-ontology.ttl -i rdfs rd
 Try breaking the data (e.g. set a rating to 7) and re-run to see the
 violation report.
 
-## 5.7 Run everything locally (no database needed)
+## 3.7 Run everything locally (no database needed)
 
 ```bash
 cd examples/retail
@@ -149,7 +149,7 @@ retail-data.ttl /retail`), **Oxigraph** (`oxigraph serve`), GraphDB Free,
 the [Wikidata Query Service](https://query.wikidata.org/) for public data,
 and Amazon Neptune ([querying Neptune](../../graphs/implementations/providers/aws/querying.md)).
 
-## 5.8 Other ways to query RDF
+## 3.8 Other ways to query RDF
 
 * **GraphQL** over RDF (HyperGraphQL, Stardog, GraphDB, Ontotext Platform).
 * **Linked Data Fragments / TPF** — cheap, cacheable server interfaces.

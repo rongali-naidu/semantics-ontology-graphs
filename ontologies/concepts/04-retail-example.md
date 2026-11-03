@@ -7,58 +7,15 @@ sit in a **category** tree and are **sold by** sellers; customers write
 
 All names (TechHub Inc, Alice Johnson, ...) are made up.
 
-## 6.1 The domain in one picture (instance data)
+## 4.1 The domain in one picture (instance data)
 
-```mermaid
-flowchart LR
-    subgraph Customers
-      C1([Alice Johnson<br/>PremiumCustomer])
-      C2([Bob Smith<br/>Customer])
-      C3([Carol Diaz<br/>PremiumCustomer])
-    end
-    subgraph Orders
-      O1[O1 2026-09-01<br/>DELIVERED]
-      O2[O2 2026-09-05<br/>SHIPPED]
-      O3[O3 2026-09-20<br/>DELIVERED]
-      O4[O4 2026-10-02<br/>PLACED]
-    end
-    subgraph Products
-      P1{{Laptop Pro 14<br/>1299.00}}
-      P2{{Wireless Earbuds X<br/>149.99}}
-      P3{{USB-C Charger 65W<br/>29.99}}
-      P4{{Knowledge Graphs 101<br/>49.99}}
-      P5{{Chef Knife 8in<br/>79.50}}
-      P6{{Mechanical Keyboard<br/>89.00}}
-    end
-    subgraph Categories
-      E[Electronics] --- COMP[Computers] --- LAP[Laptops]
-      E --- AUD[Audio]
-      BOOKS[Books]
-      KIT[Kitchen]
-    end
-    C1 -->|placed| O1 & O3
-    C2 -->|placed| O2
-    C3 -->|placed| O4
-    O1 -->|1 x 1299.00| P1
-    O1 -->|2 x 29.99| P3
-    O2 -->|1 x 49.99| P4
-    O2 -->|1 x 149.99| P2
-    O3 -->|1 x 139.99 sale| P2
-    O4 -->|1 x 79.50| P5
-    O4 -->|2 x 49.99| P4
-    P1 --> LAP
-    P2 --> AUD
-    P3 --> E
-    P4 --> BOOKS
-    P5 --> KIT
-    P6 --> COMP
-```
+![Retail instance graph: three customers, four orders, six products and six categories connected by PLACED, CONTAINS, IN_CATEGORY and SUBCATEGORY_OF](../../assets/diagrams/retail-instance-graph.svg)
 
 Plus: 3 sellers (TechHub Inc sells all electronics, PageTurner Books, HomeGoods
 Co), 3 addresses (Seattle, Austin, New York), 4 reviews (Alice → Laptop 5★,
 Alice → Earbuds 3★, Bob → Book 4★, Carol → Book 5★).
 
-## 6.2 Files
+## 4.2 Files
 
 ```
 examples/retail/
@@ -102,7 +59,7 @@ python scripts/run_sparql_local.py --shacl
 python scripts/check_consistency.py
 ```
 
-## 6.3 Modelling decisions worth noticing
+## 4.3 Modelling decisions worth noticing
 
 | Decision | Why |
 |---|---|
@@ -116,7 +73,7 @@ python scripts/check_consistency.py
 | Separate TBox / ABox / shapes | Ontology changes slowly, data changes constantly, validation rules vary by consumer. |
 | IRIs under `https://example.org/retail/` | Replace with a domain you control (or `https://w3id.org/...`) in real life. |
 
-## 6.4 Competency questions → queries in every language
+## 4.4 Competency questions → queries in every language
 
 | # | Question | Expected answer | SPARQL | Cypher | Gremlin |
 |---|---|---|---|---|---|
@@ -133,7 +90,7 @@ python scripts/check_consistency.py
 Also in [GQL](../../examples/retail/property-graph/gql/queries.gql) and
 [SQL/PGQ](../../examples/retail/property-graph/sql-pgq/retail-pgq.sql).
 
-## 6.5 Extending the example (exercises)
+## 4.5 Extending the example (exercises)
 
 1. Add a `Shipment` class with `carrier` and `deliveredOn`, and a SHACL rule
    that DELIVERED orders must have a shipment.

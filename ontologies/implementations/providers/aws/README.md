@@ -38,15 +38,7 @@ AWS says the managed ontology capability will become a native feature of
 
 ### Workflow: Scan → Model → Serve
 
-```
- Scan                         Model                                  Serve
- ────                         ─────                                  ─────
- data sources (Glue, JDBC,    induce ontology + R2RML (Bedrock)      MCP server (AgentCore Runtime)
- Databricks, documents)   ──► ground to FIBO / schema.org       ──►  Tier 1 metrics → Tier 2 ontology
-                              expert review & approval               (VKG: NL → SPARQL → SQL) →
-                              reason (HermiT / ELK), store in        Tier 3 documents (vector + graph)
-                              Neptune
-```
+![AWS Context Ontology Accelerator: Scan, Model and Serve stages over Neptune, OpenSearch Serverless, Bedrock and AgentCore](../../../../assets/diagrams/coa-architecture.svg)
 
 ### The retail ontology in COA
 

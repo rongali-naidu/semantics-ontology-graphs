@@ -7,6 +7,8 @@ each related to the retail ontology
 Verification levels: [legend](../../README.md#verification-levels).
 
 
+![Ontology products grouped as formal OWL/RDF, context graphs, and business/operational ontologies](../../assets/diagrams/ontology-landscape.svg)
+
 ## Providers
 
 | Provider | Product | Kind | What it does for ontologies | Status | Verified |

@@ -11,7 +11,7 @@
 
 ---
 
-## 4.1 Modelling languages (W3C stack)
+## 2.1 Modelling languages (W3C stack)
 
 | Language | Use it for | Key terms | Spec |
 |---|---|---|---|
@@ -56,7 +56,7 @@ The retail example uses all three:
 
 ---
 
-## 4.2 Serializations — the same ontology snippet seven ways
+## 2.2 Serializations — the same ontology snippet seven ways
 
 Snippet: *PremiumCustomer is a subclass of Customer; placedBy goes from Order
 to Customer; O1 was placed by C1.*
@@ -211,7 +211,7 @@ proves they are all the same graph (isomorphic). Conversion tools: `rdflib`
 
 ---
 
-## 4.3 Human-facing documentation
+## 2.3 Human-facing documentation
 
 ### Diagrams
 

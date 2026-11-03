@@ -52,21 +52,7 @@ LangChain / LlamaIndex graph stores.
 
 ## 10.2 Architecture in one picture
 
-```
-                        Your VPC
- ┌────────────────────────────────────────────────────────────────┐
- │  EC2 / Lambda / ECS / notebook ──────────┐                     │
- │                                           │ HTTPS / WSS / Bolt │
- │                                           ▼ port 8182          │
- │   cluster endpoint ─► [ Writer instance ]                      │
- │   reader endpoint  ─► [ Replica ] [ Replica ] ... (≤15)        │
- │                              │                                 │
- │              shared, distributed, auto-growing storage         │
- │              (6 copies / 3 AZs, quad indexes)                  │
- │                                                                │
- │   S3 gateway VPC endpoint ◄── bulk loader reads s3://bucket    │
- └────────────────────────────────────────────────────────────────┘
-```
+![Amazon Neptune: clients in a VPC reach cluster and reader endpoints; shared storage; S3 bulk loader; RDF and property graph models](../../../../assets/diagrams/neptune-architecture.svg)
 
 Endpoints (all on port **8182**, TLS required):
 

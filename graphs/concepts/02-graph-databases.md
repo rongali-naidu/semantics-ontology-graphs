@@ -3,7 +3,9 @@
 A graph database stores nodes and relationships natively and makes
 multi-hop traversal cheap. They split by data model.
 
-## 8.1 Landscape
+## 2.1 Landscape
+
+![Graph products grouped as native graph databases, graphs over tables, RDF stores and graph analytics](../../assets/diagrams/graph-landscape.svg)
 
 ### RDF triple stores (SPARQL)
 
@@ -51,7 +53,7 @@ Neptune (both models, separate stores), Stardog (Edge properties via RDF-star),
 GraphDB (RDF-star), AllegroGraph, Oxigraph, and RDF 1.2-capable stores are
 closing the gap.
 
-## 8.2 Choosing one — questions to ask
+## 2.2 Choosing one — questions to ask
 
 | Question | Leans RDF | Leans property graph |
 |---|---|---|
@@ -67,7 +69,7 @@ Other factors: scale (single machine vs distributed), transactions/ACID,
 HA & read replicas, managed vs self-hosted, license, vector search for
 GraphRAG, ecosystem (BI connectors, notebooks, visualisation).
 
-## 8.3 How graph databases store data (in brief)
+## 2.3 How graph databases store data (in brief)
 
 * **Native graph storage** (Neo4j): records for nodes/relationships with
   direct pointers → *index-free adjacency*.
@@ -79,7 +81,7 @@ GraphRAG, ecosystem (BI connectors, notebooks, visualisation).
 * **Columnar / CSR in-memory** (Neptune Analytics, Kùzu, TigerGraph): optimised
   for scans and algorithms.
 
-## 8.4 Visualisation & tooling
+## 2.4 Visualisation & tooling
 
 Neo4j Bloom / Browser, **Graph Explorer** (open source, works with Neptune
 and other Gremlin/openCypher/SPARQL endpoints —

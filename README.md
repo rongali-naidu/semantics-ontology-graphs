@@ -16,20 +16,7 @@ answers.
 > **Early release.** Every implementation page states how far it's verified;
 > see [verification levels](#verification-levels).
 
-```
-                 foundations/   ontology vs knowledge graph vs graph DB · history · semantic models ⇄ ontologies
-                       │
-     ┌─────────────────┼──────────────────────┐
-     ▼                 ▼                      ▼
- ontologies/        graphs/               semantic-models/
- ├─ concepts/       ├─ concepts/          ├─ concepts/
- └─ implementations ├─ implementations    └─ implementations/
-    ├─ providers/   │  ├─ providers/         ├─ providers/   aws · gcp · microsoft · oracle · snowflake · databricks · sap · salesforce · palantir
-    └─ tools/       │  └─ tools/             └─ tools/       dbt · atscale · cube
-                    │
-     examples/retail/   one shared example: ontology, RDF, SPARQL, property graph, warehouse, Ossie, scripts
-     reference/         standards, links, glossary
-```
+![How this repository is organised: foundations, three topics (ontologies, graphs, semantic models) with concepts and implementations, one shared retail example](assets/diagrams/repo-map.svg)
 
 ## Start here
 
@@ -69,6 +56,8 @@ Full product tables: [ontologies](ontologies/implementations/README.md) ·
 [semantic models](semantic-models/implementations/README.md).
 
 ## The example at a glance
+
+![One domain, every format: retail-data.ttl generates RDF formats, property-graph files and warehouse tables; semantic models sit on the tables; CI checks all give the same answers](assets/diagrams/one-domain-every-format.svg)
 
 ```
 (:Customer)-[:PLACED]->(:Order)-[:CONTAINS {quantity, unitPrice}]->(:Product)-[:IN_CATEGORY]->(:Category)-[:SUBCATEGORY_OF]->(:Category)

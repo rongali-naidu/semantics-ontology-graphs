@@ -2,23 +2,7 @@
 
 These three terms get mixed up all the time. They live at different layers:
 
-```
- ┌──────────────────────────────────────────────────────────────┐
- │  Ontology            the MEANING layer (schema + rules)      │  retail-ontology.ttl
- │  "Orders are placed by exactly one Customer;                 │
- │   subCategoryOf is transitive"                               │
- ├──────────────────────────────────────────────────────────────┤
- │  Knowledge graph     ontology + instance data (+ inferences) │  retail-ontology.ttl
- │  "O1 placedBy Alice; Alice is a PremiumCustomer;             │  + retail-data.ttl
- │   therefore Alice is a Customer"                             │
- ├──────────────────────────────────────────────────────────────┤
- │  Graph data model    how the graph is represented            │  RDF triples
- │                                                              │  or labeled property graph
- ├──────────────────────────────────────────────────────────────┤
- │  Graph database      the software that stores + queries it   │  Neptune, Neo4j, GraphDB,
- │                                                              │  Jena, Stardog, ...
- └──────────────────────────────────────────────────────────────┘
-```
+![Four layers: ontology (meaning), knowledge graph (ontology plus facts), graph data model (RDF or property graph), graph database (software)](../assets/diagrams/layers.svg)
 
 | | Ontology | Knowledge graph | Graph database |
 |---|---|---|---|
@@ -73,6 +57,8 @@ aggregate reporting over a few big tables (that's a warehouse's job), or when
 you have no multi-hop questions.
 
 ## RDF graph vs property graph — preview
+
+![The same fact in RDF (order line as a node with literal values) and in a property graph (CONTAINS edge with quantity and unitPrice properties)](../assets/diagrams/rdf-vs-property-graph.svg)
 
 The same fact, "Alice placed order O1 which contains 2 × USB-C Charger at
 29.99", in the two models:

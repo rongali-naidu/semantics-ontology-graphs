@@ -4,6 +4,8 @@ Three threads braid together: **philosophy** (what exists?), **AI knowledge
 representation** (how do machines reason?), and **the Web + databases** (how
 do we store and share connected data at scale?).
 
+![Timeline of three threads: knowledge representation and the Semantic Web, graph databases, and semantic layers, from Aristotle to 2026](../assets/diagrams/history-timeline.svg)
+
 ## Timeline
 
 | Year | Milestone | Why it matters |

@@ -6,6 +6,8 @@ metrics ([`metrics.sql`](../../examples/retail/warehouse/metrics.sql)).
 Verification levels: [legend](../../README.md#verification-levels).
 
 
+![Semantic-model products grouped as inside a BI tool, headless, and in the data platform, with Apache Ossie as interchange](../../assets/diagrams/semantic-landscape.svg)
+
 ## Providers
 
 | Provider | Product | Format | Model in your git repo | Apache Ossie | Status | Verified |

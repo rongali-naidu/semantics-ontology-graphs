@@ -24,7 +24,9 @@ The property graph model came from the database/developer world (Neo4j,
 TinkerPop) and optimises for **traversal**: following an edge is a pointer
 hop ("index-free adjacency"), not a join.
 
-## 7.1 RDF vs property graph
+## 1.1 RDF vs property graph
+
+![The same fact in RDF (order line as a node with literal values) and in a property graph (CONTAINS edge with quantity and unitPrice properties)](../../assets/diagrams/rdf-vs-property-graph.svg)
 
 | | RDF | Labeled property graph |
 |---|---|---|
@@ -47,7 +49,7 @@ hop ("index-free adjacency"), not a join.
 fraud rings, network/IT topology, identity graphs). Many teams keep the
 ontology as the **conceptual model** and implement it as a property graph.
 
-## 7.2 Mapping RDF ↔ property graph
+## 1.2 Mapping RDF ↔ property graph
 
 The mapping used in this repo
 ([`rdf_to_property_graph.py`](../../examples/retail/scripts/rdf_to_property_graph.py)):
@@ -78,7 +80,7 @@ lot like edge properties) — e.g.
 ex:O1 retail:contains ex:P3 ~ ex:line2 {| retail:quantity 2 ; retail:unitPrice 29.99 |} .
 ```
 
-## 7.3 Schemas in the property-graph world
+## 1.3 Schemas in the property-graph world
 
 Property graphs are often called "schema-less" but every app has a schema —
 it's just implicit. Ways to make it explicit:
@@ -91,7 +93,7 @@ it's just implicit. Ways to make it explicit:
 * **Documentation**: a diagram + the OWL ontology as the conceptual model.
 * **Validation in code / pipeline** (Great Expectations-style checks on the CSVs, or SHACL on an RDF export).
 
-## 7.4 Graph algorithms
+## 1.4 Graph algorithms
 
 Property-graph platforms usually ship analytics libraries: PageRank,
 community detection (Louvain, label propagation), similarity (Jaccard,

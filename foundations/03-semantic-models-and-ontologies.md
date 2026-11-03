@@ -51,25 +51,7 @@ All four say Alice 1498.97, Bob 199.98, Carol 179.48
 
 ## 4.4 How they work together in practice
 
-```
-              ┌───────────────────────────────────────────────┐
-              │  Enterprise ontology (OWL / Ossie ontology)    │   meaning: Customer, Order,
-              │  shared vocabulary, IRIs, rules                │   Product... across all domains
-              └───────┬───────────────────────────┬───────────┘
-          mapping (R2RML / Ossie mapping)    alignment (iri / labels)
-                      │                           │
-   ┌──────────────────▼───────┐       ┌───────────▼──────────────────┐
-   │ Knowledge graph           │       │ Semantic models (per domain) │
-   │ RDF store / property graph│       │ Ossie, dbt, LookML, TMDL ... │
-   │ entities, paths, context  │       │ metrics, dimensions, joins   │
-   └──────────────────┬───────┘       └───────────┬──────────────────┘
-                      │                           │
-                      └──────────┬────────────────┘
-                                 ▼
-               AI agents / apps / BI: "why did revenue from premium
-               customers in Electronics drop, and who are they?"
-               → metric from the semantic model + entities/paths from the KG
-```
+![An enterprise ontology maps to a knowledge graph and aligns with semantic models; both serve AI agents, apps and BI; the same data feeds both](../assets/diagrams/ontology-semantic-kg.svg)
 
 * The **ontology** names things consistently across domains; semantic
   models reuse its terms (Ossie lets each concept carry the OWL `iri`).

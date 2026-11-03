@@ -31,13 +31,7 @@ Hex, Lightdash, Holistics, GoodData, ThoughtSpot, Sigma, Omni and others.
 
 ### Three document types
 
-```
- retail.ontology.yaml  ◄──── retail.mapping.yaml ────►  retail.semantic_model.yaml
- (concepts,                  (which fields populate      (datasets, fields,
-  relationships, rules)       which concepts/links)       relationships, metrics)
-         │                                                        │
-   iri: retail:Customer  ──► OWL ontology                source: retail.orders ──► warehouse
-```
+![Apache Ossie: ontology, mapping and semantic model documents, linked to the OWL ontology and warehouse tables, with converters to 20+ tools](../../assets/diagrams/ossie-documents.svg)
 
 | Document | Spec | Retail file |
 |---|---|---|

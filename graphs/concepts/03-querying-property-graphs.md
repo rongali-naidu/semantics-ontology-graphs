@@ -9,7 +9,7 @@
 | GSQL | procedural + declarative | TigerGraph | TigerGraph |
 | AQL, nGQL, DQL | vendor | vendor | ArangoDB, NebulaGraph, Dgraph |
 
-## 9.1 Same question, four languages
+## 3.1 Same question, four languages
 
 *"Customers who bought Wireless Earbuds X also bought ..."*
 
@@ -57,7 +57,7 @@ Full files: [Cypher](../../examples/retail/property-graph/cypher/02-queries.cyph
 [SQL/PGQ](../../examples/retail/property-graph/sql-pgq/retail-pgq.sql) ·
 [SPARQL](../../examples/retail/sparql/).
 
-## 9.2 Cypher / openCypher cheat sheet
+## 3.2 Cypher / openCypher cheat sheet
 
 ```cypher
 // pattern syntax
@@ -97,7 +97,7 @@ Spec: [openCypher 9 reference](https://s3.amazonaws.com/artifacts.opencypher.org
 [Neo4j Cypher manual](https://neo4j.com/docs/cypher-manual/current/) ·
 [Neptune openCypher](https://docs.aws.amazon.com/neptune/latest/userguide/access-graph-opencypher.html)
 
-## 9.3 Gremlin cheat sheet
+## 3.3 Gremlin cheat sheet
 
 ```groovy
 g.V()                         // all vertices        g.E()  all edges
@@ -128,7 +128,7 @@ Docs: [TinkerPop reference](https://tinkerpop.apache.org/docs/current/reference/
 [Practical Gremlin (free book)](https://kelvinlawrence.net/book/Gremlin-Graph-Guide.html) ·
 [Neptune Gremlin](https://docs.aws.amazon.com/neptune/latest/userguide/access-graph-gremlin.html)
 
-## 9.4 GQL and SQL/PGQ in one paragraph each
+## 3.4 GQL and SQL/PGQ in one paragraph each
 
 **GQL** (ISO/IEC 39075:2024) standardises the Cypher-style pattern language:
 `MATCH`, `FILTER`, `RETURN`, `INSERT`, `SET`, `DELETE`, quantified paths
@@ -140,7 +140,7 @@ types (schemas), sessions and transactions. Think "SQL for graphs".
 (g MATCH ... COLUMNS (...))`. Great when the data already lives in a
 relational DB and you just want path queries.
 
-## 9.5 SPARQL ↔ Cypher ↔ Gremlin phrasebook
+## 3.5 SPARQL ↔ Cypher ↔ Gremlin phrasebook
 
 | Concept | SPARQL | Cypher | Gremlin |
 |---|---|---|---|
