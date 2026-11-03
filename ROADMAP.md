@@ -12,6 +12,11 @@ Legend: ✅ done · 🔜 next · 📋 planned · 💭 idea
   example in every format
 - ✅ AWS Context Ontology Accelerator (COA) covered in all three topics; COA
   metric definitions run in CI
+- ✅ R2RML mapping from the warehouse back to the ontology, executed with
+  Morph-KGC in CI; OWL reasoning demo (subclass, inverse, chain, defined
+  classes, functional-property behaviour) in CI
+- ✅ Chapters: OOP → OWL, properties/restrictions/axioms, mapping ontologies
+  to tables, RDBMS vs graph, data agents; ecosystem poster
 - ✅ CI: SPARQL, SHACL, OWL RL, graph consistency, warehouse + Ossie metrics,
   Ossie official schemas (pinned commit), dbt + MetricFlow, link checker,
   "generated files are current" check; weekly scheduled run

@@ -7,10 +7,10 @@ DBT_DIR      := semantic-models/implementations/tools/dbt/retail_dbt
 OSSIE_COMMIT := 10116f936e628944eadaa70ec7578caf23912e96
 OSSIE_REPO   ?= .cache/ossie
 
-.PHONY: help install generate diagrams check check-graph check-semantic check-ossie check-links check-generated dbt clean
+.PHONY: help install generate diagrams check-r2rml check check-graph check-semantic check-ossie check-links check-generated dbt clean
 
 help:            ## list targets
-	@grep -E '^[a-z-]+:.*##' $(MAKEFILE_LIST) | awk -F':.*## ' '{printf "  %-16s %s\n", $$1, $$2}'
+	@grep -E '^[a-z0-9-]+:.*##' $(MAKEFILE_LIST) | awk -F':.*## ' '{printf "  %-16s %s\n", $$1, $$2}'
 
 install:         ## install the Python check dependencies
 	$(PYTHON) -m pip install -r requirements.txt
@@ -29,10 +29,14 @@ diagrams:        ## regenerate the SVG diagrams in assets/diagrams/
 
 check: check-links check-graph check-semantic  ## run all fast checks (no network, no dbt)
 
-check-graph:     ## SPARQL + SHACL + RDF/property-graph consistency
+check-graph:     ## SPARQL + SHACL + OWL reasoning demo + RDF/property-graph consistency
 	cd $(RETAIL) && $(PYTHON) scripts/run_sparql_local.py --shacl > /dev/null && \
 	  $(PYTHON) scripts/run_sparql_local.py --reason > /dev/null && \
+	  $(PYTHON) scripts/demo_reasoning.py && \
 	  $(PYTHON) scripts/check_consistency.py
+
+check-r2rml:     ## run the R2RML mapping on the warehouse = retail-data.ttl (needs examples/retail/mapping/requirements.txt)
+	cd $(RETAIL) && $(PYTHON) scripts/check_r2rml.py
 
 check-semantic:  ## warehouse metrics + Ossie model vs SPARQL answers
 	cd $(RETAIL) && $(PYTHON) scripts/check_semantic_model.py

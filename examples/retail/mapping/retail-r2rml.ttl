@@ -1,0 +1,117 @@
+#############################################################################
+#  Retail warehouse  →  retail ontology, in W3C R2RML
+#  https://www.w3.org/TR/r2rml/
+#
+#  Maps the tables in ../warehouse/schema.sql onto the classes and
+#  properties of ../ontology/retail-ontology.ttl. Running it reproduces
+#  ../rdf/retail-data.ttl exactly (scripts/check_r2rml.py proves it in CI).
+#
+#  The pieces of every TriplesMap:
+#    rr:logicalTable          which table (rr:tableName) or SQL (rr:sqlQuery)
+#    rr:subjectMap            how a row's key becomes an IRI, + its rdf:type
+#    rr:predicateObjectMap    column → ontology property (literal or IRI)
+#  NULL columns produce no triple (e.g. top-level categories have no parent).
+#############################################################################
+@prefix rr:     <http://www.w3.org/ns/r2rml#> .
+@prefix xsd:    <http://www.w3.org/2001/XMLSchema#> .
+@prefix retail: <https://example.org/retail/ontology#> .
+@prefix map:    <https://example.org/retail/mapping#> .
+
+# --- categories: a recursive tree via parent_category_id -------------------
+map:Category a rr:TriplesMap ;
+    rr:logicalTable [ rr:tableName "categories" ] ;
+    rr:subjectMap [ rr:template "https://example.org/retail/data/{category_id}" ;
+                    rr:class retail:Category ] ;
+    rr:predicateObjectMap [ rr:predicate retail:name ; rr:objectMap [ rr:column "name" ] ] ;
+    rr:predicateObjectMap [ rr:predicate retail:subCategoryOf ;
+        rr:objectMap [ rr:template "https://example.org/retail/data/{parent_category_id}" ; rr:termType rr:IRI ] ] .
+
+map:Seller a rr:TriplesMap ;
+    rr:logicalTable [ rr:tableName "sellers" ] ;
+    rr:subjectMap [ rr:template "https://example.org/retail/data/{seller_id}" ; rr:class retail:Seller ] ;
+    rr:predicateObjectMap [ rr:predicate retail:name ; rr:objectMap [ rr:column "name" ] ] .
+
+map:Product a rr:TriplesMap ;
+    rr:logicalTable [ rr:tableName "products" ] ;
+    rr:subjectMap [ rr:template "https://example.org/retail/data/{product_id}" ; rr:class retail:Product ] ;
+    rr:predicateObjectMap [ rr:predicate retail:name ; rr:objectMap [ rr:column "name" ] ] ;
+    rr:predicateObjectMap [ rr:predicate retail:sku  ; rr:objectMap [ rr:column "sku" ] ] ;
+    rr:predicateObjectMap [ rr:predicate retail:price ;
+        rr:objectMap [ rr:column "list_price" ; rr:datatype xsd:decimal ] ] ;   # column name ≠ property name
+    rr:predicateObjectMap [ rr:predicate retail:inCategory ;
+        rr:objectMap [ rr:template "https://example.org/retail/data/{category_id}" ; rr:termType rr:IRI ] ] ;
+    rr:predicateObjectMap [ rr:predicate retail:soldBy ;
+        rr:objectMap [ rr:template "https://example.org/retail/data/{seller_id}" ; rr:termType rr:IRI ] ] .
+
+# --- customers: one table, two classes, split with SQL ---------------------
+# The ontology has a subclass (PremiumCustomer ⊑ Customer); the table has a
+# boolean column. rr:sqlQuery turns the flag back into a class.
+map:PremiumCustomer a rr:TriplesMap ;
+    rr:logicalTable [ rr:sqlQuery "SELECT * FROM customers WHERE is_premium = 'true'" ] ;
+    rr:subjectMap [ rr:template "https://example.org/retail/data/{customer_id}" ;
+                    rr:class retail:PremiumCustomer ] ;
+    rr:predicateObjectMap [ rr:predicate retail:name ; rr:objectMap [ rr:column "name" ] ] ;
+    rr:predicateObjectMap [ rr:predicate retail:email ; rr:objectMap [ rr:column "email" ] ] ;
+    rr:predicateObjectMap [ rr:predicate retail:memberSince ;
+        rr:objectMap [ rr:column "member_since" ; rr:datatype xsd:date ] ] ;
+    rr:predicateObjectMap [ rr:predicate retail:hasAddress ;
+        rr:objectMap [ rr:template "https://example.org/retail/data/{address_id}" ; rr:termType rr:IRI ] ] .
+
+map:Customer a rr:TriplesMap ;
+    rr:logicalTable [ rr:sqlQuery "SELECT * FROM customers WHERE is_premium = 'false'" ] ;
+    rr:subjectMap [ rr:template "https://example.org/retail/data/{customer_id}" ;
+                    rr:class retail:Customer ] ;
+    rr:predicateObjectMap [ rr:predicate retail:name ; rr:objectMap [ rr:column "name" ] ] ;
+    rr:predicateObjectMap [ rr:predicate retail:email ; rr:objectMap [ rr:column "email" ] ] ;
+    rr:predicateObjectMap [ rr:predicate retail:hasAddress ;
+        rr:objectMap [ rr:template "https://example.org/retail/data/{address_id}" ; rr:termType rr:IRI ] ] .
+
+map:Address a rr:TriplesMap ;
+    rr:logicalTable [ rr:tableName "addresses" ] ;
+    rr:subjectMap [ rr:template "https://example.org/retail/data/{address_id}" ; rr:class retail:Address ] ;
+    rr:predicateObjectMap [ rr:predicate retail:city ; rr:objectMap [ rr:column "city" ] ] ;
+    rr:predicateObjectMap [ rr:predicate retail:state ; rr:objectMap [ rr:column "state" ] ] ;
+    rr:predicateObjectMap [ rr:predicate retail:postalCode ; rr:objectMap [ rr:column "postal_code" ] ] ;
+    rr:predicateObjectMap [ rr:predicate retail:country ; rr:objectMap [ rr:column "country" ] ] .
+
+# --- orders and order lines -------------------------------------------------
+map:Order a rr:TriplesMap ;
+    rr:logicalTable [ rr:tableName "orders" ] ;
+    rr:subjectMap [ rr:template "https://example.org/retail/data/{order_id}" ; rr:class retail:Order ] ;
+    rr:predicateObjectMap [ rr:predicate retail:placedBy ;
+        rr:objectMap [ rr:template "https://example.org/retail/data/{customer_id}" ; rr:termType rr:IRI ] ] ;
+    rr:predicateObjectMap [ rr:predicate retail:orderDate ;
+        rr:objectMap [ rr:column "order_date" ; rr:datatype xsd:date ] ] ;
+    rr:predicateObjectMap [ rr:predicate retail:status ; rr:objectMap [ rr:column "status" ] ] ;
+    rr:predicateObjectMap [ rr:predicate retail:paymentMethod ; rr:objectMap [ rr:column "payment_method" ] ] ;
+    rr:predicateObjectMap [ rr:predicate retail:shipsTo ;
+        rr:objectMap [ rr:template "https://example.org/retail/data/{ship_address_id}" ; rr:termType rr:IRI ] ] .
+
+# The foreign key lives on order_lines, but the ontology's arrow points from
+# Order to OrderLine (retail:hasLine), so this map uses order_id as subject.
+map:OrderHasLine a rr:TriplesMap ;
+    rr:logicalTable [ rr:tableName "order_lines" ] ;
+    rr:subjectMap [ rr:template "https://example.org/retail/data/{order_id}" ] ;
+    rr:predicateObjectMap [ rr:predicate retail:hasLine ;
+        rr:objectMap [ rr:template "https://example.org/retail/data/{order_line_id}" ; rr:termType rr:IRI ] ] .
+
+map:OrderLine a rr:TriplesMap ;
+    rr:logicalTable [ rr:tableName "order_lines" ] ;
+    rr:subjectMap [ rr:template "https://example.org/retail/data/{order_line_id}" ; rr:class retail:OrderLine ] ;
+    rr:predicateObjectMap [ rr:predicate retail:forProduct ;
+        rr:objectMap [ rr:template "https://example.org/retail/data/{product_id}" ; rr:termType rr:IRI ] ] ;
+    rr:predicateObjectMap [ rr:predicate retail:quantity ;
+        rr:objectMap [ rr:column "quantity" ; rr:datatype xsd:positiveInteger ] ] ;
+    rr:predicateObjectMap [ rr:predicate retail:unitPrice ;
+        rr:objectMap [ rr:column "unit_price" ; rr:datatype xsd:decimal ] ] .
+
+map:Review a rr:TriplesMap ;
+    rr:logicalTable [ rr:tableName "reviews" ] ;
+    rr:subjectMap [ rr:template "https://example.org/retail/data/{review_id}" ; rr:class retail:Review ] ;
+    rr:predicateObjectMap [ rr:predicate retail:writtenBy ;
+        rr:objectMap [ rr:template "https://example.org/retail/data/{customer_id}" ; rr:termType rr:IRI ] ] ;
+    rr:predicateObjectMap [ rr:predicate retail:reviewOf ;
+        rr:objectMap [ rr:template "https://example.org/retail/data/{product_id}" ; rr:termType rr:IRI ] ] ;
+    rr:predicateObjectMap [ rr:predicate retail:rating ;
+        rr:objectMap [ rr:column "rating" ; rr:datatype xsd:integer ] ] ;
+    rr:predicateObjectMap [ rr:predicate retail:reviewText ; rr:objectMap [ rr:column "review_text" ] ] .

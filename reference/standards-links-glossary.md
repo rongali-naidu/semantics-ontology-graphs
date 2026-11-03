@@ -121,6 +121,19 @@
 | AWS Context Ontology Accelerator (COA) | https://github.com/aws/context-ontology-accelerator · docs https://aws.github.io/context-ontology-accelerator/ |
 | COA announcement | https://aws.amazon.com/about-aws/whats-new/2026/07/aws-context--ontology-accelarator-generally-available/ |
 
+### Mapping tables to ontologies
+
+| Standard / tool | Link |
+|---|---|
+| R2RML (W3C Rec) | https://www.w3.org/TR/r2rml/ |
+| Direct Mapping of relational data to RDF (W3C Rec) | https://www.w3.org/TR/rdb-direct-mapping/ |
+| RML (generic mapping language) | https://rml.io/specs/rml/ |
+| Morph-KGC (R2RML/RML engine, used in CI) | https://github.com/morph-kgc/morph-kgc |
+| Ontop (virtual knowledge graphs) | https://ontop-vkg.org/ |
+| Stardog virtual graphs (SMS2) | https://docs.stardog.com/virtual-graphs/mapping-data-sources |
+| Agent-OM: LLM agents for ontology matching (VLDB 2025) | https://arxiv.org/abs/2312.00326 |
+| LogMap (ontology matching) | https://github.com/ernestojimenezruiz/logmap-matcher |
+
 ## 13.3 Tools
 
 | Category | Tools |
@@ -135,6 +148,16 @@
 | Graph visualisation | Graph Explorer, Neo4j Bloom, Gephi, Cytoscape, yEd, G.V() |
 | Semantic layers | dbt Semantic Layer (MetricFlow), Cube, AtScale, Looker, Power BI / Fabric, Snowflake semantic views, Databricks metric views, Malloy |
 | Neo4j ⇄ RDF/OWL | neosemantics (n10s) |
+
+### Practice
+
+| Resource | Link |
+|---|---|
+| Turtle editor / viewer (paste Turtle, see the graph; try SHACL and SPARQL) | https://semantechs.co.uk/turtle-editor-viewer/ |
+| Turtle syntax video walkthrough | https://www.youtube.com/watch?v=Jx3TjC_Xz20 |
+| JSON-LD playground | https://json-ld.org/playground/ |
+| SHACL Playground | https://shacl.org/playground/ |
+| This repo, offline | `python examples/retail/scripts/run_sparql_local.py --shacl` · `python examples/retail/scripts/demo_reasoning.py` |
 
 ## 13.4 Further reading
 
@@ -165,16 +188,20 @@
 | **COA (AWS Context Ontology Accelerator)** | Open-source AWS ontology layer for AI agents: induces, grounds and reasons over OWL ontologies, stores them in Neptune, serves metrics/ontology/documents via MCP |
 | **Competency question** | A question the ontology must be able to answer; drives design and tests |
 | **CONSTRUCT** | SPARQL form that returns a new graph |
+| **Data agent** | An LLM that answers questions about data by calling tools (SQL, metrics, graph queries) rather than from memory |
 | **Datatype property** | OWL property whose value is a literal (`price`) |
 | **DAX** | Data Analysis Expressions: the measure language of Power BI / Analysis Services |
+| **Defined class** | A class with necessary and sufficient conditions (`owl:equivalentClass`); a reasoner classifies matching individuals into it, like structural / duck typing |
 | **Description logic (DL)** | Family of logics underpinning OWL 2 DL |
 | **Dimension (BI)** | An attribute you group or filter by (customer, month, category) |
+| **Direct Mapping** | W3C rule set that turns every table into a class and every column into a property, with no configuration |
 | **Domain / range** | Classes of a property's subject / object; in RDFS they *infer* types |
 | **DTDL** | Digital Twins Definition Language: Microsoft's JSON-LD-based modelling language |
 | **Edge / relationship** | A connection between two nodes in a property graph; has a type and optional properties |
 | **Entailment** | What logically follows from the stated triples + ontology |
 | **Fact table** | Table of events/measurements at a declared grain (order_lines) |
 | **Fan-out** | Double counting when a one-to-many join repeats rows before aggregation |
+| **Functional property** | At most one value per subject (0..1); a second value implies sameAs (objects) or inconsistency (literals), not rejection |
 | **GQL** | ISO standard property-graph query language (2024) |
 | **Grain** | What one row of a table represents |
 | **GraphRAG** | Retrieval-augmented generation that retrieves from a (knowledge) graph |
@@ -184,6 +211,7 @@
 | **Individual / instance** | A member of a class (`ex:C1`) |
 | **Inference / reasoning** | Deriving new facts from axioms (e.g. subclass, inverse, transitivity) |
 | **Instance data / instance graph** | The individuals and facts (ABox), as opposed to the schema; what people usually mean by "the graph" |
+| **Inverse functional property** | A property whose value identifies the subject (at most one subject per value) |
 | **IRI** | Internationalised Resource Identifier — the global name of an RDF resource |
 | **JSON-LD** | JSON serialization of RDF with a `@context` |
 | **Knowledge graph** | Schema (ontology) + instance data, usually with inferred facts, identity and provenance; a graph of entities and relations organised by the ontology |
@@ -197,17 +225,21 @@
 | **MetricFlow** | dbt's semantic-layer engine: semantic models + metrics → SQL |
 | **Named graph** | A set of triples identified by an IRI (the 4th element of a quad) |
 | **N-ary relation / reification** | Turning a relationship into a node so it can carry attributes (`OrderLine`) |
+| **OBDA (ontology-based data access)** | Querying databases through an ontology: SPARQL is rewritten to SQL via mappings (e.g. Ontop) |
 | **Object property** | OWL property linking two individuals (`placedBy`) |
 | **Ontology** | Formal, explicit specification of a shared conceptualisation |
 | **Open world (OWA)** | Missing = unknown; OWL reasoning works this way |
 | **openCypher** | Open specification of the Cypher language |
 | **OWL 2** | W3C Web Ontology Language; profiles EL / QL / RL; DL and Full semantics |
+| **Primitive class** | A class with only necessary conditions (`rdfs:subClassOf`); members must be asserted, like an explicitly implemented interface |
 | **Property chain** | OWL axiom deriving a property from a path (`placedOrder ∘ hasLine ∘ forProduct ⊑ purchased`) |
 | **Property path** | SPARQL regular-expression over predicates (`subCategoryOf*`) |
 | **Quad** | Triple + graph name |
+| **RBox** | Role box: axioms about properties (characteristics, sub-properties, inverses, chains); often folded into the TBox |
 | **RDF** | Resource Description Framework — graph data model of triples |
 | **RDF 1.2 / triple terms** | Successor of RDF-star: triples can be the object of other triples (statement annotation) |
 | **RDFS** | RDF Schema — classes, subclass, domain, range, labels |
+| **Restriction** | A condition built from a property (`some`, `only`, `value`, `min`, `max`, `exactly`) describing an anonymous class |
 | **Semantic model / semantic layer** | Business-friendly model of tables: dimensions, metrics, joins, defined once for all consumers |
 | **SHACL** | Shapes Constraint Language — validates RDF data |
 | **SKOS** | Simple Knowledge Organisation System — taxonomies and thesauri |

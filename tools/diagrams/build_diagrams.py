@@ -628,6 +628,108 @@ def ecosystem_poster():
     return c
 
 
+# ---------------------------------------------------------------------------
+@diagram("ontology-to-tables")
+def ontology_to_tables():
+    c = Canvas(1000, 540, "Mapping warehouse tables to the ontology with R2RML")
+    c.heading("Mapping tables and columns to the ontology", "examples/retail/mapping/retail-r2rml.ttl (W3C R2RML)")
+    c.text(170, 88, "warehouse tables", size=13, weight="700", color=NEUTRAL[1])
+    c.text(500, 88, "R2RML rule", size=13, weight="700", color=MUTED)
+    c.text(830, 88, "ontology / knowledge graph", size=13, weight="700", color=ONTO[1])
+    groups = [("products", "retail:Product", [("product_id", "ex:P1  (IRI)", "rr:template"),
+                                               ("name", "retail:name", "rr:column"),
+                                               ("list_price", "retail:price  xsd:decimal", "rr:column + rr:datatype"),
+                                               ("category_id", "retail:inCategory → ex:CAT-…", "FK → object property")]),
+              ("customers", "retail:Customer / PremiumCustomer", [("customer_id", "ex:C1  (IRI)", "rr:template"),
+                                                                    ("is_premium = 'true'", "a retail:PremiumCustomer", "rr:sqlQuery … WHERE")]),
+              ("orders", "retail:Order", [("order_id", "ex:O1  (IRI)", "rr:template"),
+                                          ("customer_id", "retail:placedBy → ex:C1", "FK → object property"),
+                                          ("order_date", "retail:orderDate  xsd:date", "rr:column + rr:datatype")])]
+    y = 104
+    for table, cls, rows in groups:
+        h = 30 + 27 * len(rows)
+        c.rect(40, y, 260, h, fill=NEUTRAL[0], stroke=NEUTRAL[1], rx=8)
+        c.text(56, y + 21, table, size=13.5, weight="700", anchor="start", color=NEUTRAL[1], mono=True)
+        c.rect(700, y, 260, h, fill=ONTO[0], stroke=ONTO[1], rx=8)
+        c.text(716, y + 21, cls, size=13, weight="700", anchor="start", color=ONTO[1])
+        for i, (col, prop, rule) in enumerate(rows):
+            ry = y + 46 + i * 27
+            c.text(56, ry, col, size=12.5, anchor="start", mono=True)
+            c.text(716, ry, prop, size=12.5, anchor="start", mono=True)
+            c.line(302, ry - 4, 698, ry - 4, color="#98A2B3", sw=1.2)
+            c.label(500, ry, rule, size=11, color=INK)
+        y += h + 12
+    c.rect(40, 482, 920, 38, fill=GOOD[0], stroke=GOOD[1])
+    c.text(500, 506, "✓ scripts/check_r2rml.py: the mapping generates 165 triples = retail-data.ttl (checked in CI)",
+           size=12.5, color=GOOD[1])
+    return c
+
+
+# ---------------------------------------------------------------------------
+@diagram("rdbms-vs-graph")
+def rdbms_vs_graph():
+    c = Canvas(1000, 420, "SQL joins versus graph traversal")
+    c.heading("\"Bought the earbuds, also bought…\": joins vs traversal", "same question, same answer, two ways of finding relationships")
+    c.rect(24, 80, 470, 276, fill="#FCFCFD", stroke="#D0D5DD")
+    c.text(259, 106, "Relational: join at query time", size=14, weight="600", color=NEUTRAL[1])
+    tables = ["products", "order_lines", "orders", "orders", "order_lines", "products"]
+    for i, t in enumerate(tables):
+        x, y = 48 + (i % 3) * 150, 130 + (i // 3) * 110
+        c.rect(x, y, 120, 44, fill=NEUTRAL[0], stroke=NEUTRAL[1], rx=6)
+        c.text(x + 60, y + 27, t, size=12.5, mono=True)
+    for (x1, y1, x2, y2) in [(168, 152, 196, 152), (318, 152, 346, 152), (408, 174, 408, 238), (346, 262, 318, 262), (196, 262, 168, 262)]:
+        c.line(x1, y1, x2, y2, arrow=False, color=NEUTRAL[1], sw=1.6)
+    for x, y in [(182, 143), (332, 143), (423, 210), (332, 254), (182, 254)]:
+        c.text(x, y, "⋈", size=15, color=SEM[1], weight="700")
+    c.text(259, 330, "5 joins · cost grows with table sizes and hops", size=12, color=MUTED)
+    c.rect(506, 80, 470, 276, fill="#FCFCFD", stroke="#D0D5DD")
+    c.text(741, 106, "Graph: follow stored edges", size=14, weight="600", color=GRAPH[1])
+    nodes = [("Earbuds", 560, 170, GRAPH), ("O3", 650, 170, EXAMPLE), ("Alice", 740, 170, ONTO),
+             ("O1", 830, 170, EXAMPLE), ("Laptop", 920, 170, GRAPH)]
+    for name, x, y, col in nodes:
+        c.circle(x, y, 32, col[0], col[1], sw=2)
+        c.text(x, y + 5, name, size=12, weight="600", color=col[1])
+    for (x1, x2, lab) in [(618, 592, "CONTAINS"), (708, 682, "PLACED"), (772, 798, "PLACED"), (862, 888, "CONTAINS")]:
+        c.line(x1, 170, x2, 170, color=MUTED)
+        c.text((x1 + x2) / 2, 128, lab, size=10, color=MUTED)
+    c.rect(560, 236, 360, 58, fill="#fff", stroke=GRAPH[1], rx=6)
+    c.text(740, 258, "MATCH (t)<-[:CONTAINS]-()<-[:PLACED]-(c)", size=11.5, mono=True)
+    c.text(740, 278, "      -[:PLACED]->()-[:CONTAINS]->(other)", size=11.5, mono=True)
+    c.text(741, 330, "cost grows with the part of the graph visited", size=12, color=MUTED)
+    c.rect(24, 368, 952, 36, fill=GOOD[0], stroke=GOOD[1])
+    c.text(500, 391, "same answer: Knowledge Graphs 101 · Laptop Pro 14 · USB-C Charger 65W (1 buyer each)", size=12.5, color=GOOD[1])
+    return c
+
+
+# ---------------------------------------------------------------------------
+@diagram("data-agent")
+def data_agent():
+    c = Canvas(1000, 520, "What a data agent needs")
+    c.heading("A data agent needs context, not just SQL access", "each component answers a different kind of question")
+    c.box(250, 80, 500, 56, "\"Why did premium Electronics revenue drop, and who are those customers?\"", [],
+          EXAMPLE, title_size=13.5)
+    c.box(380, 160, 240, 56, "Data agent (LLM + tools)", [], NEUTRAL, title_size=14)
+    c.line(500, 136, 500, 158)
+    tools = [(30, "Semantic model", "how much? how many?", ["governed metrics · joins", "revenue = Σ qty × price"], SEM),
+             (275, "Ontology", "what does it mean?", ["vocabulary · synonyms", "premium ⊑ customer"], ONTO),
+             (520, "Knowledge graph", "who? how connected?", ["entities · paths · provenance", "Alice → O3 → Earbuds"], GRAPH),
+             (765, "Documents", "why?", ["policies · definitions", "RAG retrieval"], NEUTRAL)]
+    for x, t, q, body, col in tools:
+        c.rect(x, 252, 205, 128, fill=col[0], stroke=col[1])
+        c.text(x + 102, 278, t, size=15, weight="700", color=col[1])
+        c.text(x + 102, 299, q, size=12.5, color=INK, italic=True)
+        c.lines(x + 102, 326, body, size=11.5, gap=18, color=MUTED)
+        c.line(500, 218, x + 102, 250, dash="3 3")
+    c.rect(30, 408, 940, 46, fill="#F9FAFB", stroke="#D0D5DD")
+    c.text(500, 436, "same data underneath: warehouse tables · graph store · documents (linked by IRIs and mappings)",
+           size=12.5, color=INK)
+    c.text(500, 488, "start with the semantic model for numbers · add the ontology when vocabulary diverges · add the KG for relationships",
+           size=12, color=MUTED, italic=True)
+    for x in (132, 377, 622, 867):
+        c.line(x, 382, x, 406, arrow=False, color="#98A2B3")
+    return c
+
+
 def main() -> None:
     OUT.mkdir(parents=True, exist_ok=True)
     for name, fn in DIAGRAMS.items():

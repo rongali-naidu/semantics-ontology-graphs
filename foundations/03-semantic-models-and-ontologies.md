@@ -81,4 +81,4 @@ built on it.
 | Explaining *why* an answer is what it is | Knowledge graph (paths, provenance) |
 | All of the above for AI agents | Ontology → mapping → semantic model + KG |
 
-Next: pick a topic: [ontologies](../ontologies/README.md) · [graphs](../graphs/README.md) · [semantic models](../semantic-models/README.md)
+Next: [4. Does a data agent need an ontology, a semantic model and a knowledge graph?](04-data-agents.md) · or pick a topic: [ontologies](../ontologies/README.md) · [graphs](../graphs/README.md) · [semantic models](../semantic-models/README.md)

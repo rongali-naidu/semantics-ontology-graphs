@@ -101,4 +101,4 @@ Also in [GQL](../../examples/retail/property-graph/gql/queries.gql) and
 5. Load the data into Neptune both ways (RDF and property graph) and compare
    query plans ([Neptune loading](../../graphs/implementations/providers/aws/loading.md)).
 
-Next: [ontology implementations](../implementations/README.md) · or the graphs topic: [1. Property graphs](../../graphs/concepts/01-property-graphs.md)
+Next: [5. Ontologies for software engineers: from OOP to OWL](05-ontology-for-software-engineers.md)

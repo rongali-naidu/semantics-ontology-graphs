@@ -12,6 +12,9 @@ over it (OWL, RDFS, SKOS, SHACL, RDF, SPARQL).
 | 2 | [Documenting an ontology: RDFS, OWL, SKOS, SHACL; Turtle, JSON-LD, RDF/XML, Manchester...](concepts/02-documenting-ontologies.md) |
 | 3 | [Querying ontologies and RDF knowledge graphs with SPARQL](concepts/03-querying-rdf-sparql.md) |
 | 4 | [The retail ordering example, end to end](concepts/04-retail-example.md) |
+| 5 | [Ontologies for software engineers: from OOP to OWL (primitive vs defined classes)](concepts/05-ontology-for-software-engineers.md) |
+| 6 | [Properties, restrictions and axioms (TBox, RBox, ABox; functional; transitive…)](concepts/06-properties-restrictions-axioms.md) |
+| 7 | [Mapping an ontology to tables and columns (R2RML, OBDA, ETL, LLM, COA)](concepts/07-mapping-ontology-to-tables.md) |
 
 ## Implementations
 
@@ -25,6 +28,7 @@ SAP (Knowledge Graph) · Palantir (Foundry Ontology) · Neo4j neosemantics.
 [`ontology/`](../examples/retail/ontology/) (OWL + SHACL) ·
 [`rdf/`](../examples/retail/rdf/) (data in 6 formats) ·
 [`sparql/`](../examples/retail/sparql/) (13 queries/updates) ·
+[`mapping/`](../examples/retail/mapping/) (R2RML, verified) ·
 [Ossie ontology](../examples/retail/semantic-model/ossie/retail.ontology.yaml)
 
 Related: [foundations](../foundations/README.md) · [graphs](../graphs/README.md) · [semantic models](../semantic-models/README.md)

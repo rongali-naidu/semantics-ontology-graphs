@@ -156,4 +156,4 @@ relational DB and you just want path queries.
 | Upsert | `DELETE/INSERT WHERE` | `MERGE` | `mergeV()/mergeE()` |
 | Explain | `explain=` (Neptune) | `EXPLAIN` / `/openCypher/explain` | `.explain()` / `/gremlin/explain` |
 
-Next: [graph implementations](../implementations/README.md) (Neptune, Spanner Graph, Fabric Graph, Neo4j...) · or the semantic-models topic: [1. What is a semantic model?](../../semantic-models/concepts/01-what-is-a-semantic-model.md)
+Next: [4. RDBMS vs graph database, knowledge graph vs property graph](04-relational-vs-graph.md) · [graph implementations](../implementations/README.md) (Neptune, Spanner Graph, Fabric Graph, Neo4j...) · or the semantic-models topic: [1. What is a semantic model?](../../semantic-models/concepts/01-what-is-a-semantic-model.md)

@@ -1,0 +1,29 @@
+#############################################################################
+#  Defined classes for the retail ontology (OWL 2)
+#  -----------------------------------------------------------------------
+#  A PRIMITIVE class only gets members you assert ("ex:C1 a retail:Customer").
+#  A DEFINED class (owl:equivalentClass) states necessary AND sufficient
+#  conditions, so a reasoner puts every matching individual in it - like
+#  structural / duck typing. Demonstrated by scripts/demo_reasoning.py.
+#############################################################################
+@prefix owl:    <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs:   <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix retail: <https://example.org/retail/ontology#> .
+@prefix ex:     <https://example.org/retail/data/> .
+
+# "A delivered order is an Order whose status is DELIVERED" (owl:hasValue)
+retail:DeliveredOrder a owl:Class ;
+    rdfs:label "Delivered order"@en ;
+    owl:equivalentClass [ a owl:Class ;
+        owl:intersectionOf ( retail:Order
+                             [ a owl:Restriction ; owl:onProperty retail:status ; owl:hasValue "DELIVERED" ] ) ] .
+
+# "A laptop buyer is a Customer who purchased something in the Laptops
+#  category" (owl:someValuesFrom, nested; uses the purchased property chain)
+retail:LaptopBuyer a owl:Class ;
+    rdfs:label "Laptop buyer"@en ;
+    owl:equivalentClass [ a owl:Class ;
+        owl:intersectionOf ( retail:Customer
+                             [ a owl:Restriction ; owl:onProperty retail:purchased ;
+                               owl:someValuesFrom [ a owl:Restriction ; owl:onProperty retail:inCategory ;
+                                                    owl:hasValue ex:CAT-LAPTOPS ] ] ) ] .

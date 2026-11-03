@@ -31,6 +31,10 @@ answers.
 | a developer looking at graph databases | [graphs](graphs/README.md) |
 | from BI / analytics | [semantic models](semantic-models/README.md) |
 | choosing between ontology and semantic layer for AI agents | [foundations 3: semantic models and ontologies](foundations/03-semantic-models-and-ontologies.md) |
+| building a data agent | [foundations 4: what a data agent needs](foundations/04-data-agents.md) |
+| a software engineer new to OWL | [ontologies 5: from OOP to OWL](ontologies/concepts/05-ontology-for-software-engineers.md) |
+| mapping your tables to an ontology | [ontologies 7: R2RML, OBDA, ETL, LLM, COA](ontologies/concepts/07-mapping-ontology-to-tables.md) |
+| deciding between a relational and a graph database | [graphs 4: RDBMS vs graph](graphs/concepts/04-relational-vs-graph.md) |
 | looking for one provider | the [provider index](#provider-index) below |
 | looking for a spec or a definition | [reference](reference/standards-links-glossary.md) |
 

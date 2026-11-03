@@ -1,0 +1,4 @@
+# R2RML check (separate from the main requirements: morph-kgc needs rdflib < 7.3)
+morph-kgc==2.10.0
+SQLAlchemy==2.1.6
+rdflib==7.2.1

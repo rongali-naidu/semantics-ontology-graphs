@@ -30,6 +30,20 @@ jobs:
       - name: Apache Ossie official schemas (pinned commit)
         run: make check-ossie
 
+  r2rml:
+    name: R2RML mapping (Morph-KGC)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: examples/retail/mapping/requirements.txt
+      - run: python -m pip install -r examples/retail/mapping/requirements.txt
+      - name: Warehouse tables -> R2RML -> RDF equals retail-data.ttl
+        run: make check-r2rml PYTHON=python
+
   dbt-metricflow:
     name: dbt + MetricFlow (DuckDB)
     runs-on: ubuntu-latest

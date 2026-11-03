@@ -38,12 +38,21 @@ Using the retail example in this repo
 
 ### TBox vs ABox
 
-Description-logic people split a knowledge base into two parts:
+Description logic, the logic underneath OWL, splits a knowledge base into
+parts named after what they hold:
 
-* **TBox** (terminology): classes, properties, axioms — *the schema*.
-  → `ontology/retail-ontology.ttl`
-* **ABox** (assertions): facts about individuals — *the data*.
-  → `rdf/retail-data.ttl`
+* **TBox**, where **T = terminological**: the *terminology*, meaning classes,
+  properties and axioms. This is *the schema*.
+  → `ontology/retail-ontology.ttl` (e.g. `PremiumCustomer ⊑ Customer`)
+* **ABox**, where **A = assertional**: *assertions* about specific
+  individuals. This is *the data*.
+  → `rdf/retail-data.ttl`. Two kinds:
+  * **class assertions**: what type something is (`Alice : PremiumCustomer`);
+  * **role (property) assertions**: how things relate or what value they
+    have (`placedBy(O1, Alice)`, `name(Alice, "Alice Johnson")`).
+* **RBox**, where **R = role**, sometimes listed separately: axioms about the
+  properties themselves (`subCategoryOf` is transitive, `placedOrder` is the
+  inverse of `placedBy`). Many texts fold it into the TBox.
 
 Ontology + data (+ often a reasoner) = **knowledge graph**.
 
@@ -129,4 +138,4 @@ understands schema.org understands our products.
 | Schema changes | add triples | migrations | re-tree |
 | Rules | logical axioms → inference | constraints → rejection | none |
 
-Next: [2. Documenting (writing down) an ontology](02-documenting-ontologies.md)
+Next: [2. Documenting (writing down) an ontology](02-documenting-ontologies.md) · coming from programming? [5. Ontologies for software engineers](05-ontology-for-software-engineers.md)

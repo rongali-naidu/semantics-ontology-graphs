@@ -11,6 +11,7 @@ them (Cypher, Gremlin, ISO GQL, SQL/PGQ, SPARQL).
 | 1 | [Property graphs (and mapping RDF ⇄ property graph)](concepts/01-property-graphs.md) |
 | 2 | [Graph databases](concepts/02-graph-databases.md) |
 | 3 | [Querying property graphs: Cypher, Gremlin, GQL, SQL/PGQ](concepts/03-querying-property-graphs.md) |
+| 4 | [RDBMS vs graph database, and knowledge graph vs property graph](concepts/04-relational-vs-graph.md) |
 
 RDF and SPARQL are covered in the ontologies topic
 ([SPARQL](../ontologies/concepts/03-querying-rdf-sparql.md)), since RDF is
