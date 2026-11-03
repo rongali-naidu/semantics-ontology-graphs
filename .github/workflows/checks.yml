@@ -27,6 +27,8 @@ jobs:
         run: make check-generated
       - name: Links, SPARQL, SHACL, consistency, semantic model
         run: make check
+      - name: Unit tests (incl. broken-data rejection) and quickstart notebook
+        run: python -m pytest -q
       - name: Apache Ossie official schemas (pinned commit)
         run: make check-ossie
 

@@ -730,6 +730,41 @@ def data_agent():
     return c
 
 
+# ---------------------------------------------------------------------------
+@diagram("ai-era")
+def ai_era():
+    c = Canvas(1000, 470, "Semantics and LLMs, both directions")
+    c.heading("Semantics and LLMs need each other", "LLMs bring language and reasoning; semantics brings the enterprise's meaning, facts and numbers")
+    c.box(30, 110, 300, 250, "LLMs / agents", ["fluent language", "reasoning and planning", "tool calling (MCP)", "",
+                                                "but: no built-in knowledge", "of YOUR terms, tables,", "rules or numbers"],
+          EXAMPLE, title_size=17, body_size=13, body_gap=24)
+    c.rect(670, 110, 300, 250, fill="#fff", stroke=NEUTRAL[1])
+    c.text(820, 140, "Semantics", size=17, weight="700", color=NEUTRAL[1])
+    for i, (t, s, col) in enumerate([("Ontology", "meaning · vocabulary · rules", ONTO),
+                                      ("Knowledge graph", "facts · connections · identity", GRAPH),
+                                      ("Semantic model", "governed numbers", SEM)]):
+        y = 158 + i * 64
+        c.rect(690, y, 260, 54, fill=col[0], stroke=col[1])
+        c.text(820, y + 23, t, size=14, weight="700", color=col[1])
+        c.text(820, y + 42, s, size=11.5, color=INK)
+    c.path("M 668 175 C 560 150, 440 150, 332 175", color=GOOD[1], sw=2.2)
+    c.label(500, 135, "grounds the LLM", size=13, color=GOOD[1])
+    for i, s in enumerate(["exact meaning, fewer wrong terms", "facts, paths, provenance (GraphRAG)",
+                           "correct metrics (text-to-metric)", "guardrails: validate output (SHACL)"]):
+        c.text(500, 172 + i * 19, s, size=11.5, color=INK)
+    c.path("M 332 300 C 440 330, 560 330, 668 300", color=SEM[1], sw=2.2)
+    c.label(500, 350, "helps build semantics", size=13, color=SEM[1])
+    for i, s in enumerate(["draft ontologies & mappings (R2RML)", "align to FIBO / schema.org",
+                           "extract entities from text"]):
+        c.text(500, 262 + i * 19, s, size=11.5, color=INK)
+    c.rect(30, 392, 940, 54, fill=WARN[0], stroke=WARN[1])
+    c.text(500, 415, "the rule that keeps it safe:  LLM proposes  →  human approves  →  machine checks",
+           size=14, weight="600", color=INK)
+    c.text(500, 435, "(this repo's CI: R2RML must reproduce the graph · SHACL must pass · every format gives the same answers)",
+           size=11.5, color=MUTED)
+    return c
+
+
 def main() -> None:
     OUT.mkdir(parents=True, exist_ok=True)
     for name, fn in DIAGRAMS.items():

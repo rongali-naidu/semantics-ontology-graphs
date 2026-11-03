@@ -10,23 +10,25 @@ One running example, an **Amazon-style retail ordering domain**, is
 expressed in every form: an OWL ontology, RDF in six serializations, a
 property graph, warehouse tables, an **Apache Ossie** semantic model, and
 product formats from AWS, Google Cloud, Microsoft, Oracle, Snowflake,
-Databricks, SAP, Salesforce, Palantir, dbt, AtScale, Cube and Neo4j. CI checks that they give the same
-answers.
+Databricks, SAP, Salesforce, Palantir, dbt, AtScale, Cube and Neo4j, and
+[automated checks](#how-do-we-know-the-examples-are-right) prove they all
+give the same answers.
 
 ![Ecosystem poster: a hub with six segments (foundations, ontologies, graphs, semantic models, standards, AI and agents), each with a rail of concepts and products, and the retail example underneath](assets/diagrams/ecosystem-poster.svg)
 
-*Poster for sharing: [PNG, 2×](assets/posters/ecosystem-poster.png) (exported from the SVG, which `make diagrams` regenerates).*
-
-> **Early release.** Every implementation page states how far it's verified;
-> see [verification levels](#verification-levels).
+[Download the poster as an image (PNG)](assets/posters/ecosystem-poster.png)
 
 ![How this repository is organised: foundations, three topics (ontologies, graphs, semantic models) with concepts and implementations, one shared retail example](assets/diagrams/repo-map.svg)
+
+Also at the top level: [`notebooks/`](notebooks/) (a runnable quickstart) and [`tests/`](tests/) (the automated checks as unit tests).
 
 ## Start here
 
 | If you are... | Read |
 |---|---|
 | new to all of it | [foundations](foundations/README.md), then any topic |
+| wondering why any of this matters for AI | [foundations 5: the AI era](foundations/05-ai-era.md) |
+| wanting to try it in 10 minutes | the [quickstart notebook](notebooks/quickstart.ipynb) |
 | new to ontologies / the Semantic Web | [ontologies](ontologies/README.md) |
 | a developer looking at graph databases | [graphs](graphs/README.md) |
 | from BI / analytics | [semantic models](semantic-models/README.md) |
@@ -82,31 +84,57 @@ levels) · 3 sellers · 4 reviews.
 | Warehouse tables | 8 tables | SQL → same |
 | Semantic model | 8 datasets, 8 metrics | Ossie / MetricFlow / COA metrics → same |
 
-## Run the checks (no cloud account needed)
+## How do we know the examples are right?
+
+The same retail data appears here in many forms: RDF files, a property
+graph, warehouse tables, semantic models and product formats. With that
+many copies, it's easy for one to drift and quietly give a different
+answer. So the repo includes **automated checks**: small scripts that run
+the examples and compare their answers with known results, for example
+"Alice's revenue is 1498.97" in every format.
+
+GitHub runs them on every change. The **checks** badge at the top of this
+page is green when everything passes and turns red if any example breaks.
+
+| Check | What it proves |
+|---|---|
+| SPARQL queries | each query returns the answer the docs show |
+| SHACL validation | the data obeys the ontology's rules, and 9 kinds of deliberately broken data are rejected |
+| Reasoning demo | the inferences described in the chapters really happen (subclasses, inverses, defined classes…) |
+| Format consistency | the 6 RDF files and the property-graph files contain exactly the same data |
+| Semantic models | warehouse SQL, Apache Ossie and AWS COA metrics give the same numbers as SPARQL |
+| R2RML mapping | mapping the tables back to the ontology rebuilds exactly the same knowledge graph |
+| dbt + MetricFlow | a real semantic-layer engine computes the same numbers |
+| Links and diagrams | every link in the docs works and the diagrams match the data |
+
+**Not every page can be checked this way.** Products that need a paid
+account or have no local version (Snowflake, Power BI, Neptune…) are
+written from their documentation. Each product page says which kind it is:
+see [verification levels](#verification-levels) below.
+
+### Run the checks yourself (no cloud account needed)
 
 ```bash
-make install          # pinned Python dependencies
-make check            # links, SPARQL, SHACL, OWL RL, graph consistency, warehouse, Ossie + COA metrics
-make check-ossie      # + official Apache Ossie schemas at the pinned commit
-pip install -r semantic-models/implementations/tools/dbt/requirements.txt
-make dbt              # dbt build + MetricFlow, results compared with the SPARQL answers
-make help             # all targets
+make install          # install the pinned Python packages
+make check            # everything in the table above except R2RML and dbt
+pytest                # the same checks as unit tests (tests/)
+make help             # all commands, including check-r2rml and dbt
 ```
 
-`examples/retail/rdf/retail-data.ttl` is the only hand-edited data file;
-`make generate` rebuilds every other format from it (data flow in the
-[Makefile](Makefile) and [CONTRIBUTING.md](CONTRIBUTING.md#the-data-rule)).
-CI runs all checks on every push and weekly.
+The retail data is edited in one file only,
+[`retail-data.ttl`](examples/retail/rdf/retail-data.ttl); `make generate`
+rebuilds every other format from it ([details](CONTRIBUTING.md#the-data-rule)).
 
 ## Verification levels
 
-Every implementation page starts with one of these and a review date:
+Every product page starts with one of these labels and the date it was last
+reviewed:
 
 | Level | Meaning |
 |---|---|
-| ✅ **executed** | runs end to end in CI and is compared with the SPARQL answers |
-| 🟡 **checked** | files are parsed or validated in CI, or the generated data or definitions are proven consistent; not run on the product itself |
-| ⚪ **documented** | written to the product's documented syntax; not run |
+| ✅ **executed** | runs automatically on every change and matches the known answers |
+| 🟡 **checked** | the files are validated automatically, but not run on the product itself |
+| ⚪ **documented** | written from the product's documentation; not run (needs an account or service) |
 
 | ✅ Executed | 🟡 Checked | ⚪ Documented |
 |---|---|---|
@@ -114,7 +142,7 @@ Every implementation page starts with one of these and a review date:
 | 6 RDF serializations (isomorphic) | AWS COA metric definitions | COA deployment, Neptune loader + clients |
 | Warehouse `metrics.sql` (SQLite) | AtScale SML, Cube model | Looker, Power BI, Oracle (design), Snowflake, Databricks |
 | Apache Ossie model, ontology, mapping | | Spanner / BigQuery / Fabric Graph, DTDL, GraphFrames, Neo4j |
-| dbt + MetricFlow (DuckDB) | | |
+| dbt + MetricFlow (DuckDB) · R2RML mapping (Morph-KGC) | | |
 
 Moving ⚪ items up is the plan in [ROADMAP.md](ROADMAP.md). If something
 doesn't run on your product version, please open an issue or PR.

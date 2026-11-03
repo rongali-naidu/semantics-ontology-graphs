@@ -87,4 +87,4 @@ meaning, a graph for connections**, served to the agent as tools.
 * **Test answers against known results**, as this repo's CI does: SPARQL =
   SQL = MetricFlow = Ossie = COA metric SQL.
 
-Back to: [foundations](README.md)
+Next: [5. Why this matters in the AI era](05-ai-era.md) · back to [foundations](README.md)

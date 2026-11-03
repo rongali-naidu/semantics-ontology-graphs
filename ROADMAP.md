@@ -16,7 +16,8 @@ Legend: ✅ done · 🔜 next · 📋 planned · 💭 idea
   Morph-KGC in CI; OWL reasoning demo (subclass, inverse, chain, defined
   classes, functional-property behaviour) in CI
 - ✅ Chapters: OOP → OWL, properties/restrictions/axioms, mapping ontologies
-  to tables, RDBMS vs graph, data agents; ecosystem poster
+  to tables, RDBMS vs graph, data agents, AI era; ecosystem poster
+- ✅ pytest suite with broken-data rejection tests; executed quickstart notebook
 - ✅ CI: SPARQL, SHACL, OWL RL, graph consistency, warehouse + Ossie metrics,
   Ossie official schemas (pinned commit), dbt + MetricFlow, link checker,
   "generated files are current" check; weekly scheduled run
