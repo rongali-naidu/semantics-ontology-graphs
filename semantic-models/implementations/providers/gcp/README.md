@@ -11,6 +11,16 @@
 
 Google Cloud also appears in [graphs (Spanner Graph, BigQuery Graph)](../../../../graphs/implementations/providers/gcp/README.md).
 
+## Overview
+
+* **Looker** is a semantic model as code. A **LookML project** is a git repository (views, explores, measures). A Looker instance compiles each question into SQL against your warehouse (BigQuery and others), so no data is copied.
+* **How you change it:** in development mode on a git branch, then deploy to production.
+* **Who uses it:**
+  * Looker itself;
+  * Looker Studio, Sheets and other BI tools, through connectors;
+  * **conversational analytics** with Gemini.
+* **Knowledge Catalog** ingests LookML, plus semantic models from other vendors, into one context graph for agents.
+
 ## How the concepts map
 
 * LookML **views** = Ossie datasets, **explores** = join graphs,
@@ -31,4 +41,8 @@ looker/
   views/*.view.lkml          one view per table; revenue, units_sold, order_count, average_order_value, discount_amount, buyer_count, average_rating
 ```
 
-Docs: [LookML](https://cloud.google.com/looker/docs/what-is-lookml)
+## Product documentation
+
+* [What is LookML?](https://cloud.google.com/looker/docs/what-is-lookml): views, explores, measures
+* [Looker documentation](https://cloud.google.com/looker/docs): development mode, git, deployment, conversational analytics
+* [Expanded semantic model support in Knowledge Catalog](https://cloud.google.com/blog/products/data-analytics/expanded-semantic-model-support-in-knowledge-catalog): LookML and others in the context graph

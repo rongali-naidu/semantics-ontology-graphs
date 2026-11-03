@@ -12,6 +12,14 @@
 
 Databricks also appears in [graphs (GraphFrames)](../../../../graphs/implementations/providers/databricks/README.md).
 
+## Overview
+
+* **Metric views are Unity Catalog objects** defined in YAML: source, joins, dimensions and measures. They get Unity Catalog permissions and lineage like any table or view.
+* **How you query them:** from SQL with `MEASURE()`, and from dashboards and Genie, so every consumer uses the same definitions.
+* **How you deploy them:** keep the YAML in git and deploy with **Databricks Asset Bundles**.
+* **For agents:** Genie spaces answer questions over metric views, and Genie Ontology uses them as its governed core.
+* **Portability:** an Apache Ossie converter turns metric views to and from Ossie.
+
 ## How the concepts map
 
 * A metric view = one Ossie fact dataset plus its joins: `source` is the
@@ -23,4 +31,8 @@ Databricks also appears in [graphs (GraphFrames)](../../../../graphs/implementat
 
 Check the current docs for nested-join support on your runtime.
 
-Docs: [Metric views](https://docs.databricks.com/aws/en/metric-views/)
+## Product documentation
+
+* [Metric views](https://docs.databricks.com/aws/en/metric-views/): YAML spec, `MEASURE()`, joins
+* [Genie (AI/BI)](https://docs.databricks.com/aws/en/genie/): natural-language questions over metric views
+* [Databricks Asset Bundles](https://docs.databricks.com/aws/en/dev-tools/bundles/): deploying definitions from git

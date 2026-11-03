@@ -12,6 +12,18 @@ Databricks also appears in
 [graphs (GraphFrames, OntoBricks triple store)](../../../../graphs/implementations/providers/databricks/README.md) and
 [semantic models (metric views)](../../../../semantic-models/implementations/providers/databricks/README.md).
 
+## Overview
+
+* **Genie Ontology** is **built automatically** for Genie from Unity Catalog metadata (glossary terms, domains, metric views, certifications) and from usage (lineage, query history). There is nothing to author. You steer it by certifying metric views and curating terms. Public preview (2026).
+* **OntoBricks** (Databricks Labs) is an **app you deploy in your workspace**:
+  * design or import OWL;
+  * map it to Unity Catalog tables with R2RML;
+  * materialize triples (Lakebase/Postgres by default, Delta tables or Neo4j);
+  * reason with OWL 2 RL, SWRL and SHACL;
+  * query with SPARQL, GraphQL or MCP.
+* OntoBricks is v0.9.x, provided as-is.
+* **Both rely on Unity Catalog** for permissions and lineage on the underlying tables.
+
 ## Two different ideas of "ontology"
 
 | | Genie Ontology | OntoBricks |
@@ -26,5 +38,9 @@ OntoBricks is the closest Databricks counterpart to the
 [AWS Context Ontology Accelerator](../aws/README.md#aws-context-ontology-accelerator-coa):
 both pair OWL + R2RML with LLM-assisted modelling and MCP serving.
 
-Docs: [OntoBricks](https://github.com/databrickslabs/ontobricks) ·
-[AI/BI and Genie release notes](https://docs.databricks.com/aws/en/ai-bi/release-notes/2026)
+## Product documentation
+
+* [databrickslabs/ontobricks](https://github.com/databrickslabs/ontobricks): install, modelling, mapping, reasoning
+* [Genie (AI/BI)](https://docs.databricks.com/aws/en/genie/): Genie spaces and agents
+* [AI/BI and Genie release notes 2026](https://docs.databricks.com/aws/en/ai-bi/release-notes/2026): Genie Ontology preview
+* [Unity Catalog](https://docs.databricks.com/aws/en/data-governance/unity-catalog/): governance, metadata, lineage

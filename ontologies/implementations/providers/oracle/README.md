@@ -11,6 +11,14 @@ Oracle also appears in
 [graphs (property graphs, PGX)](../../../../graphs/implementations/providers/oracle/README.md) and
 [semantic models (Oracle Analytics RPD / Semantic Modeler)](../../../../semantic-models/implementations/providers/oracle/README.md).
 
+## Overview
+
+* **RDF Graph is a feature of Oracle Database**, not a separate product: Oracle AI Database 26ai, earlier releases and Autonomous Database. Triples are stored in database tables and managed with the `SEM_APIS` PL/SQL package.
+* **How you use it:** load RDF files (Turtle, N-Triples) with the bulk-load APIs. Query with SPARQL through an endpoint or Graph Studio, or from SQL with `SEM_MATCH` / `SEM_SQL`.
+* **Reasoning happens inside the database:** *inferred graphs* (formerly *entailments*) are computed from RDFS and OWL rulebases.
+* **Relational data without copying it:** RDF views map tables to RDF (R2RML-style).
+* **It's the same database:** security, backup and SQL access are shared with your relational data.
+
 ## How the concepts map
 
 * Ontology and data are loaded as RDF triples (Turtle / N-Triples), so the
@@ -31,4 +39,8 @@ Oracle also appears in
 
 A worked Oracle example is on the [roadmap](../../../../ROADMAP.md).
 
-Docs: [Oracle Database graph (RDF)](https://docs.oracle.com/en/database/oracle/property-graph/)
+## Product documentation
+
+* [Oracle Database graph documentation](https://docs.oracle.com/en/database/oracle/property-graph/): entry point for RDF Graph and property graphs
+* [RDF Graph Developer's Guide (23ai / 26ai)](https://docs.oracle.com/en/database/oracle/oracle-database/23/rdfrm/): loading, SPARQL, inferred graphs, RDF views
+* [oracle-samples/oracle-graph](https://github.com/oracle-samples/oracle-graph): RDF and knowledge-graph samples

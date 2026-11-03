@@ -59,18 +59,27 @@ where `<topic>` is `ontologies`, `graphs` or `semantic-models`.
    > Last reviewed YYYY-MM-DD. Legend: [verification levels](../../../../README.md#verification-levels).
    ```
 
-3. Add a table mapping the topic's concepts to the products, linking each
+3. Follow it with the **products table** (product · role in this topic ·
+   retail example), the "also appears in" links, and then two sections that
+   every provider page has:
+   * `## Overview`: how the product implements the topic: what it is
+     (service, feature, app or reference architecture), where the model or
+     graph lives, how you build and query it, how agents use it, and its
+     status with a date.
+   * `## Product documentation` (last section): official docs as a list,
+     `* [Title](url): what it covers`.
+4. Add a table mapping the topic's concepts to the products, linking each
    row to the concept chapter it implements.
-4. Implement the retail example in the product's formats against
+5. Implement the retail example in the product's formats against
    [`examples/retail/`](examples/retail/), using the **same metric names and
    definitions** as [`metrics.sql`](examples/retail/warehouse/metrics.sql)
    for semantic models.
-5. Add a row to that topic's `implementations/README.md` and to the
+6. Add a row to that topic's `implementations/README.md` and to the
    [provider index](README.md#provider-index). Put the one-word **status**
    (GA, preview, open source, Labs...) in the topic table's Status column, and
    any detail ("workload GA, ontology item still preview, as of Oct 2026")
    with a date and source on the product page.
-6. If it can run for free (Docker image, local engine, free tier), add a
+7. If it can run for free (Docker image, local engine, free tier), add a
    check and a CI job, and raise the verification level.
 
 ### Verification levels

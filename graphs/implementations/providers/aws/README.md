@@ -17,6 +17,15 @@ AWS also appears in the other topics:
 (loading OWL, inference without a reasoner) and
 [COA metrics and QuickSight](../../../../semantic-models/implementations/providers/aws/README.md).
 
+## Overview
+
+* **Neptune Database** is a managed graph database cluster in your VPC: one writer, up to 15 read replicas, and storage replicated across three Availability Zones that grows automatically.
+* **It supports both graph models:** RDF with SPARQL, and property graphs with Gremlin and openCypher over one shared graph.
+* **How you load it:** the **bulk loader** reads files from S3: CSV for property graphs; Turtle, N-Triples, N-Quads or RDF/XML for RDF.
+* **How you query it:** HTTPS endpoints per language, optionally with IAM authentication.
+* **Neptune Analytics** is an in-memory graph engine for algorithms and vector search over openCypher. It loads from S3 or from a Neptune cluster.
+* **COA** uses Neptune as its knowledge-graph store, and **Bedrock Knowledge Bases** use Neptune Analytics for managed GraphRAG.
+
 ---
 
 ## Amazon Neptune
@@ -107,12 +116,6 @@ inference without a built-in reasoner are covered in the ontologies topic:
 | Mixing models | Gremlin + openCypher share data; SPARQL doesn't. Neptune Analytics can import RDF for openCypher querying. |
 | Query timeouts | `neptune_query_timeout` parameter (default 120 s); per-query hints exist. |
 
-Docs: [Neptune user guide](https://docs.aws.amazon.com/neptune/latest/userguide/intro.html) ·
-[Neptune Analytics guide](https://docs.aws.amazon.com/neptune-analytics/latest/userguide/what-is-neptune-analytics.html) ·
-[Neptune data model](https://docs.aws.amazon.com/neptune/latest/userguide/feature-overview-data-model.html) ·
-[Best practices](https://docs.aws.amazon.com/neptune/latest/userguide/best-practices.html) ·
-[awslabs/amazon-neptune-tools](https://github.com/awslabs/amazon-neptune-tools) (export, CSV↔RDF utilities)
-
 ---
 
 ## AWS Context Ontology Accelerator (COA): the knowledge-graph side
@@ -137,5 +140,15 @@ Agents reach the graph through COA's MCP tools `graph_traversal` (walk
 entity relationships), `translate_sparql` (natural language → SPARQL) and
 `query`. Note the cost: COA's docs put the idle cost of Neptune plus
 OpenSearch Serverless at about $930/month.
+
+## Product documentation
+
+* [Neptune user guide](https://docs.aws.amazon.com/neptune/latest/userguide/intro.html): clusters, endpoints, security
+* [Neptune data model](https://docs.aws.amazon.com/neptune/latest/userguide/feature-overview-data-model.html): how RDF and property graphs are stored
+* [Neptune bulk loader](https://docs.aws.amazon.com/neptune/latest/userguide/bulk-load.html): CSV and RDF load formats
+* [Neptune best practices](https://docs.aws.amazon.com/neptune/latest/userguide/best-practices.html): modelling and query tips
+* [Neptune Analytics guide](https://docs.aws.amazon.com/neptune-analytics/latest/userguide/what-is-neptune-analytics.html): algorithms, vector search
+* [awslabs/amazon-neptune-tools](https://github.com/awslabs/amazon-neptune-tools): export, CSV ↔ RDF utilities
+* [COA documentation](https://aws.github.io/context-ontology-accelerator/): COA's knowledge graph and virtual knowledge graph
 
 Next: [Loading the retail example into Neptune](loading.md)

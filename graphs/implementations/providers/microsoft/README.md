@@ -13,6 +13,12 @@ Microsoft also appears in
 [ontologies (Fabric IQ, DTDL)](../../../../ontologies/implementations/providers/microsoft/README.md) and
 [semantic models (Power BI)](../../../../semantic-models/implementations/providers/microsoft/README.md).
 
+## Overview
+
+* **Graph in Microsoft Fabric** is a Fabric item. You create a graph model that maps lakehouse tables to node and edge types; the data stays in OneLake. You query it with GQL in Fabric, and Fabric IQ routes relationship questions to it.
+* **Azure Cosmos DB for Apache Gremlin** is a managed, globally distributed graph database. You query it with Gremlin. Each graph needs a partition key, and you pay in request units.
+* **SQL Server / Azure SQL graph tables** are `NODE` and `EDGE` tables queried with `MATCH` in T-SQL, inside a relational database.
+
 ## How the concepts map
 
 * **Fabric Graph** builds its graph model over lakehouse tables, the same
@@ -25,5 +31,8 @@ Microsoft also appears in
   [`01-create-retail-graph.groovy`](../../../../examples/retail/property-graph/gremlin/01-create-retail-graph.groovy)
   traversal (Cosmos DB supports a subset of Gremlin steps; check the docs).
 
-Docs: [Microsoft Fabric docs (Graph)](https://learn.microsoft.com/fabric/) ·
-[Cosmos DB for Gremlin](https://learn.microsoft.com/azure/cosmos-db/gremlin/)
+## Product documentation
+
+* [Microsoft Fabric documentation](https://learn.microsoft.com/fabric/): Graph in Fabric, Fabric IQ
+* [Azure Cosmos DB for Apache Gremlin](https://learn.microsoft.com/azure/cosmos-db/gremlin/): setup, supported Gremlin steps, partitioning
+* [SQL Graph overview](https://learn.microsoft.com/sql/relational-databases/graphs/sql-graph-overview): node and edge tables, `MATCH`

@@ -14,6 +14,13 @@ Oracle also appears in
 [ontologies (RDF Graph)](../../../../ontologies/implementations/providers/oracle/README.md) and
 [semantic models (Oracle Analytics)](../../../../semantic-models/implementations/providers/oracle/README.md).
 
+## Overview
+
+* **Property graphs are part of Oracle Database.** A *SQL property graph* is a schema object declared over existing tables with `CREATE PROPERTY GRAPH` and queried with `GRAPH_TABLE` in SQL (SQL/PGQ, 23ai and later), so the data isn't copied. On 19c and earlier, graphs are queried with PGQL.
+* **Graph Server (PGX)** loads graphs into memory to run 80+ algorithms; some algorithms also run inside the database.
+* **Graph Studio** (in Autonomous Database) adds notebooks, modelling and visualization in the browser.
+* **GraphRAG and vector search** run in the same database, and RDF Graph covers the SPARQL side.
+
 ## How the concepts map
 
 The repo's [SQL/PGQ file](../../../../examples/retail/property-graph/sql-pgq/retail-pgq.sql)
@@ -21,5 +28,8 @@ is the closest match: `CREATE PROPERTY GRAPH` over the retail tables, then
 `SELECT … FROM GRAPH_TABLE (retail MATCH …)`. Oracle-specific syntax
 differences are on the [roadmap](../../../../ROADMAP.md).
 
-Docs: [Oracle Database graph](https://docs.oracle.com/en/database/oracle/property-graph/) ·
-[oracle-samples/oracle-graph](https://github.com/oracle-samples/oracle-graph) (demos, GraphRAG notebooks, 80+ algorithm samples)
+## Product documentation
+
+* [Oracle Database graph documentation](https://docs.oracle.com/en/database/oracle/property-graph/): SQL property graphs, PGQL, Graph Server
+* [CREATE PROPERTY GRAPH (SQL reference, 23ai)](https://docs.oracle.com/en/database/oracle/oracle-database/23/sqlrf/CREATE-PROPERTY-GRAPH.html): syntax
+* [oracle-samples/oracle-graph](https://github.com/oracle-samples/oracle-graph): demos, GraphRAG notebooks, 80+ algorithm samples

@@ -11,6 +11,12 @@
 
 Databricks also appears in [semantic models (metric views)](../../../../semantic-models/implementations/providers/databricks/README.md).
 
+## Overview
+
+* **Databricks has no graph database.** Graphs are processed with **GraphFrames**, an open-source Spark package. Vertices and edges are DataFrames read from Delta tables; motifs and algorithms run as Spark jobs. That suits batch analytics, not interactive traversal.
+* **OntoBricks** (Databricks Labs) materializes an OWL-mapped knowledge graph from Unity Catalog tables into a triple store and serves it over SPARQL, GraphQL and MCP.
+* **Graph databases** come from partners (Neo4j, TigerGraph) through connectors.
+
 ## How the concepts map
 
 Vertices and edges are DataFrames built from the warehouse tables
@@ -18,4 +24,7 @@ Vertices and edges are DataFrames built from the warehouse tables
 "customers who bought X also bought" pattern (Q5), and algorithms run as
 Spark jobs. That suits batch analytics, not interactive traversal.
 
-Docs: [GraphFrames](https://graphframes.io/)
+## Product documentation
+
+* [GraphFrames](https://graphframes.io/): API, motifs, algorithms
+* [databrickslabs/ontobricks](https://github.com/databrickslabs/ontobricks): the knowledge-graph app

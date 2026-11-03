@@ -12,6 +12,13 @@
 | Open format | Initiated the **Open Semantic Interchange**, now **Apache Ossie**; converters Ossie ↔ Cortex Analyst YAML | [Ossie model](../../../../examples/retail/semantic-model/ossie/) |
 | Graph | none native (partners, e.g. RelationalAI knowledge graphs in Snowflake) | — |
 
+## Overview
+
+* **Semantic views are schema-level objects** created with `CREATE SEMANTIC VIEW`, stored in Snowflake and governed by its role-based access control.
+* **How you query them:** with the `SEMANTIC_VIEW(...)` clause or standard SQL.
+* **Who uses them:** **Cortex Analyst** and **Cortex Agents** generate SQL from them, with synonyms helping match the user's words.
+* **How you build them:** by hand, or with **Semantic View Autopilot**, which generates them from existing schemas and query history. The older Cortex Analyst YAML format is what the Ossie converter emits.
+
 ## How the generic concepts map
 
 | Ossie | Snowflake semantic view |
@@ -27,5 +34,9 @@ Not executed on Snowflake in this repo; written from the documented DDL
 syntax. The equivalent YAML (Cortex Analyst format) is what the Ossie
 Snowflake converter emits.
 
-Docs: [Semantic views](https://docs.snowflake.com/en/user-guide/views-semantic/overview) ·
-[Cortex Analyst](https://docs.snowflake.com/en/user-guide/snowflake-cortex/cortex-analyst)
+## Product documentation
+
+* [Semantic views overview](https://docs.snowflake.com/en/user-guide/views-semantic/overview): concepts
+* [CREATE SEMANTIC VIEW](https://docs.snowflake.com/en/sql-reference/sql/create-semantic-view): DDL syntax
+* [Cortex Analyst](https://docs.snowflake.com/en/user-guide/snowflake-cortex/cortex-analyst): natural language → SQL
+* [Cortex Agents](https://docs.snowflake.com/en/user-guide/snowflake-cortex/cortex-agents): agents over semantic views

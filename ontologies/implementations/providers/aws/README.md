@@ -10,6 +10,14 @@
 
 AWS also appears in the other topics: [Neptune as a graph database](../../../../graphs/implementations/providers/aws/README.md) and [COA's metrics and QuickSight](../../../../semantic-models/implementations/providers/aws/README.md).
 
+## Overview
+
+* **COA is software you deploy, not a managed service.** It runs in your own AWS account (open source, Apache 2.0; release `v0.3.8` reviewed). AWS says the managed capability will become part of **AWS Context**.
+* **How it works: Scan → Model → Serve.** It scans your data sources. An LLM drafts an OWL ontology and R2RML mappings, grounded in standard ontologies (FIBO, schema.org). Experts approve the draft, HermiT/ELK reason over it, and it's served to agents.
+* **Where things live:** the approved ontology is materialized in **Neptune**. The data stays in its sources and is reached through a virtual knowledge graph (Ontop rewrites SPARQL into SQL). Document embeddings live in OpenSearch Serverless.
+* **How agents use it:** MCP tools that answer in tiers: governed metrics first, then the ontology, then documents.
+* **Neptune on its own** is a managed RDF store. You bulk-load Turtle from S3 and query it with SPARQL 1.1. It stores OWL but doesn't reason over it; [four workarounds](#inference-without-a-reasoner) are below.
+
 ---
 
 ## AWS Context Ontology Accelerator (COA)
@@ -118,6 +126,11 @@ can use the ontology directly:
 Validate with SHACL ([`retail-shapes.ttl`](../../../../examples/retail/ontology/retail-shapes.ttl))
 before loading. Neptune doesn't validate SHACL either.
 
-Docs: [Neptune SPARQL](https://docs.aws.amazon.com/neptune/latest/userguide/access-graph-sparql.html) ·
-[COA](https://aws.github.io/context-ontology-accelerator/) ·
-[COA announcement](https://aws.amazon.com/about-aws/whats-new/2026/07/aws-context--ontology-accelarator-generally-available/)
+## Product documentation
+
+* [COA documentation](https://aws.github.io/context-ontology-accelerator/): architecture, Scan / Model / Serve, deployment, MCP tools
+* [aws/context-ontology-accelerator](https://github.com/aws/context-ontology-accelerator): source code and releases
+* [COA announcement (July 2026)](https://aws.amazon.com/about-aws/whats-new/2026/07/aws-context--ontology-accelarator-generally-available/): what was launched
+* [Neptune user guide](https://docs.aws.amazon.com/neptune/latest/userguide/intro.html): clusters, endpoints, security
+* [Neptune SPARQL](https://docs.aws.amazon.com/neptune/latest/userguide/access-graph-sparql.html): querying RDF and OWL
+* [Neptune bulk loader](https://docs.aws.amazon.com/neptune/latest/userguide/bulk-load.html): loading Turtle / N-Triples from S3

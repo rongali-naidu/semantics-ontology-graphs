@@ -10,6 +10,13 @@
 | Tableau Next MCP server | lets MCP clients query the same semantic model Agentforce uses | — |
 | Apache Ossie | Salesforce co-founded OSI (now Ossie); a Data 360 workflow converts Ossie YAML into Tableau semantic data model JSON | [retail Ossie model](../../../../examples/retail/semantic-model/ossie/retail.semantic_model.yaml) |
 
+## Overview
+
+* **Tableau Semantics is part of Salesforce Data 360** (formerly Data Cloud). The *semantic data model* is metadata over Data 360 data objects, which sit on an Apache Iceberg lakehouse.
+* **How you build it:** in the Data 360 / Tableau Next interface: data objects, relationships, calculated fields and metrics with semantic descriptions.
+* **Who uses it:** Tableau Next and **Agentforce** analytics, and any MCP client through the Tableau Next MCP server.
+* **Portability:** the model isn't a set of files in your git repo; the Apache Ossie conversion is the portable route.
+
 ## How the concepts map
 
 | Ossie / generic | Tableau Semantics |
@@ -26,6 +33,8 @@ repo; Ossie export/import is the portable route
 Classic Tableau published data sources (`.tds`) are a separate, older
 semantic model.
 
-Docs: [Tableau Semantics](https://www.tableau.com/products/tableau-semantics) ·
-[Semantic layers for AI agents with Data 360](https://www.salesforce.com/blog/semantic-layer-ai-agents-data-360/) ·
-[From Alliance to Apache: open semantics](https://www.salesforce.com/blog/alliance-to-apache-next-chapter-for-open-semantics/)
+## Product documentation
+
+* [Tableau Semantics](https://www.tableau.com/products/tableau-semantics): product overview
+* [Semantic layers for AI agents with Data 360](https://www.salesforce.com/blog/semantic-layer-ai-agents-data-360/): how agents use it
+* [From Alliance to Apache: open semantics](https://www.salesforce.com/blog/alliance-to-apache-next-chapter-for-open-semantics/): Ossie conversion

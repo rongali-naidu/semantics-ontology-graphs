@@ -15,6 +15,14 @@ Oracle also appears in
 [graphs (property graphs, PGX)](../../../../graphs/implementations/providers/oracle/README.md) and
 [ontologies (RDF Graph)](../../../../ontologies/implementations/providers/oracle/README.md).
 
+## Overview
+
+* **The semantic model runs in the Oracle Analytics BI Server** (Oracle Analytics Cloud, or Oracle Analytics Server on-premises). It has three layers: Physical, Business Model and Mapping, Presentation. BI Server turns each query into physical SQL for each data source.
+* **Two ways to author it:**
+  * **Classic:** the RPD, edited in the Model Administration Tool.
+  * **Modern:** **Semantic Modeler** in the browser, with models stored as JSON (SMML) in a git repository you choose.
+* **Datasets** are lighter self-service models that users build themselves.
+
 Semantic Modeler stores models as JSON files and does Git branching,
 merging, pull, push and commit from inside the tool, including a
 **Semantic Merge** option that merges by model semantics rather than text
@@ -43,5 +51,7 @@ The two-fact design (order lines, reviews sharing Product and Customer)
 avoids the chasm trap described in
 [chapter 1](../../../concepts/01-what-is-a-semantic-model.md#12-the-hard-problems-a-semantic-model-solves).
 
-Docs: [Oracle Analytics Cloud](https://docs.oracle.com/en/cloud/paas/analytics-cloud/) ·
-[Oracle Database graph](https://docs.oracle.com/en/database/oracle/property-graph/)
+## Product documentation
+
+* [Oracle Analytics Cloud documentation](https://docs.oracle.com/en/cloud/paas/analytics-cloud/): product docs
+* [Building Semantic Models in Oracle Analytics Cloud (PDF)](https://docs.oracle.com/en/cloud/paas/analytics-cloud/acmdg/building-semantic-models-oracle-analytics-cloud.pdf): Semantic Modeler, layers, git

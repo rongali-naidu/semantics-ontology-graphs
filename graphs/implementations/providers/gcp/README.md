@@ -13,6 +13,14 @@
 
 Google Cloud also appears in [semantic models (Looker)](../../../../semantic-models/implementations/providers/gcp/README.md).
 
+## Overview
+
+* **No separate graph database:** both products declare a property graph **over existing tables** with `CREATE PROPERTY GRAPH`, so the data isn't copied.
+* **Spanner Graph** is part of **Spanner**, the transactional database. Graph queries (ISO GQL) run next to SQL, full-text and vector search on the same data.
+* **BigQuery Graph** does the same over **BigQuery warehouse tables**, for analytics. `GRAPH_TABLE(...)` feeds graph matches into SQL.
+* **Knowledge Catalog** ingests BigQuery Graph definitions into its context graph. Vertex AI uses both for GraphRAG.
+* **RDF / SPARQL** isn't offered: run Jena, GraphDB or Oxigraph yourself on GKE or Compute Engine.
+
 ## How the concepts map
 
 * **No copy into a graph store.** Both products declare `CREATE PROPERTY GRAPH`
@@ -25,6 +33,8 @@ Google Cloud also appears in [semantic models (Looker)](../../../../semantic-mod
   ISO GQL quantified paths such as `-[:SUBCATEGORY_OF]-{0,3}` walk the category tree.
   BigQuery's `GRAPH_TABLE(...)` feeds graph matches into SQL aggregation (= SPARQL Q3).
 
-Docs: [Spanner Graph](https://cloud.google.com/spanner/docs/graph/overview) ·
-[GQL reference (Spanner)](https://cloud.google.com/spanner/docs/reference/standard-sql/graph-intro) ·
-[BigQuery docs (Graph)](https://cloud.google.com/bigquery/docs)
+## Product documentation
+
+* [Spanner Graph overview](https://cloud.google.com/spanner/docs/graph/overview): schema, GQL, use cases
+* [Spanner Graph GQL reference](https://cloud.google.com/spanner/docs/reference/standard-sql/graph-intro): query language
+* [BigQuery documentation](https://cloud.google.com/bigquery/docs): BigQuery Graph

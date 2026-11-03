@@ -14,6 +14,13 @@ Snowflake also appears in
 [ontologies (Ontology on Snowflake, RelationalAI)](../../../../ontologies/implementations/providers/snowflake/README.md) and
 [semantic models (semantic views)](../../../../semantic-models/implementations/providers/snowflake/README.md).
 
+## Overview
+
+* **Snowflake has no native graph database.** Graphs are stored as tables and processed by code that runs inside Snowflake.
+* **Graph tables:** the *Ontology on Snowflake* pattern stores a property graph in two tables, `KG_NODE` and `KG_EDGE`, with VARIANT properties. You traverse it with SQL (recursive CTEs) or Snowpark UDFs.
+* **Graph analytics** (NetworkX centrality, Louvain, shortest path) run in **Snowpark Container Services** and are exposed to Cortex Agents as tools.
+* **RelationalAI**, a native app, adds a knowledge graph and reasoning engine over Snowflake data.
+
 ## How the concepts map
 
 A two-table node/edge layout is the simplest way to put a property graph in
@@ -28,3 +35,9 @@ CREATE TABLE kg_edge (edge_id STRING, src STRING, dst STRING, label STRING, prop
 Multi-hop questions become recursive CTEs or UDFs; heavier algorithms run in
 containers. That's fine for agent tools and analytics, not a substitute for a
 native graph database at high traversal volume.
+
+## Product documentation
+
+* [Snowflake-Labs/ontology-on-snowflake](https://github.com/snowflake-Labs/ontology-on-snowflake): KG tables, graph tools, agent
+* [Snowpark Container Services](https://docs.snowflake.com/en/developer-guide/snowpark-container-services/overview): running graph analytics in containers
+* [RelationalAI documentation](https://docs.relational.ai/): knowledge graphs on Snowflake

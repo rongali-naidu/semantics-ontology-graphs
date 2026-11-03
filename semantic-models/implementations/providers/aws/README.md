@@ -14,6 +14,13 @@ Amazon Redshift or Athena are common choices
 [COA and Neptune for ontologies](../../../../ontologies/implementations/providers/aws/README.md),
 [Neptune as a graph database](../../../../graphs/implementations/providers/aws/README.md).
 
+## Overview
+
+* **AWS has no dedicated semantic-layer service.** It offers COA metrics, QuickSight datasets and Topics, or open tools on Redshift and Athena.
+* **COA metric service:** part of a COA deployment. Metrics are registered per namespace through a REST API (`CreateMetric`); each one is a complete read-only SQL statement per dialect, plus synonyms and links to ontology concepts. Agents find and run metrics with the MCP tools `list_metrics` and `query`.
+* **Amazon QuickSight:** *datasets* hold joins, calculated fields and row-level security. *Topics* add business names and synonyms so Amazon Q in QuickSight can answer in natural language. Both are managed in the service (API or asset bundles), not as text files in git.
+* **Open alternatives:** dbt, Cube or AtScale over Amazon Redshift or Athena.
+
 ---
 
 ## COA metrics (Tier 1)
@@ -90,6 +97,8 @@ Agents then use the MCP tools `list_metrics` and `query`.
   `line_amount = quantity * unit_price` and a Topic declaring `revenue`,
   `order_count`, `average_order_value` with synonyms.
 
-Docs: [COA metrics](https://github.com/aws/context-ontology-accelerator/blob/main/external-docs/content/metrics.md) ·
-[COA serving tiers](https://github.com/aws/context-ontology-accelerator/blob/main/external-docs/content/serve.md) ·
-[Amazon QuickSight](https://docs.aws.amazon.com/quicksight/)
+## Product documentation
+
+* [COA metrics](https://github.com/aws/context-ontology-accelerator/blob/main/external-docs/content/metrics.md): metric fields and API
+* [COA serving tiers](https://github.com/aws/context-ontology-accelerator/blob/main/external-docs/content/serve.md): metric → ontology → documents
+* [Amazon QuickSight documentation](https://docs.aws.amazon.com/quicksight/): datasets, Topics, Amazon Q

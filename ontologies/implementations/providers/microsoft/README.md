@@ -12,6 +12,14 @@ Microsoft also appears in
 [graphs (Fabric Graph, Cosmos DB for Gremlin)](../../../../graphs/implementations/providers/microsoft/README.md) and
 [semantic models (Power BI / Fabric)](../../../../semantic-models/implementations/providers/microsoft/README.md).
 
+## Overview
+
+* **Fabric IQ** is a workload in Microsoft Fabric. The ontology is an **item in a Fabric workspace**, authored in Fabric rather than exchanged as a file.
+* **How you build it:** define entity types, properties and relationships, or generate a draft from a Power BI semantic model. Then bind them to OneLake tables, semantic models and Eventhouse data.
+* **How it answers:** the ontology routes each question to the right engine: metrics to the semantic model (DAX), relationships to Fabric Graph (GQL), events to Eventhouse (KQL). Fabric data agents and Copilot use it.
+* **DTDL** is a JSON-LD modelling language for **Azure Digital Twins**. You upload model files to a Digital Twins instance, then create twins (instances) and relationships and query them with the Digital Twins query language.
+* **Status (Nov 2026):** Fabric IQ GA since June 2026, but the ontology item was still labelled preview in October 2026. DTDL v3 is GA.
+
 ## How the concepts map
 
 | OWL ([ontologies concepts 1](../../../concepts/01-what-is-an-ontology.md)) | DTDL v3 | Fabric IQ ontology |
@@ -51,5 +59,9 @@ Microsoft's only *textual* ontology language, so the retail ontology is
 expressed in it here. Fabric IQ's ontology is authored in Fabric and bound to
 data rather than exchanged as a file.
 
-Docs: [DTDL v3](https://github.com/Azure/opendigitaltwins-dtdl/blob/master/DTDL/v3/DTDL.v3.md) ·
-[Microsoft Fabric docs (IQ)](https://learn.microsoft.com/fabric/)
+## Product documentation
+
+* [Microsoft Fabric documentation](https://learn.microsoft.com/fabric/): Fabric IQ, ontology item, data agents
+* [DTDL v3 specification](https://github.com/Azure/opendigitaltwins-dtdl/blob/master/DTDL/v3/DTDL.v3.md): the modelling language
+* [Azure Digital Twins overview](https://learn.microsoft.com/azure/digital-twins/overview): the service that runs DTDL models
+* [Azure Digital Twins models](https://learn.microsoft.com/azure/digital-twins/concepts-models): writing and uploading DTDL models
