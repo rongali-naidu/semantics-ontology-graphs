@@ -13,6 +13,10 @@ product formats from AWS, Google Cloud, Microsoft, Oracle, Snowflake,
 Databricks, SAP, Salesforce, Palantir, dbt, AtScale, Cube and Neo4j. CI checks that they give the same
 answers.
 
+![Ecosystem poster: a hub with six segments (foundations, ontologies, graphs, semantic models, standards, AI and agents), each with a rail of concepts and products, and the retail example underneath](assets/diagrams/ecosystem-poster.svg)
+
+*Poster for sharing: [PNG, 2×](assets/posters/ecosystem-poster.png) (exported from the SVG, which `make diagrams` regenerates).*
+
 > **Early release.** Every implementation page states how far it's verified;
 > see [verification levels](#verification-levels).
 

@@ -501,6 +501,133 @@ def semantic_landscape():
                      footer="Apache Ossie: open interchange format, with converters between all three columns")
 
 
+# ---------------------------------------------------------------------------
+@diagram("schema-vs-data")
+def schema_vs_data():
+    c = Canvas(1000, 500, "Schema plus data: ontology, instance graph, knowledge graph")
+    c.heading("Schema + data = knowledge graph", "what people usually mean by \"ontology\" and by \"the graph\"")
+    c.rect(30, 82, 430, 196, fill=ONTO[0], stroke=ONTO[1])
+    c.text(245, 108, "Schema  =  the ontology", size=16, weight="700", color=ONTO[1])
+    c.text(245, 128, "TBox: classes, properties, rules · changes slowly", size=12, color=MUTED)
+    for k, (ind, ln) in enumerate([(0, "retail:PremiumCustomer rdfs:subClassOf"), (1, "retail:Customer ."),
+                                   (0, "retail:placedBy rdfs:domain retail:Order ;"), (1, "rdfs:range retail:Customer .")]):
+        c.text(50 + ind * 58, 158 + k * 19, ln, size=12, anchor="start", mono=True)
+    c.text(245, 264, "retail-ontology.ttl · 238 triples", size=11.5, color=ONTO[1])
+    c.text(500, 190, "+", size=34, weight="700", color=MUTED)
+    c.rect(540, 82, 430, 196, fill=GRAPH[0], stroke=GRAPH[1])
+    c.text(755, 108, "Data  =  \"the graph\" (instances)", size=16, weight="700", color=GRAPH[1])
+    c.text(755, 128, "ABox: individuals and facts · changes constantly", size=12, color=MUTED)
+    for k, (ind, ln) in enumerate([(0, "ex:C1 a retail:PremiumCustomer ;"), (1, "retail:name \"Alice Johnson\" ."),
+                                   (0, "ex:O1 retail:placedBy ex:C1 ;"), (1, "retail:orderDate \"2026-09-01\" .")]):
+        c.text(560 + ind * 44, 158 + k * 19, ln, size=12, anchor="start", mono=True)
+    c.text(755, 264, "retail-data.ttl · 165 triples", size=11.5, color=GRAPH[1])
+    c.line(245, 280, 440, 326)
+    c.line(755, 280, 560, 326)
+    c.rect(250, 328, 500, 82, fill=EXAMPLE[0], stroke=EXAMPLE[1])
+    c.text(500, 355, "=  Knowledge graph", size=16, weight="700", color=EXAMPLE[1])
+    c.text(500, 378, "+ a reasoner adds what follows from the schema:", size=12, color=INK)
+    c.text(500, 398, "ex:C1 a retail:Customer   (Alice is a Customer)", size=12, mono=True, color=EXAMPLE[1])
+    c.rect(30, 428, 940, 50, fill=WARN[0], stroke=WARN[1])
+    c.text(500, 450, "In RDF both halves are triples in one graph, so the line is a convention: formally an OWL ontology may include",
+           size=12, color=INK)
+    c.text(500, 468, "individuals too. This repo: ontology = schema · data = instance graph · knowledge graph = both.",
+           size=12, color=INK)
+    return c
+
+
+# ---------------------------------------------------------------------------
+@diagram("ecosystem-poster")
+def ecosystem_poster():
+    import math
+    W, H = 1460, 1580
+    c = Canvas(W, H, "The semantics, ontology and graphs ecosystem")
+    c.text(W / 2, 62, "Semantics · Ontologies · Graphs: the ecosystem", size=34, weight="700", color=SEM[1])
+    c.text(W / 2, 94, "from meaning to models to products, with one retail example implemented in every format",
+           size=16, color=INK)
+    cx, cy, r0, r1 = 215, 790, 118, 300
+    segments = [
+        ("Foundations", NEUTRAL), ("Ontologies", ONTO), ("Graphs", GRAPH),
+        ("Semantic models", SEM), ("Standards", EXAMPLE), ("AI & agents", GOOD)]
+    span, start = 150 / len(segments), -75
+    rail_y = [290, 490, 690, 890, 1090, 1290]
+    rail_x0, rail_x1 = 610, 1420
+    rows = [
+        ([("Ontology", ["the schema: classes,", "relationships, rules", "(TBox)"]),
+          ("Instance graph", ["the data: individuals", "and facts", "(ABox)"]),
+          ("Knowledge graph", ["schema + data", "+ inferences", "+ provenance"]),
+          ("Semantic model", ["metrics, dimensions,", "joins over tables", "for BI and agents"])]),
+        ([("Languages", ["OWL 2 · RDFS", "SKOS · SHACL", "Ossie ontology"]),
+          ("Formats", ["Turtle · JSON-LD", "RDF/XML · N-Triples", "N-Quads · TriG"]),
+          ("Query & reason", ["SPARQL 1.1", "OWL RL · HermiT · ELK", "SHACL validation"]),
+          ("Products", ["AWS COA · Fabric IQ", "Palantir · OntoBricks", "Oracle RDF · SAP KG"])]),
+        ([("Models", ["RDF triples", "labeled property", "graphs"]),
+          ("Languages", ["Cypher · Gremlin", "ISO GQL · SQL/PGQ", "SPARQL"]),
+          ("Databases", ["Neptune · Neo4j", "Spanner · BigQuery", "Fabric · Oracle"]),
+          ("Analytics", ["Neptune Analytics", "GraphFrames · PGX", "Neo4j GDS"])]),
+        ([("Building blocks", ["datasets · dimensions", "measures · metrics", "joins · hierarchies"]),
+          ("BI tools", ["Power BI · Looker", "Oracle Analytics", "Tableau Semantics"]),
+          ("Headless", ["dbt MetricFlow", "Cube · AtScale SML", "COA metrics"]),
+          ("Data platforms", ["Snowflake semantic", "views · Databricks", "metric views · SAP"])]),
+        ([("W3C", ["RDF 1.1/1.2 · OWL 2", "SPARQL 1.1 · SHACL", "SKOS · JSON-LD"]),
+          ("ISO", ["GQL 39075:2024", "SQL/PGQ 9075-16", "BFO 21838-2"]),
+          ("Open source", ["openCypher", "Apache TinkerPop", "R2RML · RML"]),
+          ("Apache Ossie", ["semantic model +", "ontology + mapping", "20+ converters"])]),
+        ([("Grounding", ["ontology terms,", "synonyms and", "ai_context for LLMs"]),
+          ("GraphRAG", ["retrieve entities,", "paths and facts", "from the graph"]),
+          ("Text-to-metric", ["agents pick governed", "metrics instead of", "writing SQL"]),
+          ("MCP serving", ["COA · Knowledge", "Catalog · Genie", "Fabric IQ · Tableau"])]),
+    ]
+
+    def pt(r, deg):
+        a = math.radians(deg)
+        return cx + r * math.cos(a), cy + r * math.sin(a)
+
+    for i, ((name, col), boxes, ry) in enumerate(zip(segments, rows, rail_y)):
+        a0, a1 = start + i * span + 1.2, start + (i + 1) * span - 1.2
+        (x0, y0), (x1, y1) = pt(r0, a0), pt(r1, a0)
+        (x2, y2), (x3, y3) = pt(r1, a1), pt(r0, a1)
+        c.path(f"M {x0:.1f} {y0:.1f} L {x1:.1f} {y1:.1f} A {r1} {r1} 0 0 1 {x2:.1f} {y2:.1f} "
+               f"L {x3:.1f} {y3:.1f} A {r0} {r0} 0 0 0 {x0:.1f} {y0:.1f} Z",
+               color=col[1], sw=1.8, arrow=False, fill=col[0])
+        mid = (a0 + a1) / 2
+        tx, ty = pt((r0 + r1) / 2 + 6, mid)
+        c.text(tx, ty + 6, name, size=17, weight="700", color=col[1], rotate=mid)
+        ex, ey = pt(r1 + 4, mid)
+        c.path(f"M {ex:.1f} {ey:.1f} C {ex + 50:.1f} {ey:.1f}, {rail_x0 - 50} {ry}, {rail_x0} {ry}",
+               color=col[1], sw=2.2, arrow=False)
+        c.line(rail_x0, ry, rail_x1, ry, color=col[1], sw=2.2, arrow=False)
+        bw = (rail_x1 - rail_x0 - 3 * 18) / 4
+        for j, (title, body) in enumerate(boxes):
+            bx = rail_x0 + j * (bw + 18)
+            c.rect(bx, ry - 150, bw, 126, fill="#ffffff", stroke=col[1], rx=10, sw=1.4)
+            c.text(bx + bw / 2, ry - 122, title, size=15.5, weight="700", color=col[1])
+            c.lines(bx + bw / 2, ry - 98, body, size=13, gap=19)
+            c.line(bx + bw / 2, ry - 24, bx + bw / 2, ry - 5, color=col[1], sw=1.6, arrow=False)
+            c.circle(bx + bw / 2, ry, 6, "#ffffff", col[1], sw=2.2)
+        c.circle(rail_x0, ry, 5, col[1], col[1])
+    c.circle(cx, cy, r0 - 8, "#ffffff", SEM[1], sw=2.5)
+    c.text(cx, cy - 26, "✳", size=40, color=SEM[1])
+    c.text(cx, cy + 12, "SEMANTICS", size=22, weight="700", color=SEM[1])
+    c.text(cx, cy + 36, "ontology · graphs", size=14, color=INK)
+    c.text(cx, cy + 56, "semantic models", size=14, color=INK)
+    c.rect(40, 1360, W - 80, 150, fill=EXAMPLE[0], stroke=EXAMPLE[1])
+    c.text(W / 2, 1396, "examples/retail: one Amazon-style domain, every format, CI-verified", size=19, weight="700",
+           color=EXAMPLE[1])
+    stations = ["OWL + SHACL", "RDF × 6 formats", "13 SPARQL queries", "property graph", "warehouse tables",
+                "Apache Ossie", "dbt MetricFlow ✓", "COA metrics"]
+    sw_ = (W - 120) / len(stations)
+    c.line(70, 1455, W - 70, 1455, color=EXAMPLE[1], sw=2.2, arrow=False)
+    for k, s in enumerate(stations):
+        x = 60 + sw_ * (k + 0.5)
+        c.circle(x, 1455, 6, "#ffffff", EXAMPLE[1], sw=2.2)
+        c.text(x, 1440, s, size=13.5, weight="600", color=INK)
+    c.text(W / 2, 1488, "same answers everywhere: Alice 1498.97 · Bob 199.98 · Carol 179.48",
+           size=14, color=INK)
+    c.text(W / 2, 1560, "github.com/rongali-naidu/semantics-ontology-graphs · status as of November 2026",
+           size=13, color=MUTED)
+    return c
+
+
 def main() -> None:
     OUT.mkdir(parents=True, exist_ok=True)
     for name, fn in DIAGRAMS.items():

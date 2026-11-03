@@ -12,6 +12,43 @@ These three terms get mixed up all the time. They live at different layers:
 | Example | schema.org, FIBO, our retail TBox | Google KG, Wikidata, our retail graph | Neptune, Neo4j |
 | Without the others? | Yes — you can publish an ontology as a file | Yes — a KG can live in files or even a relational DB | Yes — many graph DBs have no ontology at all |
 
+## Schema vs data: what "ontology" and "the graph" usually mean
+
+![Schema (the ontology, TBox) plus data (the instance graph, ABox) equals the knowledge graph; a reasoner adds inferred facts](../assets/diagrams/schema-vs-data.svg)
+
+The everyday shorthand is:
+
+> **ontology = schema** · **the graph = data** · **knowledge graph = schema + data**
+
+| Term | Means | Retail example |
+|---|---|---|
+| **Ontology** (schema, *TBox*) | the classes, relationships and rules: what *can* exist and what must hold | [`retail-ontology.ttl`](../examples/retail/ontology/retail-ontology.ttl): Customer, Order, `placedBy`, "every Order has exactly one Customer" |
+| **Instance data** (*ABox*), often just "the graph" | the individual things and facts | [`retail-data.ttl`](../examples/retail/rdf/retail-data.ttl): Alice, order O1, "O1 placedBy Alice" |
+| **Knowledge graph** | both together, usually plus inferred facts and provenance | ontology + data + "Alice is a Customer" (inferred from PremiumCustomer ⊑ Customer) |
+
+Why the words get blurred:
+
+* **Formally, an OWL ontology may contain individuals too.** An OWL file
+  can hold `ex:C1 a retail:Customer`, and description logic calls TBox +
+  ABox together a *knowledge base*. So some people say "ontology" for schema
+  *plus* data. Neither usage is wrong; just say which you mean.
+* **In RDF both halves are triples.** The schema (`retail:placedBy
+  rdfs:domain retail:Order`) and the data (`ex:O1 retail:placedBy ex:C1`)
+  sit in the same graph and are queried with the same SPARQL, so "the graph"
+  can mean everything. Keeping them in separate files or named graphs is a
+  convention that makes the split visible.
+* **Property graphs have no separate schema graph.** The "schema" is the set
+  of labels, relationship types and constraints, and "the graph" is always the
+  data. That's one reason developers hear "graph" as "data".
+* **Semantic layers use a third word.** A *semantic model* is the schema
+  over tables (datasets, joins, metrics); the tables are the data
+  ([foundations 3](03-semantic-models-and-ontologies.md)).
+
+**This repo's convention:** *ontology* = schema (TBox), *data* or
+*instance graph* = ABox, *knowledge graph* = both. That's why the retail
+example keeps them in separate files (and in separate named graphs when
+loaded into Neptune).
+
 ### Key point: you need none of them to use the others
 
 * You can store an RDF knowledge graph **in a relational DB** (Ontop /

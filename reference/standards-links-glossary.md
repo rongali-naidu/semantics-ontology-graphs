@@ -154,7 +154,7 @@
 
 | Term | Meaning |
 |---|---|
-| **ABox** | Assertion box: facts about individuals (instance data) |
+| **ABox** | Assertion box: facts about individuals; the instance data, often just called "the graph" |
 | **Apache Ossie** | Vendor-neutral spec for semantic models, ontologies and mappings (formerly Open Semantic Interchange, OSI) |
 | **Axiom** | A statement in an ontology that is taken to be true (e.g. a subclass or cardinality rule) |
 | **Blank node** | An RDF node without a global IRI (`_:b1`, `[ ... ]`) |
@@ -183,9 +183,10 @@
 | **Index-free adjacency** | Native graph storage where each node points directly at its neighbours |
 | **Individual / instance** | A member of a class (`ex:C1`) |
 | **Inference / reasoning** | Deriving new facts from axioms (e.g. subclass, inverse, transitivity) |
+| **Instance data / instance graph** | The individuals and facts (ABox), as opposed to the schema; what people usually mean by "the graph" |
 | **IRI** | Internationalised Resource Identifier — the global name of an RDF resource |
 | **JSON-LD** | JSON serialization of RDF with a `@context` |
-| **Knowledge graph** | Graph of entities and relations, organised by an ontology/schema, with identity and context |
+| **Knowledge graph** | Schema (ontology) + instance data, usually with inferred facts, identity and provenance; a graph of entities and relations organised by the ontology |
 | **Label (LPG)** | A tag on a node naming its type (`:Customer`) |
 | **Linked Data** | Publishing RDF with dereferenceable HTTP IRIs that link to each other |
 | **Literal** | A data value in RDF (`"29.99"^^xsd:decimal`, `"Seattle"`) |
@@ -215,7 +216,7 @@
 | **SQL/PGQ** | SQL extension for property-graph queries over tables |
 | **Star schema** | A fact table surrounded by dimension tables |
 | **Taxonomy** | Hierarchy of categories (broader/narrower) |
-| **TBox** | Terminology box: classes, properties, axioms (the schema) |
+| **TBox** | Terminology box: classes, properties, axioms; the schema, i.e. what "ontology" usually means |
 | **TMDL** | Tabular Model Definition Language: text format of Power BI semantic models |
 | **Traversal** | Walking a graph step by step (Gremlin's model) |
 | **Triple** | subject – predicate – object statement |

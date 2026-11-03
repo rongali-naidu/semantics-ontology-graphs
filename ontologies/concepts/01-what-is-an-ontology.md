@@ -45,8 +45,15 @@ Description-logic people split a knowledge base into two parts:
 * **ABox** (assertions): facts about individuals — *the data*.
   → `rdf/retail-data.ttl`
 
-Ontology + data (+ often a reasoner) = **knowledge graph**
-(see [foundations 1](../../foundations/01-ontology-knowledge-graph-graph-database.md)).
+Ontology + data (+ often a reasoner) = **knowledge graph**.
+
+![Schema (the ontology, TBox) plus data (the instance graph, ABox) equals the knowledge graph](../../assets/diagrams/schema-vs-data.svg)
+
+In everyday use, **"ontology" means the schema** and the data is called
+**"the graph"** or instance data. Formally an OWL ontology may include
+individuals too, so some people use "ontology" for schema + data. See
+[schema vs data](../../foundations/01-ontology-knowledge-graph-graph-database.md#schema-vs-data-what-ontology-and-the-graph-usually-mean)
+for when each usage applies.
 
 ## What an ontology buys you
 
