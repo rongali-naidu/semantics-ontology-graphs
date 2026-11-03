@@ -67,7 +67,8 @@ where `<topic>` is `ontologies`, `graphs` or `semantic-models`.
      graph lives, how you build and query it, how agents use it, and its
      status with a date.
    * `## Product documentation` (last section): official docs as a list,
-     `* [Title](url): what it covers`.
+     one bullet per link: the page title as the link text, then a colon and
+     what it covers.
 4. Add a table mapping the topic's concepts to the products, linking each
    row to the concept chapter it implements.
 5. Implement the retail example in the product's formats against
