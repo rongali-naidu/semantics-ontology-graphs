@@ -24,6 +24,28 @@ Microsoft also appears in
 | enumerated values | `Enum` schema | — |
 | global identifier (IRI) | DTMI (`dtmi:example:retail:Order;1`, versioned) | item in the Fabric workspace |
 
+## Fabric IQ ontology in practice
+
+* **Generate from a semantic model:** Fabric IQ can draft an ontology from a
+  Power BI semantic model: tables become **entity types**, columns become
+  **properties**, model relationships become **relationships**. The draft
+  still needs review and business context.
+* **Bind, don't replace:** the ontology sits alongside the semantic model.
+  Metrics stay as the model's DAX measures, and entity types bind to OneLake
+  tables, semantic models and Eventhouse data.
+* **Status:** the Fabric IQ workload was announced generally available in
+  June 2026, but the **ontology item was still labelled preview** in
+  Microsoft's documentation as of October 2026. Reported current
+  limitations include Direct Lake models only, data already in OneLake,
+  mostly manual modelling, and no native ontology versioning. Check
+  Microsoft Learn before relying on these.
+* For the retail model, generating from
+  [`Retail.SemanticModel`](../../../../semantic-models/implementations/providers/microsoft/power-bi/Retail.SemanticModel/)
+  would yield Order Lines, Orders, Customers, Products, Categories and Reviews
+  entity types. Compare that with the hand-written OWL ontology: the subclass
+  (`PremiumCustomer`), the transitive category tree and the cardinality
+  rules would have to be added by hand.
+
 DTDL is aimed at digital twins (IoT, buildings, supply chains), but it's
 Microsoft's only *textual* ontology language, so the retail ontology is
 expressed in it here. Fabric IQ's ontology is authored in Fabric and bound to

@@ -21,7 +21,8 @@ How semantic models relate to ontologies:
 
 [All products](implementations/README.md): AWS (COA metrics, QuickSight) ·
 Google Cloud (Looker) · Microsoft (Power BI / Fabric) · Oracle (Analytics) ·
-Snowflake · Databricks · dbt · AtScale · Cube.
+Snowflake · Databricks · Salesforce (Tableau Semantics) · SAP (Datasphere) ·
+dbt · AtScale · Cube.
 
 ## Retail example files
 

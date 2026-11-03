@@ -66,8 +66,10 @@ where `<topic>` is `ontologies`, `graphs` or `semantic-models`.
    definitions** as [`metrics.sql`](examples/retail/warehouse/metrics.sql)
    for semantic models.
 5. Add a row to that topic's `implementations/README.md` and to the
-   [provider index](README.md#provider-index). Product status (GA, preview...)
-   goes **only** in the topic's `implementations/README.md`.
+   [provider index](README.md#provider-index). Put the one-word **status**
+   (GA, preview, open source, Labs...) in the topic table's Status column, and
+   any detail ("workload GA, ontology item still preview, as of Oct 2026")
+   with a date and source on the product page.
 6. If it can run for free (Docker image, local engine, free tier), add a
    check and a CI job, and raise the verification level.
 

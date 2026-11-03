@@ -16,8 +16,9 @@ over it (OWL, RDFS, SKOS, SHACL, RDF, SPARQL).
 ## Implementations
 
 [All products](implementations/README.md): AWS (Context Ontology Accelerator,
-Neptune) · Microsoft (Fabric IQ, DTDL) · Oracle (RDF Graph) · Neo4j
-neosemantics.
+Neptune) · Google Cloud (Knowledge Catalog) · Microsoft (Fabric IQ, DTDL) ·
+Oracle (RDF Graph) · Snowflake · Databricks (Genie Ontology, OntoBricks) ·
+SAP (Knowledge Graph) · Palantir (Foundry Ontology) · Neo4j neosemantics.
 
 ## Retail example files
 

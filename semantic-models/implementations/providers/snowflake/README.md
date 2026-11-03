@@ -6,7 +6,9 @@
 | Concept | Snowflake product | Retail example |
 |---|---|---|
 | Semantic model | **Semantic views** (`CREATE SEMANTIC VIEW`; query with `SEMANTIC_VIEW(...)` or standard SQL) | [`retail_semantic_view.sql`](retail_semantic_view.sql) |
-| AI on semantics | **Cortex Analyst** (natural language → SQL using the semantic view / semantic-model YAML) | — |
+| AI on semantics | **Cortex Analyst** and Cortex Agents (natural language → SQL using semantic views) | — |
+| Model generation | **Semantic View Autopilot**: generates semantic views from existing schemas and query history | — |
+| Knowledge graph sync | **RelationalAI** syncs both ways with semantic views (concepts and measures) | see [ontologies](../../../../ontologies/implementations/providers/snowflake/README.md) |
 | Open format | Initiated the **Open Semantic Interchange**, now **Apache Ossie**; converters Ossie ↔ Cortex Analyst YAML | [Ossie model](../../../../examples/retail/semantic-model/ossie/) |
 | Graph | none native (partners, e.g. RelationalAI knowledge graphs in Snowflake) | — |
 

@@ -20,7 +20,8 @@ the knowledge-representation stack.
 
 [All products](implementations/README.md): AWS (Neptune, Neptune Analytics,
 COA) · Google Cloud (Spanner Graph, BigQuery Graph) · Microsoft (Fabric Graph,
-Cosmos DB) · Oracle (property graphs) · Databricks (GraphFrames) · Neo4j.
+Cosmos DB) · Oracle (property graphs) · Snowflake (KG tables) · Databricks
+(GraphFrames, OntoBricks) · SAP (HANA Cloud) · Neo4j.
 
 ## Retail example files
 

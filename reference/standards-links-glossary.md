@@ -61,6 +61,20 @@
 | GraphML | http://graphml.graphdrawing.org/ |
 | LDBC benchmarks (SNB, Graphalytics) | https://ldbcouncil.org/ |
 
+### Provider ontology / context-layer products (2026)
+
+| Product | Link |
+|---|---|
+| Google Knowledge Catalog (semantic model ingestion) | https://cloud.google.com/blog/products/data-analytics/expanded-semantic-model-support-in-knowledge-catalog |
+| Databricks OntoBricks (Databricks Labs) | https://github.com/databrickslabs/ontobricks |
+| Databricks Genie (release notes) | https://docs.databricks.com/aws/en/ai-bi/release-notes/2026 |
+| Snowflake Ontology on Snowflake (Snowflake-Labs) | https://github.com/snowflake-Labs/ontology-on-snowflake |
+| Oracle Graph samples (property graph + RDF) | https://github.com/oracle-samples/oracle-graph |
+| Oracle RDF Graph (26ai) | https://docs.oracle.com/en/database/oracle/oracle-database/26/rdfrm/rdf-graph-overview.html |
+| SAP Sapphire 2026 (Knowledge Graph) | https://news.sap.com/2026/05/sap-sapphire-sap-unveils-autonomous-enterprise/ |
+| Palantir Ontology core concepts | https://www.palantir.com/docs/foundry/ontology/core-concepts |
+| Tableau Semantics | https://www.tableau.com/products/tableau-semantics |
+
 ### Semantic-layer / semantic-model formats
 
 | Format | Link |

@@ -21,6 +21,14 @@ Oracle also appears in
 * Relational data can be exposed as RDF through **RDF views** (R2RML-style
   mappings), the same idea as COA's virtual knowledge graph and Ossie mappings.
 
+* **Oracle AI Database 26ai renamed the concepts:** a "semantic model" is
+  now an **RDF graph** and an "entailment" is now an **inferred graph**. 26ai
+  adds new `SEM_APIS` subprograms, 32K `VARCHAR` RDF values, and a
+  `SEM_SQL` SQL macro for querying RDF from SQL.
+* RDF graphs support **SPARQL 1.1** with RDF, RDFS and a subset of **OWL**,
+  plus GraphRAG and vector search in the same database; samples live in
+  [oracle-samples/oracle-graph](https://github.com/oracle-samples/oracle-graph) (`rdf/`, `knowledge-graph/`).
+
 A worked Oracle example is on the [roadmap](../../../../ROADMAP.md).
 
 Docs: [Oracle Database graph (RDF)](https://docs.oracle.com/en/database/oracle/property-graph/)

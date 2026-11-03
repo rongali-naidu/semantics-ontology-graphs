@@ -15,6 +15,11 @@ Oracle also appears in
 [graphs (property graphs, PGX)](../../../../graphs/implementations/providers/oracle/README.md) and
 [ontologies (RDF Graph)](../../../../ontologies/implementations/providers/oracle/README.md).
 
+Semantic Modeler stores models as JSON files and does Git branching,
+merging, pull, push and commit from inside the tool, including a
+**Semantic Merge** option that merges by model semantics rather than text
+lines ([Oracle: Building Semantic Models in OAC](https://docs.oracle.com/en/cloud/paas/analytics-cloud/acmdg/building-semantic-models-oracle-analytics-cloud.pdf)).
+
 How Oracle stores and promotes the semantic model (RPD file, MUDE, MDS XML,
 Semantic Modeler + Git) is covered in
 [semantic models concepts 3](../../../concepts/03-semantic-model-repositories.md#31-oracle-analytics-oac--oas-formerly-obiee).

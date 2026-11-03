@@ -10,7 +10,7 @@ One running example, an **Amazon-style retail ordering domain**, is
 expressed in every form: an OWL ontology, RDF in six serializations, a
 property graph, warehouse tables, an **Apache Ossie** semantic model, and
 product formats from AWS, Google Cloud, Microsoft, Oracle, Snowflake,
-Databricks, dbt, AtScale, Cube and Neo4j. CI checks that they give the same
+Databricks, SAP, Salesforce, Palantir, dbt, AtScale, Cube and Neo4j. CI checks that they give the same
 answers.
 
 > **Early release.** Every implementation page states how far it's verified;
@@ -24,7 +24,7 @@ answers.
  ontologies/        graphs/               semantic-models/
  ├─ concepts/       ├─ concepts/          ├─ concepts/
  └─ implementations ├─ implementations    └─ implementations/
-    ├─ providers/   │  ├─ providers/         ├─ providers/   aws · gcp · microsoft · oracle · snowflake · databricks
+    ├─ providers/   │  ├─ providers/         ├─ providers/   aws · gcp · microsoft · oracle · snowflake · databricks · sap · salesforce · palantir
     └─ tools/       │  └─ tools/             └─ tools/       dbt · atscale · cube
                     │
      examples/retail/   one shared example: ontology, RDF, SPARQL, property graph, warehouse, Ossie, scripts
@@ -51,11 +51,14 @@ topic's page is complete on its own.
 | Provider / tool | Ontologies | Graphs | Semantic models |
 |---|---|---|---|
 | **AWS** | [Context Ontology Accelerator, Neptune](ontologies/implementations/providers/aws/README.md) | [Neptune, Neptune Analytics, COA knowledge graph](graphs/implementations/providers/aws/README.md) | [COA metrics, QuickSight](semantic-models/implementations/providers/aws/README.md) |
-| **Google Cloud** | — | [Spanner Graph, BigQuery Graph](graphs/implementations/providers/gcp/README.md) | [Looker](semantic-models/implementations/providers/gcp/README.md) |
+| **Google Cloud** | [Knowledge Catalog context graph](ontologies/implementations/providers/gcp/README.md) | [Spanner Graph, BigQuery Graph](graphs/implementations/providers/gcp/README.md) | [Looker, Knowledge Catalog](semantic-models/implementations/providers/gcp/README.md) |
 | **Microsoft** | [Fabric IQ, DTDL](ontologies/implementations/providers/microsoft/README.md) | [Fabric Graph, Cosmos DB](graphs/implementations/providers/microsoft/README.md) | [Power BI / Fabric](semantic-models/implementations/providers/microsoft/README.md) |
-| **Oracle** | [RDF Graph](ontologies/implementations/providers/oracle/README.md) | [property graphs, PGX](graphs/implementations/providers/oracle/README.md) | [Oracle Analytics](semantic-models/implementations/providers/oracle/README.md) |
-| **Snowflake** | — | — | [semantic views](semantic-models/implementations/providers/snowflake/README.md) |
-| **Databricks** | — | [GraphFrames](graphs/implementations/providers/databricks/README.md) | [metric views](semantic-models/implementations/providers/databricks/README.md) |
+| **Oracle** | [RDF Graph](ontologies/implementations/providers/oracle/README.md) | [property graphs, Graph Studio](graphs/implementations/providers/oracle/README.md) | [Oracle Analytics](semantic-models/implementations/providers/oracle/README.md) |
+| **Snowflake** | [Ontology on Snowflake, RelationalAI](ontologies/implementations/providers/snowflake/README.md) | [KG tables + graph analytics](graphs/implementations/providers/snowflake/README.md) | [semantic views](semantic-models/implementations/providers/snowflake/README.md) |
+| **Databricks** | [Genie Ontology, OntoBricks](ontologies/implementations/providers/databricks/README.md) | [GraphFrames, OntoBricks](graphs/implementations/providers/databricks/README.md) | [metric views](semantic-models/implementations/providers/databricks/README.md) |
+| **SAP** | [SAP Knowledge Graph, HANA Cloud](ontologies/implementations/providers/sap/README.md) | [HANA Cloud knowledge graph engine](graphs/implementations/providers/sap/README.md) | [Datasphere / Business Data Cloud](semantic-models/implementations/providers/sap/README.md) |
+| **Salesforce** | — | — | [Tableau Semantics](semantic-models/implementations/providers/salesforce/README.md) |
+| **Palantir** | [Foundry Ontology](ontologies/implementations/providers/palantir/README.md) | — | — |
 | **Neo4j** | [neosemantics](ontologies/implementations/tools/neo4j-neosemantics/README.md) | [Neo4j](graphs/implementations/tools/neo4j/README.md) | — |
 | **dbt** | — | — | [Semantic Layer / MetricFlow](semantic-models/implementations/tools/dbt/README.md) ✅ |
 | **AtScale** | — | — | [SML](semantic-models/implementations/tools/atscale/README.md) |

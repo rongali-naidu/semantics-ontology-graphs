@@ -5,8 +5,9 @@
 
 | Product | Role for graphs | Retail example |
 |---|---|---|
-| **Oracle Database property graphs** | SQL/PGQ property graph views over relational tables (Oracle Database 23ai), plus PGQL | [`retail-pgq.sql`](../../../../examples/retail/property-graph/sql-pgq/retail-pgq.sql) (ISO SQL/PGQ; Oracle 23ai implements it) |
-| **Oracle Graph Server (PGX)** | in-memory graph analytics and algorithms | — |
+| **Oracle Database property graphs** (Oracle AI Database 26ai, 19c+) | SQL:2023 property graph views over relational tables (SQL/PGQ); PGQL on 19c and earlier; GraphRAG + vector search in the same database | [`retail-pgq.sql`](../../../../examples/retail/property-graph/sql-pgq/retail-pgq.sql) (ISO SQL/PGQ; Oracle 23ai implements it) |
+| **Oracle Graph Server (PGX)** / in-database algorithms | 80+ algorithms (PageRank, Louvain, Dijkstra, betweenness) | — |
+| **Graph Studio** | browser IDE to build, query and visualize graphs | — |
 | **Oracle RDF Graph** | RDF store with SPARQL inside Oracle Database | covered under [ontologies](../../../../ontologies/implementations/providers/oracle/README.md) |
 
 Oracle also appears in
@@ -20,4 +21,5 @@ is the closest match: `CREATE PROPERTY GRAPH` over the retail tables, then
 `SELECT … FROM GRAPH_TABLE (retail MATCH …)`. Oracle-specific syntax
 differences are on the [roadmap](../../../../ROADMAP.md).
 
-Docs: [Oracle Database graph](https://docs.oracle.com/en/database/oracle/property-graph/)
+Docs: [Oracle Database graph](https://docs.oracle.com/en/database/oracle/property-graph/) ·
+[oracle-samples/oracle-graph](https://github.com/oracle-samples/oracle-graph) (demos, GraphRAG notebooks, 80+ algorithm samples)

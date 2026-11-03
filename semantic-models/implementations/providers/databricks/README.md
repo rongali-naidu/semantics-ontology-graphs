@@ -7,6 +7,7 @@
 |---|---|---|
 | **Unity Catalog metric views** | YAML-defined source, joins, dimensions and measures; queried with `MEASURE()` in SQL | [`retail_metric_view.sql`](retail_metric_view.sql) |
 | Genie (AI/BI) | natural-language questions using metric views and their synonyms | — |
+| Genie Ontology | learned context layer that uses metric views as its governed core | see [ontologies](../../../../ontologies/implementations/providers/databricks/README.md) |
 | Apache Ossie | Databricks ↔ Ossie converter | [Ossie model](../../../../examples/retail/semantic-model/ossie/) |
 
 Databricks also appears in [graphs (GraphFrames)](../../../../graphs/implementations/providers/databricks/README.md).

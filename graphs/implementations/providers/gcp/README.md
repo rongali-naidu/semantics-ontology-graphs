@@ -8,6 +8,7 @@
 | **Spanner Graph** | property graph (ISO GQL) declared over Spanner tables | [`spanner-graph/retail-graph.sql`](spanner-graph/retail-graph.sql) |
 | **BigQuery Graph** | property graph (GQL) over BigQuery warehouse tables, mixed with SQL via `GRAPH_TABLE` | [`bigquery-graph/retail-graph.sql`](bigquery-graph/retail-graph.sql) |
 | Vertex AI + Spanner / BigQuery Graph | GraphRAG | — |
+| **Knowledge Catalog** | ingests BigQuery Graph definitions into its context graph alongside semantic models | see [ontologies](../../../../ontologies/implementations/providers/gcp/README.md) |
 | RDF / SPARQL | none native (run Jena, GraphDB or Oxigraph on GKE / Compute Engine) | — |
 
 Google Cloud also appears in [semantic models (Looker)](../../../../semantic-models/implementations/providers/gcp/README.md).
