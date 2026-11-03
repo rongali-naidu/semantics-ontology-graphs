@@ -712,7 +712,7 @@ def data_agent():
     c.line(500, 136, 500, 158)
     tools = [(30, "Semantic model", "how much? how many?", ["governed metrics · joins", "revenue = Σ qty × price"], SEM),
              (275, "Ontology", "what does it mean?", ["vocabulary · synonyms", "premium ⊑ customer"], ONTO),
-             (520, "Knowledge graph", "who? how connected?", ["entities · paths · provenance", "Alice → O3 → Earbuds"], GRAPH),
+             (520, "Knowledge graph", "where is it? how related?", ["concepts ↔ tables ↔ metrics", "lineage · key entities"], GRAPH),
              (765, "Documents", "why?", ["policies · definitions", "RAG retrieval"], NEUTRAL)]
     for x, t, q, body, col in tools:
         c.rect(x, 252, 205, 128, fill=col[0], stroke=col[1])
@@ -723,7 +723,7 @@ def data_agent():
     c.rect(30, 408, 940, 46, fill="#F9FAFB", stroke="#D0D5DD")
     c.text(500, 436, "same data underneath: warehouse tables · graph store · documents (linked by IRIs and mappings)",
            size=12.5, color=INK)
-    c.text(500, 488, "start with the semantic model for numbers · add the ontology when vocabulary diverges · add the KG for relationships",
+    c.text(500, 488, "start with the semantic model for numbers · add the ontology when vocabulary diverges · add the KG when data spans many sources",
            size=12, color=MUTED, italic=True)
     for x in (132, 377, 622, 867):
         c.line(x, 382, x, 406, arrow=False, color="#98A2B3")

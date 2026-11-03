@@ -22,7 +22,7 @@ Each topic in this repo supplies one missing piece of context:
 |---|---|---|
 | **Semantic model** | governed metrics, dimensions and joins: *how much?* | invents formulas and joins; numbers change between runs |
 | **Ontology** | shared meaning: terms, synonyms, hierarchies, rules: *what does it mean?* | misreads business terms, misses that a premium customer is a customer |
-| **Knowledge graph** | connected facts with identity and provenance: *who? how connected?* | can't answer multi-hop questions or say where an answer came from |
+| **Knowledge graph** (mostly *metadata*) | a connected map of business concepts, tables, columns, metrics, lineage and key entities: *where is it? how does it relate?* | can't find the right tables or metric among many sources, guesses join paths, can't resolve "Alice" to one customer or explain where an answer came from |
 
 That's why every major data platform now ships one or more of these for
 agents: AWS Context Ontology Accelerator, Microsoft Fabric IQ, Google

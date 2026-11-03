@@ -17,7 +17,7 @@ The three components each supply a different kind of context.
 |---|---|---|---|
 | **Semantic model** (semantic layer) | **how much / how many**: governed metrics, dimensions, joins | writes its own SQL and invents a formula ("revenue = SUM(list_price)") or a join that double counts | `revenue = SUM(quantity × unit_price)`, `average_order_value = revenue / order_count`; Alice's revenue is 1498.97 every time |
 | **Ontology** | **what does this mean**: vocabulary, synonyms, class hierarchy, rules, what is allowed | confuses terms ("buyer", "client", "account"), misses subclasses, can't tell which concept a question is about | "premium members" = `PremiumCustomer`; a PremiumCustomer **is** a Customer; every Order has exactly one Customer |
-| **Knowledge graph** (ontology + data) | **who / which / how connected**: entities, relationships, paths, provenance | can't resolve "Alice" to one entity, can't answer multi-hop questions without fragile self-joins | "customers who bought the earbuds also bought…"; "how is Alice connected to Carol?" |
+| **Knowledge graph**: mostly a *context graph* of metadata, optionally key entities ([4.2](#42-what-goes-in-the-graph-and-what-stays-in-the-warehouse)) | **where is it, how does it relate**: concepts ↔ tables ↔ columns ↔ metrics ↔ lineage across many sources; resolved entities (customers, products) | picks the wrong table or metric among many sources, guesses join paths, can't resolve "Alice" to one customer, can't explain where an answer came from | "revenue" → metric *revenue* in the *sales* model → `order_lines` ⋈ `orders`; "Alice" → customer `C1` |
 | *(Documents)* | **why**: policies, definitions, rationale (RAG) | has numbers but can't explain them | "what counts as a delivered order?" |
 
 ## 4.2 What goes in the graph, and what stays in the warehouse
@@ -101,8 +101,9 @@ Not on day one. Choose by the questions the agent must answer:
 | a mix, in production, with audit requirements | **all three**, linked: ontology terms ↔ semantic-model fields ↔ KG entities | governance, tests, human approval of mappings |
 
 Rule of thumb: **semantic model first for numbers, ontology when vocabulary
-gets inconsistent, knowledge graph when the questions become about
-relationships.**
+gets inconsistent, knowledge graph when data and metrics span many sources
+(a context graph) or when the questions themselves are about relationships
+(an entity graph).**
 
 ## 4.5 How they work together in one question
 
@@ -117,9 +118,12 @@ who are those customers?"*
    `revenue` by `order_month`, filtered to `is_premium = true` and
    `category_level_1 = 'Electronics'`. The agent picks a metric instead of
    writing SQL.
-3. **Knowledge graph** answers "who": the premium customers connected to
-   Electronics orders, their other purchases, reviews and addresses, with
-   provenance.
+3. **Knowledge graph** (context graph) finds *where* and *how*: the
+   `revenue` metric lives in the *sales* semantic model over `order_lines` ⋈
+   `orders`; "premium" maps to `customers.is_premium`; Electronics includes
+   its subcategories. If an entity graph exists, it also resolves *who* the
+   premium customers are across systems. The transactions themselves are read
+   from the warehouse, not from the graph.
 4. **Documents** (optional) explain "why": a promotion ended, a policy
    changed.
 

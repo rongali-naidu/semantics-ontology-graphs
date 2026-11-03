@@ -111,7 +111,7 @@ format must give the same answers.
 | | Gives an AI system | Without it |
 |---|---|---|
 | **Ontology** | meaning: what things are, how they relate, what's allowed | ambiguity, inconsistent terms, no guardrails |
-| **Knowledge graph** | facts and connections, with identity and provenance | shallow retrieval, invented relationships, no "why this answer" |
+| **Knowledge graph** | a connected map of concepts, data, metrics and key entities, with identity and provenance (mostly metadata; transactions stay in the warehouse) | wrong tables and joins, unresolved entities, no "why this answer" |
 | **Semantic model** | correct, consistent numbers | plausible but wrong metrics |
 
 LLMs bring language and reasoning; these three bring **the enterprise's
