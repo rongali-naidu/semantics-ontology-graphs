@@ -7,6 +7,13 @@ sit in a **category** tree and are **sold by** sellers; customers write
 
 All names (TechHub Inc, Alice Johnson, ...) are made up.
 
+> **About scale:** this example materializes every order and order line as
+> RDF so that each format can be compared. In production, transactional facts
+> stay in the warehouse; the knowledge graph holds the ontology, mappings,
+> metadata and (optionally) master data, and reaches the transactions through
+> SQL, a virtual knowledge graph or a graph over tables. See
+> [foundations 4.2](../../foundations/04-data-agents.md#42-what-goes-in-the-graph-and-what-stays-in-the-warehouse).
+
 ## 4.1 The domain in one picture (instance data)
 
 ![Retail instance graph: three customers, four orders, six products and six categories connected by PLACED, CONTAINS, IN_CATEGORY and SUBCATEGORY_OF](../../assets/diagrams/retail-instance-graph.svg)

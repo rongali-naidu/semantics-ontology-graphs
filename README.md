@@ -105,6 +105,12 @@ Full product tables: [ontologies](ontologies/implementations/README.md) ·
 3 customers · 4 orders · 7 order lines · 6 products · 6 categories (3
 levels) · 3 sellers · 4 reviews.
 
+> **About scale:** the example loads *everything*, orders included, into
+> the graph because it's tiny. With real volumes, transactions stay in the
+> warehouse and the graph holds meaning and metadata. See
+> [what goes in the graph, and what stays in the warehouse](foundations/04-data-agents.md#42-what-goes-in-the-graph-and-what-stays-in-the-warehouse).
+
+
 | Same data as... | Size | Revenue by customer |
 |---|---|---|
 | RDF (+ OWL ontology) | 165 triples (+ 238) | SPARQL → Alice 1498.97 · Bob 199.98 · Carol 179.48 |

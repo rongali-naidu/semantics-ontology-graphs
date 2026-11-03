@@ -14,6 +14,12 @@ Same retail graph, six bulk-load formats plus three "load by query" options.
 | H | Query | Gremlin `addV/addE` | [`01-create-retail-graph.groovy`](../../../../examples/retail/property-graph/gremlin/01-create-retail-graph.groovy) | Gremlin + openCypher |
 | I | Query | SPARQL `INSERT DATA` / `LOAD <url>` | [`12-insert-new-order.ru`](../../../../examples/retail/sparql/12-insert-new-order.ru) | SPARQL |
 
+> **What to load at scale:** bulk-load the ontology, metadata and master
+> data (customers, products, categories). Loading every order line, as this
+> tiny example does, rarely pays off for terabytes of transactions; keep those
+> in the warehouse and reach them with SQL or a virtual graph
+> ([foundations 4.2](../../../../foundations/04-data-agents.md#42-what-goes-in-the-graph-and-what-stays-in-the-warehouse)).
+
 Pick **one** of A/B/G/H for the property graph (they create the same 29
 nodes and 41 edges) and **one** of C/D/E/F/I for RDF (same 165 data triples +
 238 ontology triples). JSON-LD and TriG are not bulk-load formats — convert

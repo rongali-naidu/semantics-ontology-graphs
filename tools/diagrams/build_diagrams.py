@@ -765,6 +765,42 @@ def ai_era():
     return c
 
 
+# ---------------------------------------------------------------------------
+@diagram("agent-context-layers")
+def agent_context_layers():
+    c = Canvas(1000, 560, "What goes in the graph for a data agent, and what stays in the warehouse")
+    c.heading("At scale, the graph holds meaning, not terabytes of orders",
+              "a data agent plans with the context graph, computes with the semantic model, and reads facts from the warehouse")
+    c.box(330, 82, 340, 50, "Data agent (LLM + tools)", [], EXAMPLE, title_size=14.5)
+    cols = [(30, "Context graph (metadata KG)", ["ontology concepts · glossary", "tables · columns · mappings",
+             "metric references · lineage", "owners · example queries"], ONTO, "thousands–millions of nodes", "1. understand & plan"),
+            (350, "Semantic model", ["metric definitions", "joins · grain · fan-out rules", "compiles to correct SQL", "(executable)"],
+             SEM, "per domain; text files", "2. compute numbers"),
+            (670, "Entity graph (optional)", ["customers · products · suppliers", "identities resolved across", "systems · relationships",
+             "(master data, not transactions)"], GRAPH, "millions of nodes", "3. who / how connected")]
+    for x, t, body, col, size, step in cols:
+        c.box(x, 186, 300, 150, t, body, col, title_size=14.5, body_size=12.5, body_gap=20)
+        c.text(x + 150, 330, size, size=11, color=col[1], italic=True)
+        c.line(500, 134, x + 150, 184)
+        c.label(x + 150 + (40 if x < 350 else -40 if x > 350 else 0), 166, step, size=11.5, color=INK)
+    c.line(330, 262, 348, 262, both=True)
+    c.line(650, 262, 668, 262, both=True)
+    c.rect(30, 400, 940, 76, fill=NEUTRAL[0], stroke=NEUTRAL[1])
+    c.text(500, 428, "Warehouse / lakehouse: transactions stay here", size=15, weight="700", color=NEUTRAL[1])
+    c.text(500, 452, "orders · order lines · events · terabytes   (graphs over tables: Spanner / BigQuery Graph, SQL/PGQ)",
+           size=12.5, color=INK)
+    c.line(500, 338, 500, 398)
+    c.label(500, 372, "SQL", size=11.5)
+    c.line(820, 398, 820, 338, dash="4 3")
+    c.label(820, 372, "load master data", size=11)
+    c.line(180, 398, 180, 338, dash="4 3", both=True)
+    c.label(180, 372, "virtual KG: SPARQL → SQL", size=11)
+    c.rect(30, 494, 940, 46, fill=WARN[0], stroke=WARN[1])
+    c.text(500, 522, "the retail example loads everything into the graph only because it is tiny (165 triples); at scale, don't",
+           size=12.5, color=INK)
+    return c
+
+
 def main() -> None:
     OUT.mkdir(parents=True, exist_ok=True)
     for name, fn in DIAGRAMS.items():
