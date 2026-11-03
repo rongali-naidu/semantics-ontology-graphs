@@ -44,11 +44,7 @@ give the same answers.
 
 ![Ecosystem poster: a hub with six segments (foundations, ontologies, graphs, semantic models, standards, AI and agents), each with a rail of concepts and products, and the retail example underneath](assets/diagrams/ecosystem-poster.svg)
 
-[Download the poster as an image (PNG)](assets/posters/ecosystem-poster.png)
-
 ![How this repository is organised: foundations, three topics (ontologies, graphs, semantic models) with concepts and implementations, one shared retail example](assets/diagrams/repo-map.svg)
-
-Also at the top level: [`notebooks/`](notebooks/) (a runnable quickstart) and [`tests/`](tests/) (the automated checks as unit tests).
 
 ## Start here
 
