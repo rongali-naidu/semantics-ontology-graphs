@@ -11,7 +11,7 @@ Writes  rdf/retail-data.nt           N-Triples   (Neptune bulk loader: ntriples)
         rdf/retail-data.trig         TriG        (Turtle + named graphs)
         rdf/retail-data.nq           N-Quads     (Neptune bulk loader: nquads)
         ontology/retail-ontology.nt  ontology as N-Triples
-        ../../vendors/aws/rdf/*      copies ready to upload to S3 for Neptune
+        ../../graphs/implementations/providers/aws/rdf/*      copies ready to upload to S3 for Neptune
 
 Named graphs: each subject is put into a graph based on its rdf:type, so the
 quad formats show a realistic split (catalog / customers / orders / reviews).
@@ -24,7 +24,7 @@ from rdflib.compare import isomorphic
 from rdflib.namespace import RDF
 
 ROOT = Path(__file__).resolve().parent.parent
-AWS = ROOT.parent.parent / "vendors/aws"      # Neptune-specific load files
+AWS = ROOT.parent.parent / "graphs/implementations/providers/aws"      # Neptune-specific load files
 RETAIL = Namespace("https://example.org/retail/ontology#")
 EX = Namespace("https://example.org/retail/data/")
 GRAPH = Namespace("https://example.org/retail/graph/")

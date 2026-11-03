@@ -1,7 +1,7 @@
 # Common tasks. `make help` lists them.
 PYTHON       ?= python3
 RETAIL       := examples/retail
-DBT_DIR      := vendors/dbt-labs/retail_dbt
+DBT_DIR      := semantic-models/implementations/tools/dbt/retail_dbt
 # Apache Ossie spec the Ossie files are validated against (see
 # examples/retail/semantic-model/ossie/README.md)
 OSSIE_COMMIT := 10116f936e628944eadaa70ec7578caf23912e96
@@ -16,9 +16,9 @@ install:         ## install the Python check dependencies
 	$(PYTHON) -m pip install -r requirements.txt
 
 # Data flow: rdf/retail-data.ttl (source of truth) is the ONLY hand-edited data file.
-#   build_rdf_formats.py     -> examples/retail/rdf/*.{nt,nq,trig,rdf,jsonld}, vendors/aws/rdf/
-#   rdf_to_property_graph.py -> vendors/aws/{gremlin,opencypher}-csv/, property-graph/*/01-create-*
-#   rdf_to_tables.py         -> examples/retail/warehouse/data/, vendors/dbt-labs/retail_dbt/seeds/
+#   build_rdf_formats.py     -> examples/retail/rdf/*.{nt,nq,trig,rdf,jsonld}, graphs/implementations/providers/aws/rdf/
+#   rdf_to_property_graph.py -> graphs/implementations/providers/aws/{gremlin,opencypher}-csv/, property-graph/*/01-create-*
+#   rdf_to_tables.py         -> examples/retail/warehouse/data/, semantic-models/implementations/tools/dbt/retail_dbt/seeds/
 generate:        ## regenerate every derived file from rdf/retail-data.ttl
 	cd $(RETAIL) && $(PYTHON) scripts/build_rdf_formats.py && \
 	  $(PYTHON) scripts/rdf_to_property_graph.py && $(PYTHON) scripts/rdf_to_tables.py
@@ -45,9 +45,9 @@ check-links:     ## relative links and anchors in all Markdown files
 	$(PYTHON) tools/check_links.py
 
 check-generated: generate  ## fail if committed derived files are out of date
-	git diff --exit-code -- examples vendors
+	git diff --exit-code -- examples ontologies graphs semantic-models
 
-dbt:             ## build the dbt project and check MetricFlow results (needs vendors/dbt-labs/requirements.txt)
+dbt:             ## build the dbt project and check MetricFlow results (needs semantic-models/implementations/tools/dbt/requirements.txt)
 	cd $(DBT_DIR) && DBT_PROFILES_DIR=. dbt build && DBT_PROFILES_DIR=. mf validate-configs && \
 	  DBT_PROFILES_DIR=. $(PYTHON) ../check_metricflow.py
 

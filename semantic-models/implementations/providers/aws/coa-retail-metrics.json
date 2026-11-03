@@ -1,0 +1,106 @@
+{
+  "_comment": "Retail metrics as AWS Context Ontology Accelerator (COA) CreateMetric request bodies (POST /namespaces/{namespaceId}/metrics). Field names and enums follow COA v0.3.8 models/src/main/smithy/metric-service.smithy. Replace dataSourceId with your registered source. Each metric binds to ONE source table, so discount_amount (needs products) is not a Tier-1 metric here.",
+  "metrics": [
+    {
+      "name": "revenue",
+      "label": "Revenue",
+      "description": "Sum of quantity * unit price actually paid (not list price).",
+      "expression": {
+        "dialects": [
+          { "dialect": "TRINO", "expression": "SELECT SUM(quantity * unit_price) AS revenue FROM retail.order_lines" },
+          { "dialect": "POSTGRESQL", "expression": "SELECT SUM(quantity * unit_price) AS revenue FROM retail.order_lines" }
+        ]
+      },
+      "dataSourceId": "retail-warehouse",
+      "sourceTable": "order_lines",
+      "unit": "USD",
+      "returnType": "DECIMAL",
+      "aiContext": {
+        "synonyms": ["sales", "GMV", "gross merchandise value", "turnover"],
+        "instructions": "Revenue uses the price paid on each order line, which can be below the product list price.",
+        "examples": ["What was total revenue?", "Revenue by customer"]
+      },
+      "ontologyConcepts": [
+        "https://example.org/retail/ontology#OrderLine",
+        "https://example.org/retail/ontology#unitPrice",
+        "https://example.org/retail/ontology#quantity"
+      ]
+    },
+    {
+      "name": "units_sold",
+      "label": "Units sold",
+      "description": "Total quantity across all order lines.",
+      "expression": {
+        "dialects": [
+          { "dialect": "TRINO", "expression": "SELECT SUM(quantity) AS units_sold FROM retail.order_lines" }
+        ]
+      },
+      "dataSourceId": "retail-warehouse",
+      "sourceTable": "order_lines",
+      "returnType": "INTEGER",
+      "aiContext": { "synonyms": ["units", "items sold", "quantity sold"] },
+      "ontologyConcepts": ["https://example.org/retail/ontology#quantity"]
+    },
+    {
+      "name": "order_count",
+      "label": "Orders",
+      "description": "Number of distinct orders (never count order lines).",
+      "expression": {
+        "dialects": [
+          { "dialect": "TRINO", "expression": "SELECT COUNT(DISTINCT order_id) AS order_count FROM retail.order_lines" }
+        ]
+      },
+      "dataSourceId": "retail-warehouse",
+      "sourceTable": "order_lines",
+      "returnType": "INTEGER",
+      "aiContext": { "synonyms": ["number of orders", "orders"] },
+      "ontologyConcepts": ["https://example.org/retail/ontology#Order"]
+    },
+    {
+      "name": "average_order_value",
+      "label": "Average order value",
+      "description": "Revenue per order.",
+      "expression": {
+        "dialects": [
+          { "dialect": "TRINO", "expression": "SELECT SUM(quantity * unit_price) / COUNT(DISTINCT order_id) AS average_order_value FROM retail.order_lines" }
+        ]
+      },
+      "dataSourceId": "retail-warehouse",
+      "sourceTable": "order_lines",
+      "unit": "USD",
+      "returnType": "DECIMAL",
+      "aiContext": { "synonyms": ["AOV", "basket size", "average basket"] },
+      "ontologyConcepts": ["https://example.org/retail/ontology#Order"]
+    },
+    {
+      "name": "buyer_count",
+      "label": "Buyers",
+      "description": "Customers with at least one order.",
+      "expression": {
+        "dialects": [
+          { "dialect": "TRINO", "expression": "SELECT COUNT(DISTINCT customer_id) AS buyer_count FROM retail.orders" }
+        ]
+      },
+      "dataSourceId": "retail-warehouse",
+      "sourceTable": "orders",
+      "returnType": "INTEGER",
+      "aiContext": { "synonyms": ["active customers", "number of buyers"] },
+      "ontologyConcepts": ["https://example.org/retail/ontology#Customer", "https://example.org/retail/ontology#placedBy"]
+    },
+    {
+      "name": "average_rating",
+      "label": "Average rating",
+      "description": "Average review stars (1-5).",
+      "expression": {
+        "dialects": [
+          { "dialect": "TRINO", "expression": "SELECT AVG(rating) AS average_rating FROM retail.reviews" }
+        ]
+      },
+      "dataSourceId": "retail-warehouse",
+      "sourceTable": "reviews",
+      "returnType": "DECIMAL",
+      "aiContext": { "synonyms": ["stars", "average stars", "score"] },
+      "ontologyConcepts": ["https://example.org/retail/ontology#Review", "https://example.org/retail/ontology#rating"]
+    }
+  ]
+}

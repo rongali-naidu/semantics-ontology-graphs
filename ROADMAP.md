@@ -7,23 +7,27 @@ Legend: ✅ done · 🔜 next · 📋 planned · 💭 idea
 
 ## Phase 0: foundations ✅ (November 2026)
 
-- ✅ Concepts / vendors / reference structure; one retail example in every format
+- ✅ Topic-first structure: foundations + ontologies / graphs / semantic models,
+  each with concepts and implementations (providers, tools); one retail
+  example in every format
+- ✅ AWS Context Ontology Accelerator (COA) covered in all three topics; COA
+  metric definitions run in CI
 - ✅ CI: SPARQL, SHACL, OWL RL, graph consistency, warehouse + Ossie metrics,
   Ossie official schemas (pinned commit), dbt + MetricFlow, link checker,
   "generated files are current" check; weekly scheduled run
-- ✅ Verification level + review date on every vendor folder
+- ✅ Verification level + review date on every implementation page
 - ✅ Licensing: Apache 2.0 (code, data, models) + CC BY 4.0 (docs)
 - ✅ `Makefile`, `CONTRIBUTING.md`, pinned dependencies
 - ✅ Chapter on where semantic models are stored (BI metadata repositories vs
   user-defined git: Oracle Analytics RPD / Semantic Modeler, Power BI PBIP +
   Fabric Git, Looker, BusinessObjects, Cognos, MicroStrategy, Tableau, Qlik,
-  ThoughtSpot); Oracle vendor folder (layer mapping); PBIP metadata files for
+  ThoughtSpot); Oracle Analytics entry (layer mapping); PBIP metadata files for
   the Power BI model
 
 ## Phase 1: make more formats executable in CI 🔜
 
 Everything here runs free in GitHub Actions (Docker service containers or
-pip packages). Each item raises a vendor folder to ✅ or 🟡.
+pip packages). Each item raises an implementation page to ✅ or 🟡.
 
 | Item | How | Raises |
 |---|---|---|
@@ -35,6 +39,18 @@ pip packages). Each item raises a vendor folder to ✅ or 🟡.
 | 📋 LookML | `lkml` parser in CI (syntax); full validation needs a Looker instance | gcp/looker 🟡 |
 | 📋 TMDL | parse with an open-source TMDL tool, or convert with the Ossie Microsoft converter and compare metrics | microsoft 🟡 |
 | 📋 GraphFrames | local PySpark in CI (slow, so weekly only) | databricks graph 🟡 |
+
+## Phase 1b: AWS Context Ontology Accelerator 📋
+
+- 📋 Deploy COA from a tagged release in a sandbox account (mind the
+  ~$930/month idle cost; tear down after), then: upload `retail-ontology.ttl`,
+  register the warehouse, create the metrics from `coa-retail-metrics.json`,
+  and record answers to the competency questions in a `VERIFIED.md`.
+- 📋 Run COA **induction** on the warehouse tables and compare the induced
+  ontology (and R2RML mappings) with the hand-written `retail-ontology.ttl`
+  and Ossie mapping. That's a useful benchmark for LLM-generated ontologies.
+- 💭 Map COA metrics ⇄ Apache Ossie metrics (both carry dialect expressions,
+  synonyms and ontology links) and propose a converter.
 
 ## Phase 2: round-trips through Apache Ossie 📋
 
@@ -51,7 +67,7 @@ TMDL, and the hand-written vendor files **back** to Ossie. Then:
 
 ## Phase 3: content gaps 📋
 
-- 📋 **Oracle Analytics**: an SMML example in `vendors/oracle/` (needs
+- 📋 **Oracle Analytics**: an SMML example in `semantic-models/implementations/providers/oracle/` (needs
   Oracle's published samples or an OAC instance to verify the syntax).
 - 📋 **More BI tools**: Tableau (`.tds` / Tableau Semantics), Qlik (master
   items), ThoughtSpot (TML), MicroStrategy, Omni, Lightdash.
@@ -73,7 +89,7 @@ TMDL, and the hand-written vendor files **back** to Ossie. Then:
 ## Phase 4: vendor-account verification 📋
 
 For platforms that can't run in CI, record manual verification runs in
-`vendors/<name>/VERIFIED.md` (date, product version, who, what passed), and
+`<topic>/implementations/<providers|tools>/<name>/VERIFIED.md` (date, product version, who, what passed), and
 use free tiers where possible: Neo4j Aura Free, BigQuery sandbox, Databricks
 Free Edition, Snowflake trial, Power BI Desktop (free), Neptune (paid; short
 serverless run).
@@ -90,7 +106,7 @@ serverless run).
 | What | When |
 |---|---|
 | CI (all checks) | every PR + weekly |
-| Vendor matrix review (GA / preview, new products) | monthly |
-| Vendor folder "last reviewed" dates | when touched, at least quarterly |
+| Implementation tables review (GA / preview, new products) | monthly |
+| Implementation pages "last reviewed" dates | when touched, at least quarterly |
 | Apache Ossie pinned commit | when Ossie releases a version (0.2.0 next) |
 | Pinned Python / dbt versions | quarterly |

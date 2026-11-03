@@ -5,7 +5,7 @@
     python scripts/rdf_to_property_graph.py
 
 This is the RDF -> property graph mapping explained in
-concepts/ontologies-and-graphs/07-property-graphs.md, written out as code:
+graphs/concepts/01-property-graphs.md, written out as code:
 
   RDF                                   Property graph
   ------------------------------------  ------------------------------------
@@ -19,8 +19,8 @@ concepts/ontologies-and-graphs/07-property-graphs.md, written out as code:
   Review writtenBy Customer             (Customer)-[:WROTE]->(Review)
 
 Writes (all from the same in-memory graph, so they always agree):
-  ../../vendors/aws/gremlin-csv/     Neptune bulk-load "csv" format   (Gremlin)
-  ../../vendors/aws/opencypher-csv/  Neptune bulk-load "opencypher" format
+  ../../graphs/implementations/providers/aws/gremlin-csv/     Neptune bulk-load "csv" format   (Gremlin)
+  ../../graphs/implementations/providers/aws/opencypher-csv/  Neptune bulk-load "opencypher" format
   property-graph/cypher/01-create-retail-graph.cypher
   property-graph/gremlin/01-create-retail-graph.groovy
 """
@@ -32,7 +32,7 @@ from rdflib import Graph, Literal, Namespace
 from rdflib.namespace import RDF
 
 ROOT = Path(__file__).resolve().parent.parent
-AWS = ROOT.parent.parent / "vendors/aws"      # Neptune-specific load files
+AWS = ROOT.parent.parent / "graphs/implementations/providers/aws"      # Neptune-specific load files
 RETAIL = Namespace("https://example.org/retail/ontology#")
 EX = "https://example.org/retail/data/"
 

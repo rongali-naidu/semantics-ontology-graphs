@@ -20,4 +20,4 @@ CI checks out exactly that commit (`OSSIE_COMMIT` in the
 [Makefile](../../../../Makefile)). To move to a newer spec: bump the commit,
 run `make check-ossie`, fix what breaks, and update this table.
 
-Explanation: [concepts/semantic-modelling/04](../../../../concepts/semantic-modelling/04-open-semantic-formats.md).
+Explanation: [semantic models: open formats](../../../../semantic-models/concepts/04-open-semantic-formats.md).

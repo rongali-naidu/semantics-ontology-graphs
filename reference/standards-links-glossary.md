@@ -81,7 +81,7 @@
 | DTDL v3 (Azure Digital Twins) | https://github.com/Azure/opendigitaltwins-dtdl/blob/master/DTDL/v3/DTDL.v3.md |
 | Kimball dimensional modelling techniques | https://www.kimballgroup.com/data-warehouse-business-intelligence-resources/kimball-techniques/dimensional-modeling-techniques/ |
 
-## 13.2 Amazon Neptune documentation
+## 13.2 AWS documentation (Neptune, COA)
 
 | Topic | Link |
 |---|---|
@@ -104,6 +104,8 @@
 | Graph Explorer | https://github.com/aws/graph-explorer |
 | amazon-neptune-tools | https://github.com/awslabs/amazon-neptune-tools |
 | Neptune samples | https://github.com/aws-samples/amazon-neptune-samples |
+| AWS Context Ontology Accelerator (COA) | https://github.com/aws/context-ontology-accelerator · docs https://aws.github.io/context-ontology-accelerator/ |
+| COA announcement | https://aws.amazon.com/about-aws/whats-new/2026/07/aws-context--ontology-accelarator-generally-available/ |
 
 ## 13.3 Tools
 
@@ -146,6 +148,7 @@
 | **Chasm trap** | Joining two facts through a shared dimension multiplies rows; semantic layers query each fact separately |
 | **Class** | A set of individuals sharing characteristics (`retail:Customer`) |
 | **Closed world (CWA)** | Missing = false; databases and SHACL behave this way |
+| **COA (AWS Context Ontology Accelerator)** | Open-source AWS ontology layer for AI agents: induces, grounds and reasons over OWL ontologies, stores them in Neptune, serves metrics/ontology/documents via MCP |
 | **Competency question** | A question the ontology must be able to answer; drives design and tests |
 | **CONSTRUCT** | SPARQL form that returns a new graph |
 | **Datatype property** | OWL property whose value is a literal (`price`) |
@@ -161,6 +164,7 @@
 | **GQL** | ISO standard property-graph query language (2024) |
 | **Grain** | What one row of a table represents |
 | **GraphRAG** | Retrieval-augmented generation that retrieves from a (knowledge) graph |
+| **Grounding (ontology)** | Aligning new classes to concepts in existing ontologies (e.g. FIBO, schema.org) via `rdfs:subClassOf` / `skos:*Match` |
 | **Headless BI** | A semantic layer independent of any one BI tool (dbt SL, Cube, AtScale) |
 | **Index-free adjacency** | Native graph storage where each node points directly at its neighbours |
 | **Individual / instance** | A member of a class (`ex:C1`) |
@@ -205,3 +209,4 @@
 | **Turtle** | Compact, human-readable RDF syntax |
 | **UNA** | Unique Name Assumption — OWL does *not* make it |
 | **Vertex** | Gremlin/TinkerPop term for a node |
+| **Virtual knowledge graph (VKG)** | A graph view over relational data: SPARQL is rewritten to SQL through mappings (R2RML), so no RDF is stored (e.g. Ontop) |

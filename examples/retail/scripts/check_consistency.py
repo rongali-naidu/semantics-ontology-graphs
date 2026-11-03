@@ -18,7 +18,7 @@ from rdflib import Dataset, Graph
 from rdflib.compare import isomorphic
 
 ROOT = Path(__file__).resolve().parent.parent
-AWS = ROOT.parent.parent / "vendors/aws"      # Neptune-specific load files
+AWS = ROOT.parent.parent / "graphs/implementations/providers/aws"      # Neptune-specific load files
 
 
 def check_rdf_formats() -> None:

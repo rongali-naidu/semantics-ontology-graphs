@@ -13,6 +13,9 @@
    declared relationships), runs it on SQLite, and compares with metrics.sql.
 3. Checks Ossie references: relationship fields, mapping expressions, and
    that every ontology `iri` names a term defined in the OWL ontology.
+4. Runs every AWS COA metric definition (coa-retail-metrics.json) on SQLite,
+   checks names/dialects against COA's API rules, and checks that each
+   `ontologyConcepts` IRI is defined in the OWL ontology.
 """
 import argparse
 import csv
@@ -28,6 +31,8 @@ from rdflib import Graph, URIRef
 
 ROOT = Path(__file__).resolve().parent.parent
 OSSIE = ROOT / "semantic-model/ossie"
+COA_METRICS = ROOT.parent.parent / "semantic-models/implementations/providers/aws/coa-retail-metrics.json"
+COA_DIALECTS = {"POSTGRESQL", "TRINO", "REDSHIFT", "SNOWFLAKE", "DATABRICKS", "MYSQL"}   # COA v0.3.8 SqlDialect
 
 EXPECTED_TOTALS = {"revenue": Decimal("1878.43"), "units_sold": 9, "order_count": 4,
                    "average_order_value": Decimal("469.61"), "buyer_count": 3,
@@ -202,6 +207,24 @@ def check_ossie(db, ossie_repo):
           f"(revenue {money(results['revenue'])}, AOV {money(results['average_order_value'])})")
 
 
+def check_coa(db):
+    owl = Graph().parse(ROOT / "ontology/retail-ontology.ttl")
+    metrics = json.loads(COA_METRICS.read_text())["metrics"]
+    for m in metrics:
+        assert re.fullmatch(r"[a-zA-Z][a-zA-Z0-9_]{0,127}", m["name"]), m["name"]
+        for d in m["expression"]["dialects"]:
+            assert d["dialect"] in COA_DIALECTS, d["dialect"]
+        for iri in m.get("ontologyConcepts", []):
+            assert (URIRef(iri), None, None) in owl, f"{m['name']}: {iri} not in OWL ontology"
+        sql = m["expression"]["dialects"][0]["expression"].replace("retail.", "")
+        got = db.execute(sql).fetchone()[0]
+        exp = EXPECTED_TOTALS[m["name"]]
+        ok = money(got) == money(exp) if isinstance(exp, Decimal) else got == exp
+        assert ok, f"COA metric {m['name']} = {got}, expected {exp}"
+    print(f"ok  AWS COA metrics           {len(metrics)} metric SQL definitions execute and match; "
+          f"names, dialects and ontologyConcepts IRIs valid")
+
+
 def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--ossie-repo", help="path to a clone of github.com/apache/ossie for schema validation")
@@ -209,6 +232,7 @@ def main() -> None:
     db = load_warehouse()
     check_warehouse(db)
     check_ossie(db, args.ossie_repo)
+    check_coa(db)
     print("semantic model consistent with the knowledge graph")
 
 

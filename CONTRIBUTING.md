@@ -10,7 +10,7 @@ protect that.
 make install        # Python check dependencies (requirements.txt)
 make check          # links, SPARQL, SHACL, graph consistency, semantic model
 make check-ossie    # + Apache Ossie official schemas (fetches the pinned commit)
-pip install -r vendors/dbt-labs/requirements.txt && make dbt   # dbt + MetricFlow
+pip install -r semantic-models/implementations/tools/dbt/requirements.txt && make dbt   # dbt + MetricFlow
 ```
 
 CI runs all of these on every pull request
@@ -22,36 +22,53 @@ CI runs all of these on every pull request
 is the **only** hand-edited data file. Everything else is generated:
 
 ```
-retail-data.ttl ─► build_rdf_formats.py     ─► rdf/*.nt .nq .trig .rdf .jsonld, vendors/aws/rdf/
-                ─► rdf_to_property_graph.py ─► vendors/aws/*-csv/, property-graph/*/01-create-*
-                ─► rdf_to_tables.py         ─► warehouse/data/*.csv, vendors/dbt-labs/retail_dbt/seeds/
+retail-data.ttl ─► build_rdf_formats.py     ─► rdf/*.nt .nq .trig .rdf .jsonld, graphs/implementations/providers/aws/rdf/
+                ─► rdf_to_property_graph.py ─► graphs/implementations/providers/aws/*-csv/, property-graph/*/01-create-*
+                ─► rdf_to_tables.py         ─► warehouse/data/*.csv, semantic-models/implementations/tools/dbt/retail_dbt/seeds/
 ```
 
 After changing the data, run `make generate`, then update the expected
 answers in the check scripts and docs. CI fails (`make check-generated`) if
 generated files weren't regenerated.
 
-## Adding a vendor
+## Adding a product
 
-1. Create `vendors/<name>/README.md`, starting with the verification block:
+Implementations are organised **by topic**, then **providers** (cloud and
+data platforms) or **tools** (software you can run anywhere, commercial or
+open source):
+
+```
+<topic>/implementations/providers/<provider>/README.md     e.g. graphs/implementations/providers/aws/
+<topic>/implementations/tools/<tool>/README.md             e.g. semantic-models/implementations/tools/dbt/
+```
+
+where `<topic>` is `ontologies`, `graphs` or `semantic-models`.
+
+1. **One entry per topic the product serves.** If a provider has products in
+   several topics (AWS: COA + Neptune in ontologies, Neptune in graphs, COA
+   metrics in semantic models), write a complete entry in **each** topic,
+   focused on that topic, and link the entries to each other. Keep runnable
+   files (scripts, load files) in **one** place and link to them, so copies
+   don't drift.
+2. Start the README with the verification block:
 
    ```markdown
-   # <Vendor>
+   # <Provider>: <topic>
 
-   > **Verification:** ⚪ written to documented syntax; not run on <Vendor>.
-   > Last reviewed YYYY-MM-DD. Legend: [vendors/README.md](../README.md#verification-levels).
+   > **Verification:** ⚪ written to documented syntax; not run on <product>.
+   > Last reviewed YYYY-MM-DD. Legend: [verification levels](../../../../README.md#verification-levels).
    ```
 
-2. Add a table mapping the generic concepts to the vendor's products, and
-   link each row to the concept chapter it implements.
-3. Implement the retail example in the vendor's formats against
-   [`examples/retail/warehouse/`](examples/retail/warehouse/) (semantic
-   models) or the graph files (graph databases). Use the **same metric
-   names and definitions** as
-   [`metrics.sql`](examples/retail/warehouse/metrics.sql).
-4. Add a column to the matrices in [`vendors/README.md`](vendors/README.md).
-   Put product status (GA, preview...) **only** in that matrix.
-5. If it can run for free (Docker image, local engine, free tier), add a
+3. Add a table mapping the topic's concepts to the products, linking each
+   row to the concept chapter it implements.
+4. Implement the retail example in the product's formats against
+   [`examples/retail/`](examples/retail/), using the **same metric names and
+   definitions** as [`metrics.sql`](examples/retail/warehouse/metrics.sql)
+   for semantic models.
+5. Add a row to that topic's `implementations/README.md` and to the
+   [provider index](README.md#provider-index). Product status (GA, preview...)
+   goes **only** in the topic's `implementations/README.md`.
+6. If it can run for free (Docker image, local engine, free tier), add a
    check and a CI job, and raise the verification level.
 
 ### Verification levels

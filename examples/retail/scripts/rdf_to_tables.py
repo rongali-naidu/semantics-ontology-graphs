@@ -4,12 +4,12 @@
     pip install rdflib
     python scripts/rdf_to_tables.py
 
-Writes warehouse/data/*.csv (and copies them to vendors/dbt-labs/retail_dbt/seeds).
+Writes warehouse/data/*.csv (and copies them to semantic-models/implementations/tools/dbt/retail_dbt/seeds).
 The table definitions are in warehouse/schema.sql.
 
 This is the third shape of the same data:
   RDF triples      -> rdf/retail-data.ttl          (meaning, global ids, inference)
-  property graph   -> vendors/aws/*-csv/           (nodes + edges, traversal)
+  property graph   -> graphs/implementations/providers/aws/*-csv/           (nodes + edges, traversal)
   relational tables-> warehouse/data/*.csv         (rows + keys, aggregation)  <- here
 
 Two things happen on the way to tables:
@@ -25,7 +25,7 @@ from rdflib import Graph, Namespace
 from rdflib.namespace import RDF
 
 ROOT = Path(__file__).resolve().parent.parent
-DBT_SEEDS = ROOT.parent.parent / "vendors/dbt-labs/retail_dbt/seeds"   # dbt loads the same CSVs
+DBT_SEEDS = ROOT.parent.parent / "semantic-models/implementations/tools/dbt/retail_dbt/seeds"   # dbt loads the same CSVs
 R = Namespace("https://example.org/retail/ontology#")
 EX = "https://example.org/retail/data/"
 
