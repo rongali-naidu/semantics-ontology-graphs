@@ -1,16 +1,38 @@
-# NVIDIA Auto Ontology and ontology-sql-eval
+# NVIDIA: ontologies
 
 > **Verification:** ⚪ written from the projects' READMEs; not run (needs
 > Postgres + pgvector, a source database and an LLM API key).
-> Last reviewed 2026-11-03. Legend: [verification levels](../../../../README.md#verification-levels).
+> Last reviewed 2026-11-04. Legend: [verification levels](../../../../README.md#verification-levels).
 
-| Project | What it is | Licence |
+| Product | Role for ontologies | Retail example |
 |---|---|---|
-| [**NVIDIA/auto-ontology**](https://github.com/NVIDIA/auto-ontology) | open-source Python framework that builds an ontology-style **context layer for data agents** from enterprise metadata and serves it over MCP, CLI and API | Apache 2.0 |
-| [**NVIDIA/ontology-sql-eval**](https://github.com/NVIDIA/ontology-sql-eval) | text-to-SQL **evaluation toolkit**: measures how much the Auto Ontology context improves SQL accuracy over a schema-only LLM | Apache 2.0 |
+| [**Auto Ontology**](https://github.com/NVIDIA/auto-ontology) (open source, Apache 2.0) | builds an ontology-style **context layer for data agents** from enterprise metadata and serves it over MCP, CLI and API | [five steps on the retail tables](#auto-ontology-five-steps) |
+| [**ontology-sql-eval**](https://github.com/NVIDIA/ontology-sql-eval) (open source, Apache 2.0) | text-to-SQL **evaluation toolkit**: measures how much the Auto Ontology context improves SQL accuracy over a schema-only LLM | — |
 
-Both are open source. Auto Ontology is not accepting external contributions;
-it has no tagged release (as of November 2026).
+## Overview
+
+* **Auto Ontology is software you deploy, not a managed service**, like
+  [AWS COA](../aws/README.md#aws-context-ontology-accelerator-coa). It's a
+  Python framework with a web UI. It needs Postgres with pgvector and an LLM
+  endpoint.
+* **How it works:** it reads catalog metadata from your sources
+  (Databricks, Postgres, Snowflake, DuckDB), generates an ontology, and
+  connects existing ontologies and semantic models. It then checks the SQL
+  that agents generate against certified definitions, and learns from
+  corrections ([five steps](#auto-ontology-five-steps)).
+* **Where the ontology lives:** in **Postgres with pgvector**, not as
+  RDF/OWL. There is no SPARQL and no OWL reasoner. The data stays in the
+  source databases.
+* **How agents use it:**
+  * an MCP server;
+  * a CLI;
+  * an API (`POST /api/chat/completions`, streamed);
+  * agent skills: `nvidia-ontology-setup`, `nvidia-ontology-management`,
+    `nvidia-ontology-query`.
+* **ontology-sql-eval** measures the gain on public text-to-SQL benchmarks
+  ([below](#ontology-sql-eval-measuring-the-gain)).
+* **Status (Nov 2026):** open source, no tagged release, not accepting
+  external contributions.
 
 ## Auto Ontology: five steps
 
@@ -22,11 +44,7 @@ it has no tagged release (as of November 2026).
 | **Expose** | serves the context to agents via MCP, CLI and an API (`POST /api/chat/completions`, streamed) | answer "revenue by customer" through an agent |
 | **Learn** | feeds certified corrections and usage back into the ontology | record that "buyers" means customers |
 
-Sources: Databricks, Postgres, Snowflake and DuckDB. Agent skills ship with
-it (`nvidia-ontology-setup`, `nvidia-ontology-management`,
-`nvidia-ontology-query`).
-
-**How it differs from the OWL tools in this repo.** The ontology and catalog
+**How it differs from the OWL products in this repo.** The ontology and catalog
 are stored in **Postgres with pgvector**, not as RDF/OWL, and there is no
 SPARQL or OWL reasoner. It is closer to the **context graph** of
 [foundations 4.2](../../../../foundations/04-data-agents.md#42-what-goes-in-the-graph-and-what-stays-in-the-warehouse)
@@ -76,3 +94,8 @@ headline numbers are published in the README (as of November 2026).
 Compare with [AWS Context Ontology Accelerator](../../providers/aws/README.md)
 (OWL + R2RML, MCP serving) and [Databricks Genie Ontology](../../providers/databricks/README.md)
 (learned context from metadata and usage).
+
+## Product documentation
+
+* [NVIDIA/auto-ontology](https://github.com/NVIDIA/auto-ontology): install, architecture, MCP server, API (OpenAPI spec in `docs/`)
+* [NVIDIA/ontology-sql-eval](https://github.com/NVIDIA/ontology-sql-eval): benchmarks, setup, running the evaluation

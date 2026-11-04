@@ -22,13 +22,13 @@ Verification levels: [legend](../../README.md#verification-levels).
 | [Databricks](providers/databricks/README.md) | **Genie Ontology** · **OntoBricks** | learned context · formal (OWL) | learned context from Unity Catalog + usage · OWL/R2RML/SHACL/SWRL app | public preview · Labs (as-is) | ⚪ |
 | [SAP](providers/sap/README.md) | **SAP Knowledge Graph** · HANA Cloud knowledge graph engine | pre-built domain ontology · RDF store | business semantics for Joule · RDF + SPARQL | announced May 2026 · see SAP docs | ⚪ |
 | [Palantir](providers/palantir/README.md) | **Foundry Ontology** | operational | object, link and **action** types driving apps and agents | GA | ⚪ |
+| [NVIDIA](providers/nvidia/README.md) | **Auto Ontology** · ontology-sql-eval | context layer (not OWL) | ontology generated from metadata, stored in Postgres + pgvector; checks agent SQL against certified definitions; MCP / API serving · text-to-SQL evaluation (BIRD and others) | open source, no release yet | ⚪ |
 
 ## Tools
 
 | Tool | What it does for ontologies | Verified |
 |---|---|---|
 | [Neo4j neosemantics (n10s)](tools/neo4j-neosemantics/README.md) | OWL/RDF import into Neo4j, subclass inference, SHACL validation | ⚪ |
-| [NVIDIA Auto Ontology + ontology-sql-eval](tools/nvidia-auto-ontology/README.md) | context layer for data agents generated from metadata (Postgres, MCP); text-to-SQL evaluation on BIRD and others | ⚪ |
 | Apache Ossie ontology spec | vendor-neutral ontology + mapping to semantic models; [retail version](../../examples/retail/semantic-model/ossie/retail.ontology.yaml) | ✅ |
 | rdflib · pySHACL · owlrl (Python) | parse, validate and reason over the retail ontology in CI | ✅ |
 

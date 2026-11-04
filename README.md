@@ -80,8 +80,8 @@ topic's page is complete on its own.
 | **SAP** | [SAP Knowledge Graph, HANA Cloud](ontologies/implementations/providers/sap/README.md) | [HANA Cloud knowledge graph engine](graphs/implementations/providers/sap/README.md) | [Datasphere / Business Data Cloud](semantic-models/implementations/providers/sap/README.md) |
 | **Salesforce** | — | — | [Tableau Semantics](semantic-models/implementations/providers/salesforce/README.md) |
 | **Palantir** | [Foundry Ontology](ontologies/implementations/providers/palantir/README.md) | — | — |
+| **NVIDIA** | [Auto Ontology, ontology-sql-eval](ontologies/implementations/providers/nvidia/README.md) | — | — |
 | **Neo4j** | [neosemantics](ontologies/implementations/tools/neo4j-neosemantics/README.md) | [Neo4j](graphs/implementations/tools/neo4j/README.md) | — |
-| **NVIDIA** | [Auto Ontology, ontology-sql-eval](ontologies/implementations/tools/nvidia-auto-ontology/README.md) | — | — |
 | **dbt** | — | — | [Semantic Layer / MetricFlow](semantic-models/implementations/tools/dbt/README.md) ✅ |
 | **AtScale** | — | — | [SML](semantic-models/implementations/tools/atscale/README.md) |
 | **Cube** | — | — | [Cube](semantic-models/implementations/tools/cube/README.md) |

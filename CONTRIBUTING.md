@@ -33,9 +33,11 @@ generated files weren't regenerated.
 
 ## Adding a product
 
-Implementations are organised **by topic**, then **providers** (cloud and
-data platforms) or **tools** (software you can run anywhere, commercial or
-open source):
+Implementations are organised **by topic**, then **providers** (cloud,
+data and AI platform vendors, **including the open-source accelerators they
+publish**, such as AWS COA, Databricks OntoBricks, Ontology on Snowflake and
+NVIDIA Auto Ontology) or **tools** (independent software you can run
+anywhere, commercial or open source, such as dbt, Cube or Neo4j):
 
 ```
 <topic>/implementations/providers/<provider>/README.md     e.g. graphs/implementations/providers/aws/
