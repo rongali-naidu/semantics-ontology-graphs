@@ -2,7 +2,7 @@
 
 > **Verification:** ⚪ written from the projects' READMEs; not run (needs
 > Postgres + pgvector, a source database and an LLM API key).
-> Last reviewed 2026-11-04. Legend: [verification levels](../../../../README.md#verification-levels).
+> Last reviewed 2026-11-04 (README, `docs/mcp.md`, `auto_ontology/dal/`). Legend: [verification levels](../../../../README.md#verification-levels).
 
 | Product | Role for ontologies | Retail example |
 |---|---|---|
@@ -20,9 +20,20 @@
   connects existing ontologies and semantic models. It then checks the SQL
   that agents generate against certified definitions, and learns from
   corrections ([five steps](#auto-ontology-five-steps)).
+* **What the ontology contains:** three kinds of definition.
+  * **Terms:** business concepts with a description and synonyms, mapped
+    to tables and columns.
+  * **SQL attributes:** reviewed SQL expressions under a term, such as
+    revenue.
+  * **Relationships:** how tables join, inferred from keys and from the
+    data.
+
+  There is no hierarchy between terms: two terms count as "related" when
+  they share a table.
 * **Where the ontology lives:** in **Postgres with pgvector**, not as
-  RDF/OWL. There is no SPARQL and no OWL reasoner. The data stays in the
-  source databases.
+  RDF/OWL. Models are imported and exported as **Apache Ossie YAML**.
+  There is no SPARQL and no OWL reasoner. The data stays in the source
+  databases.
 * **How agents use it:**
   * an MCP server;
   * a CLI;
