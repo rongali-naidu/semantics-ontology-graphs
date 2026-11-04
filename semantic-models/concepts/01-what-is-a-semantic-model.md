@@ -60,7 +60,7 @@ See [`warehouse/schema.sql`](../../examples/retail/warehouse/schema.sql).
 | 1990s–2000s | **OLAP cubes** (Essbase, Microsoft SSAS Multidimensional, MDX query language): pre-aggregated dimensional models |
 | 2010 | **SSAS Tabular / Power Pivot** and the **DAX** language → today's Power BI semantic models |
 | 2012 | **Looker** and **LookML**: semantic model as code, in git, generating SQL on the cloud warehouse |
-| 2019–2022 | **"Headless BI" / metrics layer**: Cube (2019), Transform's MetricFlow, dbt Semantic Layer (2022, built on MetricFlow after dbt Labs acquired Transform in 2023), AtScale's open SML |
+| 2019–2022 | **"Headless BI" / metrics layer**: Cube (2019), Transform's MetricFlow, dbt Semantic Layer (first launched 2022 on dbt's own metrics spec; dbt Labs acquired Transform in early 2023 and relaunched the Semantic Layer on MetricFlow later that year), AtScale's open SML |
 | 2023–2025 | **Warehouse-native** semantic layers: Snowflake semantic views, Databricks metric views, Microsoft Fabric semantic models, Google Looker modeler as a standalone layer |
 | 2025 | **Open Semantic Interchange (OSI)** launched by Snowflake with Salesforce, dbt Labs, BlackRock, RelationalAI and others to stop format lock-in; dbt Labs open-sources MetricFlow |
 | 2026 | OSI enters the Apache Incubator as **Apache Ossie**, with an ontology layer and converters for 20+ tools |
