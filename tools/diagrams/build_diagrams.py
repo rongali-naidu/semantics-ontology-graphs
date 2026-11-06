@@ -815,7 +815,7 @@ def six_dimensions():
             ("Lineage", "proves trust", LINEAGE)]
     xs = [30 + i * 203 for i in range(7)]
     CW = 197
-    captions = ["columns + types + meaning", "business logic → tables", "rules + verified answers",
+    captions = ["columns + types + meaning", "business logic → tables", "docs the agent searches",
                 "tree + classes + rules", "this customer, these orders", "metric ↔ terms ↔ tables",
                 "where a number came from"]
     for i, (x, (t, sub, col), cap) in enumerate(zip(xs, cols, captions)):
@@ -860,17 +860,24 @@ def six_dimensions():
     c.text(x + CW / 2, 324, "physical tables", size=10.5, weight="600", color=SEM[1])
     mono(x + 16, 344, ["order_lines", "  ⋈ orders ⋈ customers", "products ⋈ categories", "(Ossie, dbt, LookML…)"],
          size=9.5, gap=15)
-    # 3 knowledge base: Ossie ai_context + verified queries with expected answers
+    # 3 knowledge base: any documents, chunked and embedded for semantic search
     x = xs[2]
-    c.rect(x + 8, 148, CW - 16, 134, fill=GOOD[0], stroke=GOOD[1], rx=6)
-    c.text(x + CW / 2, 164, "rules (ai_context)", size=10.5, weight="600", color=GOOD[1])
-    c.lines(x + CW / 2, 183, ["“Revenue means the price", "actually paid, not list price.”",
-                               "“Count orders with order_count,", "never by counting lines.”",
-                               "“Use category_level_1 for", "Electronics.”"], size=9.8, gap=15, color=INK)
-    c.rect(x + 8, 290, CW - 16, 120, fill="#fff", stroke=GOOD[1], rx=6)
-    c.text(x + CW / 2, 306, "verified queries", size=10.5, weight="600", color=GOOD[1])
-    mono(x + 16, 325, ["03-order-totals…rq", "→ Alice 1498.97", "  Bob 199.98", "  Carol 179.48", "metrics.sql",
-                       "→ revenue 1878.43"], size=9.5, gap=14)
+    c.rect(x + 8, 148, CW - 16, 108, fill=GOOD[0], stroke=GOOD[1], rx=6)
+    c.text(x + CW / 2, 164, "documents (any format)", size=10.5, weight="600", color=GOOD[1])
+    c.lines(x + CW / 2, 182, ["wikis · policies · PDFs", "runbooks · past answers", "SQL vault (verified queries)",
+                               "JSON / YAML, e.g. semantic", "models indexed as text"], size=9.8, gap=14.5, color=INK)
+    for i, t in enumerate(["chunk", "embed", "vector DB"]):
+        bx = x + 10 + i * 62
+        c.rect(bx, 264, 56 if i < 2 else 58, 20, fill="#fff", stroke=GOOD[1], rx=10)
+        c.text(bx + 28, 278, t, size=9.5, weight="600", color=GOOD[1])
+        if i < 2:
+            c.line(bx + 57, 274, bx + 61, 274)
+    c.text(x + CW / 2, 298, "semantic search (+ keyword)", size=9.5, color=MUTED, italic=True)
+    c.rect(x + 8, 306, CW - 16, 104, fill="#fff", stroke=GOOD[1], rx=6)
+    c.text(x + CW / 2, 322, "in this repo", size=10.5, weight="600", color=GOOD[1])
+    c.lines(x + CW / 2, 340, ["“Revenue means the price", "paid, not list price.” (ai_context)",
+                               "03-order-totals.rq", "→ Alice 1498.97 (expected)", "Markdown chapters · Ossie YAML"],
+            size=9.5, gap=14, color=INK)
     # 4 ontology & taxonomy: category tree (skos:broader) + classes and axioms
     x = xs[3]
     c.text(x + 14, 160, "taxonomy (skos:broader)", size=10.5, weight="600", color=ONTO[1], anchor="start")
@@ -957,7 +964,7 @@ def six_dimensions():
     rows = [("Purpose",
              [["describe tables and columns:", "types, meaning, owners"],
               ["define metrics, dimensions", "and joins once, for every", "tool and agent"],
-              ["capture rules, definitions", "and verified Q&A the data", "itself doesn't say"],
+              ["a general store of documents", "the agent searches and reads", "as context"],
               ["define what things are, how", "they relate, and the rules", "(a taxonomy: just the tree)"],
               ["store real entities and their", "relationships: customers,", "orders, products"],
               ["store meaning, not records:", "terms, metrics, concepts,", "tables, owners, lineage"],
@@ -965,7 +972,7 @@ def six_dimensions():
             ("Form",
              [["catalog entries: schema,", "descriptions, constraints"],
               ["datasets, fields, metrics,", "joins over physical tables"],
-              ["documents, instructions,", "example questions + SQL"],
+              ["wikis, policies, PDFs, SQL", "vaults, JSON / YAML (semantic", "models indexed as text)"],
               ["classes, properties, axioms", "(TBox); taxonomy = broader /", "narrower concept tree"],
               ["instances (ABox) as triples", "or a property graph"],
               ["a metadata graph linking", "glossary, semantic model,", "ontology and catalog"],
@@ -973,7 +980,7 @@ def six_dimensions():
             ("Standards",
              [["DCAT, Dublin Core;", "catalog APIs"],
               ["Apache Ossie, MetricFlow,", "LookML, TMDL, semantic views"],
-              ["none: docs, Ossie ai_context,", "verified queries"],
+              ["any format in; chunked and", "embedded for semantic (vector)", "search, plus keyword search"],
               ["OWL 2, RDFS, SHACL;", "SKOS for taxonomies"],
               ["RDF + SPARQL, or property", "graph + Cypher / ISO GQL"],
               ["RDF, SKOS, DCAT, PROV-O;", "or a catalog's graph API"],
@@ -989,7 +996,7 @@ def six_dimensions():
             ("In this repo",
              [["schema.sql, Ossie field", "descriptions, SHACL sh:in"],
               ["Ossie model, dbt MetricFlow,", "LookML, TMDL, COA metrics"],
-              ["Ossie ai_context; .rq files", "with expected answers"],
+              ["Markdown chapters, Ossie YAML", "+ ai_context, .rq files with", "expected answers"],
               ["retail-ontology.ttl,", "retail-shapes.ttl, category", "tree (skos:broader)"],
               ["retail-data.ttl, property", "graph, Neptune load files"],
               ["links in Ossie mapping, COA", "ontologyConcepts; the graph", "itself isn't built here"],
@@ -997,7 +1004,7 @@ def six_dimensions():
             ("Typical tools",
              [["Unity Catalog, Glue Data", "Catalog, Dataplex, DataHub"],
               ["dbt, Looker, Power BI, Cube,", "AtScale, Snowflake"],
-              ["wikis, vector stores; Genie", "instructions, Cortex verified", "queries"],
+              ["vector DBs (OpenSearch,", "pgvector), Bedrock Knowledge", "Bases, Vertex AI Search"],
               ["Protégé, TopBraid, AWS COA;", "PoolParty for taxonomies"],
               ["Neptune, Neo4j, GraphDB,", "Stardog, Spanner Graph"],
               ["Knowledge Catalog, AWS COA,", "Fabric IQ, Genie Ontology,", "DataHub"],
