@@ -105,6 +105,10 @@ them:
 
 ![Seven columns, one per dimension with the knowledge graph split in two, each with a retail example: metadata (customers.is_premium BOOLEAN, paid membership; order status values), semantic model (revenue = SUM(quantity × unit_price) mapped to order_lines, orders, customers), knowledge base (documents of any format, including SQL vaults and semantic-model YAML, chunked and embedded for semantic search), ontology and taxonomy (Electronics → Computers → Laptops; Order placedBy Customer; PremiumCustomer ⊑ Customer), data graph (Naidu → O1 → Laptop Pro 14 → Laptops → Computers), semantic graph (metric revenue linked to its synonyms, definitions, ontology concept, dbt model and column), lineage (source tables → dbt model fct_order_lines → measure → metric revenue 1878.43, and column level: revenue ← line_amount ← quantity, unit_price); then the question "revenue from premium customers in Electronics" answered as 1498.97, and a comparison table](../assets/diagrams/six-dimensions.svg)
 
+A 4:5 portrait version of the same diagram, for slides and social posts:
+[SVG](../assets/diagrams/six-dimensions-portrait.svg) ·
+[PNG](../assets/posters/six-dimensions-portrait.png).
+
 | | Metadata | Semantic model | Knowledge base | Ontology & taxonomy | Knowledge graph: data | Knowledge graph: semantic | Lineage |
 |---|---|---|---|---|---|---|---|
 | **Purpose** | describe tables and columns: types, meaning, owners | define metrics, dimensions and joins once, for every tool and agent | a general store of documented, institutional knowledge that the agent searches and reads | a taxonomy **classifies** (what sits under what); an ontology **defines** concepts and the logical rules between them | store real entities and their relationships: customers, orders, products | store meaning, not records: terms, metrics, concepts, tables, owners, lineage | show where a number came from and what depends on it |

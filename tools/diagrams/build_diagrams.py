@@ -802,19 +802,26 @@ def agent_context_layers():
 
 
 # ---------------------------------------------------------------------------
-@diagram("six-dimensions")
-def six_dimensions():
-    W = 1480
-    c = Canvas(W, 1200, "The six dimensions of meaning, on the retail example")
-    c.heading("Metadata, semantic model, knowledge base, ontology, knowledge graph or lineage?",
-              "the six dimensions of a semantic layer, each shown on this repo's retail example "
-              "(the knowledge graph in its two kinds)")
-    cols = [("Metadata", "describes the data", NEUTRAL), ("Semantic model", "encodes business logic", SEM),
+SIX_COLS = [("Metadata", "describes the data", NEUTRAL), ("Semantic model", "encodes business logic", SEM),
             ("Knowledge base", "holds institutional knowledge", GOOD), ("Ontology & taxonomy", "defines meaning", ONTO),
             ("Data graph", "entities and relationships", GRAPH), ("Semantic graph", "meaning, not records", GRAPH),
             ("Lineage", "proves trust", LINEAGE)]
-    xs = [30 + i * 203 for i in range(7)]
-    CW = 197
+SIX_XS = [30 + i * 203 for i in range(7)]   # column x positions in the wide layout (cards span y 84-444)
+SIX_CW = 197
+SIX_CONTRIB = [["is_premium = paid membership;", "unit_price = price paid"],
+               ["revenue = Σ quantity × unit_price,", "filtered: premium, Electronics"],
+               ["use the price paid, not list", "price; Electronics = level 1"],
+               ["premium customers ⊑ Customer;", "Laptops ⊂ Computers ⊂ Electronics"],
+               ["who: Naidu (orders O1, O3);", "Carol bought Books, Kitchen"],
+               ["“revenue” = governed metric,", "computed from fct_order_lines"],
+               ["answer ← metric revenue ←", "fct_order_lines ← 3 sources"]]
+SIX_ANSWER = ("answer: 1498.97, all from Naidu Rongali's orders: Laptop Pro 14, 2 × USB-C Charger 65W (O1) "
+              "and Wireless Earbuds X (O3)")
+
+
+def _six_cards(c):
+    """Draw the seven dimension cards (wide layout coordinates) onto canvas c."""
+    cols, xs, CW = SIX_COLS, SIX_XS, SIX_CW
     captions = ["columns + types + meaning", "business logic → tables", "docs the agent searches",
                 "tree + classes + rules", "this customer, these orders", "metric ↔ terms ↔ tables",
                 "where a number came from"]
@@ -941,24 +948,27 @@ def six_dimensions():
     c.text(x + CW / 2, 394, "column level: revenue ← line_amount", size=9.5, color=MUTED, italic=True)
     c.text(x + CW / 2, 407, "← quantity, unit_price (repo's dbt)", size=9.5, color=MUTED, italic=True)
 
+
+@diagram("six-dimensions")
+def six_dimensions():
+    W = 1480
+    c = Canvas(W, 1200, "The six dimensions of meaning, on the retail example")
+    c.heading("Metadata, semantic model, knowledge base, ontology, knowledge graph or lineage?",
+              "the six dimensions of a semantic layer, each shown on this repo's retail example "
+              "(the knowledge graph in its two kinds)")
+    _six_cards(c)
+    cols, xs, CW = SIX_COLS, SIX_XS, SIX_CW
     # one question, seven contributions
     c.rect(30, 462, W - 60, 168, fill="#F9FAFB", stroke="#D0D5DD")
     c.text(W / 2, 487, "One question, every dimension contributes: “What was revenue from premium customers in Electronics?”",
            size=14.5, weight="700", color=EXAMPLE[1])
-    contrib = [["is_premium = paid membership;", "unit_price = price paid"],
-               ["revenue = Σ quantity × unit_price,", "filtered: premium, Electronics"],
-               ["use the price paid, not list", "price; Electronics = level 1"],
-               ["premium customers ⊑ Customer;", "Laptops ⊂ Computers ⊂ Electronics"],
-               ["who: Naidu (orders O1, O3);", "Carol bought Books, Kitchen"],
-               ["“revenue” = governed metric,", "computed from fct_order_lines"],
-               ["answer ← metric revenue ←", "fct_order_lines ← 3 sources"]]
+    contrib = SIX_CONTRIB
     for x, (t, _, col), lines in zip(xs, cols, contrib):
         c.rect(x, 500, CW, 70, fill=col[0], stroke=col[1], rx=6)
         c.text(x + CW / 2, 516, t, size=11, weight="700", color=col[1])
         c.lines(x + CW / 2, 535, lines, size=9.8, gap=15, color=INK)
     c.rect(38, 582, W - 76, 36, fill=GOOD[0], stroke=GOOD[1], rx=6)
-    c.text(W / 2, 605, "answer: 1498.97, all from Naidu Rongali's orders: Laptop Pro 14, 2 × USB-C Charger 65W (O1) "
-           "and Wireless Earbuds X (O3)", size=12.5, weight="600", color=GOOD[1])
+    c.text(W / 2, 605, SIX_ANSWER, size=12.5, weight="600", color=GOOD[1])
 
     # comparison table
     rows = [("Purpose",
@@ -1031,6 +1041,71 @@ def six_dimensions():
     c.text(W / 2, y + 28, "they overlap: give each piece of meaning one source of truth, and make the others reference it",
            size=12.5, weight="600", color=INK)
     c.h = y + 56
+    return c
+
+
+# ---------------------------------------------------------------------------
+@diagram("six-dimensions-portrait")
+def six_dimensions_portrait():
+    """The six-dimensions cards rearranged for a 4:5 portrait image (e.g. a LinkedIn post)."""
+    W, H, L = 1012, 1265, 103          # 4:5 canvas; L = left margin of the 806-px content
+    c = Canvas(W, H, "The six dimensions of a semantic layer, on a retail example")
+    c.text(L, 42, "The six dimensions of a semantic layer", size=24, weight="700", anchor="start")
+    c.text(L, 66, "each shown on a retail example · the knowledge graph in its two kinds", size=13.5,
+           anchor="start", color=MUTED)
+    # draw the cards once, off-canvas, then show each column through a cropped window
+    cards = Canvas(1480, 460, "cards")
+    _six_cards(cards)
+    c.parts.append('<defs><g id="six-cards">' + "".join(cards.parts) + '</g></defs>')
+
+    def tile(sx, sw, tx, ty):
+        c.parts.append(f'<svg x="{tx - 2}" y="{ty - 2}" width="{sw + 4}" height="364" '
+                       f'viewBox="{sx - 2} 82 {sw + 4} 364" overflow="hidden"><use href="#six-cards"/></svg>')
+
+    xs, CW = SIX_XS, SIX_CW
+    row1, row2 = 84, 464
+    for j, i in enumerate(range(4)):                       # metadata, semantic model, knowledge base, ontology
+        tile(xs[i], CW, L + j * 203, row1)
+    tile(xs[4], xs[5] + CW - xs[4], L, row2)               # knowledge graph: data + semantic, side by side
+    tile(xs[6], CW, L + 2 * 203, row2)                     # lineage
+    # last cell: the layer they form together
+    x, y = L + 3 * 203, row2
+    c.rect(x, y, CW, 360, fill="#fff", stroke="#0F172A")
+    c.rect(x, y, CW, 34, fill="#0F172A", stroke="#0F172A")
+    c.text(x + CW / 2, y + 23, "One semantic layer", size=15, weight="700", color="#ffffff")
+    cx, cy, R = x + CW / 2, y + 170, 62
+    import math
+    pts = [(cx + R * math.cos(math.radians(-90 + k * 60)), cy + R * math.sin(math.radians(-90 + k * 60))) for k in range(6)]
+    for k, (px, py) in enumerate(pts):
+        qx, qy = pts[(k + 1) % 6]
+        c.line(px, py, qx, qy, arrow=False, color="#CBD5E1", sw=2.5)
+        c.line(cx, cy, px, py, arrow=False, color="#94A3B8", sw=2, dash="4 4")
+    for (px, py), (_, _, col) in zip(pts, [SIX_COLS[k] for k in (0, 1, 2, 3, 4, 6)]):
+        c.circle(px, py, 15, col[1], col[1])
+    c.circle(cx, cy, 30, "#0F172A", "#0F172A")
+    c.text(cx, cy + 6, "agent", size=12, weight="700", color="#ffffff")
+    c.lines(x + CW / 2, y + 270, ["six kinds of meaning,", "one layer for humans", "and AI agents"],
+            size=12.5, gap=18, color=INK)
+    c.text(x + CW / 2, y + 340, "each piece of meaning:", size=10.5, color=MUTED, italic=True)
+    c.text(x + CW / 2, y + 354, "one source of truth", size=10.5, color=MUTED, italic=True)
+
+    # one question, every dimension contributes
+    top = 846
+    c.rect(L - 12, top, 830, H - top - 18, fill="#F9FAFB", stroke="#D0D5DD")
+    c.text(W / 2, top + 28, "One question, every dimension contributes:", size=15, weight="700", color=EXAMPLE[1])
+    c.text(W / 2, top + 50, "“What was revenue from premium customers in Electronics?”", size=15, weight="700",
+           color=EXAMPLE[1])
+    BW, BH = 398, 72
+    for k, ((t, _, col), lines) in enumerate(zip(SIX_COLS, SIX_CONTRIB)):
+        bx, by = L + (k % 2) * (BW + 10), top + 66 + (k // 2) * (BH + 10)
+        c.rect(bx, by, BW, BH, fill=col[0], stroke=col[1], rx=6)
+        c.text(bx + BW / 2, by + 22, t, size=13, weight="700", color=col[1])
+        c.lines(bx + BW / 2, by + 43, lines, size=12, gap=17, color=INK)
+    bx, by = L + BW + 10, top + 66 + 3 * (BH + 10)
+    c.rect(bx, by, BW, BH, fill=GOOD[0], stroke=GOOD[1], rx=6)
+    c.text(bx + BW / 2, by + 24, "answer: 1498.97", size=15, weight="700", color=GOOD[1])
+    c.lines(bx + BW / 2, by + 45, ["Naidu Rongali's orders O1 + O3: Laptop Pro 14,",
+                                    "2 × USB-C Charger 65W, Wireless Earbuds X"], size=11.5, gap=16, color=INK)
     return c
 
 
