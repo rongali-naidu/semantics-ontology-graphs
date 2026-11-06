@@ -39,9 +39,10 @@ gap the three topics fill.
   "global" questions ("what are the main themes?"). *Caveats: evaluated by
   an LLM judge on two corpora; vector RAG stays better for short fact
   lookups.*
-* **The industry bet.** Every major data platform shipped an ontology,
-  context-graph or semantic-layer feature for agents in 2025–2026: AWS
-  Context Ontology Accelerator, Microsoft Fabric IQ, Google Knowledge
+* **The industry bet.** Every major data platform, and AI vendors such as
+  NVIDIA, shipped an ontology, context-graph or semantic-layer feature for
+  agents in 2025–2026: AWS Context Ontology Accelerator, NVIDIA Auto
+  Ontology, Microsoft Fabric IQ, Google Knowledge
   Catalog, Databricks Genie Ontology, Snowflake semantic views and Cortex,
   Salesforce Tableau Semantics, SAP Knowledge Graph, Apache Ossie
   ([provider index](../README.md#provider-index)).
@@ -84,7 +85,7 @@ draft most of it, with humans approving:
 
 | Task | How LLMs help | Examples |
 |---|---|---|
-| Draft an ontology from schemas or documents | propose classes, properties, relationships | AWS COA induction, OntoBricks "Generate", Fabric IQ from a semantic model |
+| Draft an ontology from schemas or documents | propose classes, properties, relationships | AWS COA induction, NVIDIA Auto Ontology "Discover", OntoBricks "Generate", Fabric IQ from a semantic model |
 | Align to standards | match new classes to FIBO, schema.org | COA grounding, Agent-OM, LogMap with LLM |
 | Map tables to the ontology | propose column → property mappings (R2RML) | COA, OntoBricks auto-map ([ontologies 7](../ontologies/concepts/07-mapping-ontology-to-tables.md)) |
 | Build a graph from text | extract entities and relations | GraphRAG indexing, Oracle and Neo4j KG builders |

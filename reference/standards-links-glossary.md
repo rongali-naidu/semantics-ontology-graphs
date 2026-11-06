@@ -120,6 +120,7 @@
 | Neptune samples | https://github.com/aws-samples/amazon-neptune-samples |
 | AWS Context Ontology Accelerator (COA) | https://github.com/aws/context-ontology-accelerator · docs https://aws.github.io/context-ontology-accelerator/ |
 | COA announcement | https://aws.amazon.com/about-aws/whats-new/2026/07/aws-context--ontology-accelarator-generally-available/ |
+| NVIDIA Auto Ontology · evaluation toolkit | https://github.com/NVIDIA/auto-ontology · https://github.com/NVIDIA/ontology-sql-eval |
 
 ### Mapping tables to ontologies
 

@@ -470,7 +470,7 @@ def ontology_landscape():
                      [("Formal (OWL / RDF)", "standards, reasoning, IRIs", ONTO,
                        ["AWS COA", "Databricks OntoBricks", "Oracle RDF Graph", "Amazon Neptune (RDF)", "SAP HANA Cloud KG engine", "Neo4j neosemantics"]),
                       ("Context graphs", "assembled or learned from metadata", GRAPH,
-                       ["Google Knowledge Catalog", "Databricks Genie Ontology", "SAP Knowledge Graph"]),
+                       ["Google Knowledge Catalog", "Databricks Genie Ontology", "SAP Knowledge Graph", "NVIDIA Auto Ontology"]),
                       ("Business / operational", "bound to data, apps and actions", SEM,
                        ["Microsoft Fabric IQ", "Palantir Foundry Ontology", "Ontology on Snowflake", "Azure DTDL (twins)"])],
                      footer="Apache Ossie ontology: a vendor-neutral bridge, with iri links to OWL and a mapping to semantic models")
@@ -559,7 +559,7 @@ def ecosystem_poster():
         ([("Languages", ["OWL 2 · RDFS", "SKOS · SHACL", "Ossie ontology"]),
           ("Formats", ["Turtle · JSON-LD", "RDF/XML · N-Triples", "N-Quads · TriG"]),
           ("Query & reason", ["SPARQL 1.1", "OWL RL · HermiT · ELK", "SHACL validation"]),
-          ("Products", ["AWS COA · Fabric IQ", "Palantir · OntoBricks", "Oracle RDF · SAP KG"])]),
+          ("Products", ["AWS COA · NVIDIA", "Fabric IQ · Palantir", "OntoBricks · Oracle · SAP"])]),
         ([("Models", ["RDF triples", "labeled property", "graphs"]),
           ("Languages", ["Cypher · Gremlin", "ISO GQL · SQL/PGQ", "SPARQL"]),
           ("Databases", ["Neptune · Neo4j", "Spanner · BigQuery", "Fabric · Oracle"]),
@@ -1005,9 +1005,9 @@ def six_dimensions():
              [["Unity Catalog, Glue Data", "Catalog, Dataplex, DataHub"],
               ["dbt, Looker, Power BI, Cube,", "AtScale, Snowflake"],
               ["vector DBs (OpenSearch,", "pgvector), Bedrock Knowledge", "Bases, Vertex AI Search"],
-              ["Protégé, TopBraid, AWS COA;", "PoolParty for taxonomies"],
+              ["Protégé, TopBraid, AWS COA,", "NVIDIA Auto Ontology;", "PoolParty for taxonomies"],
               ["Neptune, Neo4j, GraphDB,", "Stardog, Spanner Graph"],
-              ["Knowledge Catalog, AWS COA,", "Fabric IQ, Genie Ontology,", "DataHub"],
+              ["Knowledge Catalog, AWS COA,", "NVIDIA Auto Ontology, Fabric", "IQ, Genie Ontology, DataHub"],
               ["OpenLineage (column-lineage", "facet), Marquez, dbt, Unity", "Catalog column lineage"]])]
     tx = [156 + i * 184 for i in range(7)]
     TW = 178

@@ -151,7 +151,7 @@ produce RDF: they're the semantic-layer counterpart to R2RML.
 | live SPARQL over operational databases, no copy | OBDA: Ontop, Stardog virtual graphs |
 | a big, fast, offline knowledge graph | materialize with R2RML or code, bulk-load (e.g. Neptune) |
 | to map a huge legacy schema | LLM-assisted matching, then human review, then R2RML |
-| governed context for AI agents | AWS COA / OntoBricks, or your own: ontology + R2RML + approval + VKG |
+| governed context for AI agents | AWS COA / OntoBricks (OWL + R2RML), NVIDIA Auto Ontology (terms mapped to columns, not OWL), or your own: ontology + R2RML + approval + VKG |
 | BI metrics, not a knowledge graph | a semantic layer (Ossie, dbt, semantic views), [semantic models](../../semantic-models/README.md) |
 
 Next: [ontology implementations](../implementations/README.md) · or

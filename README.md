@@ -36,8 +36,9 @@ Each topic in this repo supplies one missing piece of context:
 | **Ontology** | shared meaning: terms, synonyms, hierarchies, rules: *what does it mean?* | misreads business terms, misses that a premium customer is a customer |
 | **Knowledge graph** (mostly *metadata*) | a connected map of business concepts, tables, columns, metrics, lineage and key entities: *where is it? how does it relate?* | can't find the right tables or metric among many sources, guesses join paths, can't resolve "Naidu" to one customer or explain where an answer came from |
 
-That's why every major data platform now ships one or more of these for
-agents: AWS Context Ontology Accelerator, Microsoft Fabric IQ, Google
+That's why every major data platform, and AI vendors such as NVIDIA, now
+ship one or more of these for agents: AWS Context Ontology Accelerator,
+NVIDIA Auto Ontology, Microsoft Fabric IQ, Google
 Knowledge Catalog, Databricks Genie Ontology, Snowflake semantic views and
 Cortex, Salesforce Tableau Semantics and Apache Ossie. Implementing a data
 agent well means understanding all three, and how they fit together.

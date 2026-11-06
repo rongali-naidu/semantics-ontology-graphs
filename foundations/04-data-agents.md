@@ -141,6 +141,7 @@ explicit, and the graph path can be shown to a human.
 | [Snowflake](../semantic-models/implementations/providers/snowflake/README.md) | semantic views | Ontology on Snowflake / RelationalAI | KG tables | Cortex Agents |
 | [Salesforce](../semantic-models/implementations/providers/salesforce/README.md) | Tableau Semantics | — | — | Agentforce, Tableau Next MCP |
 | [Palantir](../ontologies/implementations/providers/palantir/README.md) | — | Foundry Ontology (with actions) | object graph | AIP agents |
+| [NVIDIA](../ontologies/implementations/providers/nvidia/README.md) | certified SQL attributes; imports / exports Apache Ossie | Auto Ontology (generated from metadata, not OWL) | context layer in Postgres + pgvector | MCP, CLI, API, agent skills |
 
 The pattern is the same everywhere: **metrics for numbers, an ontology for
 meaning, a graph for connections**, served to the agent as tools.
