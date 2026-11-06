@@ -28,7 +28,7 @@ talks. Metrics, dimensions, joins and business logic are defined once and
 reused everywhere. "Active customer" should mean one thing, whether a
 dashboard asks or an agent does.
 
-### 3. Knowledge bases: capture context
+### 3. Knowledge bases: hold institutional knowledge
 The institutional memory:
 * business rules, definitions and policies;
 * verified query examples;
@@ -43,7 +43,7 @@ or YAML files such as semantic-model definitions. They're chunked and
 embedded into a vector database, so the agent can find the relevant pieces
 by meaning (semantic search), usually alongside keyword search for exact
 names. What makes something part of the knowledge base is how it's used:
-the agent *reads* it as context. The semantic model itself is *executed*
+the agent *retrieves and reads* it. The semantic model itself is *executed*
 to produce numbers, so the knowledge base should index it, not keep its
 own edited copy. The same split holds for answers: a knowledge base finds
 context, but it never computes a number. Revenue comes from the semantic
@@ -107,10 +107,10 @@ them:
 
 | | Metadata | Semantic model | Knowledge base | Ontology & taxonomy | Knowledge graph: data | Knowledge graph: semantic | Lineage |
 |---|---|---|---|---|---|---|---|
-| **Purpose** | describe tables and columns: types, meaning, owners | define metrics, dimensions and joins once, for every tool and agent | a general store of documents the agent searches and reads as context | a taxonomy **classifies** (what sits under what); an ontology **defines** concepts and the logical rules between them | store real entities and their relationships: customers, orders, products | store meaning, not records: terms, metrics, concepts, tables, owners, lineage | show where a number came from and what depends on it |
+| **Purpose** | describe tables and columns: types, meaning, owners | define metrics, dimensions and joins once, for every tool and agent | a general store of documented, institutional knowledge that the agent searches and reads | a taxonomy **classifies** (what sits under what); an ontology **defines** concepts and the logical rules between them | store real entities and their relationships: customers, orders, products | store meaning, not records: terms, metrics, concepts, tables, owners, lineage | show where a number came from and what depends on it |
 | **Form** | catalog entries: schema, descriptions, constraints | datasets, fields, metrics, joins over physical tables | wikis, policies, PDFs, runbooks, SQL vaults of verified queries, JSON / YAML (for example, semantic models indexed as text) | taxonomy: a SKOS concept tree (broader / narrower); ontology: OWL classes, properties and axioms (TBox), with SHACL validating the data | instances (ABox) as triples or a property graph | a metadata graph linking glossary, semantic model, ontology and catalog | a DAG of sources → models → metrics, at table **and column** level |
 | **Standards** | DCAT, Dublin Core; catalog APIs | Apache Ossie, MetricFlow, LookML, TMDL, semantic views | none for content: any format goes in, is chunked and embedded into a vector database for semantic search, usually alongside keyword search | OWL 2, RDFS, SHACL; SKOS for taxonomies | RDF + SPARQL, or a property graph + Cypher / ISO GQL | RDF, SKOS, DCAT, PROV-O; or a catalog's graph API | OpenLineage, W3C PROV-O |
-| **Reasoning** | none; lookup and search | no logical inference; computes aggregates without double counting | finds context, never computes numbers: those come from the semantic model's deterministic SQL, not from similarity search | taxonomy: none; ontology: a reasoner (HermiT, ELK…) infers facts (Alice is a Customer) and finds contradictions (a Customer who is also a Seller) | traversal and paths; inference only when backed by an ontology | navigation of meaning: which metric, which tables, whose, how fresh | impact analysis: what breaks if a source changes |
+| **Reasoning** | none; lookup and search | no logical inference; computes aggregates without double counting | finds relevant passages, never computes numbers: those come from the semantic model's deterministic SQL, not from similarity search | taxonomy: none; ontology: a reasoner (HermiT, ELK…) infers facts (Alice is a Customer) and finds contradictions (a Customer who is also a Seller) | traversal and paths; inference only when backed by an ontology | navigation of meaning: which metric, which tables, whose, how fresh | impact analysis: what breaks if a source changes |
 | **In this repo** | [`schema.sql`](../examples/retail/warehouse/schema.sql), Ossie field descriptions, SHACL `sh:in` | [Ossie model](../examples/retail/semantic-model/ossie/retail.semantic_model.yaml), dbt MetricFlow, LookML, TMDL, COA metrics | the repo's Markdown chapters, the Ossie YAML and its `ai_context`, [SPARQL queries](../examples/retail/sparql/) with expected answers | [`retail-ontology.ttl`](../examples/retail/ontology/retail-ontology.ttl), [`retail-shapes.ttl`](../examples/retail/ontology/retail-shapes.ttl), the category tree (`subCategoryOf` ⊑ `skos:broader`) | [`retail-data.ttl`](../examples/retail/rdf/retail-data.ttl), the property graph, Neptune load files | the links exist in the files ([Ossie mapping](../examples/retail/semantic-model/ossie/retail.mapping.yaml), COA `ontologyConcepts`, dbt `ref()`s); the graph itself isn't built here | [dbt project](../semantic-models/implementations/tools/dbt/README.md): sources → `fct_order_lines` → `revenue`, run in CI |
 | **Typical tools** | Unity Catalog, Glue Data Catalog, Dataplex, DataHub | dbt, Looker, Power BI, Cube, AtScale, Snowflake | vector databases (OpenSearch, pgvector), Bedrock Knowledge Bases, Vertex AI Search; wikis | Protégé, TopBraid, AWS COA; PoolParty for taxonomies | Neptune, Neo4j, GraphDB, Stardog, Spanner Graph | Knowledge Catalog, AWS COA, Fabric IQ, Genie Ontology, DataHub | OpenLineage (column-lineage facet), Marquez, dbt, Unity Catalog column lineage |
 
@@ -137,11 +137,15 @@ layer of the enterprise**:
 
 * **metadata** describes the data;
 * the **semantic model** encodes business logic;
-* the **knowledge base** captures context;
+* the **knowledge base** holds institutional knowledge;
 * the **ontology** defines meaning;
 * **lineage** proves trust;
 * the **semantic knowledge graph** connects all of them into one navigable
   map that an agent can reason over.
+
+In context-engineering terms, **all six supply the agent's context**: each
+dimension is a different kind of context, assembled for the question at
+hand. The knowledge base's share is the documented, institutional knowledge.
 
 That layer needs an owner: the **Semantics Architect**. It's a new role at
 the intersection of data architecture, data governance, knowledge

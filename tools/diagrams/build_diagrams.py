@@ -810,7 +810,7 @@ def six_dimensions():
               "the six dimensions of a semantic layer, each shown on this repo's retail example "
               "(the knowledge graph in its two kinds)")
     cols = [("Metadata", "describes the data", NEUTRAL), ("Semantic model", "encodes business logic", SEM),
-            ("Knowledge base", "captures context", GOOD), ("Ontology & taxonomy", "defines meaning", ONTO),
+            ("Knowledge base", "holds institutional knowledge", GOOD), ("Ontology & taxonomy", "defines meaning", ONTO),
             ("Data graph", "entities and relationships", GRAPH), ("Semantic graph", "meaning, not records", GRAPH),
             ("Lineage", "proves trust", LINEAGE)]
     xs = [30 + i * 203 for i in range(7)]
@@ -964,7 +964,7 @@ def six_dimensions():
     rows = [("Purpose",
              [["describe tables and columns:", "types, meaning, owners"],
               ["define metrics, dimensions", "and joins once, for every", "tool and agent"],
-              ["a general store of documents", "the agent searches and reads", "as context"],
+              ["a store of documented,", "institutional knowledge the", "agent searches and reads"],
               ["taxonomy classifies (what sits", "under what); ontology defines", "concepts + logical rules"],
               ["store real entities and their", "relationships: customers,", "orders, products"],
               ["store meaning, not records:", "terms, metrics, concepts,", "tables, owners, lineage"],
@@ -988,7 +988,7 @@ def six_dimensions():
             ("Reasoning",
              [["none; lookup and search"],
               ["no logical inference;", "computes aggregates without", "double counting"],
-              ["finds context, never computes", "numbers: those come from the", "semantic model's SQL"],
+              ["finds relevant passages, never", "computes numbers: those come", "from the semantic model"],
               ["taxonomy: none; ontology: a", "reasoner infers (Alice is a", "Customer), finds contradictions"],
               ["traversal and paths; inference", "only when backed by an", "ontology"],
               ["navigate meaning: which", "metric, which tables, whose,", "how fresh"],
