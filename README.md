@@ -4,7 +4,10 @@
 
 A hands-on reference for **semantics** in three topics, **ontologies**,
 **knowledge graphs** and **semantic models**, from first principles to the
-products that implement them.
+products that implement them. 
+
+# Semantic Architect 
+Concepts covered here foundational concepts required for **Semantic Architect** role
 
 ## Why learn this now: data agents
 
