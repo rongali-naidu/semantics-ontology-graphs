@@ -45,7 +45,9 @@ by meaning (semantic search), usually alongside keyword search for exact
 names. What makes something part of the knowledge base is how it's used:
 the agent *reads* it as context. The semantic model itself is *executed*
 to produce numbers, so the knowledge base should index it, not keep its
-own edited copy.
+own edited copy. The same split holds for answers: a knowledge base finds
+context, but it never computes a number. Revenue comes from the semantic
+model's deterministic SQL, not from similarity search over documents.
 
 ### 4. Ontology (including taxonomy): defines meaning
 * **Taxonomy** organizes concepts into hierarchies, such as Product →
@@ -55,7 +57,10 @@ own edited copy.
   fulfilled by a Warehouse.
 
 This gives agents a shared vocabulary and lets them reason, not just
-retrieve.
+retrieve. The line between the two: a taxonomy **classifies** (Laptops sit
+under Computers); an ontology **defines**, with logical rules a reasoner
+uses to infer new facts and find contradictions. Checking that the data
+obeys the rules is a separate job, done by SHACL.
 
 ### 5. Knowledge graphs: the data graph plus the semantic graph
 The ontology brought to life in graph form. A knowledge graph can hold two
@@ -85,7 +90,10 @@ Trust and explainability:
 * What breaks downstream if this source changes?
 
 An agent that can't explain its answer won't be trusted in a boardroom, and
-lineage is how it explains itself.
+lineage is how it explains itself. Table-level lineage is a start, but
+column-level lineage is what explains a metric: `revenue` comes from
+`line_amount`, which comes from `quantity` and `unit_price`, not just "from
+`fct_order_lines`".
 
 ## 6.2 The six dimensions side by side
 
@@ -95,16 +103,16 @@ because it comes in the two kinds described above: a **data graph** of
 records and a **semantic graph** of metadata. One question needs all of
 them:
 
-![Seven columns, one per dimension with the knowledge graph split in two, each with a retail example: metadata (customers.is_premium BOOLEAN, paid membership; order status values), semantic model (revenue = SUM(quantity × unit_price) mapped to order_lines, orders, customers), knowledge base (documents of any format, including SQL vaults and semantic-model YAML, chunked and embedded for semantic search), ontology and taxonomy (Electronics → Computers → Laptops; Order placedBy Customer; PremiumCustomer ⊑ Customer), data graph (Alice → O1 → Laptop Pro 14 → Laptops → Computers), semantic graph (metric revenue linked to its synonyms, definitions, ontology concept, dbt model and column), lineage (source tables → dbt model fct_order_lines → measure → metric revenue 1878.43); then the question "revenue from premium customers in Electronics" answered as 1498.97, and a comparison table](../assets/diagrams/six-dimensions.svg)
+![Seven columns, one per dimension with the knowledge graph split in two, each with a retail example: metadata (customers.is_premium BOOLEAN, paid membership; order status values), semantic model (revenue = SUM(quantity × unit_price) mapped to order_lines, orders, customers), knowledge base (documents of any format, including SQL vaults and semantic-model YAML, chunked and embedded for semantic search), ontology and taxonomy (Electronics → Computers → Laptops; Order placedBy Customer; PremiumCustomer ⊑ Customer), data graph (Alice → O1 → Laptop Pro 14 → Laptops → Computers), semantic graph (metric revenue linked to its synonyms, definitions, ontology concept, dbt model and column), lineage (source tables → dbt model fct_order_lines → measure → metric revenue 1878.43, and column level: revenue ← line_amount ← quantity, unit_price); then the question "revenue from premium customers in Electronics" answered as 1498.97, and a comparison table](../assets/diagrams/six-dimensions.svg)
 
 | | Metadata | Semantic model | Knowledge base | Ontology & taxonomy | Knowledge graph: data | Knowledge graph: semantic | Lineage |
 |---|---|---|---|---|---|---|---|
-| **Purpose** | describe tables and columns: types, meaning, owners | define metrics, dimensions and joins once, for every tool and agent | a general store of documents the agent searches and reads as context | define what things are, how they relate, and the rules (a taxonomy is just the tree) | store real entities and their relationships: customers, orders, products | store meaning, not records: terms, metrics, concepts, tables, owners, lineage | show where a number came from and what depends on it |
-| **Form** | catalog entries: schema, descriptions, constraints | datasets, fields, metrics, joins over physical tables | wikis, policies, PDFs, runbooks, SQL vaults of verified queries, JSON / YAML (for example, semantic models indexed as text) | classes, properties, axioms (TBox); a taxonomy is a broader / narrower concept tree | instances (ABox) as triples or a property graph | a metadata graph linking glossary, semantic model, ontology and catalog | a DAG of sources → models → metrics, down to columns |
+| **Purpose** | describe tables and columns: types, meaning, owners | define metrics, dimensions and joins once, for every tool and agent | a general store of documents the agent searches and reads as context | a taxonomy **classifies** (what sits under what); an ontology **defines** concepts and the logical rules between them | store real entities and their relationships: customers, orders, products | store meaning, not records: terms, metrics, concepts, tables, owners, lineage | show where a number came from and what depends on it |
+| **Form** | catalog entries: schema, descriptions, constraints | datasets, fields, metrics, joins over physical tables | wikis, policies, PDFs, runbooks, SQL vaults of verified queries, JSON / YAML (for example, semantic models indexed as text) | taxonomy: a SKOS concept tree (broader / narrower); ontology: OWL classes, properties and axioms (TBox), with SHACL validating the data | instances (ABox) as triples or a property graph | a metadata graph linking glossary, semantic model, ontology and catalog | a DAG of sources → models → metrics, at table **and column** level |
 | **Standards** | DCAT, Dublin Core; catalog APIs | Apache Ossie, MetricFlow, LookML, TMDL, semantic views | none for content: any format goes in, is chunked and embedded into a vector database for semantic search, usually alongside keyword search | OWL 2, RDFS, SHACL; SKOS for taxonomies | RDF + SPARQL, or a property graph + Cypher / ISO GQL | RDF, SKOS, DCAT, PROV-O; or a catalog's graph API | OpenLineage, W3C PROV-O |
-| **Reasoning** | none; lookup and search | no logical inference; computes aggregates without double counting | none; retrieved (RAG) and applied by the LLM | a reasoner infers and checks: Alice is a Customer; a Customer who is also a Seller is an error | traversal and paths; inference only when backed by an ontology | navigation of meaning: which metric, which tables, whose, how fresh | impact analysis: what breaks if a source changes |
+| **Reasoning** | none; lookup and search | no logical inference; computes aggregates without double counting | finds context, never computes numbers: those come from the semantic model's deterministic SQL, not from similarity search | taxonomy: none; ontology: a reasoner (HermiT, ELK…) infers facts (Alice is a Customer) and finds contradictions (a Customer who is also a Seller) | traversal and paths; inference only when backed by an ontology | navigation of meaning: which metric, which tables, whose, how fresh | impact analysis: what breaks if a source changes |
 | **In this repo** | [`schema.sql`](../examples/retail/warehouse/schema.sql), Ossie field descriptions, SHACL `sh:in` | [Ossie model](../examples/retail/semantic-model/ossie/retail.semantic_model.yaml), dbt MetricFlow, LookML, TMDL, COA metrics | the repo's Markdown chapters, the Ossie YAML and its `ai_context`, [SPARQL queries](../examples/retail/sparql/) with expected answers | [`retail-ontology.ttl`](../examples/retail/ontology/retail-ontology.ttl), [`retail-shapes.ttl`](../examples/retail/ontology/retail-shapes.ttl), the category tree (`subCategoryOf` ⊑ `skos:broader`) | [`retail-data.ttl`](../examples/retail/rdf/retail-data.ttl), the property graph, Neptune load files | the links exist in the files ([Ossie mapping](../examples/retail/semantic-model/ossie/retail.mapping.yaml), COA `ontologyConcepts`, dbt `ref()`s); the graph itself isn't built here | [dbt project](../semantic-models/implementations/tools/dbt/README.md): sources → `fct_order_lines` → `revenue`, run in CI |
-| **Typical tools** | Unity Catalog, Glue Data Catalog, Dataplex, DataHub | dbt, Looker, Power BI, Cube, AtScale, Snowflake | vector databases (OpenSearch, pgvector), Bedrock Knowledge Bases, Vertex AI Search; wikis | Protégé, TopBraid, AWS COA; PoolParty for taxonomies | Neptune, Neo4j, GraphDB, Stardog, Spanner Graph | Knowledge Catalog, AWS COA, Fabric IQ, Genie Ontology, DataHub | OpenLineage / Marquez, dbt docs, catalog lineage views |
+| **Typical tools** | Unity Catalog, Glue Data Catalog, Dataplex, DataHub | dbt, Looker, Power BI, Cube, AtScale, Snowflake | vector databases (OpenSearch, pgvector), Bedrock Knowledge Bases, Vertex AI Search; wikis | Protégé, TopBraid, AWS COA; PoolParty for taxonomies | Neptune, Neo4j, GraphDB, Stardog, Spanner Graph | Knowledge Catalog, AWS COA, Fabric IQ, Genie Ontology, DataHub | OpenLineage (column-lineage facet), Marquez, dbt, Unity Catalog column lineage |
 
 **One question, every dimension contributes:** *"What was revenue from
 premium customers in Electronics?"*
@@ -117,7 +125,7 @@ premium customers in Electronics?"*
 | Ontology & taxonomy | premium customers are Customers; Laptops ⊂ Computers ⊂ Electronics | [`retail-ontology.ttl`](../examples/retail/ontology/retail-ontology.ttl), [`retail-data.ttl`](../examples/retail/rdf/retail-data.ttl) |
 | Knowledge graph: data | *who*: Alice (orders O1, O3); Carol, the other premium customer, bought Books and Kitchen items | [`retail-data.ttl`](../examples/retail/rdf/retail-data.ttl) |
 | Knowledge graph: semantic | "revenue" (also "sales", "GMV") is a governed metric, about `retail:OrderLine`, computed from `fct_order_lines.line_amount` | Ossie synonyms, COA `ontologyConcepts`, dbt model |
-| Lineage | the number traces from metric `revenue` ← measure ← `fct_order_lines` ← `order_lines`, `orders`, `products` | [dbt project](../semantic-models/implementations/tools/dbt/README.md) |
+| Lineage | the number traces from metric `revenue` ← measure ← `fct_order_lines` ← `order_lines`, `orders`, `products`; at column level, `revenue` ← `line_amount` ← `quantity`, `unit_price` | [dbt project](../semantic-models/implementations/tools/dbt/README.md) |
 
 Answer: **1498.97**, all from Alice Johnson's orders: Laptop Pro 14 and
 2 × USB-C Charger 65W (O1), and Wireless Earbuds X (O3).

@@ -938,8 +938,8 @@ def six_dimensions():
     c.rect(x + 18, 334, CW - 36, 40, fill=LINEAGE[0], stroke=LINEAGE[1], rx=6)
     c.text(x + CW / 2, 350, "metric revenue", size=10.5, mono=True, weight="600", color=LINEAGE[1])
     c.text(x + CW / 2, 366, "= 1878.43 (CI)", size=9.5, color=INK)
-    c.text(x + CW / 2, 396, "sources → dbt model → metric", size=9.5, color=MUTED, italic=True)
-    c.text(x + CW / 2, 409, "(the repo's dbt project)", size=9.5, color=MUTED, italic=True)
+    c.text(x + CW / 2, 394, "column level: revenue ← line_amount", size=9.5, color=MUTED, italic=True)
+    c.text(x + CW / 2, 407, "← quantity, unit_price (repo's dbt)", size=9.5, color=MUTED, italic=True)
 
     # one question, seven contributions
     c.rect(30, 462, W - 60, 168, fill="#F9FAFB", stroke="#D0D5DD")
@@ -965,7 +965,7 @@ def six_dimensions():
              [["describe tables and columns:", "types, meaning, owners"],
               ["define metrics, dimensions", "and joins once, for every", "tool and agent"],
               ["a general store of documents", "the agent searches and reads", "as context"],
-              ["define what things are, how", "they relate, and the rules", "(a taxonomy: just the tree)"],
+              ["taxonomy classifies (what sits", "under what); ontology defines", "concepts + logical rules"],
               ["store real entities and their", "relationships: customers,", "orders, products"],
               ["store meaning, not records:", "terms, metrics, concepts,", "tables, owners, lineage"],
               ["show where a number came", "from and what depends on it"]]),
@@ -973,10 +973,10 @@ def six_dimensions():
              [["catalog entries: schema,", "descriptions, constraints"],
               ["datasets, fields, metrics,", "joins over physical tables"],
               ["wikis, policies, PDFs, SQL", "vaults, JSON / YAML (semantic", "models indexed as text)"],
-              ["classes, properties, axioms", "(TBox); taxonomy = broader /", "narrower concept tree"],
+              ["taxonomy: SKOS concept tree;", "ontology: OWL classes, axioms;", "SHACL validates the data"],
               ["instances (ABox) as triples", "or a property graph"],
               ["a metadata graph linking", "glossary, semantic model,", "ontology and catalog"],
-              ["a DAG: sources → models →", "metrics, down to columns"]]),
+              ["a DAG: sources → models →", "metrics, at table and", "column level"]]),
             ("Standards",
              [["DCAT, Dublin Core;", "catalog APIs"],
               ["Apache Ossie, MetricFlow,", "LookML, TMDL, semantic views"],
@@ -988,8 +988,8 @@ def six_dimensions():
             ("Reasoning",
              [["none; lookup and search"],
               ["no logical inference;", "computes aggregates without", "double counting"],
-              ["none; retrieved (RAG) and", "applied by the LLM"],
-              ["a reasoner infers and checks:", "Alice is a Customer; a", "Customer + Seller is an error"],
+              ["finds context, never computes", "numbers: those come from the", "semantic model's SQL"],
+              ["taxonomy: none; ontology: a", "reasoner infers (Alice is a", "Customer), finds contradictions"],
               ["traversal and paths; inference", "only when backed by an", "ontology"],
               ["navigate meaning: which", "metric, which tables, whose,", "how fresh"],
               ["impact analysis: what breaks", "if a source changes"]]),
@@ -1008,7 +1008,7 @@ def six_dimensions():
               ["Protégé, TopBraid, AWS COA;", "PoolParty for taxonomies"],
               ["Neptune, Neo4j, GraphDB,", "Stardog, Spanner Graph"],
               ["Knowledge Catalog, AWS COA,", "Fabric IQ, Genie Ontology,", "DataHub"],
-              ["OpenLineage / Marquez, dbt", "docs, catalog lineage views"]])]
+              ["OpenLineage (column-lineage", "facet), Marquez, dbt, Unity", "Catalog column lineage"]])]
     tx = [156 + i * 184 for i in range(7)]
     TW = 178
     y = 646
