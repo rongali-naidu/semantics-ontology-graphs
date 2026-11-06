@@ -28,7 +28,7 @@ Using the retail example in this repo
 |---|---|---|
 | **Class** | concept, type, category | `Customer`, `Order`, `Product` |
 | **Subclass** (is-a hierarchy) | taxonomy | `PremiumCustomer ⊑ Customer` |
-| **Individual** | instance, entity | `ex:C1` (Alice), `ex:P1` (Laptop Pro 14) |
+| **Individual** | instance, entity | `ex:C1` (Naidu), `ex:P1` (Laptop Pro 14) |
 | **Object property** | relation, role | `placedBy` (Order → Customer) |
 | **Datatype property** | attribute | `price` (Product → xsd:decimal) |
 | **Domain / range** | signature | `placedBy` has domain `Order`, range `Customer` |
@@ -47,9 +47,9 @@ parts named after what they hold:
 * **ABox**, where **A = assertional**: *assertions* about specific
   individuals. This is *the data*.
   → `rdf/retail-data.ttl`. Two kinds:
-  * **class assertions**: what type something is (`Alice : PremiumCustomer`);
+  * **class assertions**: what type something is (`Naidu : PremiumCustomer`);
   * **role (property) assertions**: how things relate or what value they
-    have (`placedBy(O1, Alice)`, `name(Alice, "Alice Johnson")`).
+    have (`placedBy(O1, Naidu)`, `name(Naidu, "Naidu Rongali")`).
 * **RBox**, where **R = role**, sometimes listed separately: axioms about the
   properties themselves (`subCategoryOf` is transitive, `placedOrder` is the
   inverse of `placedBy`). Many texts fold it into the TBox.
@@ -71,12 +71,12 @@ for when each usage applies.
 2. **Integration.** Two systems that map to the same ontology can be merged by
    simply loading both datasets into one graph (IRIs are global identifiers).
 3. **Inference.** New facts follow from rules. From the retail data:
-   * Alice is typed only `PremiumCustomer` → a reasoner knows she is a
+   * Naidu is typed only `PremiumCustomer` → a reasoner knows she is a
      `Customer`, a `Party` and a `schema:Person`.
    * `Laptops subCategoryOf Computers subCategoryOf Electronics` → laptops are
      Electronics (transitivity).
-   * Order `placedBy` Alice → Alice `placedOrder` the order (inverse).
-   * Alice placedOrder O1, O1 hasLine L1, L1 forProduct P1 → Alice
+   * Order `placedBy` Naidu → Naidu `placedOrder` the order (inverse).
+   * Naidu placedOrder O1, O1 hasLine L1, L1 forProduct P1 → Naidu
      `purchased` P1 (property chain).
 4. **Consistency checking.** If something were both an `Order` and a
    `Product`, the reasoner flags it (the classes are declared disjoint).

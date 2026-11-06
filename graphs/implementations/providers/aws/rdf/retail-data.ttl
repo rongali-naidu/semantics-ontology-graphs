@@ -6,7 +6,7 @@
 #  ../scripts/build_rdf_formats.py - edit this file, then re-run the script.
 #
 #  Notice what is NOT stated here but can be inferred from the ontology:
-#    * Alice and Carol are only typed PremiumCustomer -> they are also Customer
+#    * Naidu and Carol are only typed PremiumCustomer -> they are also Customer
 #    * orders say placedBy  -> customers placedOrder (owl:inverseOf)
 #    * Laptops subCategoryOf Computers subCategoryOf Electronics (transitive)
 #    * customer purchased product (owl:propertyChainAxiom)
@@ -72,7 +72,7 @@ ex:P6 a retail:Product ;
 # Customers and addresses
 #---------------------------------------------------------------------------
 ex:C1 a retail:PremiumCustomer ;
-    retail:name "Alice Johnson" ; retail:email "alice@example.com" ;
+    retail:name "Naidu Rongali" ; retail:email "naidu@example.com" ;
     retail:memberSince "2024-03-15"^^xsd:date ;
     retail:hasAddress ex:A1 .
 

@@ -6,7 +6,7 @@ from rdflib.namespace import OWL, RDF
 
 def test_subclass_inference():
     g = d.reason()
-    assert set(d.names(g, g.subjects(RDF.type, d.R.Customer))) == {"Alice Johnson", "Bob Smith", "Carol Diaz"}
+    assert set(d.names(g, g.subjects(RDF.type, d.R.Customer))) == {"Naidu Rongali", "Bob Smith", "Carol Diaz"}
 
 
 def test_inverse_and_chain():
@@ -32,8 +32,8 @@ def test_functional_object_property_infers_sameas():
 
 
 def test_functional_data_property_conflict_is_detectable():
-    g = d.reason((d.EX.C1, d.R.email, Literal("alice@work.example")))
-    assert (Literal("alice@example.com"), OWL.sameAs, Literal("alice@work.example")) in g
+    g = d.reason((d.EX.C1, d.R.email, Literal("naidu@work.example")))
+    assert (Literal("naidu@example.com"), OWL.sameAs, Literal("naidu@work.example")) in g
 
 
 def test_demo_script_passes():

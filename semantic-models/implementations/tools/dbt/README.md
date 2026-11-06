@@ -30,11 +30,11 @@ mf validate-configs           # semantic model validated against the warehouse
 mf query --metrics revenue,units_sold,order_count,average_order_value,buyer_count,discount_amount
 #   revenue 1878.43 · units 9 · orders 4 · AOV 469.61 · buyers 3 · discount 10
 mf query --metrics revenue,order_count --group-by customer__customer_name --order -revenue
-#   Alice Johnson 1498.97 (2) · Bob Smith 199.98 (1) · Carol Diaz 179.48 (1)   = SPARQL Q3
+#   Naidu Rongali 1498.97 (2) · Bob Smith 199.98 (1) · Carol Diaz 179.48 (1)   = SPARQL Q3
 mf query --metrics revenue --group-by product__category_level_1
 #   Electronics 1648.96 · Books 149.97 · Kitchen 79.5
 mf query --metrics premium_revenue
-#   1678.45   (Alice + Carol: the ontology's PremiumCustomer class as a metric filter)
+#   1678.45   (Naidu + Carol: the ontology's PremiumCustomer class as a metric filter)
 ```
 
 Tested with dbt-core 1.12.6, dbt-duckdb 1.11.1, dbt-metricflow 0.15.0 (pinned in [`requirements.txt`](requirements.txt)); CI runs [`check_metricflow.py`](check_metricflow.py) on every push.

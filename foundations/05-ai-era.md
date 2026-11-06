@@ -4,8 +4,8 @@ Large language models changed who asks questions of data: increasingly it's
 an agent, not an analyst writing SQL. That raised the stakes for the three
 topics in this repo, because **an LLM is fluent but has no built-in
 knowledge of *your* business**: what "revenue" means here, which table holds
-it, that "client" and "customer" are the same thing, or that Alice in the CRM
-is Alice in the order system.
+it, that "client" and "customer" are the same thing, or that Naidu in the CRM
+is Naidu in the order system.
 
 ![Two-way relationship: semantics grounds LLMs (meaning, facts, numbers, guardrails), and LLMs help build semantics (draft ontologies, mappings, extraction)](../assets/diagrams/ai-era.svg)
 

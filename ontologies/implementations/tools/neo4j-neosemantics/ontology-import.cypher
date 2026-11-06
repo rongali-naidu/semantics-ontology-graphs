@@ -24,7 +24,7 @@ CALL n10s.rdf.import.fetch(
 //    (= SPARQL 08-all-customers-via-subclass.rq)
 CALL n10s.inference.nodesLabelled('Customer', {catNameProp: 'name', catLabel: 'Class', subCatRel: 'SCO'})
 YIELD node
-RETURN node.name AS customer;   // Alice Johnson, Bob Smith, Carol Diaz
+RETURN node.name AS customer;   // Naidu Rongali, Bob Smith, Carol Diaz
 
 // 5. Validate the graph with the SHACL shapes
 CALL n10s.validation.shacl.import.fetch(

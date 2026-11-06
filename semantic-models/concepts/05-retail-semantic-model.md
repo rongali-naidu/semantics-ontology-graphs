@@ -35,7 +35,7 @@ semantic format:
 | `discount_amount` | `SUM(quantity * (list_price − unit_price))` | 10.00 | additive, cross-table |
 | `average_rating` | `AVG(rating)` on reviews | 4.25 | second fact |
 
-Revenue by customer: Alice 1498.97 · Bob 199.98 · Carol 179.48
+Revenue by customer: Naidu 1498.97 · Bob 199.98 · Carol 179.48
 (= SPARQL Q3). Revenue by department: Electronics 1648.96 · Books 149.97 ·
 Kitchen 79.50 (= SPARQL roll-up over `subCategoryOf*`).
 

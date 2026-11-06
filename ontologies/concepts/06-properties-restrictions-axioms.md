@@ -17,7 +17,7 @@ Declaring a property functional is itself an axiom (a *property axiom*).
 |---|---|---|---|
 | **TBox** | **T**erminological | class axioms: subclass, equivalence, disjointness, restrictions | `PremiumCustomer ⊑ Customer` |
 | **RBox** | **R**ole | property axioms: characteristics, sub-properties, inverses, chains | `subCategoryOf` is transitive; `placedOrder` inverse of `placedBy` |
-| **ABox** | **A**ssertional | facts about individuals: class and property assertions | `Alice : PremiumCustomer`, `placedBy(O1, Alice)` |
+| **ABox** | **A**ssertional | facts about individuals: class and property assertions | `Naidu : PremiumCustomer`, `placedBy(O1, Naidu)` |
 
 Many texts fold the RBox into the TBox (schema = TBox + RBox).
 
@@ -56,7 +56,7 @@ would reject it. What happens depends on the property kind:
 | Second value for… | What an OWL reasoner concludes | Demo |
 |---|---|---|
 | a functional **object** property | the two individuals are **the same thing** (`owl:sameAs`) | O1 placedBy C1 *and* C2 ⇒ `C1 owl:sameAs C2` |
-| a functional **datatype** property | the two literals would have to be equal; they can't be, so the ontology is **inconsistent** | two different emails for Alice ⇒ inconsistency |
+| a functional **datatype** property | the two literals would have to be equal; they can't be, so the ontology is **inconsistent** | two different emails for Naidu ⇒ inconsistency |
 
 ```text
 $ python scripts/demo_reasoning.py

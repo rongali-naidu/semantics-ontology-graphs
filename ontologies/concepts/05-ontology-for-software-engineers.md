@@ -26,9 +26,9 @@ class Order:
     placed_by: Customer                    # the reference lives INSIDE Order
     status: str = "PLACED"
 
-alice = PremiumCustomer("Alice Johnson", "alice@example.com", "2024-03-15")
-o1 = Order("O1", placed_by=alice, status="DELIVERED")
-# alice does not know about o1 unless you write code to keep both sides in sync
+naidu = PremiumCustomer("Naidu Rongali", "naidu@example.com", "2024-03-15")
+o1 = Order("O1", placed_by=naidu, status="DELIVERED")
+# naidu does not know about o1 unless you write code to keep both sides in sync
 ```
 
 **Ontology (declarative, open)**, from [`retail-ontology.ttl`](../../examples/retail/ontology/retail-ontology.ttl)
@@ -47,7 +47,7 @@ retail:placedBy a owl:ObjectProperty , owl:FunctionalProperty ;   # a standalone
 retail:name a owl:DatatypeProperty ; rdfs:range xsd:string .
 
 # --- ABox: the data -----------------------------------------------------
-ex:C1 a retail:PremiumCustomer ; retail:name "Alice Johnson" .
+ex:C1 a retail:PremiumCustomer ; retail:name "Naidu Rongali" .
 ex:O1 a retail:Order ; retail:placedBy ex:C1 ; retail:status "DELIVERED" .
 ```
 
@@ -56,7 +56,7 @@ ex:O1 a retail:Order ; retail:placedBy ex:C1 ; retail:status "DELIVERED" .
 | OOP | Ontology (OWL / RDFS) | Note |
 |---|---|---|
 | class `Customer` | class `retail:Customer` (`owl:Class`) | a set of individuals, not a code template |
-| object `alice = Customer(...)` | individual `ex:C1` (ABox) | has a global IRI, not a memory address |
+| object `naidu = Customer(...)` | individual `ex:C1` (ABox) | has a global IRI, not a memory address |
 | reference `order.placed_by` | object property `retail:placedBy` | an edge between individuals |
 | primitive field `order.status` | datatype property `retail:status` | an edge to a literal |
 | type annotation `placed_by: Customer` | `rdfs:domain` / `rdfs:range` | **infers types; does not check them** (5.4) |
@@ -78,7 +78,7 @@ classes through domain and range. That's why you can:
 * reuse one property across classes (`retail:name` is used for Customers,
   Sellers, Products and Categories, with no domain at all);
 * add a new property to existing data without changing any class;
-* query "everything connected to Alice" without knowing the class layout.
+* query "everything connected to Naidu" without knowing the class layout.
 
 ## 5.4 Domain and range infer; they don't validate
 
@@ -123,7 +123,7 @@ No order or customer in the data is typed with these classes, yet:
 ```text
 $ python scripts/demo_reasoning.py
 ok   4a. defined: DeliveredOrder: O1, O3
-ok   4b. defined: LaptopBuyer: Alice Johnson
+ok   4b. defined: LaptopBuyer: Naidu Rongali
 ```
 
 The reasoner classified them. In OOP terms, it *re-typed existing objects*
@@ -139,7 +139,7 @@ the duck-typing analogy:
 
 | OOP assumption | Ontology reality |
 |---|---|
-| An object has exactly one class | An individual can be in many classes at once (Alice: PremiumCustomer, Customer, Party, schema:Person, LaptopBuyer) |
+| An object has exactly one class | An individual can be in many classes at once (Naidu: PremiumCustomer, Customer, Party, schema:Person, LaptopBuyer) |
 | Missing field = null / false | Missing fact = **unknown** (open world) |
 | Two objects are different objects | Two IRIs may denote the **same** thing (no unique-name assumption) unless declared `owl:differentFrom` |
 | Constraints reject bad data | OWL axioms **infer** (or report inconsistency); SHACL rejects |

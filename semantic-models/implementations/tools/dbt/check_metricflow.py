@@ -20,7 +20,7 @@ CHECKS = [
      [{"revenue": "1878.43", "units_sold": "9", "order_count": "4",
        "average_order_value": "469.61", "buyer_count": "3", "discount_amount": "10.00"}]),
     (["--metrics", "revenue,order_count", "--group-by", "customer__customer_name"],
-     [{"customer__customer_name": "Alice Johnson", "revenue": "1498.97", "order_count": "2"},
+     [{"customer__customer_name": "Naidu Rongali", "revenue": "1498.97", "order_count": "2"},
       {"customer__customer_name": "Bob Smith", "revenue": "199.98", "order_count": "1"},
       {"customer__customer_name": "Carol Diaz", "revenue": "179.48", "order_count": "1"}]),
     (["--metrics", "revenue", "--group-by", "product__category_level_1"],

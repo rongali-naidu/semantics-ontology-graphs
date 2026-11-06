@@ -105,8 +105,8 @@
   <retail:Order rdf:about="https://example.org/retail/data/O3">
     <retail:placedBy>
       <retail:PremiumCustomer rdf:about="https://example.org/retail/data/C1">
-        <retail:name>Alice Johnson</retail:name>
-        <retail:email>alice@example.com</retail:email>
+        <retail:name>Naidu Rongali</retail:name>
+        <retail:email>naidu@example.com</retail:email>
         <retail:memberSince rdf:datatype="http://www.w3.org/2001/XMLSchema#date">2024-03-15</retail:memberSince>
         <retail:hasAddress rdf:resource="https://example.org/retail/data/A1"/>
       </retail:PremiumCustomer>

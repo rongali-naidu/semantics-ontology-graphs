@@ -18,7 +18,7 @@ CREATE TABLE order_line (id VARCHAR PRIMARY KEY, order_id VARCHAR REFERENCES ord
                          product_id VARCHAR REFERENCES product(id), quantity INT, unit_price DECIMAL(10,2));
 
 INSERT INTO customer VALUES
-  ('C1','Alice Johnson','alice@example.com',TRUE ,DATE '2024-03-15'),
+  ('C1','Naidu Rongali','naidu@example.com',TRUE ,DATE '2024-03-15'),
   ('C2','Bob Smith'    ,'bob@example.com'  ,FALSE,NULL),
   ('C3','Carol Diaz'   ,'carol@example.com',TRUE ,DATE '2025-11-01');
 INSERT INTO category VALUES

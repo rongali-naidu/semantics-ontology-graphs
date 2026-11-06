@@ -35,7 +35,7 @@ ORDER BY totalSpent DESC
 
 ```
 %%gremlin -p v,oute,inv
-g.V().has('Customer','name','Alice Johnson').outE('PLACED').inV().outE('CONTAINS').inV().path()
+g.V().has('Customer','name','Naidu Rongali').outE('PLACED').inV().outE('CONTAINS').inV().path()
 ```
 
 The `-p` option builds an interactive **graph visualisation** of the path
@@ -131,7 +131,7 @@ curl -s https://$NEPTUNE_ENDPOINT:8182/gremlin \
   -d '{"gremlin": "g.V().hasLabel(\"Product\").not(inE(\"CONTAINS\")).values(\"name\")"}'
 
 curl -s https://$NEPTUNE_ENDPOINT:8182/gremlin/profile \
-  -d '{"gremlin": "g.V().has(\"Customer\",\"name\",\"Alice Johnson\").out(\"PLACED\").count()"}'
+  -d '{"gremlin": "g.V().has(\"Customer\",\"name\",\"Naidu Rongali\").out(\"PLACED\").count()"}'
 ```
 
 Gremlin Console: `conf/neptune-remote.yaml` with `hosts: [endpoint]`,

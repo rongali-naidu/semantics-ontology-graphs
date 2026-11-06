@@ -23,7 +23,7 @@ ORDER BY product;
 
 // Q3. Spend per customer. Line attributes live ON THE EDGE (l.quantity),
 // no OrderLine node needed.
-// Expected: Alice 1498.97 (2 orders), Bob 199.98, Carol 179.48
+// Expected: Naidu 1498.97 (2 orders), Bob 199.98, Carol 179.48
 MATCH (c:Customer)-[:PLACED]->(o:Order)-[l:CONTAINS]->(:Product)
 RETURN c.name AS customer,
        count(DISTINCT o) AS orders,
@@ -68,10 +68,10 @@ WHERE timesOrdered = 0
 RETURN p.name AS product;
 
 
-// Q8. How is Alice connected to Carol through purchases?
-// Alice -PLACED-> O3 -CONTAINS-> Earbuds <- O2 <- Bob -> O2 -> Book <- O4 <- Carol
+// Q8. How is Naidu connected to Carol through purchases?
+// Naidu -PLACED-> O3 -CONTAINS-> Earbuds <- O2 <- Bob -> O2 -> Book <- O4 <- Carol
 // Neo4j has shortestPath(); this bounded variable-length form also runs on Neptune.
-MATCH path = (a:Customer {name: 'Alice Johnson'})-[:PLACED|CONTAINS*1..8]-(b:Customer {name: 'Carol Diaz'})
+MATCH path = (a:Customer {name: 'Naidu Rongali'})-[:PLACED|CONTAINS*1..8]-(b:Customer {name: 'Carol Diaz'})
 RETURN [n IN nodes(path) | coalesce(n.name, n.status)] AS hops, length(path) AS len
 ORDER BY len
 LIMIT 1;

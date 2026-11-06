@@ -65,7 +65,7 @@ governed*.
 | Schema | optional; labels and edge types | central: an ontology (OWL/RDFS, or a governed vocabulary) |
 | Identity | local node ids | global, stable identifiers (IRIs), entity resolution across sources |
 | Reasoning | usually none (application code) | often: subclass, inverse, transitive, rules |
-| Example | the retail graph in Neo4j built from [`01-create-retail-graph.cypher`](../../examples/retail/property-graph/cypher/01-create-retail-graph.cypher) | the retail graph in RDF with [`retail-ontology.ttl`](../../examples/retail/ontology/retail-ontology.ttl), where a reasoner knows Alice is a Customer |
+| Example | the retail graph in Neo4j built from [`01-create-retail-graph.cypher`](../../examples/retail/property-graph/cypher/01-create-retail-graph.cypher) | the retail graph in RDF with [`retail-ontology.ttl`](../../examples/retail/ontology/retail-ontology.ttl), where a reasoner knows Naidu is a Customer |
 
 So:
 

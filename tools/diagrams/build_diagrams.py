@@ -63,7 +63,7 @@ def one_domain():
     c.line(730, 253, 748, 253)
     c.rect(30, 340, 940, 70, fill=GOOD[0], stroke=GOOD[1])
     c.text(500, 368, "✓ same answers everywhere", size=15, weight="600", color=GOOD[1])
-    c.text(500, 391, "Alice 1498.97 · Bob 199.98 · Carol 179.48  —  SPARQL = CSVs = SQL = Ossie = MetricFlow = COA metric SQL",
+    c.text(500, 391, "Naidu 1498.97 · Bob 199.98 · Carol 179.48  —  SPARQL = CSVs = SQL = Ossie = MetricFlow = COA metric SQL",
            size=12.5, color=INK)
     for x in (140, 380, 620, 860):
         c.line(x, 310, x, 338, color=GOOD[1], dash="3 3")
@@ -76,7 +76,7 @@ def layers():
     c = Canvas(960, 452, "Ontology, knowledge graph, data model, graph database")
     c.heading("Four layers that get mixed up", "ontology ≠ knowledge graph ≠ graph data model ≠ graph database")
     rows = [("Ontology", "the meaning: classes, relationships, rules", "Orders are placed by exactly one Customer;", "subCategoryOf is transitive", ONTO),
-            ("Knowledge graph", "ontology + facts (+ inferences)", "O1 placedBy Alice; Alice is a PremiumCustomer", "⇒ Alice is a Customer", GRAPH),
+            ("Knowledge graph", "ontology + facts (+ inferences)", "O1 placedBy Naidu; Naidu is a PremiumCustomer", "⇒ Naidu is a Customer", GRAPH),
             ("Graph data model", "how the graph is represented", "RDF triples (subject–predicate–object)", "or labeled property graph (nodes, edges, props)", EXAMPLE),
             ("Graph database", "software that stores and queries it", "Neptune · Neo4j · Spanner Graph · Oracle", "GraphDB · Jena · Fabric Graph …", NEUTRAL)]
     c.text(470, 88, "in the retail example", size=11.5, anchor="start", color=MUTED, italic=True)
@@ -210,7 +210,7 @@ def retail_ontology():
 @diagram("rdf-vs-property-graph")
 def rdf_vs_lpg():
     c = Canvas(980, 380, "The same fact as RDF triples and as a property graph")
-    c.heading("One fact, two graph models", "\"Alice placed order O1, which contains 2 × USB-C Charger at 29.99\"")
+    c.heading("One fact, two graph models", "\"Naidu placed order O1, which contains 2 × USB-C Charger at 29.99\"")
     c.rect(24, 76, 460, 280, fill="#FCFCFD", stroke="#D0D5DD")
     c.text(254, 100, "RDF (triples): the line item must be a node", size=14, weight="600", color=ONTO[1])
     nodes = {"ex:C1": (90, 140), "ex:O1": (260, 140), "ex:O1-L2": (220, 240), "ex:P3": (410, 240)}
@@ -228,7 +228,7 @@ def rdf_vs_lpg():
         c.label(x + 40 + (60 if i else -10), 292, k, size=11)
     c.rect(500, 76, 456, 280, fill="#FCFCFD", stroke="#D0D5DD")
     c.text(728, 100, "Property graph: the edge carries the properties", size=14, weight="600", color=GRAPH[1])
-    pg = {"Alice\n:Customer": (580, 220), "O1\n:Order": (728, 220), "Charger\n:Product": (880, 220)}
+    pg = {"Naidu\n:Customer": (580, 220), "O1\n:Order": (728, 220), "Charger\n:Product": (880, 220)}
     for k, (x, y) in pg.items():
         c.circle(x, y, 44, GRAPH[0], GRAPH[1], sw=2)
         a, b = k.split("\n")
@@ -517,7 +517,7 @@ def schema_vs_data():
     c.rect(540, 82, 430, 196, fill=GRAPH[0], stroke=GRAPH[1])
     c.text(755, 108, "Data  =  \"the graph\" (instances)", size=16, weight="700", color=GRAPH[1])
     c.text(755, 128, "ABox: individuals and facts · changes constantly", size=12, color=MUTED)
-    for k, (ind, ln) in enumerate([(0, "ex:C1 a retail:PremiumCustomer ;"), (1, "retail:name \"Alice Johnson\" ."),
+    for k, (ind, ln) in enumerate([(0, "ex:C1 a retail:PremiumCustomer ;"), (1, "retail:name \"Naidu Rongali\" ."),
                                    (0, "ex:O1 retail:placedBy ex:C1 ;"), (1, "retail:orderDate \"2026-09-01\" .")]):
         c.text(560 + ind * 44, 158 + k * 19, ln, size=12, anchor="start", mono=True)
     c.text(755, 264, "retail-data.ttl · 165 triples", size=11.5, color=GRAPH[1])
@@ -526,7 +526,7 @@ def schema_vs_data():
     c.rect(250, 328, 500, 82, fill=EXAMPLE[0], stroke=EXAMPLE[1])
     c.text(500, 355, "=  Knowledge graph", size=16, weight="700", color=EXAMPLE[1])
     c.text(500, 378, "+ a reasoner adds what follows from the schema:", size=12, color=INK)
-    c.text(500, 398, "ex:C1 a retail:Customer   (Alice is a Customer)", size=12, mono=True, color=EXAMPLE[1])
+    c.text(500, 398, "ex:C1 a retail:Customer   (Naidu is a Customer)", size=12, mono=True, color=EXAMPLE[1])
     c.rect(30, 428, 940, 50, fill=WARN[0], stroke=WARN[1])
     c.text(500, 450, "In RDF both halves are triples in one graph, so the line is a convention: formally an OWL ontology may include",
            size=12, color=INK)
@@ -621,7 +621,7 @@ def ecosystem_poster():
         x = 60 + sw_ * (k + 0.5)
         c.circle(x, 1455, 6, "#ffffff", EXAMPLE[1], sw=2.2)
         c.text(x, 1440, s, size=13.5, weight="600", color=INK)
-    c.text(W / 2, 1488, "same answers everywhere: Alice 1498.97 · Bob 199.98 · Carol 179.48",
+    c.text(W / 2, 1488, "same answers everywhere: Naidu 1498.97 · Bob 199.98 · Carol 179.48",
            size=14, color=INK)
     c.text(W / 2, 1560, "github.com/rongali-naidu/semantics-ontology-graphs · status as of November 2026",
            size=13, color=MUTED)
@@ -684,7 +684,7 @@ def rdbms_vs_graph():
     c.text(259, 330, "5 joins · cost grows with table sizes and hops", size=12, color=MUTED)
     c.rect(506, 80, 470, 276, fill="#FCFCFD", stroke="#D0D5DD")
     c.text(741, 106, "Graph: follow stored edges", size=14, weight="600", color=GRAPH[1])
-    nodes = [("Earbuds", 560, 170, GRAPH), ("O3", 650, 170, EXAMPLE), ("Alice", 740, 170, ONTO),
+    nodes = [("Earbuds", 560, 170, GRAPH), ("O3", 650, 170, EXAMPLE), ("Naidu", 740, 170, ONTO),
              ("O1", 830, 170, EXAMPLE), ("Laptop", 920, 170, GRAPH)]
     for name, x, y, col in nodes:
         c.circle(x, y, 32, col[0], col[1], sw=2)
@@ -876,7 +876,7 @@ def six_dimensions():
     c.rect(x + 8, 306, CW - 16, 104, fill="#fff", stroke=GOOD[1], rx=6)
     c.text(x + CW / 2, 322, "in this repo", size=10.5, weight="600", color=GOOD[1])
     c.lines(x + CW / 2, 340, ["“Revenue means the price", "paid, not list price.” (ai_context)",
-                               "03-order-totals.rq", "→ Alice 1498.97 (expected)", "Markdown chapters · Ossie YAML"],
+                               "03-order-totals.rq", "→ Naidu 1498.97 (expected)", "Markdown chapters · Ossie YAML"],
             size=9.5, gap=14, color=INK)
     # 4 ontology & taxonomy: category tree (skos:broader) + classes and axioms
     x = xs[3]
@@ -899,7 +899,7 @@ def six_dimensions():
                                "subCategoryOf is transitive"], size=9.5, gap=13.5, color=INK)
     # 5 data knowledge graph: instance chain from retail-data.ttl
     x = xs[4]
-    chain = [("Alice : PremiumCustomer", 150), ("O1 : Order", 202), ("Laptop Pro 14 : Product", 254),
+    chain = [("Naidu : PremiumCustomer", 150), ("O1 : Order", 202), ("Laptop Pro 14 : Product", 254),
              ("Laptops : Category", 306), ("Computers : Category", 358)]
     edges = ["PLACED", "CONTAINS {qty 1}", "IN_CATEGORY", "SUBCATEGORY_OF"]
     for i, (n, y) in enumerate(chain):
@@ -949,7 +949,7 @@ def six_dimensions():
                ["revenue = Σ quantity × unit_price,", "filtered: premium, Electronics"],
                ["use the price paid, not list", "price; Electronics = level 1"],
                ["premium customers ⊑ Customer;", "Laptops ⊂ Computers ⊂ Electronics"],
-               ["who: Alice (orders O1, O3);", "Carol bought Books, Kitchen"],
+               ["who: Naidu (orders O1, O3);", "Carol bought Books, Kitchen"],
                ["“revenue” = governed metric,", "computed from fct_order_lines"],
                ["answer ← metric revenue ←", "fct_order_lines ← 3 sources"]]
     for x, (t, _, col), lines in zip(xs, cols, contrib):
@@ -957,7 +957,7 @@ def six_dimensions():
         c.text(x + CW / 2, 516, t, size=11, weight="700", color=col[1])
         c.lines(x + CW / 2, 535, lines, size=9.8, gap=15, color=INK)
     c.rect(38, 582, W - 76, 36, fill=GOOD[0], stroke=GOOD[1], rx=6)
-    c.text(W / 2, 605, "answer: 1498.97, all from Alice Johnson's orders: Laptop Pro 14, 2 × USB-C Charger 65W (O1) "
+    c.text(W / 2, 605, "answer: 1498.97, all from Naidu Rongali's orders: Laptop Pro 14, 2 × USB-C Charger 65W (O1) "
            "and Wireless Earbuds X (O3)", size=12.5, weight="600", color=GOOD[1])
 
     # comparison table
@@ -989,7 +989,7 @@ def six_dimensions():
              [["none; lookup and search"],
               ["no logical inference;", "computes aggregates without", "double counting"],
               ["finds relevant passages, never", "computes numbers: those come", "from the semantic model"],
-              ["taxonomy: none; ontology: a", "reasoner infers (Alice is a", "Customer), finds contradictions"],
+              ["taxonomy: none; ontology: a", "reasoner infers (Naidu is a", "Customer), finds contradictions"],
               ["traversal and paths; inference", "only when backed by an", "ontology"],
               ["navigate meaning: which", "metric, which tables, whose,", "how fresh"],
               ["impact analysis: what breaks", "if a source changes"]]),

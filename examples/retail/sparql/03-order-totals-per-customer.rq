@@ -1,5 +1,5 @@
 # Q3. Revenue per customer = SUM(quantity * unitPrice) over all their lines.
-# Expected: Alice Johnson 1498.97 (2 orders), Bob Smith 199.98, Carol Diaz 179.48
+# Expected: Naidu Rongali 1498.97 (2 orders), Bob Smith 199.98, Carol Diaz 179.48
 PREFIX rdf:    <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX rdfs:   <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX owl:    <http://www.w3.org/2002/07/owl#>

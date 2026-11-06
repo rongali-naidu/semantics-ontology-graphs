@@ -73,8 +73,8 @@ g.V().hasLabel('Product').not(inE('CONTAINS')).values('name')
 // ==> Mechanical Keyboard
 
 
-// Q8. Path from Alice to Carol through purchases (simplePath avoids cycles).
-g.V().has('Customer', 'name', 'Alice Johnson').
+// Q8. Path from Naidu to Carol through purchases (simplePath avoids cycles).
+g.V().has('Customer', 'name', 'Naidu Rongali').
   repeat(both('PLACED', 'CONTAINS').simplePath()).
     until(has('Customer', 'name', 'Carol Diaz').or().loops().is(8)).
   has('Customer', 'name', 'Carol Diaz').

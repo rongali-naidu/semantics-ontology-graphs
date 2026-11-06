@@ -34,7 +34,7 @@ cardinality.
 `vertices-customer.csv`
 ```csv
 ~id,~label,name:String(single),email:String(single),premium:Bool(single),memberSince:Date(single)
-C1,Customer,Alice Johnson,alice@example.com,true,2024-03-15
+C1,Customer,Naidu Rongali,naidu@example.com,true,2024-03-15
 C2,Customer,Bob Smith,bob@example.com,false,
 C3,Customer,Carol Diaz,carol@example.com,true,2025-11-01
 ```
@@ -65,7 +65,7 @@ Same idea, Neo4j-import-like headers.
 `nodes-customer.csv`
 ```csv
 :ID,:LABEL,name:String,email:String,premium:Bool,memberSince:DateTime
-C1,Customer,Alice Johnson,alice@example.com,true,2024-03-15
+C1,Customer,Naidu Rongali,naidu@example.com,true,2024-03-15
 ```
 
 `relationships-contains.csv`
@@ -171,14 +171,14 @@ python graphs/implementations/providers/aws/python/bulk_load.py s3://$BUCKET/ret
 **openCypher** — paste the generated single `CREATE` statement:
 ```
 %%oc
-CREATE (n_C1:Customer {`~id`: 'C1', name: 'Alice Johnson', ...}), ..., (n_C1)-[:PLACED]->(n_O1), ...
+CREATE (n_C1:Customer {`~id`: 'C1', name: 'Naidu Rongali', ...}), ..., (n_C1)-[:PLACED]->(n_O1), ...
 ```
 Neptune honours `` `~id` `` as the element id.
 
 **Gremlin** — one long traversal:
 ```
 %%gremlin
-g.addV('Customer').property(T.id, 'C1').property('name', 'Alice Johnson')...as('C1')
+g.addV('Customer').property(T.id, 'C1').property('name', 'Naidu Rongali')...as('C1')
  .addE('PLACED').from('C1').to('O1').property(T.id, 'C1-PLACED-O1') ... .iterate()
 ```
 

@@ -15,7 +15,7 @@ they agree:
 | **Warehouse tables** | storage, bulk aggregation | `warehouse/` | SQL (`metrics.sql` M2) |
 | **Semantic model** | governed metrics, BI, AI | `semantic-model/ossie/`, `semantic-models/implementations/*` | Ossie / MetricFlow / DAX / LookML |
 
-All four say Alice 1498.97, Bob 199.98, Carol 179.48
+All four say Naidu 1498.97, Bob 199.98, Carol 179.48
 (`check_consistency.py`, `check_semantic_model.py`, dbt `mf query`).
 
 ## 4.2 Side by side

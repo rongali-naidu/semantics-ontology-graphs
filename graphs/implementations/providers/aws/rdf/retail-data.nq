@@ -150,9 +150,9 @@
 <https://example.org/retail/data/A2> <https://example.org/retail/ontology#state> "TX" <https://example.org/retail/graph/customers> .
 <https://example.org/retail/data/A2> <https://example.org/retail/ontology#city> "Austin" <https://example.org/retail/graph/customers> .
 <https://example.org/retail/data/A1> <https://example.org/retail/ontology#postalCode> "98101" <https://example.org/retail/graph/customers> .
-<https://example.org/retail/data/C1> <https://example.org/retail/ontology#email> "alice@example.com" <https://example.org/retail/graph/customers> .
+<https://example.org/retail/data/C1> <https://example.org/retail/ontology#email> "naidu@example.com" <https://example.org/retail/graph/customers> .
 <https://example.org/retail/data/A3> <https://example.org/retail/ontology#city> "New York" <https://example.org/retail/graph/customers> .
-<https://example.org/retail/data/C1> <https://example.org/retail/ontology#name> "Alice Johnson" <https://example.org/retail/graph/customers> .
+<https://example.org/retail/data/C1> <https://example.org/retail/ontology#name> "Naidu Rongali" <https://example.org/retail/graph/customers> .
 <https://example.org/retail/data/C2> <https://example.org/retail/ontology#hasAddress> <https://example.org/retail/data/A2> <https://example.org/retail/graph/customers> .
 <https://example.org/retail/data/A1> <https://example.org/retail/ontology#country> "US" <https://example.org/retail/graph/customers> .
 <https://example.org/retail/data/A3> <https://example.org/retail/ontology#postalCode> "10001" <https://example.org/retail/graph/customers> .

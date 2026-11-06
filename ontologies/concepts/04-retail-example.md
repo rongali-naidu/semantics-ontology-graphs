@@ -5,7 +5,7 @@ each order has **order lines** (product × quantity × price paid); **products**
 sit in a **category** tree and are **sold by** sellers; customers write
 **reviews**; orders **ship to** an **address**.
 
-All names (TechHub Inc, Alice Johnson, ...) are made up.
+All names (TechHub Inc, Naidu Rongali, ...) are made up.
 
 > **About scale:** this example materializes every order and order line as
 > RDF so that each format can be compared. In production, transactional facts
@@ -19,8 +19,8 @@ All names (TechHub Inc, Alice Johnson, ...) are made up.
 ![Retail instance graph: three customers, four orders, six products and six categories connected by PLACED, CONTAINS, IN_CATEGORY and SUBCATEGORY_OF](../../assets/diagrams/retail-instance-graph.svg)
 
 Plus: 3 sellers (TechHub Inc sells all electronics, PageTurner Books, HomeGoods
-Co), 3 addresses (Seattle, Austin, New York), 4 reviews (Alice → Laptop 5★,
-Alice → Earbuds 3★, Bob → Book 4★, Carol → Book 5★).
+Co), 3 addresses (Seattle, Austin, New York), 4 reviews (Naidu → Laptop 5★,
+Naidu → Earbuds 3★, Bob → Book 4★, Carol → Book 5★).
 
 ## 4.2 Files
 
@@ -85,12 +85,12 @@ python scripts/check_consistency.py
 | # | Question | Expected answer | SPARQL | Cypher | Gremlin |
 |---|---|---|---|---|---|
 | Q2 | Products under Electronics, any depth | Laptop Pro 14, Mechanical Keyboard, USB-C Charger 65W, Wireless Earbuds X | [02](../../examples/retail/sparql/02-electronics-products-incl-subcategories.rq) | [Q2](../../examples/retail/property-graph/cypher/02-queries.cypher) | [Q2](../../examples/retail/property-graph/gremlin/02-queries.groovy) |
-| Q3 | Spend per customer | Alice 1498.97 (2 orders) · Bob 199.98 · Carol 179.48 | [03](../../examples/retail/sparql/03-order-totals-per-customer.rq) | Q3 | Q3 |
+| Q3 | Spend per customer | Naidu 1498.97 (2 orders) · Bob 199.98 · Carol 179.48 | [03](../../examples/retail/sparql/03-order-totals-per-customer.rq) | Q3 | Q3 |
 | Q4 | Details of order O1 | Laptop 1×1299.00, Charger 2×29.99 → Seattle | [04](../../examples/retail/sparql/04-order-details.rq) | Q4 | Q4 |
 | Q5 | Bought Earbuds, also bought | Knowledge Graphs 101, Laptop Pro 14, USB-C Charger 65W | [05](../../examples/retail/sparql/05-customers-who-bought-also-bought.rq) | Q5 | Q5 |
 | Q6 | Average rating per product | Laptop 5 · Book 4.5 (2) · Earbuds 3 | [06](../../examples/retail/sparql/06-average-rating-per-product.rq) | Q6 | Q6 |
 | Q7 | Products never ordered | Mechanical Keyboard | [07](../../examples/retail/sparql/07-products-never-ordered.rq) | Q7 | Q7 |
-| Q8 | All customers incl. subclasses (RDF) / path Alice→Carol (PG) | Alice, Bob, Carol / Alice→O3→Earbuds→O2→Bob→O2→Book→O4→Carol | [08](../../examples/retail/sparql/08-all-customers-via-subclass.rq) | Q8 | Q8 |
+| Q8 | All customers incl. subclasses (RDF) / path Naidu→Carol (PG) | Bob, Carol, Naidu / Naidu→O3→Earbuds→O2→Bob→O2→Book→O4→Carol | [08](../../examples/retail/sparql/08-all-customers-via-subclass.rq) | Q8 | Q8 |
 | W1 | Bob orders a keyboard | +1 order | [12](../../examples/retail/sparql/12-insert-new-order.ru) | W1 | W1 |
 | W2 | Shipped → delivered | O2 updated | [13](../../examples/retail/sparql/13-update-status.ru) | W2 | W2 |
 

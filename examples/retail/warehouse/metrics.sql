@@ -27,7 +27,7 @@ FROM order_lines ol
 JOIN orders   o ON o.order_id   = ol.order_id
 JOIN products p ON p.product_id = ol.product_id;
 
--- M2. Revenue by customer  (= SPARQL Q3: Alice 1498.97, Bob 199.98, Carol 179.48)
+-- M2. Revenue by customer  (= SPARQL Q3: Naidu 1498.97, Bob 199.98, Carol 179.48)
 SELECT c.name AS customer, c.is_premium,
        COUNT(DISTINCT o.order_id)                 AS order_count,
        ROUND(SUM(ol.quantity * ol.unit_price), 2) AS revenue

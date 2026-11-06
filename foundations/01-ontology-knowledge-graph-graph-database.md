@@ -23,8 +23,8 @@ The everyday shorthand is:
 | Term | Means | Retail example |
 |---|---|---|
 | **Ontology** (schema, *TBox*) | the classes, relationships and rules: what *can* exist and what must hold | [`retail-ontology.ttl`](../examples/retail/ontology/retail-ontology.ttl): Customer, Order, `placedBy`, "every Order has exactly one Customer" |
-| **Instance data** (*ABox*), often just "the graph" | the individual things and facts | [`retail-data.ttl`](../examples/retail/rdf/retail-data.ttl): Alice, order O1, "O1 placedBy Alice" |
-| **Knowledge graph** | both together, usually plus inferred facts and provenance | ontology + data + "Alice is a Customer" (inferred from PremiumCustomer ⊑ Customer) |
+| **Instance data** (*ABox*), often just "the graph" | the individual things and facts | [`retail-data.ttl`](../examples/retail/rdf/retail-data.ttl): Naidu, order O1, "O1 placedBy Naidu" |
+| **Knowledge graph** | both together, usually plus inferred facts and provenance | ontology + data + "Naidu is a Customer" (inferred from PremiumCustomer ⊑ Customer) |
 
 Why the words get blurred:
 
@@ -97,7 +97,7 @@ you have no multi-hop questions.
 
 ![The same fact in RDF (order line as a node with literal values) and in a property graph (CONTAINS edge with quantity and unitPrice properties)](../assets/diagrams/rdf-vs-property-graph.svg)
 
-The same fact, "Alice placed order O1 which contains 2 × USB-C Charger at
+The same fact, "Naidu placed order O1 which contains 2 × USB-C Charger at
 29.99", in the two models:
 
 **RDF (triples)** — every fact is subject–predicate–object; the line item must
@@ -114,7 +114,7 @@ ex:O1-L2  retail:forProduct ex:P3 ;
 **Property graph** — relationships can have properties directly:
 
 ```cypher
-(alice:Customer)-[:PLACED]->(o1:Order)-[:CONTAINS {quantity: 2, unitPrice: 29.99}]->(charger:Product)
+(naidu:Customer)-[:PLACED]->(o1:Order)-[:CONTAINS {quantity: 2, unitPrice: 29.99}]->(charger:Product)
 ```
 
 Full comparison in [graphs: property graphs](../graphs/concepts/01-property-graphs.md).

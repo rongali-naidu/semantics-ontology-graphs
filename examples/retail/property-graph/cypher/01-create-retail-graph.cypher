@@ -21,7 +21,7 @@ CREATE
   (n_A1:Address {`~id`: 'A1', city: 'Seattle', country: 'US', postalCode: '98101', state: 'WA'}),
   (n_A2:Address {`~id`: 'A2', city: 'Austin', country: 'US', postalCode: '78701', state: 'TX'}),
   (n_A3:Address {`~id`: 'A3', city: 'New York', country: 'US', postalCode: '10001', state: 'NY'}),
-  (n_C1:Customer {`~id`: 'C1', email: 'alice@example.com', memberSince: datetime('2024-03-15T00:00:00Z'), name: 'Alice Johnson', premium: true}),
+  (n_C1:Customer {`~id`: 'C1', email: 'naidu@example.com', memberSince: datetime('2024-03-15T00:00:00Z'), name: 'Naidu Rongali', premium: true}),
   (n_C2:Customer {`~id`: 'C2', email: 'bob@example.com', name: 'Bob Smith', premium: false}),
   (n_C3:Customer {`~id`: 'C3', email: 'carol@example.com', memberSince: datetime('2025-11-01T00:00:00Z'), name: 'Carol Diaz', premium: true}),
   (n_O1:Order {`~id`: 'O1', orderDate: datetime('2026-09-01T00:00:00Z'), paymentMethod: 'CARD', status: 'DELIVERED'}),

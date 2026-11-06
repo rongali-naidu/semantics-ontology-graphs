@@ -79,10 +79,10 @@ g:catalog {
 
 g:customers {
     ex:C1 a retail:PremiumCustomer ;
-        retail:email "alice@example.com" ;
+        retail:email "naidu@example.com" ;
         retail:hasAddress ex:A1 ;
         retail:memberSince "2024-03-15"^^xsd:date ;
-        retail:name "Alice Johnson" .
+        retail:name "Naidu Rongali" .
 
     ex:C2 a retail:Customer ;
         retail:email "bob@example.com" ;

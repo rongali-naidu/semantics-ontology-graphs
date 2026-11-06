@@ -24,8 +24,8 @@ Companies are putting **AI agents** in front of their data: "what was
 revenue from premium customers last quarter, and who are they?" An LLM can
 write SQL, but on its own it doesn't know what *your* business means: which
 of five "revenue" columns is the right one, that "client" and "customer" are
-the same thing, how tables join without double counting, or that Alice in
-the CRM is Alice in the order system. So it gives fluent, confident,
+the same thing, how tables join without double counting, or that Naidu in
+the CRM is Naidu in the order system. So it gives fluent, confident,
 **wrong** answers.
 
 Each topic in this repo supplies one missing piece of context:
@@ -34,7 +34,7 @@ Each topic in this repo supplies one missing piece of context:
 |---|---|---|
 | **Semantic model** | governed metrics, dimensions and joins: *how much?* | invents formulas and joins; numbers change between runs |
 | **Ontology** | shared meaning: terms, synonyms, hierarchies, rules: *what does it mean?* | misreads business terms, misses that a premium customer is a customer |
-| **Knowledge graph** (mostly *metadata*) | a connected map of business concepts, tables, columns, metrics, lineage and key entities: *where is it? how does it relate?* | can't find the right tables or metric among many sources, guesses join paths, can't resolve "Alice" to one customer or explain where an answer came from |
+| **Knowledge graph** (mostly *metadata*) | a connected map of business concepts, tables, columns, metrics, lineage and key entities: *where is it? how does it relate?* | can't find the right tables or metric among many sources, guesses join paths, can't resolve "Naidu" to one customer or explain where an answer came from |
 
 That's why every major data platform now ships one or more of these for
 agents: AWS Context Ontology Accelerator, Microsoft Fabric IQ, Google
@@ -124,7 +124,7 @@ levels) · 3 sellers · 4 reviews.
 
 | Same data as... | Size | Revenue by customer |
 |---|---|---|
-| RDF (+ OWL ontology) | 165 triples (+ 238) | SPARQL → Alice 1498.97 · Bob 199.98 · Carol 179.48 |
+| RDF (+ OWL ontology) | 165 triples (+ 238) | SPARQL → Naidu 1498.97 · Bob 199.98 · Carol 179.48 |
 | Property graph | 29 nodes / 41 edges | Cypher / Gremlin → same |
 | Warehouse tables | 8 tables | SQL → same |
 | Semantic model | 8 datasets, 8 metrics | Ossie / MetricFlow / COA metrics → same |
@@ -136,7 +136,7 @@ graph, warehouse tables, semantic models and product formats. With that
 many copies, it's easy for one to drift and quietly give a different
 answer. So the repo includes **automated checks**: small scripts that run
 the examples and compare their answers with known results, for example
-"Alice's revenue is 1498.97" in every format.
+"Naidu's revenue is 1498.97" in every format.
 
 GitHub runs them on every change. The **checks** badge at the top of this
 page is green when everything passes and turns red if any example breaks.

@@ -3,13 +3,13 @@
 A **labeled property graph (LPG)** has:
 
 * **Nodes** (vertices) with one or more **labels** (`:Customer`) and a map of
-  **properties** (`{name: 'Alice Johnson', premium: true}`)
+  **properties** (`{name: 'Naidu Rongali', premium: true}`)
 * **Relationships** (edges) that are **directed**, have exactly one **type**
   (`:PLACED`), and can have **properties** too (`{quantity: 2}`)
 * Every node and edge has an internal **id**
 
 ```
- (:Customer {name:'Alice Johnson', premium:true})
+ (:Customer {name:'Naidu Rongali', premium:true})
         │
         │ :PLACED
         ▼

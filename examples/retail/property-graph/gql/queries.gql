@@ -52,7 +52,7 @@ RETURN other.name AS product, COUNT(DISTINCT c) AS buyers
 ORDER BY buyers DESC, product
 
 -- Q8. Shortest path is part of the standard (path search prefixes)
-MATCH ANY SHORTEST p = (a:Customer {name: 'Alice Johnson'})-[:PLACED|CONTAINS]-{1,8}(b:Customer {name: 'Carol Diaz'})
+MATCH ANY SHORTEST p = (a:Customer {name: 'Naidu Rongali'})-[:PLACED|CONTAINS]-{1,8}(b:Customer {name: 'Carol Diaz'})
 RETURN p
 
 -- W1. Insert

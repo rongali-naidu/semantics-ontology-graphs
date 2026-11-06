@@ -21,7 +21,7 @@ g
   .addV('Address').property(T.id, 'A1').property('city', 'Seattle').property('country', 'US').property('postalCode', '98101').property('state', 'WA').as('A1')
   .addV('Address').property(T.id, 'A2').property('city', 'Austin').property('country', 'US').property('postalCode', '78701').property('state', 'TX').as('A2')
   .addV('Address').property(T.id, 'A3').property('city', 'New York').property('country', 'US').property('postalCode', '10001').property('state', 'NY').as('A3')
-  .addV('Customer').property(T.id, 'C1').property('email', 'alice@example.com').property('memberSince', datetime('2024-03-15T00:00:00Z')).property('name', 'Alice Johnson').property('premium', true).as('C1')
+  .addV('Customer').property(T.id, 'C1').property('email', 'naidu@example.com').property('memberSince', datetime('2024-03-15T00:00:00Z')).property('name', 'Naidu Rongali').property('premium', true).as('C1')
   .addV('Customer').property(T.id, 'C2').property('email', 'bob@example.com').property('name', 'Bob Smith').property('premium', false).as('C2')
   .addV('Customer').property(T.id, 'C3').property('email', 'carol@example.com').property('memberSince', datetime('2025-11-01T00:00:00Z')).property('name', 'Carol Diaz').property('premium', true).as('C3')
   .addV('Order').property(T.id, 'O1').property('orderDate', datetime('2026-09-01T00:00:00Z')).property('paymentMethod', 'CARD').property('status', 'DELIVERED').as('O1')

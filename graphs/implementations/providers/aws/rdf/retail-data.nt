@@ -14,10 +14,10 @@
 <https://example.org/retail/data/A3> <https://example.org/retail/ontology#postalCode> "10001" .
 <https://example.org/retail/data/A3> <https://example.org/retail/ontology#state> "NY" .
 <https://example.org/retail/data/C1> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://example.org/retail/ontology#PremiumCustomer> .
-<https://example.org/retail/data/C1> <https://example.org/retail/ontology#email> "alice@example.com" .
+<https://example.org/retail/data/C1> <https://example.org/retail/ontology#email> "naidu@example.com" .
 <https://example.org/retail/data/C1> <https://example.org/retail/ontology#hasAddress> <https://example.org/retail/data/A1> .
 <https://example.org/retail/data/C1> <https://example.org/retail/ontology#memberSince> "2024-03-15"^^<http://www.w3.org/2001/XMLSchema#date> .
-<https://example.org/retail/data/C1> <https://example.org/retail/ontology#name> "Alice Johnson" .
+<https://example.org/retail/data/C1> <https://example.org/retail/ontology#name> "Naidu Rongali" .
 <https://example.org/retail/data/C2> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://example.org/retail/ontology#Customer> .
 <https://example.org/retail/data/C2> <https://example.org/retail/ontology#email> "bob@example.com" .
 <https://example.org/retail/data/C2> <https://example.org/retail/ontology#hasAddress> <https://example.org/retail/data/A2> .

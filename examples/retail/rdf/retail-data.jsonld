@@ -199,10 +199,10 @@
     {
       "@id": "ex:C1",
       "@type": "PremiumCustomer",
-      "email": "alice@example.com",
+      "email": "naidu@example.com",
       "hasAddress": "ex:A1",
       "memberSince": "2024-03-15",
-      "name": "Alice Johnson"
+      "name": "Naidu Rongali"
     },
     {
       "@id": "ex:CAT-LAPTOPS",

@@ -82,7 +82,7 @@ See [01-list-classes-and-properties.rq](../../examples/retail/sparql/01-list-cla
 
 ## 3.5 Inference: three ways to get "implicit" answers
 
-Alice and Carol are typed **only** as `retail:PremiumCustomer`. Asking for
+Naidu and Carol are typed **only** as `retail:PremiumCustomer`. Asking for
 `?c a retail:Customer` returns only Bob — unless:
 
 1. **Query-time rewriting** with property paths (works on *any* SPARQL
@@ -131,7 +131,7 @@ USB-C Charger 65W | Electronics
 Wireless Earbuds X | Audio
 
 === 03-order-totals-per-customer.rq
-Alice Johnson | 2 | 1498.97
+Naidu Rongali | 2 | 1498.97
 Bob Smith | 1 | 199.98
 Carol Diaz | 1 | 179.48
 
