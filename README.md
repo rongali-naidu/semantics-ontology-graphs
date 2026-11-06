@@ -65,6 +65,7 @@ give the same answers.
 | new to all of it | [foundations](foundations/README.md), then any topic |
 | wondering why any of this matters for AI | [foundations 5: the AI era](foundations/05-ai-era.md) |
 | thinking about the role that owns all of this | [foundations 6: the Semantics Architect](foundations/06-semantics-architect.md) |
+| comparing metadata, semantic models, knowledge bases, ontologies, taxonomies, knowledge graphs and lineage | [foundations 6.2: the six dimensions side by side](foundations/06-semantics-architect.md#62-the-six-dimensions-side-by-side) |
 | wanting to try it in 10 minutes | the [quickstart notebook](notebooks/quickstart.ipynb) |
 | new to ontologies / the Semantic Web | [ontologies](ontologies/README.md) |
 | a developer looking at graph databases | [graphs](graphs/README.md) |

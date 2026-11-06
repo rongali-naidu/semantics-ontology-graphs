@@ -10,7 +10,7 @@ openCypher CSVs, so it always matches the data.
 import csv
 from pathlib import Path
 
-from svg import (EXAMPLE, GOOD, GRAPH, INK, MUTED, NEUTRAL, ONTO, SEM, WARN, Canvas)
+from svg import (EXAMPLE, GOOD, GRAPH, INK, LINEAGE, MUTED, NEUTRAL, ONTO, SEM, WARN, Canvas)
 
 ROOT = Path(__file__).resolve().parents[2]
 OUT = ROOT / "assets/diagrams"
@@ -798,6 +798,193 @@ def agent_context_layers():
     c.rect(30, 494, 940, 46, fill=WARN[0], stroke=WARN[1])
     c.text(500, 522, "the retail example loads everything into the graph only because it is tiny (165 triples); at scale, don't",
            size=12.5, color=INK)
+    return c
+
+
+# ---------------------------------------------------------------------------
+@diagram("six-dimensions")
+def six_dimensions():
+    W = 1340
+    c = Canvas(W, 1150, "The six dimensions of meaning, on the retail example")
+    c.heading("Metadata, semantic model, knowledge base, ontology, knowledge graph or lineage?",
+              "the six dimensions of a semantic layer, each shown on this repo's retail example")
+    cols = [("Metadata", "describes the data", NEUTRAL), ("Semantic model", "encodes business logic", SEM),
+            ("Knowledge base", "captures context", GOOD), ("Ontology & taxonomy", "defines meaning", ONTO),
+            ("Knowledge graph", "connects entities", GRAPH), ("Lineage", "proves trust", LINEAGE)]
+    xs = [30 + i * 215 for i in range(6)]
+    CW = 205
+    captions = ["columns + types + meaning", "business logic → tables", "rules + verified answers",
+                "tree + classes + rules", "entities + relationships", "where a number came from"]
+    for x, (t, sub, col), cap in zip(xs, cols, captions):
+        c.rect(x, 84, CW, 360, fill="#fff", stroke=col[1])
+        c.rect(x, 84, CW, 34, fill=col[1], stroke=col[1])
+        c.text(x + CW / 2, 107, t, size=15, weight="700", color="#ffffff")
+        c.text(x + CW / 2, 136, sub, size=11.5, color=MUTED, italic=True)
+        c.rect(x + 8, 418, CW - 16, 20, fill=col[0], stroke=col[0], rx=5)
+        c.text(x + CW / 2, 432, cap, size=11, weight="600", color=col[1])
+
+    def mono(x, y, rows, size=10, gap=14.5, color=INK):
+        for i, r in enumerate(rows):  # non-breaking spaces keep the indentation (SVG collapses spaces)
+            c.text(x, y + i * gap, r.replace(" ", "\u00a0"), size=size, mono=True, anchor="start", color=color)
+
+    # 1 metadata: catalog entries from schema.sql, Ossie descriptions, SHACL sh:in
+    x = xs[0]
+    c.rect(x + 8, 148, CW - 16, 262, fill=NEUTRAL[0], stroke="#D0D5DD", rx=6)
+    mono(x + 16, 168, ["customers.is_premium", "  BOOLEAN NOT NULL", "  \"paid membership\"", "",
+                       "order_lines.unit_price", "  DECIMAL(10,2)", "  \"price actually paid\"", "",
+                       "orders.status", "  PLACED | SHIPPED |", "  DELIVERED | CANCELLED", "",
+                       "orders.customer_id", "  FK → customers"])
+    # 2 semantic model: Ossie metric over physical tables
+    x = xs[1]
+    c.rect(x + 8, 148, CW - 16, 128, fill=SEM[0], stroke=SEM[1], rx=6)
+    c.text(x + CW / 2, 164, "business layer", size=10.5, weight="600", color=SEM[1])
+    mono(x + 16, 182, ["revenue =", "  SUM(quantity", "      × unit_price)", "aov = revenue", "      / order_count",
+                       "dims: category_level_1›2›3", "      is_premium"], size=9.5, gap=13)
+    c.line(x + CW / 2, 278, x + CW / 2, 306)
+    c.label(x + CW / 2 + 32, 297, "maps to", size=10)
+    c.rect(x + 8, 308, CW - 16, 102, fill="#fff", stroke=SEM[1], rx=6, dash="4 3")
+    c.text(x + CW / 2, 324, "physical tables", size=10.5, weight="600", color=SEM[1])
+    mono(x + 16, 344, ["order_lines", "  ⋈ orders ⋈ customers", "products ⋈ categories", "(retail.semantic_model.yaml)"],
+         size=9.5, gap=15)
+    # 3 knowledge base: Ossie ai_context + verified queries with expected answers
+    x = xs[2]
+    c.rect(x + 8, 148, CW - 16, 134, fill=GOOD[0], stroke=GOOD[1], rx=6)
+    c.text(x + CW / 2, 164, "rules (ai_context)", size=10.5, weight="600", color=GOOD[1])
+    c.lines(x + CW / 2, 183, ["“Revenue means the price", "actually paid, not list price.”",
+                               "“Count orders with order_count,", "never by counting lines.”",
+                               "“Use category_level_1 for", "Electronics.”"], size=10, gap=15, color=INK)
+    c.rect(x + 8, 290, CW - 16, 120, fill="#fff", stroke=GOOD[1], rx=6)
+    c.text(x + CW / 2, 306, "verified queries", size=10.5, weight="600", color=GOOD[1])
+    mono(x + 16, 325, ["03-order-totals…rq", "→ Alice 1498.97", "  Bob 199.98 · Carol 179.48", "metrics.sql",
+                       "→ revenue 1878.43"], size=9.5, gap=15)
+    # 4 ontology & taxonomy: category tree (skos:broader) + classes and axioms
+    x = xs[3]
+    c.text(x + 14, 160, "taxonomy (skos:broader)", size=10.5, weight="600", color=ONTO[1], anchor="start")
+    mono(x + 18, 178, ["Electronics", "├─ Computers", "│  └─ Laptops", "└─ Audio", "Books · Kitchen"],
+         size=10, gap=14)
+    c.line(x + 8, 252, x + CW - 8, 252, arrow=False, color="#D0D5DD", dash="3 3")
+    c.text(x + 14, 270, "ontology (OWL)", size=10.5, weight="600", color=ONTO[1], anchor="start")
+    c.rect(x + 10, 280, 66, 24, fill=ONTO[0], stroke=ONTO[1], rx=5)
+    c.text(x + 43, 296, "Order", size=10.5, weight="600", color=ONTO[1])
+    c.rect(x + 118, 280, 78, 24, fill=ONTO[0], stroke=ONTO[1], rx=5)
+    c.text(x + 157, 296, "Customer", size=10.5, weight="600", color=ONTO[1])
+    c.line(x + 77, 292, x + 116, 292)
+    c.text(x + 97, 315, "placedBy", size=9, color=MUTED)
+    c.rect(x + 96, 330, 102, 22, fill=ONTO[0], stroke=ONTO[1], rx=5)
+    c.text(x + 147, 345, "PremiumCustomer", size=10, weight="600", color=ONTO[1])
+    c.line(x + 157, 329, x + 157, 306)
+    c.text(x + 170, 322, "⊑", size=11, color=MUTED)
+    c.lines(x + CW / 2, 370, ["Order placedBy exactly 1 Customer", "Customer disjointWith Seller",
+                               "subCategoryOf is transitive"], size=9.5, gap=13.5, color=INK)
+    # 5 knowledge graph: instance chain from retail-data.ttl
+    x = xs[4]
+    chain = [("Alice : PremiumCustomer", 150), ("O1 : Order", 202), ("Laptop Pro 14 : Product", 254),
+             ("Laptops : Category", 306), ("Computers : Category", 358)]
+    edges = ["PLACED", "CONTAINS {qty 1}", "IN_CATEGORY", "SUBCATEGORY_OF"]
+    for i, (n, y) in enumerate(chain):
+        c.rect(x + 22, y, 160, 24, fill=GRAPH[0], stroke=GRAPH[1], rx=12)
+        c.text(x + 102, y + 16, n, size=10.5, weight="600", color=GRAPH[1])
+        if i < 4:
+            c.line(x + 50, y + 25, x + 50, y + 50)
+            c.text(x + 58, y + 42, edges[i], size=9, color=MUTED, anchor="start")
+    c.text(x + CW / 2, 402, "29 nodes · 41 edges (165 triples)", size=10, color=MUTED)
+    # 6 lineage: how the retail numbers are produced in this repo
+    x = xs[5]
+    steps = [("rdf/retail-data.ttl", "the one edited file"), ("rdf_to_tables.py", "generates"),
+             ("order_lines.csv", "→ warehouse table"), ("revenue = 1878.43", "metric, checked in CI")]
+    for i, (n, note) in enumerate(steps):
+        y = 150 + i * 62
+        c.rect(x + 14, y, CW - 28, 28, fill=LINEAGE[0], stroke=LINEAGE[1], rx=6)
+        c.text(x + CW / 2, y + 18, n, size=10.5, mono=True, color=LINEAGE[1])
+        c.text(x + CW / 2, y + 42, note, size=9.5, color=MUTED, italic=True)
+        if i < 3:
+            c.line(x + 26, y + 29, x + 26, y + 60)
+    c.lines(x + CW / 2, 396, ["also → 6 RDF formats, property-graph", "CSVs, every semantic model"], size=9.5, gap=12.5,
+            color=MUTED)
+
+    # one question, six contributions
+    c.rect(30, 462, W - 60, 168, fill="#F9FAFB", stroke="#D0D5DD")
+    c.text(W / 2, 487, "One question, six contributions: “What was revenue from premium customers in Electronics?”",
+           size=14.5, weight="700", color=EXAMPLE[1])
+    contrib = [["is_premium = paid membership;", "unit_price = price paid"],
+               ["revenue = Σ quantity × unit_price,", "filtered by is_premium, Electronics"],
+               ["rule: use the price paid, not", "list price; Electronics = level 1"],
+               ["premium customers ⊑ Customer;", "Laptops ⊂ Computers ⊂ Electronics"],
+               ["who: Alice (orders O1, O3);", "Carol bought Books and Kitchen"],
+               ["answer traced to order_lines", "← rdf_to_tables.py ← retail-data.ttl"]]
+    for x, (t, _, col), lines in zip(xs, cols, contrib):
+        c.rect(x, 500, CW, 70, fill=col[0], stroke=col[1], rx=6)
+        c.text(x + CW / 2, 516, t, size=11, weight="700", color=col[1])
+        c.lines(x + CW / 2, 535, lines, size=10, gap=15, color=INK)
+    c.rect(30 + 8, 582, W - 76, 36, fill=GOOD[0], stroke=GOOD[1], rx=6)
+    c.text(W / 2, 605, "answer: 1498.97, all from Alice Johnson's orders: Laptop Pro 14, 2 × USB-C Charger 65W (O1) "
+           "and Wireless Earbuds X (O3)", size=12.5, weight="600", color=GOOD[1])
+
+    # comparison table
+    rows = [("Purpose",
+             [["describe tables and columns:", "types, meaning, owners"],
+              ["define metrics, dimensions", "and joins once, for every", "tool and agent"],
+              ["capture rules, definitions", "and verified Q&A the data", "itself doesn't say"],
+              ["define what things are, how", "they relate, and the rules", "(a taxonomy: just the tree)"],
+              ["connect entities, or concepts", "and metadata, as one", "navigable graph"],
+              ["show where a number came", "from and what depends on it"]]),
+            ("Form",
+             [["catalog entries: schema,", "descriptions, constraints"],
+              ["datasets, fields, metrics,", "joins over physical tables"],
+              ["documents, instructions,", "example questions + SQL"],
+              ["classes, properties, axioms", "(TBox); taxonomy = broader /", "narrower concept tree"],
+              ["nodes and edges: triples or", "a property graph (ABox)"],
+              ["a graph: sources →", "transformations → tables →", "metrics"]]),
+            ("Standards",
+             [["DCAT, Dublin Core;", "catalog APIs"],
+              ["Apache Ossie, MetricFlow,", "LookML, TMDL, semantic views"],
+              ["none: docs, Ossie ai_context,", "verified queries"],
+              ["OWL 2, RDFS, SHACL;", "SKOS for taxonomies"],
+              ["RDF + SPARQL, or a property", "graph + Cypher / ISO GQL"],
+              ["OpenLineage, W3C PROV-O"]]),
+            ("Reasoning",
+             [["none; lookup and search"],
+              ["no logical inference;", "computes aggregates without", "double counting"],
+              ["none; retrieved (RAG) and", "applied by the LLM"],
+              ["a reasoner infers and checks:", "Alice is a Customer; a", "Customer + Seller is an error"],
+              ["traversal, paths; inference", "only when backed by an", "ontology"],
+              ["impact analysis: what breaks", "if a source changes"]]),
+            ("In this repo",
+             [["schema.sql, Ossie field", "descriptions, SHACL sh:in"],
+              ["Ossie model, dbt MetricFlow,", "LookML, TMDL, COA metrics"],
+              ["Ossie ai_context; .rq files", "with expected answers"],
+              ["retail-ontology.ttl,", "retail-shapes.ttl, category", "tree (skos:broader)"],
+              ["retail-data.ttl, property", "graph, Neptune load files"],
+              ["make generate; CI proves", "every copy gives the same", "answers"]]),
+            ("Typical tools",
+             [["Unity Catalog, Glue Data", "Catalog, Dataplex, DataHub"],
+              ["dbt, Looker, Power BI, Cube,", "AtScale, Snowflake"],
+              ["wikis, vector stores; Genie", "instructions, Cortex verified", "queries"],
+              ["Protégé, TopBraid, AWS COA;", "PoolParty for taxonomies"],
+              ["Neptune, Neo4j, GraphDB,", "Stardog, Spanner Graph"],
+              ["OpenLineage / Marquez, dbt", "docs, catalog lineage views"]])]
+    tx = [156 + i * 192 for i in range(6)]
+    TW = 186
+    y = 646
+    c.rect(30, y, 120, 30, fill=NEUTRAL[0], stroke=NEUTRAL[1], rx=6)
+    c.text(90, y + 20, "Aspect", size=12.5, weight="700", color=NEUTRAL[1])
+    for x, (t, _, col) in zip(tx, cols):
+        c.rect(x, y, TW, 30, fill=col[1], stroke=col[1], rx=6)
+        c.text(x + TW / 2, y + 20, t, size=12.5, weight="700", color="#ffffff")
+    y += 36
+    for label, cells in rows:
+        h = max(len(cl) for cl in cells) * 14 + 14
+        c.rect(30, y, 120, h, fill=NEUTRAL[0], stroke="#D0D5DD", rx=6)
+        c.text(90, y + h / 2 + 4, label, size=12, weight="700", color=INK)
+        for x, cl, (_, _, col) in zip(tx, cells, cols):
+            c.rect(x, y, TW, h, fill="#fff", stroke="#D0D5DD", rx=6)
+            top = y + (h - len(cl) * 14) / 2 + 11
+            c.lines(x + TW / 2, top, cl, size=10.5, gap=14, color=INK)
+        y += h + 6
+    c.rect(30, y + 6, W - 60, 34, fill=WARN[0], stroke=WARN[1])
+    c.text(W / 2, y + 28, "they overlap: give each piece of meaning one source of truth, and make the others reference it",
+           size=12.5, weight="600", color=INK)
+    c.h = y + 56
     return c
 
 
