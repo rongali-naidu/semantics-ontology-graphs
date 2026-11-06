@@ -123,4 +123,4 @@ Sources: [Sequeda, Allemang, Jacob 2023](https://arxiv.org/abs/2311.07509) ·
 [Edge et al. 2024 (GraphRAG)](https://arxiv.org/abs/2404.16130) ·
 [microsoft/graphrag](https://github.com/microsoft/graphrag)
 
-Back to: [foundations](README.md)
+Next: [6. The Semantics Architect](06-semantics-architect.md) · back to [foundations](README.md)

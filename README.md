@@ -4,10 +4,19 @@
 
 A hands-on reference for **semantics** in three topics, **ontologies**,
 **knowledge graphs** and **semantic models**, from first principles to the
-products that implement them. 
+products that implement them.
 
-# Semantic Architect 
-Concepts covered here foundational concepts required for **Semantic Architect** role
+## The Semantics Architect
+
+The concepts in this repo are the foundation of an emerging AI role, the
+**Semantics Architect**: the person who designs and governs the shared
+meaning of an organization's data, so that humans and AI agents get answers
+that are accurate, explainable and trusted. The role spans six dimensions:
+metadata, semantic models, knowledge bases, ontology and taxonomy,
+knowledge graphs, and lineage.
+More: [the Semantics Architect](foundations/06-semantics-architect.md).
+
+![The six dimensions of a Semantics Architect: metadata, semantic models, knowledge bases, ontology and taxonomy, knowledge graphs, lineage](assets/images/semantics-architect-six-dimensions.png)
 
 ## Why learn this now: data agents
 
@@ -55,6 +64,7 @@ give the same answers.
 |---|---|
 | new to all of it | [foundations](foundations/README.md), then any topic |
 | wondering why any of this matters for AI | [foundations 5: the AI era](foundations/05-ai-era.md) |
+| thinking about the role that owns all of this | [foundations 6: the Semantics Architect](foundations/06-semantics-architect.md) |
 | wanting to try it in 10 minutes | the [quickstart notebook](notebooks/quickstart.ipynb) |
 | new to ontologies / the Semantic Web | [ontologies](ontologies/README.md) |
 | a developer looking at graph databases | [graphs](graphs/README.md) |
